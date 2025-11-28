@@ -849,18 +849,25 @@ def generate_titles_html():
         row_cls = type_classes.get(ttype, "")
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
         
-        h += f'''
-                    <tr class="{row_cls}" data-type="{ttype}" data-area="titles" data-id="title_{tid}">
-                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="title_{tid}" data-area="titles"></td>
-                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{name}</a><br><span class="prereq">{desc}</span></td>
-                        <td>
+        # Legendary titles have auto-calculated progress, no manual input
+        if ttype == "legendary":
+            progress_html = f'''
+                            <span style="color:#8b949e;font-style:italic;">Auto-berechnet</span>'''
+        else:
+            progress_html = f'''
                             <div style="display:flex;align-items:center;gap:8px;">
                                 <input type="number" class="title-progress-input" data-id="title_{tid}" data-max="{max_pts}" min="0" max="{max_pts}" value="0" style="width:70px;padding:4px;background:#161b22;color:#c9d1d9;border:1px solid #30363d;border-radius:4px;">
                                 <span style="color:#8b949e;">/ {max_pts:,}</span>
                             </div>
                             <div class="progress-bar" style="height:6px;margin-top:4px;">
                                 <div class="progress-fill title-progress-bar" data-id="title_{tid}" style="width:0%;"></div>
-                            </div>
+                            </div>'''
+        
+        h += f'''
+                    <tr class="{row_cls}" data-type="{ttype}" data-area="titles" data-id="title_{tid}">
+                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="title_{tid}" data-area="titles"></td>
+                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{name}</a><br><span class="prereq">{desc}</span></td>
+                        <td>{progress_html}
                         </td>
                         <td><span class="badge {badge_cls}">{badge_text}</span></td>
                         <td>{campaign}</td>
