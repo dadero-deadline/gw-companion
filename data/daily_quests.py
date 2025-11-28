@@ -155,8 +155,8 @@ ZAISHEN_BOUNTIES = [
 
 # ==================== ZAISHEN VANQUISH ====================
 # 136-day cycle - Nov 28 2025 = Traveler's Vale (index 79)
-# So start = Nov 28 2025 - 79 days = Sept 10 2025
-ZAISHEN_VANQUISH_START = datetime(2025, 9, 10)  # Calibrated
+# So start = Nov 28 2025 - 79 days = Sept 11 2025
+ZAISHEN_VANQUISH_START = datetime(2025, 9, 11)  # Calibrated
 ZAISHEN_VANQUISHES = [
     ("Jaya Bluffs", "Factions", "Shing Jea", "Jaya_Bluffs_(Zaishen_vanquish)"),
     ("Holdings of Chokhin", "Nightfall", "Vabbi", "Holdings_of_Chokhin_(Zaishen_vanquish)"),
