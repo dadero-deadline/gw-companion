@@ -987,6 +987,12 @@ def generate_daily_html():
     combat_idx = combat_days % len(ZAISHEN_COMBAT)
     today_combat = ZAISHEN_COMBAT[combat_idx]
     
+    # Vanguard (9-day cycle)
+    vanguard_start = datetime(2009, 4, 23)
+    vanguard_days = (today - vanguard_start).days
+    vanguard_idx = vanguard_days % len(VANGUARD_QUESTS)
+    today_vanguard = VANGUARD_QUESTS[vanguard_idx]
+    
     h = f'''
     <div class="area" id="area-daily">
         <div class="content">
@@ -1040,21 +1046,15 @@ def generate_daily_html():
                 </div>
                 
                 <h3 style="color:#ffa657;margin:25px 0 15px 0;">🛡️ Pre-Searing Vanguard</h3>
-                <div style="background:#21262d;border-radius:12px;overflow:hidden;">'''
-    
-    for i, quest in enumerate(VANGUARD_QUESTS):
-        name, qtype, location, wiki = quest
-        quest_id = f"vanguard_{i}"
-        border = "border-bottom:1px solid #30363d;" if i < len(VANGUARD_QUESTS) - 1 else ""
-        
-        h += f'''
-                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;{border}">
-                        <input type="checkbox" id="{quest_id}" class="quest-checkbox" style="width:20px;height:20px;" data-daily="{quest_id}">
-                        <a href="https://wiki.guildwars.com/wiki/{wiki}" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">{name}</a>
-                        <span style="color:#79c0ff;font-size:0.85em;">{location}</span>
-                    </div>'''
-    
-    h += '''
+                <div style="background:#21262d;border-radius:12px;overflow:hidden;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;">
+                        <input type="checkbox" id="daily-vanguard" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanguard">
+                        <div style="flex:1;">
+                            <span style="color:#ffa657;font-weight:bold;">🛡️ Vanguard:</span>
+                            <a href="https://wiki.guildwars.com/wiki/{today_vanguard[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_vanguard[0]}</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_vanguard[2]})</span>
+                        </div>
+                    </div>
                 </div>
                 
                 <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
