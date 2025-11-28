@@ -22750,12 +22750,12 @@
             }
         }
         
-        // Auto-calculate legendary titles
+        // Auto-calculate legendary titles (IDs have title_ prefix)
         const legendaryMappings = {
-            'leg_guard': ['guard_tyria', 'guard_cantha', 'guard_elona'],
-            'leg_cart': ['cart_tyria', 'cart_cantha', 'cart_elona'],
-            'leg_skill': ['skill_tyria', 'skill_cantha', 'skill_elona'],
-            'leg_vanq': ['vanq_tyria', 'vanq_cantha', 'vanq_elona']
+            'title_leg_guard': ['title_guard_tyria', 'title_guard_cantha', 'title_guard_elona'],
+            'title_leg_cart': ['title_cart_tyria', 'title_cart_cantha', 'title_cart_elona'],
+            'title_leg_skill': ['title_skill_tyria', 'title_skill_cantha', 'title_skill_elona'],
+            'title_leg_vanq': ['title_vanq_tyria', 'title_vanq_cantha', 'title_vanq_elona']
         };
         
         function checkLegendaryTitles() {
