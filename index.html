@@ -22150,7 +22150,8 @@
         function clearUI() {
             document.querySelectorAll('.quest-checkbox, .hm-checkbox, .bonus-checkbox, .hm-bonus-checkbox').forEach(cb => {
                 cb.checked = false;
-                cb.closest('tr').classList.remove('completed', 'hm-done', 'bonus-done', 'hm-bonus-done');
+                const row = cb.closest('tr');
+                if (row) row.classList.remove('completed', 'hm-done', 'bonus-done', 'hm-bonus-done');
             });
         }
         
@@ -22536,25 +22537,29 @@
             document.querySelectorAll('.quest-checkbox').forEach(cb => {
                 if (saved[cb.dataset.id]) {
                     cb.checked = true;
-                    cb.closest('tr').classList.add('completed');
+                    const row = cb.closest('tr');
+                    if (row) row.classList.add('completed');
                 }
             });
             document.querySelectorAll('.hm-checkbox').forEach(cb => {
                 if (saved[cb.dataset.id]) {
                     cb.checked = true;
-                    cb.closest('tr').classList.add('hm-done');
+                    const row = cb.closest('tr');
+                    if (row) row.classList.add('hm-done');
                 }
             });
             document.querySelectorAll('.bonus-checkbox').forEach(cb => {
                 if (saved[cb.dataset.id]) {
                     cb.checked = true;
-                    cb.closest('tr').classList.add('bonus-done');
+                    const row = cb.closest('tr');
+                    if (row) row.classList.add('bonus-done');
                 }
             });
             document.querySelectorAll('.hm-bonus-checkbox').forEach(cb => {
                 if (saved[cb.dataset.id]) {
                     cb.checked = true;
-                    cb.closest('tr').classList.add('hm-bonus-done');
+                    const row = cb.closest('tr');
+                    if (row) row.classList.add('hm-bonus-done');
                 }
             });
             // Load title progress
@@ -22768,7 +22773,8 @@
                 const legCb = document.querySelector(`.quest-checkbox[data-id="${legendary}"]`);
                 if (legCb && allDone && !legCb.checked) {
                     legCb.checked = true;
-                    legCb.closest('tr').classList.add('completed');
+                    const row = legCb.closest('tr');
+                    if (row) row.classList.add('completed');
                     console.log('🏆 Auto-completed:', legendary);
                 }
             }
@@ -22779,7 +22785,8 @@
                 const homGwamm = document.querySelector('.quest-checkbox[data-id="hom_gwamm"]');
                 if (homGwamm && !homGwamm.checked) {
                     homGwamm.checked = true;
-                    homGwamm.closest('tr').classList.add('completed');
+                    const row = homGwamm.closest('tr');
+                    if (row) row.classList.add('completed');
                     console.log('🌟 GWAMM UNLOCKED! You have', maxedTitles, 'maxed titles!');
                 }
             }
@@ -22792,7 +22799,8 @@
         // Checkbox handler
         document.querySelectorAll('.quest-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
-                this.closest('tr').classList.toggle('completed', this.checked);
+                const row = this.closest('tr');
+                if (row) row.classList.toggle('completed', this.checked);
                 saveProgress();
                 updateProgress(this.dataset.area);
                 if (this.dataset.area === 'elites') updateElitesCampaignProgress();
@@ -22803,7 +22811,8 @@
         // HM checkbox handler
         document.querySelectorAll('.hm-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
-                this.closest('tr').classList.toggle('hm-done', this.checked);
+                const row = this.closest('tr');
+                if (row) row.classList.toggle('hm-done', this.checked);
                 saveProgress();
             });
         });
@@ -22811,7 +22820,8 @@
         // Bonus checkbox handler
         document.querySelectorAll('.bonus-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
-                this.closest('tr').classList.toggle('bonus-done', this.checked);
+                const row = this.closest('tr');
+                if (row) row.classList.toggle('bonus-done', this.checked);
                 saveProgress();
             });
         });
@@ -22819,7 +22829,8 @@
         // HM Bonus checkbox handler
         document.querySelectorAll('.hm-bonus-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
-                this.closest('tr').classList.toggle('hm-bonus-done', this.checked);
+                const row = this.closest('tr');
+                if (row) row.classList.toggle('hm-bonus-done', this.checked);
                 saveProgress();
             });
         });
