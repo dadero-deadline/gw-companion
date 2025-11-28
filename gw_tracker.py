@@ -2704,16 +2704,28 @@ html += '''
         
         function checkLegendaryTitles() {
             for (const [legendary, requirements] of Object.entries(legendaryMappings)) {
-                const allDone = requirements.every(reqId => {
+                let doneCount = 0;
+                requirements.forEach(reqId => {
                     const cb = document.querySelector(`.quest-checkbox[data-id="${reqId}"]`);
-                    return cb && cb.checked;
+                    if (cb && cb.checked) doneCount++;
                 });
                 
                 const legCb = document.querySelector(`.quest-checkbox[data-id="${legendary}"]`);
-                if (legCb && allDone && !legCb.checked) {
+                const legRow = legCb ? legCb.closest('tr') : null;
+                
+                // Update progress display (1/3, 2/3, 3/3)
+                if (legRow) {
+                    const prereq = legRow.querySelector('.prereq');
+                    if (prereq) {
+                        prereq.textContent = `${doneCount}/3 complete`;
+                        prereq.style.color = doneCount === 3 ? '#3fb950' : (doneCount > 0 ? '#f0883e' : '#8b949e');
+                    }
+                }
+                
+                // Auto-check when all 3 done
+                if (legCb && doneCount === 3 && !legCb.checked) {
                     legCb.checked = true;
-                    const row = legCb.closest('tr');
-                    if (row) row.classList.add('completed');
+                    if (legRow) legRow.classList.add('completed');
                     console.log('🏆 Auto-completed:', legendary);
                 }
             }
