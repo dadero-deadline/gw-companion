@@ -16756,103 +16756,109 @@
         <div class="content">
             <div style="text-align:center;margin-bottom:30px;">
                 <h2 style="color:#ffd700;margin:0;">📅 Today's Daily Quests</h2>
-                <p style="color:#8b949e;margin:5px 0;">Reset at midnight UTC</p>
+                <p style="color:#8b949e;margin:5px 0;">Friday, November 28, 2025 • Resets at midnight UTC</p>
             </div>
             
-            <!-- Today's Zaishen Quests -->
             <div style="max-width:600px;margin:0 auto;">
+                <h3 style="color:#ffa657;margin:0 0 15px 0;">⚔️ Zaishen Dailies</h3>
                 
-                <!-- Today's Mission -->
-                <div style="background:linear-gradient(135deg, #238636 0%, #2ea043 100%);padding:20px;border-radius:12px;margin-bottom:15px;">
-                    <div style="display:flex;align-items:center;gap:15px;">
-                        <input type="checkbox" id="daily-mission-check" class="quest-checkbox" style="width:24px;height:24px;" onchange="saveDailyProgress()">
+                <div style="background:#21262d;border-radius:12px;overflow:hidden;">
+                    <!-- Mission -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="daily-mission" class="quest-checkbox" style="width:22px;height:22px;" data-daily="mission">
                         <div style="flex:1;">
-                            <div style="font-size:0.85em;color:rgba(255,255,255,0.7);">🗺️ ZAISHEN MISSION</div>
-                            <div id="today-mission-name" style="font-size:1.3em;color:#fff;font-weight:bold;"></div>
-                            <div id="today-mission-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;"></div>
+                            <span style="color:#238636;font-weight:bold;">🗺️ Mission:</span>
+                            <a href="https://wiki.guildwars.com/wiki/Grand_Court_of_Sebelkeh_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Grand Court of Sebelkeh</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Nightfall)</span>
                         </div>
-                        <a id="today-mission-link" href="#" target="_blank" style="background:#fff;color:#238636;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">Wiki</a>
+                    </div>
+                    
+                    <!-- Bounty -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="daily-bounty" class="quest-checkbox" style="width:22px;height:22px;" data-daily="bounty">
+                        <div style="flex:1;">
+                            <span style="color:#1f6feb;font-weight:bold;">🎯 Bounty:</span>
+                            <a href="https://wiki.guildwars.com/wiki/Selvetarm_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Selvetarm</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Eye of the North)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Vanquish -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="daily-vanquish" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanquish">
+                        <div style="flex:1;">
+                            <span style="color:#f85149;font-weight:bold;">⚔️ Vanquish:</span>
+                            <a href="https://wiki.guildwars.com/wiki/Griffon%27s_Mouth_(Zaishen_vanquish)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Griffon's Mouth</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Combat/PvP -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;">
+                        <input type="checkbox" id="daily-combat" class="quest-checkbox" style="width:22px;height:22px;" data-daily="combat">
+                        <div style="flex:1;">
+                            <span style="color:#a855f7;font-weight:bold;">🏆 PvP:</span>
+                            <a href="https://wiki.guildwars.com/wiki/Codex_Arena_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Codex Arena</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Today's Bounty -->
-                <div style="background:linear-gradient(135deg, #1f6feb 0%, #388bfd 100%);padding:20px;border-radius:12px;margin-bottom:15px;">
-                    <div style="display:flex;align-items:center;gap:15px;">
-                        <input type="checkbox" id="daily-bounty-check" class="quest-checkbox" style="width:24px;height:24px;" onchange="saveDailyProgress()">
-                        <div style="flex:1;">
-                            <div style="font-size:0.85em;color:rgba(255,255,255,0.7);">🎯 ZAISHEN BOUNTY</div>
-                            <div id="today-bounty-name" style="font-size:1.3em;color:#fff;font-weight:bold;"></div>
-                            <div id="today-bounty-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;"></div>
-                        </div>
-                        <a id="today-bounty-link" href="#" target="_blank" style="background:#fff;color:#1f6feb;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">Wiki</a>
-                    </div>
-                </div>
-                
-                <!-- Vanguard Dailies (Pre-Searing) -->
-                <div style="background:#21262d;padding:20px;border-radius:12px;margin-bottom:15px;">
-                    <h3 style="color:#ffa657;margin:0 0 15px 0;">🛡️ Pre-Searing Vanguard (all daily)</h3>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_charr_at_the_gate" data-area="daily" style="width:20px;height:20px;">
+                <h3 style="color:#ffa657;margin:25px 0 15px 0;">🛡️ Pre-Searing Vanguard</h3>
+                <div style="background:#21262d;border-radius:12px;overflow:hidden;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_0" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_0">
                         <a href="https://wiki.guildwars.com/wiki/Charr_at_the_Gate" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Charr at the Gate</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Ascalon City</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_farmer_hamnet" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_1" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_1">
                         <a href="https://wiki.guildwars.com/wiki/Farmer_Hamnet_(quest)" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Farmer Hamnet</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Lakeside County</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_the_worm_problem" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_2" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_2">
                         <a href="https://wiki.guildwars.com/wiki/The_Worm_Problem" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">The Worm Problem</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Lakeside County</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_bandit_raid" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_3" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_3">
                         <a href="https://wiki.guildwars.com/wiki/Bandit_Raid" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Bandit Raid</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Lakeside County</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_the_prize_moa_bird" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_4" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_4">
                         <a href="https://wiki.guildwars.com/wiki/The_Prize_Moa_Bird" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">The Prize Moa Bird</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Wizard's Folly</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_undead_invasion" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_5" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_5">
                         <a href="https://wiki.guildwars.com/wiki/Undead_Invasion" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Undead Invasion</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Green Hills County</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_supplies_of_war" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_6" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_6">
                         <a href="https://wiki.guildwars.com/wiki/Supplies_of_War" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Supplies of War</a>
                         <span style="color:#79c0ff;font-size:0.85em;">The Northlands</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_a_guilds_burden" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="vanguard_7" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_7">
                         <a href="https://wiki.guildwars.com/wiki/A_Guild%27s_Burden" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">A Guilds Burden</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Wizard's Folly</span>
                     </div>
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="vg_little_thom" data-area="daily" style="width:20px;height:20px;">
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;">
+                        <input type="checkbox" id="vanguard_8" class="quest-checkbox" style="width:20px;height:20px;" data-daily="vanguard_8">
                         <a href="https://wiki.guildwars.com/wiki/Little_Thom_(quest)" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Little Thom</a>
                         <span style="color:#79c0ff;font-size:0.85em;">Regent Valley</span>
                     </div>
                 </div>
                 
-                <!-- Upcoming -->
-                <div style="background:#21262d;padding:20px;border-radius:12px;">
-                    <h3 style="color:#8b949e;margin:0 0 15px 0;">📆 Upcoming (next 5 days)</h3>
-                    <div id="upcoming-quests" style="font-size:0.9em;"></div>
+                <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
+                    <h4 style="color:#8b949e;margin:0 0 10px 0;">💡 Tips</h4>
+                    <ul style="margin:0;color:#8b949e;font-size:0.85em;">
+                        <li>Zaishen Coins → Balthazar faction, lockpicks, tomes</li>
+                        <li>Checkboxes reset daily</li>
+                    </ul>
                 </div>
-                
-            </div>
-            
-            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;max-width:600px;margin:20px auto 0;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Tips</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
-                    <li><strong>Zaishen Coins</strong> can buy Balthazar faction, lockpicks, tomes</li>
-                    <li><strong>Missions</strong> rotate every 69 days</li>
-                    <li><strong>Bounties</strong> rotate every 66 days</li>
-                </ul>
             </div>
         </div>
     </div>
@@ -23045,93 +23051,39 @@
             }
         }
         
-        // Calculate and display today's Zaishen quests
+        // Load/save daily checkboxes
         function updateTodaysZaishen() {
-            // Zaishen Mission: 69-day cycle starting March 4, 2011
-            const missionStart = new Date(2011, 2, 4); // March 4, 2011
-            const missions = [['Augury Rock', 'Prophecies', 'Crystal Desert', 'Augury_Rock_(Zaishen_quest)'], ['Grand Court of Sebelkeh', 'Nightfall', 'Vabbi', 'Grand_Court_of_Sebelkeh_(Zaishen_quest)'], ['Ice Caves of Sorrow', 'Prophecies', 'Southern Shiverpeaks', 'Ice_Caves_of_Sorrow_(Zaishen_quest)'], ['Raisu Palace', 'Factions', 'Kaineng City', 'Raisu_Palace_(Zaishen_quest)'], ['Gate of Desolation', 'Nightfall', 'Desolation', 'Gate_of_Desolation_(Zaishen_quest)'], ['Thirsty River', 'Prophecies', 'Crystal Desert', 'Thirsty_River_(Zaishen_quest)'], ['Blacktide Den', 'Nightfall', 'Istan', 'Blacktide_Den_(Zaishen_quest)'], ['Against the Charr', 'Eye of the North', 'Charr Homelands', 'Against_the_Charr_(Zaishen_quest)'], ["Abaddon's Mouth", 'Prophecies', 'Ring of Fire', 'Abaddon%27s_Mouth_(Zaishen_quest)'], ['Nundu Bay', 'Nightfall', 'Kourna', 'Nundu_Bay_(Zaishen_quest)'], ['Divinity Coast', 'Prophecies', 'Kryta', 'Divinity_Coast_(Zaishen_quest)'], ['Zen Daijun', 'Factions', 'Shing Jea', 'Zen_Daijun_(Zaishen_quest)'], ['Pogahn Passage', 'Nightfall', 'Kourna', 'Pogahn_Passage_(Zaishen_quest)'], ['Tahnnakai Temple', 'Factions', 'Kaineng City', 'Tahnnakai_Temple_(Zaishen_quest)'], ['The Great Northern Wall', 'Prophecies', 'Ascalon', 'The_Great_Northern_Wall_(Zaishen_quest)'], ['Dasha Vestibule', 'Nightfall', 'Vabbi', 'Dasha_Vestibule_(Zaishen_quest)'], ['The Wilds', 'Prophecies', 'Maguuma', 'The_Wilds_(Zaishen_quest)'], ['Unwaking Waters', 'Factions', 'Jade Sea', 'Unwaking_Waters_(Zaishen_quest)'], ['Chahbek Village', 'Nightfall', 'Istan', 'Chahbek_Village_(Zaishen_quest)'], ['Aurora Glade', 'Prophecies', 'Maguuma', 'Aurora_Glade_(Zaishen_quest)'], ['A Time for Heroes', 'Eye of the North', 'Depths', 'A_Time_for_Heroes_(Zaishen_quest)'], ['Consulate Docks', 'Nightfall', 'Istan', 'Consulate_Docks_(Zaishen_quest)'], ['Ring of Fire', 'Prophecies', 'Ring of Fire', 'Ring_of_Fire_(Zaishen_quest)'], ['Nahpui Quarter', 'Factions', 'Kaineng City', 'Nahpui_Quarter_(Zaishen_quest)'], ["The Dragon's Lair", 'Prophecies', 'Crystal Desert', 'The_Dragon%27s_Lair_(Zaishen_quest)'], ['Dzagonur Bastion', 'Nightfall', 'Vabbi', 'Dzagonur_Bastion_(Zaishen_quest)'], ["D'Alessio Seaboard", 'Prophecies', 'Kryta', 'D%27Alessio_Seaboard_(Zaishen_quest)'], ['Assault on the Stronghold', 'Eye of the North', 'Charr Homelands', 'Assault_on_the_Stronghold_(Zaishen_quest)'], ['The Eternal Grove', 'Factions', 'Echovald', 'The_Eternal_Grove_(Zaishen_quest)'], ['Sanctum Cay', 'Prophecies', 'Kryta', 'Sanctum_Cay_(Zaishen_quest)'], ['Rilohn Refuge', 'Nightfall', 'Kourna', 'Rilohn_Refuge_(Zaishen_quest)'], ['Warband of Brothers', 'Eye of the North', 'Charr Homelands', 'Warband_of_Brothers_(Zaishen_quest)'], ['Borlis Pass', 'Prophecies', 'Northern Shiverpeaks', 'Borlis_Pass_(Zaishen_quest)'], ['Imperial Sanctum', 'Factions', 'Kaineng City', 'Imperial_Sanctum_(Zaishen_quest)'], ['Moddok Crevice', 'Nightfall', 'Vabbi', 'Moddok_Crevice_(Zaishen_quest)'], ['Nolani Academy', 'Prophecies', 'Ascalon', 'Nolani_Academy_(Zaishen_quest)'], ["Destruction's Depths", 'Eye of the North', 'Depths', 'Destruction%27s_Depths_(Zaishen_quest)'], ['Venta Cemetery', 'Nightfall', 'Kourna', 'Venta_Cemetery_(Zaishen_quest)'], ['Fort Ranik', 'Prophecies', 'Ascalon', 'Fort_Ranik_(Zaishen_quest)'], ['A Gate Too Far', 'Eye of the North', 'Depths', 'A_Gate_Too_Far_(Zaishen_quest)'], ["Minister Cho's Estate", 'Factions', 'Shing Jea', 'Minister_Cho%27s_Estate_(Zaishen_quest)'], ['Thunderhead Keep', 'Prophecies', 'Southern Shiverpeaks', 'Thunderhead_Keep_(Zaishen_quest)'], ['Tihark Orchard', 'Nightfall', 'Vabbi', 'Tihark_Orchard_(Zaishen_quest)'], ['Finding the Bloodstone', 'Eye of the North', 'Tarnished Coast', 'Finding_the_Bloodstone_(Zaishen_quest)'], ['Dunes of Despair', 'Prophecies', 'Crystal Desert', 'Dunes_of_Despair_(Zaishen_quest)'], ['Vizunah Square', 'Factions', 'Kaineng City', 'Vizunah_Square_(Zaishen_quest)'], ['Jokanur Diggings', 'Nightfall', 'Istan', 'Jokanur_Diggings_(Zaishen_quest)'], ['Iron Mines of Moladune', 'Prophecies', 'Southern Shiverpeaks', 'Iron_Mines_of_Moladune_(Zaishen_quest)'], ['Kodonur Crossroads', 'Nightfall', 'Kourna', 'Kodonur_Crossroads_(Zaishen_quest)'], ['G.O.L.E.M.', 'Eye of the North', 'Tarnished Coast', 'G.O.L.E.M._(Zaishen_quest)'], ['Arborstone', 'Factions', 'Echovald', 'Arborstone_(Zaishen_quest)'], ['Gates of Kryta', 'Prophecies', 'Kryta', 'Gates_of_Kryta_(Zaishen_quest)'], ['Gate of Madness', 'Nightfall', 'Realm of Torment', 'Gate_of_Madness_(Zaishen_quest)'], ['The Elusive Golemancer', 'Eye of the North', 'Tarnished Coast', 'The_Elusive_Golemancer_(Zaishen_quest)'], ['Riverside Province', 'Prophecies', 'Kryta', 'Riverside_Province_(Zaishen_quest)'], ['Boreas Seabed', 'Factions', 'Jade Sea', 'Boreas_Seabed_(Zaishen_quest)'], ['Ruins of Morah', 'Nightfall', 'Desolation', 'Ruins_of_Morah_(Zaishen_quest)'], ["Hell's Precipice", 'Prophecies', 'Ring of Fire', 'Hell%27s_Precipice_(Zaishen_quest)'], ['Ruins of Surmia', 'Prophecies', 'Ascalon', 'Ruins_of_Surmia_(Zaishen_quest)'], ['Curse of the Nornbear', 'Eye of the North', 'Far Shiverpeaks', 'Curse_of_the_Nornbear_(Zaishen_quest)'], ['Sunjiang District', 'Factions', 'Kaineng City', 'Sunjiang_District_(Zaishen_quest)'], ['Elona Reach', 'Prophecies', 'Crystal Desert', 'Elona_Reach_(Zaishen_quest)'], ['Gate of Pain', 'Nightfall', 'Realm of Torment', 'Gate_of_Pain_(Zaishen_quest)'], ['Blood Washes Blood', 'Eye of the North', 'Charr Homelands', 'Blood_Washes_Blood_(Zaishen_quest)'], ['Bloodstone Fen', 'Prophecies', 'Maguuma', 'Bloodstone_Fen_(Zaishen_quest)'], ["Jennur's Horde", 'Nightfall', 'Desolation', 'Jennur%27s_Horde_(Zaishen_quest)'], ['Gyala Hatchery', 'Factions', 'Jade Sea', 'Gyala_Hatchery_(Zaishen_quest)'], ["Abaddon's Gate", 'Nightfall', 'Realm of Torment', 'Abaddon%27s_Gate_(Zaishen_quest)'], ['The Frost Gate', 'Prophecies', 'Northern Shiverpeaks', 'The_Frost_Gate_(Zaishen_quest)']];
-            
-            // Zaishen Bounty: 66-day cycle starting June 12, 2009
-            const bountyStart = new Date(2009, 5, 12); // June 12, 2009
-            const bounties = [['Droajam, Mage of the Sands', 'Nightfall', 'Desolation', 'Droajam,_Mage_of_the_Sands_(Zaishen_quest)'], ['Royen Beastkeeper', 'Prophecies', 'Maguuma', 'Royen_Beastkeeper_(Zaishen_quest)'], ['Eldritch Ettin', 'Prophecies', 'Southern Shiverpeaks', 'Eldritch_Ettin_(Zaishen_quest)'], ['Vengeful Aatxe', 'Core', 'Underworld', 'Vengeful_Aatxe_(Zaishen_quest)'], ['Fronis Irontoe', 'Eye of the North', 'Depths', 'Fronis_Irontoe_(Zaishen_quest)'], ['Urgoz', 'Factions', 'Echovald', 'Urgoz_(Zaishen_quest)'], ['Fenrir', 'Eye of the North', 'Far Shiverpeaks', 'Fenrir_(Zaishen_quest)'], ['Selvetarm', 'Eye of the North', 'Depths', 'Selvetarm_(Zaishen_quest)'], ['Mohby Windbeak', 'Nightfall', 'Istan', 'Mohby_Windbeak_(Zaishen_quest)'], ['Charged Blackness', 'Prophecies', 'Ring of Fire', 'Charged_Blackness_(Zaishen_quest)'], ['Rotscale', 'Prophecies', 'Kryta', 'Rotscale_(Zaishen_quest)'], ['Zoldark the Unholy', 'Eye of the North', 'Depths', 'Zoldark_the_Unholy_(Zaishen_quest)'], ['Korshek the Immolated', 'Nightfall', 'Desolation', 'Korshek_the_Immolated_(Zaishen_quest)'], ['Myish, Lady of the Lake', 'Eye of the North', 'Far Shiverpeaks', 'Myish,_Lady_of_the_Lake_(Zaishen_quest)'], ['Frostmaw the Kinslayer', 'Eye of the North', 'Far Shiverpeaks', 'Frostmaw_the_Kinslayer_(Zaishen_quest)'], ['Kunvie Firewing', 'Factions', 'Echovald', 'Kunvie_Firewing_(Zaishen_quest)'], ["Z'him Monns", 'Nightfall', 'Desolation', 'Z%27him_Monns_(Zaishen_quest)'], ['The Greater Darkness', 'Eye of the North', 'Depths', 'The_Greater_Darkness_(Zaishen_quest)'], ['TPS Regulator Golem', 'Eye of the North', 'Depths', 'TPS_Regulator_Golem_(Zaishen_quest)'], ['Plague of Destruction', 'Eye of the North', 'Tarnished Coast', 'Plague_of_Destruction_(Zaishen_quest)'], ['The Darknesses', 'Eye of the North', 'Depths', 'The_Darknesses_(Zaishen_quest)'], ['Admiral Kantoh', 'Factions', 'Jade Sea', 'Admiral_Kantoh_(Zaishen_quest)'], ['Borrguus Blisterbark', 'Eye of the North', 'Tarnished Coast', 'Borrguus_Blisterbark_(Zaishen_quest)'], ['Forgewight', 'Eye of the North', 'Depths', 'Forgewight_(Zaishen_quest)'], ['Baubao Wavewrath', 'Factions', 'Jade Sea', 'Baubao_Wavewrath_(Zaishen_quest)'], ['Joffs the Mitigator', 'Nightfall', 'Kourna', 'Joffs_the_Mitigator_(Zaishen_quest)'], ['Rragar Maneater', 'Eye of the North', 'Charr Homelands', 'Rragar_Maneater_(Zaishen_quest)'], ['Chung, the Attuned', 'Factions', 'Kaineng City', 'Chung,_the_Attuned_(Zaishen_quest)'], ['Lord Jadoth', 'Core', 'Domain of Anguish', 'Lord_Jadoth_(Zaishen_quest)'], ['Nulfastu, Earthbound', 'Eye of the North', 'Far Shiverpeaks', 'Nulfastu,_Earthbound_(Zaishen_quest)'], ['The Iron Forgeman', 'Eye of the North', 'Depths', 'The_Iron_Forgeman_(Zaishen_quest)'], ['Magmus', 'Eye of the North', 'Depths', 'Magmus_(Zaishen_quest)'], ['Mobrin, Lord of the Marsh', 'Factions', 'Echovald', 'Mobrin,_Lord_of_the_Marsh_(Zaishen_quest)'], ['Jarimiya the Unmerciful', 'Nightfall', 'Desolation', 'Jarimiya_the_Unmerciful_(Zaishen_quest)'], ['Duncan the Black', 'Eye of the North', 'Depths', 'Duncan_the_Black_(Zaishen_quest)'], ['Quansong Spiritspeak', 'Factions', 'Echovald', 'Quansong_Spiritspeak_(Zaishen_quest)'], ['The Stygian Underlords', 'Core', 'Domain of Anguish', 'The_Stygian_Underlords_(Zaishen_quest)'], ['Fozzy Yeoryios', 'Nightfall', 'Vabbi', 'Fozzy_Yeoryios_(Zaishen_quest)'], ['The Black Beast of Arrgh', 'Eye of the North', 'Depths', 'The_Black_Beast_of_Arrgh_(Zaishen_quest)'], ['Arachni', 'Eye of the North', 'Tarnished Coast', 'Arachni_(Zaishen_quest)'], ['The Four Horsemen', 'Core', 'Underworld', 'The_Four_Horsemen_(Zaishen_quest)'], ['Remnant of Antiquities', 'Eye of the North', 'Depths', 'Remnant_of_Antiquities_(Zaishen_quest)'], ['Arbor Earthcall', 'Factions', 'Jade Sea', 'Arbor_Earthcall_(Zaishen_quest)'], ['Prismatic Ooze', 'Eye of the North', 'Tarnished Coast', 'Prismatic_Ooze_(Zaishen_quest)'], ['Lord Khobay', 'Nightfall', 'Desolation', 'Lord_Khobay_(Zaishen_quest)'], ['Jedeh the Mighty', 'Nightfall', 'Desolation', 'Jedeh_the_Mighty_(Zaishen_quest)'], ['Ssuns, Blessed of Dwayna', 'Nightfall', 'Realm of Torment', 'Ssuns,_Blessed_of_Dwayna_(Zaishen_quest)'], ['Justiciar Thommis', 'Prophecies', 'Kryta', 'Justiciar_Thommis_(Zaishen_quest)'], ['Harn and Maxine Coldstone', 'Prophecies', 'Southern Shiverpeaks', 'Harn_and_Maxine_Coldstone_(Zaishen_quest)'], ['Pywatt the Swift', 'Nightfall', 'Kourna', 'Pywatt_the_Swift_(Zaishen_quest)'], ['Fendi Nin', 'Eye of the North', 'Depths', 'Fendi_Nin_(Zaishen_quest)'], ['Mungri Magicbox', 'Nightfall', 'Istan', 'Mungri_Magicbox_(Zaishen_quest)'], ['Priest of Menzies', 'Core', 'Fissure of Woe', 'Priest_of_Menzies_(Zaishen_quest)'], ['Ilsundur, Lord of Fire', 'Eye of the North', 'Depths', 'Ilsundur,_Lord_of_Fire_(Zaishen_quest)'], ['Kepkhet Marrowfeast', 'Nightfall', 'Desolation', 'Kepkhet_Marrowfeast_(Zaishen_quest)'], ['Commander Wahli', 'Factions', 'Jade Sea', 'Commander_Wahli_(Zaishen_quest)'], ['Kanaxai', 'Factions', 'Jade Sea', 'Kanaxai_(Zaishen_quest)'], ['Khabuus', 'Nightfall', 'Vabbi', 'Khabuus_(Zaishen_quest)'], ['Molotov Rocktail', 'Eye of the North', 'Charr Homelands', 'Molotov_Rocktail_(Zaishen_quest)'], ['The Stygian Lords', 'Core', 'Domain of Anguish', 'The_Stygian_Lords_(Zaishen_quest)'], ['Dragon Lich', 'Prophecies', 'Ring of Fire', 'Dragon_Lich_(Zaishen_quest)'], ['Havok Soulwail', 'Eye of the North', 'Depths', 'Havok_Soulwail_(Zaishen_quest)'], ['Ghial the Bone Dancer', 'Nightfall', 'Desolation', 'Ghial_the_Bone_Dancer_(Zaishen_quest)'], ['Murakai, Lady of the Night', 'Eye of the North', 'Depths', 'Murakai,_Lady_of_the_Night_(Zaishen_quest)'], ['Rand Stormweaver', 'Prophecies', 'Northern Shiverpeaks', 'Rand_Stormweaver_(Zaishen_quest)'], ['Verata', 'Prophecies', 'Kryta', 'Verata_(Zaishen_quest)']];
-            
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            // Calculate mission index
-            const missionDays = Math.floor((today - missionStart) / (1000 * 60 * 60 * 24));
-            const missionIndex = ((missionDays % missions.length) + missions.length) % missions.length;
-            
-            // Calculate bounty index
-            const bountyDays = Math.floor((today - bountyStart) / (1000 * 60 * 60 * 24));
-            const bountyIndex = ((bountyDays % bounties.length) + bounties.length) % bounties.length;
-            
-            // Update today's mission
-            const todayMission = missions[missionIndex];
-            document.getElementById('today-mission-name').textContent = todayMission[0];
-            document.getElementById('today-mission-info').textContent = todayMission[1] + ' • ' + todayMission[2];
-            document.getElementById('today-mission-link').href = 'https://wiki.guildwars.com/wiki/' + todayMission[3];
-            
-            // Update today's bounty
-            const todayBounty = bounties[bountyIndex];
-            document.getElementById('today-bounty-name').textContent = todayBounty[0];
-            document.getElementById('today-bounty-info').textContent = todayBounty[1] + ' • ' + todayBounty[2];
-            document.getElementById('today-bounty-link').href = 'https://wiki.guildwars.com/wiki/' + todayBounty[3];
-            
-            // Load saved daily progress
-            loadDailyProgress();
-            
-            // Generate upcoming quests
-            let upcomingHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                const futureDate = new Date(today);
-                futureDate.setDate(futureDate.getDate() + i);
-                
-                const futureMissionDays = Math.floor((futureDate - missionStart) / (1000 * 60 * 60 * 24));
-                const futureMissionIdx = ((futureMissionDays % missions.length) + missions.length) % missions.length;
-                
-                const futureBountyDays = Math.floor((futureDate - bountyStart) / (1000 * 60 * 60 * 24));
-                const futureBountyIdx = ((futureBountyDays % bounties.length) + bounties.length) % bounties.length;
-                
-                const dateStr = futureDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-                
-                upcomingHtml += '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">';
-                upcomingHtml += '<span style="color:#8b949e;min-width:100px;">' + dateStr + '</span>';
-                upcomingHtml += '<span style="color:#238636;">🗺️ ' + missions[futureMissionIdx][0] + '</span>';
-                upcomingHtml += '<span style="color:#1f6feb;">🎯 ' + bounties[futureBountyIdx][0] + '</span>';
-                upcomingHtml += '</div>';
-            }
-            document.getElementById('upcoming-quests').innerHTML = upcomingHtml;
+            loadDailyCheckboxes();
         }
         
-        // Save daily quest progress (resets each day)
-        function saveDailyProgress() {
-            const today = new Date().toISOString().split('T')[0];
-            const charName = getCurrentCharacter();
-            const key = 'gw-daily-' + charName + '-' + today;
-            
-            const progress = {
-                mission: document.getElementById('daily-mission-check').checked,
-                bounty: document.getElementById('daily-bounty-check').checked
-            };
-            localStorage.setItem(key, JSON.stringify(progress));
-        }
-        
-        // Load daily quest progress
-        function loadDailyProgress() {
+        function loadDailyCheckboxes() {
             const today = new Date().toISOString().split('T')[0];
             const charName = getCurrentCharacter();
             const key = 'gw-daily-' + charName + '-' + today;
             
             const saved = localStorage.getItem(key);
-            if (saved) {
-                const progress = JSON.parse(saved);
-                document.getElementById('daily-mission-check').checked = progress.mission || false;
-                document.getElementById('daily-bounty-check').checked = progress.bounty || false;
-            } else {
-                document.getElementById('daily-mission-check').checked = false;
-                document.getElementById('daily-bounty-check').checked = false;
-            }
+            const progress = saved ? JSON.parse(saved) : {};
+            
+            // Load all daily checkboxes
+            document.querySelectorAll('[data-daily]').forEach(cb => {
+                const dailyId = cb.getAttribute('data-daily');
+                cb.checked = progress[dailyId] || false;
+                cb.addEventListener('change', saveDailyCheckboxes);
+            });
+        }
+        
+        function saveDailyCheckboxes() {
+            const today = new Date().toISOString().split('T')[0];
+            const charName = getCurrentCharacter();
+            const key = 'gw-daily-' + charName + '-' + today;
+            
+            const progress = {};
+            document.querySelectorAll('[data-daily]').forEach(cb => {
+                const dailyId = cb.getAttribute('data-daily');
+                progress[dailyId] = cb.checked;
+            });
+            
+            localStorage.setItem(key, JSON.stringify(progress));
         }
         
         // Open official HoM Calculator with character name

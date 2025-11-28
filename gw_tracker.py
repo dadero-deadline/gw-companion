@@ -11,7 +11,7 @@ from vanquishes import ALL_VANQUISHES, VANQUISH_REGIONS, PROPHECIES_VANQUISHES, 
 from missions import ALL_MISSIONS, MISSION_REGIONS, PROPHECIES_MISSIONS, FACTIONS_MISSIONS, NIGHTFALL_MISSIONS
 from armor_sets import ALL_ARMOR, HOM_ARMOR, ARMOR_ICONS, CORE_ARMOR, PROPHECIES_ARMOR, FACTIONS_ARMOR, NIGHTFALL_ARMOR, EOTN_ARMOR, STANDALONE_PIECES
 from minipets import ALL_MINIS, RARITY_COLORS, YEAR1_MINIS, YEAR2_MINIS, YEAR3_MINIS, YEAR4_MINIS, YEAR5_MINIS, INGAME_MINIS, FESTIVAL_MINIS
-from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, VANGUARD_QUESTS, get_current_zaishen_mission, get_current_zaishen_bounty, get_upcoming_zaishen, ZAISHEN_MISSION_START, ZAISHEN_BOUNTY_START
+from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, ZAISHEN_VANQUISHES, ZAISHEN_COMBAT, VANGUARD_QUESTS, ZAISHEN_MISSION_START, ZAISHEN_BOUNTY_START, ZAISHEN_VANQUISH_START, ZAISHEN_COMBAT_START
 
 # Load both Excel files
 def load_quests(filename, area_id):
@@ -961,77 +961,109 @@ html += generate_heroes_html()
 
 # === DAILY QUESTS ===
 def generate_daily_html():
-    h = '''
+    from datetime import datetime, timedelta
+    
+    # Calculate today's quests
+    today = datetime.now()
+    today = today.replace(hour=0, minute=0, second=0, microsecond=0)
+    
+    # Mission (69-day cycle)
+    mission_days = (today - ZAISHEN_MISSION_START).days
+    mission_idx = mission_days % len(ZAISHEN_MISSIONS)
+    today_mission = ZAISHEN_MISSIONS[mission_idx]
+    
+    # Bounty (66-day cycle)
+    bounty_days = (today - ZAISHEN_BOUNTY_START).days
+    bounty_idx = bounty_days % len(ZAISHEN_BOUNTIES)
+    today_bounty = ZAISHEN_BOUNTIES[bounty_idx]
+    
+    # Vanquish (136-day cycle, but we only have 10 in our list, so use that)
+    vanquish_days = (today - ZAISHEN_VANQUISH_START).days
+    vanquish_idx = vanquish_days % len(ZAISHEN_VANQUISHES)
+    today_vanquish = ZAISHEN_VANQUISHES[vanquish_idx]
+    
+    # Combat/PvP (7-day cycle)
+    combat_days = (today - ZAISHEN_COMBAT_START).days
+    combat_idx = combat_days % len(ZAISHEN_COMBAT)
+    today_combat = ZAISHEN_COMBAT[combat_idx]
+    
+    h = f'''
     <div class="area" id="area-daily">
         <div class="content">
             <div style="text-align:center;margin-bottom:30px;">
                 <h2 style="color:#ffd700;margin:0;">📅 Today's Daily Quests</h2>
-                <p style="color:#8b949e;margin:5px 0;">Reset at midnight UTC</p>
+                <p style="color:#8b949e;margin:5px 0;">{today.strftime("%A, %B %d, %Y")} • Resets at midnight UTC</p>
             </div>
             
-            <!-- Today's Zaishen Quests -->
             <div style="max-width:600px;margin:0 auto;">
+                <h3 style="color:#ffa657;margin:0 0 15px 0;">⚔️ Zaishen Dailies</h3>
                 
-                <!-- Today's Mission -->
-                <div style="background:linear-gradient(135deg, #238636 0%, #2ea043 100%);padding:20px;border-radius:12px;margin-bottom:15px;">
-                    <div style="display:flex;align-items:center;gap:15px;">
-                        <input type="checkbox" id="daily-mission-check" class="quest-checkbox" style="width:24px;height:24px;" onchange="saveDailyProgress()">
+                <div style="background:#21262d;border-radius:12px;overflow:hidden;">
+                    <!-- Mission -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="daily-mission" class="quest-checkbox" style="width:22px;height:22px;" data-daily="mission">
                         <div style="flex:1;">
-                            <div style="font-size:0.85em;color:rgba(255,255,255,0.7);">🗺️ ZAISHEN MISSION</div>
-                            <div id="today-mission-name" style="font-size:1.3em;color:#fff;font-weight:bold;"></div>
-                            <div id="today-mission-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;"></div>
+                            <span style="color:#238636;font-weight:bold;">🗺️ Mission:</span>
+                            <a href="https://wiki.guildwars.com/wiki/{today_mission[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_mission[0]}</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_mission[1]})</span>
                         </div>
-                        <a id="today-mission-link" href="#" target="_blank" style="background:#fff;color:#238636;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">Wiki</a>
+                    </div>
+                    
+                    <!-- Bounty -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="daily-bounty" class="quest-checkbox" style="width:22px;height:22px;" data-daily="bounty">
+                        <div style="flex:1;">
+                            <span style="color:#1f6feb;font-weight:bold;">🎯 Bounty:</span>
+                            <a href="https://wiki.guildwars.com/wiki/{today_bounty[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_bounty[0]}</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_bounty[1]})</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Vanquish -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" id="daily-vanquish" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanquish">
+                        <div style="flex:1;">
+                            <span style="color:#f85149;font-weight:bold;">⚔️ Vanquish:</span>
+                            <a href="https://wiki.guildwars.com/wiki/{today_vanquish[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_vanquish[0]}</a>
+                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_vanquish[1]})</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Combat/PvP -->
+                    <div style="display:flex;align-items:center;gap:15px;padding:15px;">
+                        <input type="checkbox" id="daily-combat" class="quest-checkbox" style="width:22px;height:22px;" data-daily="combat">
+                        <div style="flex:1;">
+                            <span style="color:#a855f7;font-weight:bold;">🏆 PvP:</span>
+                            <a href="https://wiki.guildwars.com/wiki/{today_combat[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_combat[0]}</a>
+                        </div>
                     </div>
                 </div>
                 
-                <!-- Today's Bounty -->
-                <div style="background:linear-gradient(135deg, #1f6feb 0%, #388bfd 100%);padding:20px;border-radius:12px;margin-bottom:15px;">
-                    <div style="display:flex;align-items:center;gap:15px;">
-                        <input type="checkbox" id="daily-bounty-check" class="quest-checkbox" style="width:24px;height:24px;" onchange="saveDailyProgress()">
-                        <div style="flex:1;">
-                            <div style="font-size:0.85em;color:rgba(255,255,255,0.7);">🎯 ZAISHEN BOUNTY</div>
-                            <div id="today-bounty-name" style="font-size:1.3em;color:#fff;font-weight:bold;"></div>
-                            <div id="today-bounty-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;"></div>
-                        </div>
-                        <a id="today-bounty-link" href="#" target="_blank" style="background:#fff;color:#1f6feb;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">Wiki</a>
-                    </div>
-                </div>
-                
-                <!-- Vanguard Dailies (Pre-Searing) -->
-                <div style="background:#21262d;padding:20px;border-radius:12px;margin-bottom:15px;">
-                    <h3 style="color:#ffa657;margin:0 0 15px 0;">🛡️ Pre-Searing Vanguard (all daily)</h3>'''
+                <h3 style="color:#ffa657;margin:25px 0 15px 0;">🛡️ Pre-Searing Vanguard</h3>
+                <div style="background:#21262d;border-radius:12px;overflow:hidden;">'''
     
-    for quest in VANGUARD_QUESTS:
+    for i, quest in enumerate(VANGUARD_QUESTS):
         name, qtype, location, wiki = quest
-        quest_id = f"vg_{name.lower().replace(' ', '_').replace(chr(39), '')}"
-        wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
+        quest_id = f"vanguard_{i}"
+        border = "border-bottom:1px solid #30363d;" if i < len(VANGUARD_QUESTS) - 1 else ""
         
         h += f'''
-                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
-                        <input type="checkbox" class="quest-checkbox" data-id="{quest_id}" data-area="daily" style="width:20px;height:20px;">
-                        <a href="{wiki_url}" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">{name}</a>
+                    <div style="display:flex;align-items:center;gap:15px;padding:12px 15px;{border}">
+                        <input type="checkbox" id="{quest_id}" class="quest-checkbox" style="width:20px;height:20px;" data-daily="{quest_id}">
+                        <a href="https://wiki.guildwars.com/wiki/{wiki}" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">{name}</a>
                         <span style="color:#79c0ff;font-size:0.85em;">{location}</span>
                     </div>'''
     
     h += '''
                 </div>
                 
-                <!-- Upcoming -->
-                <div style="background:#21262d;padding:20px;border-radius:12px;">
-                    <h3 style="color:#8b949e;margin:0 0 15px 0;">📆 Upcoming (next 5 days)</h3>
-                    <div id="upcoming-quests" style="font-size:0.9em;"></div>
+                <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
+                    <h4 style="color:#8b949e;margin:0 0 10px 0;">💡 Tips</h4>
+                    <ul style="margin:0;color:#8b949e;font-size:0.85em;">
+                        <li>Zaishen Coins → Balthazar faction, lockpicks, tomes</li>
+                        <li>Checkboxes reset daily</li>
+                    </ul>
                 </div>
-                
-            </div>
-            
-            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;max-width:600px;margin:20px auto 0;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Tips</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
-                    <li><strong>Zaishen Coins</strong> can buy Balthazar faction, lockpicks, tomes</li>
-                    <li><strong>Missions</strong> rotate every 69 days</li>
-                    <li><strong>Bounties</strong> rotate every 66 days</li>
-                </ul>
             </div>
         </div>
     </div>'''
@@ -2920,93 +2952,39 @@ html += '''
             }
         }
         
-        // Calculate and display today's Zaishen quests
+        // Load/save daily checkboxes
         function updateTodaysZaishen() {
-            // Zaishen Mission: 69-day cycle starting March 4, 2011
-            const missionStart = new Date(2011, 2, 4); // March 4, 2011
-            const missions = ''' + str([[m[0], m[1], m[2], m[3]] for m in ZAISHEN_MISSIONS]) + ''';
-            
-            // Zaishen Bounty: 66-day cycle starting June 12, 2009
-            const bountyStart = new Date(2009, 5, 12); // June 12, 2009
-            const bounties = ''' + str([[b[0], b[1], b[2], b[3]] for b in ZAISHEN_BOUNTIES]) + ''';
-            
-            const today = new Date();
-            today.setHours(0, 0, 0, 0);
-            
-            // Calculate mission index
-            const missionDays = Math.floor((today - missionStart) / (1000 * 60 * 60 * 24));
-            const missionIndex = ((missionDays % missions.length) + missions.length) % missions.length;
-            
-            // Calculate bounty index
-            const bountyDays = Math.floor((today - bountyStart) / (1000 * 60 * 60 * 24));
-            const bountyIndex = ((bountyDays % bounties.length) + bounties.length) % bounties.length;
-            
-            // Update today's mission
-            const todayMission = missions[missionIndex];
-            document.getElementById('today-mission-name').textContent = todayMission[0];
-            document.getElementById('today-mission-info').textContent = todayMission[1] + ' • ' + todayMission[2];
-            document.getElementById('today-mission-link').href = 'https://wiki.guildwars.com/wiki/' + todayMission[3];
-            
-            // Update today's bounty
-            const todayBounty = bounties[bountyIndex];
-            document.getElementById('today-bounty-name').textContent = todayBounty[0];
-            document.getElementById('today-bounty-info').textContent = todayBounty[1] + ' • ' + todayBounty[2];
-            document.getElementById('today-bounty-link').href = 'https://wiki.guildwars.com/wiki/' + todayBounty[3];
-            
-            // Load saved daily progress
-            loadDailyProgress();
-            
-            // Generate upcoming quests
-            let upcomingHtml = '';
-            for (let i = 1; i <= 5; i++) {
-                const futureDate = new Date(today);
-                futureDate.setDate(futureDate.getDate() + i);
-                
-                const futureMissionDays = Math.floor((futureDate - missionStart) / (1000 * 60 * 60 * 24));
-                const futureMissionIdx = ((futureMissionDays % missions.length) + missions.length) % missions.length;
-                
-                const futureBountyDays = Math.floor((futureDate - bountyStart) / (1000 * 60 * 60 * 24));
-                const futureBountyIdx = ((futureBountyDays % bounties.length) + bounties.length) % bounties.length;
-                
-                const dateStr = futureDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
-                
-                upcomingHtml += '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">';
-                upcomingHtml += '<span style="color:#8b949e;min-width:100px;">' + dateStr + '</span>';
-                upcomingHtml += '<span style="color:#238636;">🗺️ ' + missions[futureMissionIdx][0] + '</span>';
-                upcomingHtml += '<span style="color:#1f6feb;">🎯 ' + bounties[futureBountyIdx][0] + '</span>';
-                upcomingHtml += '</div>';
-            }
-            document.getElementById('upcoming-quests').innerHTML = upcomingHtml;
+            loadDailyCheckboxes();
         }
         
-        // Save daily quest progress (resets each day)
-        function saveDailyProgress() {
-            const today = new Date().toISOString().split('T')[0];
-            const charName = getCurrentCharacter();
-            const key = 'gw-daily-' + charName + '-' + today;
-            
-            const progress = {
-                mission: document.getElementById('daily-mission-check').checked,
-                bounty: document.getElementById('daily-bounty-check').checked
-            };
-            localStorage.setItem(key, JSON.stringify(progress));
-        }
-        
-        // Load daily quest progress
-        function loadDailyProgress() {
+        function loadDailyCheckboxes() {
             const today = new Date().toISOString().split('T')[0];
             const charName = getCurrentCharacter();
             const key = 'gw-daily-' + charName + '-' + today;
             
             const saved = localStorage.getItem(key);
-            if (saved) {
-                const progress = JSON.parse(saved);
-                document.getElementById('daily-mission-check').checked = progress.mission || false;
-                document.getElementById('daily-bounty-check').checked = progress.bounty || false;
-            } else {
-                document.getElementById('daily-mission-check').checked = false;
-                document.getElementById('daily-bounty-check').checked = false;
-            }
+            const progress = saved ? JSON.parse(saved) : {};
+            
+            // Load all daily checkboxes
+            document.querySelectorAll('[data-daily]').forEach(cb => {
+                const dailyId = cb.getAttribute('data-daily');
+                cb.checked = progress[dailyId] || false;
+                cb.addEventListener('change', saveDailyCheckboxes);
+            });
+        }
+        
+        function saveDailyCheckboxes() {
+            const today = new Date().toISOString().split('T')[0];
+            const charName = getCurrentCharacter();
+            const key = 'gw-daily-' + charName + '-' + today;
+            
+            const progress = {};
+            document.querySelectorAll('[data-daily]').forEach(cb => {
+                const dailyId = cb.getAttribute('data-daily');
+                progress[dailyId] = cb.checked;
+            });
+            
+            localStorage.setItem(key, JSON.stringify(progress));
         }
         
         // Open official HoM Calculator with character name

@@ -153,6 +153,35 @@ ZAISHEN_BOUNTIES = [
     ("Verata", "Prophecies", "Kryta", "Verata_(Zaishen_quest)"),
 ]
 
+# ==================== ZAISHEN VANQUISH ====================
+# 136-day cycle
+ZAISHEN_VANQUISH_START = datetime(2011, 3, 4)
+ZAISHEN_VANQUISHES = [
+    ("Jaya Bluffs", "Factions", "Shing Jea", "Jaya_Bluffs_(Zaishen_vanquish)"),
+    ("Holdings of Chokhin", "Nightfall", "Vabbi", "Holdings_of_Chokhin_(Zaishen_vanquish)"),
+    ("Ice Cliff Chasms", "Eye of the North", "Far Shiverpeaks", "Ice_Cliff_Chasms_(Zaishen_vanquish)"),
+    ("Griffon's Mouth", "Prophecies", "Shiverpeaks", "Griffon%27s_Mouth_(Zaishen_vanquish)"),
+    ("Kinya Province", "Factions", "Shing Jea", "Kinya_Province_(Zaishen_vanquish)"),
+    ("Issnur Isles", "Nightfall", "Istan", "Issnur_Isles_(Zaishen_vanquish)"),
+    ("Jaga Moraine", "Eye of the North", "Far Shiverpeaks", "Jaga_Moraine_(Zaishen_vanquish)"),
+    ("Ice Floe", "Eye of the North", "Far Shiverpeaks", "Ice_Floe_(Zaishen_vanquish)"),
+    ("Maishang Hills", "Factions", "Jade Sea", "Maishang_Hills_(Zaishen_vanquish)"),
+    ("Jahai Bluffs", "Nightfall", "Kourna", "Jahai_Bluffs_(Zaishen_vanquish)"),
+]
+
+# ==================== ZAISHEN COMBAT (PvP) ====================
+# 7-day cycle
+ZAISHEN_COMBAT_START = datetime(2009, 4, 23)
+ZAISHEN_COMBAT = [
+    ("Random Arena", "PvP", "Battle Isles", "Random_Arena_(Zaishen_quest)"),
+    ("Codex Arena", "PvP", "Battle Isles", "Codex_Arena_(Zaishen_quest)"),
+    ("Heroes' Ascent", "PvP", "Battle Isles", "Heroes%27_Ascent_(Zaishen_quest)"),
+    ("Guild versus Guild", "PvP", "Battle Isles", "Guild_Versus_Guild_(Zaishen_quest)"),
+    ("Alliance Battles", "PvP", "Battle Isles", "Alliance_Battles_(Zaishen_quest)"),
+    ("Fort Aspenwood", "PvP", "Battle Isles", "Fort_Aspenwood_(Zaishen_quest)"),
+    ("Jade Quarry", "PvP", "Battle Isles", "Jade_Quarry_(Zaishen_quest)"),
+]
+
 # ==================== PRE-SEARING VANGUARD DAILIES ====================
 VANGUARD_QUESTS = [
     ("Charr at the Gate", "Daily", "Ascalon City", "Charr_at_the_Gate"),
