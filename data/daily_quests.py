@@ -183,16 +183,17 @@ ZAISHEN_COMBAT = [
 ]
 
 # ==================== PRE-SEARING VANGUARD DAILIES ====================
+# 9-day cycle from Lieutenant Langmar
 VANGUARD_QUESTS = [
-    ("Charr at the Gate", "Daily", "Ascalon City", "Charr_at_the_Gate"),
-    ("Farmer Hamnet", "Daily", "Lakeside County", "Farmer_Hamnet_(quest)"),
-    ("The Worm Problem", "Daily", "Lakeside County", "The_Worm_Problem"),
-    ("Bandit Raid", "Daily", "Lakeside County", "Bandit_Raid"),
-    ("The Prize Moa Bird", "Daily", "Wizard's Folly", "The_Prize_Moa_Bird"),
-    ("Undead Invasion", "Daily", "Green Hills County", "Undead_Invasion"),
-    ("Supplies of War", "Daily", "The Northlands", "Supplies_of_War"),
-    ("A Guilds Burden", "Daily", "Wizard's Folly", "A_Guild%27s_Burden"),
-    ("Little Thom", "Daily", "Regent Valley", "Little_Thom_(quest)"),
+    ("Vanguard Annihilation: Bandits", "Annihilation", "Pre-Searing", "Vanguard_Annihilation:_Bandits"),
+    ("Vanguard Bounty: Utini Wupwup", "Bounty", "Pre-Searing", "Vanguard_Bounty:_Utini_Wupwup"),
+    ("Vanguard Rescue: Ascalonian Noble", "Rescue", "Pre-Searing", "Vanguard_Rescue:_Save_the_Ascalonian_Noble"),
+    ("Vanguard Annihilation: Undead", "Annihilation", "Pre-Searing", "Vanguard_Annihilation:_Undead"),
+    ("Vanguard Bounty: Blazefiend Griefblade", "Bounty", "Pre-Searing", "Vanguard_Bounty:_Blazefiend_Griefblade"),
+    ("Vanguard Rescue: Farmer Hamnet", "Rescue", "Pre-Searing", "Vanguard_Rescue:_Farmer_Hamnet"),
+    ("Vanguard Annihilation: Charr", "Annihilation", "Pre-Searing", "Vanguard_Annihilation:_Charr"),
+    ("Vanguard Bounty: Countess Nadya", "Bounty", "Pre-Searing", "Vanguard_Bounty:_Countess_Nadya"),
+    ("Vanguard Rescue: Footman Tate", "Rescue", "Pre-Searing", "Vanguard_Rescue:_Footman_Tate"),
 ]
 
 # ==================== NICHOLAS THE TRAVELER ====================
