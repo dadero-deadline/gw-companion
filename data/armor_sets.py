@@ -80,9 +80,9 @@ HOM_ARMOR = [a for a in ALL_ARMOR if a[4] == True]
 
 # Campaign icons
 ARMOR_ICONS = {
-    "Core": "🌐",
+    "Core": "🔥",
     "Prophecies": "⚔️",
     "Factions": "🐉",
-    "Nightfall": "🌙",
-    "Eye of the North": "🏔️",
+    "Nightfall": "☀️",
+    "Eye of the North": "⛰️",
 }
