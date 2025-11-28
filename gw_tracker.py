@@ -2689,6 +2689,45 @@ html += '''
             }
         }
         
+        // Auto-calculate legendary titles
+        const legendaryMappings = {
+            'leg_guard': ['guard_tyria', 'guard_cantha', 'guard_elona'],
+            'leg_cart': ['cart_tyria', 'cart_cantha', 'cart_elona'],
+            'leg_skill': ['skill_tyria', 'skill_cantha', 'skill_elona'],
+            'leg_vanq': ['vanq_tyria', 'vanq_cantha', 'vanq_elona']
+        };
+        
+        function checkLegendaryTitles() {
+            for (const [legendary, requirements] of Object.entries(legendaryMappings)) {
+                const allDone = requirements.every(reqId => {
+                    const cb = document.querySelector(`.quest-checkbox[data-id="${reqId}"]`);
+                    return cb && cb.checked;
+                });
+                
+                const legCb = document.querySelector(`.quest-checkbox[data-id="${legendary}"]`);
+                if (legCb && allDone && !legCb.checked) {
+                    legCb.checked = true;
+                    legCb.closest('tr').classList.add('completed');
+                    console.log('🏆 Auto-completed:', legendary);
+                }
+            }
+            
+            // Check GWAMM (30+ max titles) - also auto-check HoM GWAMM display
+            const maxedTitles = document.querySelectorAll('.quest-checkbox[data-area="titles"]:checked').length;
+            if (maxedTitles >= 30) {
+                const homGwamm = document.querySelector('.quest-checkbox[data-id="hom_gwamm"]');
+                if (homGwamm && !homGwamm.checked) {
+                    homGwamm.checked = true;
+                    homGwamm.closest('tr').classList.add('completed');
+                    console.log('🌟 GWAMM UNLOCKED! You have', maxedTitles, 'maxed titles!');
+                }
+            }
+            
+            // Update GWAMM progress display
+            const gwammCount = document.getElementById('titles-completed');
+            if (gwammCount) gwammCount.textContent = maxedTitles;
+        }
+        
         // Checkbox handler
         document.querySelectorAll('.quest-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
@@ -2696,6 +2735,7 @@ html += '''
                 saveProgress();
                 updateProgress(this.dataset.area);
                 if (this.dataset.area === 'elites') updateElitesCampaignProgress();
+                if (this.dataset.area === 'titles') checkLegendaryTitles();
             });
         });
         
@@ -3015,6 +3055,7 @@ html += '''
         updateAllProgress();
         updateElitesCampaignProgress();
         applyProfessionHighlighting();
+        checkLegendaryTitles(); // Auto-check legendary titles on load
         
         console.log('GW Companion initialized!');
     </script>
