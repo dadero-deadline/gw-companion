@@ -852,7 +852,7 @@ def generate_titles_html():
         # Legendary titles have auto-calculated progress, no manual input
         if ttype == "legendary":
             progress_html = f'''
-                            <span style="color:#8b949e;font-style:italic;">Auto-berechnet</span>'''
+                            <span style="color:#8b949e;font-style:italic;">Auto-calculated</span>'''
         else:
             progress_html = f'''
                             <div style="display:flex;align-items:center;gap:8px;">
