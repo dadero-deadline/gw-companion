@@ -11,6 +11,7 @@ from vanquishes import ALL_VANQUISHES, VANQUISH_REGIONS, PROPHECIES_VANQUISHES, 
 from missions import ALL_MISSIONS, MISSION_REGIONS, PROPHECIES_MISSIONS, FACTIONS_MISSIONS, NIGHTFALL_MISSIONS
 from armor_sets import ALL_ARMOR, HOM_ARMOR, ARMOR_ICONS, CORE_ARMOR, PROPHECIES_ARMOR, FACTIONS_ARMOR, NIGHTFALL_ARMOR, EOTN_ARMOR, STANDALONE_PIECES
 from minipets import ALL_MINIS, RARITY_COLORS, YEAR1_MINIS, YEAR2_MINIS, YEAR3_MINIS, YEAR4_MINIS, YEAR5_MINIS, INGAME_MINIS, FESTIVAL_MINIS
+from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, VANGUARD_QUESTS, get_current_zaishen_mission, get_current_zaishen_bounty, get_upcoming_zaishen, ZAISHEN_MISSION_START, ZAISHEN_BOUNTY_START
 
 # Load both Excel files
 def load_quests(filename, area_id):
@@ -457,6 +458,7 @@ html = '''<!DOCTYPE html>
     
     <div class="main-tabs">
         <button class="main-tab active" data-category="quests" onclick="switchCategory('quests')">📜 Quests</button>
+        <button class="main-tab" data-category="daily" onclick="switchCategory('daily')">📅 Daily</button>
         <button class="main-tab" data-category="missions" onclick="switchCategory('missions')">🗺️ Missions</button>
         <button class="main-tab" data-category="elites" onclick="switchCategory('elites')">🎯 Skills</button>
         <button class="main-tab" data-category="heroes" onclick="switchCategory('heroes')">🦸 Heroes</button>
@@ -956,6 +958,145 @@ def generate_heroes_html():
     return h
 
 html += generate_heroes_html()
+
+# === DAILY QUESTS ===
+def generate_daily_html():
+    from datetime import datetime, timedelta
+    
+    # Calculate today's quests
+    today = datetime.now()
+    
+    h = '''
+    <div class="area" id="area-daily">
+        <div class="content">
+            <div style="text-align:center;margin-bottom:20px;">
+                <h2 style="color:#ffd700;margin:0;">📅 Daily & Repeatable Quests</h2>
+                <p style="color:#8b949e;margin:5px 0;">Zaishen quests rotate daily on a fixed cycle</p>
+            </div>
+            
+            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:20px;margin-bottom:30px;">
+                <div style="background:#238636;padding:20px;border-radius:10px;">
+                    <h3 style="color:#fff;margin:0 0 10px 0;">🗺️ Today's Zaishen Mission</h3>
+                    <div id="today-mission" style="font-size:1.2em;color:#fff;font-weight:bold;"></div>
+                    <div id="today-mission-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;margin-top:5px;"></div>
+                </div>
+                <div style="background:#1f6feb;padding:20px;border-radius:10px;">
+                    <h3 style="color:#fff;margin:0 0 10px 0;">🎯 Today's Zaishen Bounty</h3>
+                    <div id="today-bounty" style="font-size:1.2em;color:#fff;font-weight:bold;"></div>
+                    <div id="today-bounty-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;margin-top:5px;"></div>
+                </div>
+            </div>
+            
+            <div class="filters" data-area="daily">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="mission">Missions</button>
+                <button class="filter-btn" data-filter="bounty">Bounties</button>
+                <button class="filter-btn" data-filter="vanguard">Vanguard</button>
+            </div>
+            
+            <div class="container">
+                <h3 style="color:#238636;margin:20px 0 10px 0;">🗺️ Zaishen Missions (''' + str(len(ZAISHEN_MISSIONS)) + ''')</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:50px">Done</th>
+                            <th>Mission</th>
+                            <th>Campaign</th>
+                            <th>Region</th>
+                        </tr>
+                    </thead>
+                    <tbody>'''
+    
+    for i, mission in enumerate(ZAISHEN_MISSIONS):
+        name, campaign, region, wiki = mission
+        mission_id = f"zm_{name.lower().replace(' ', '_').replace(chr(39), '')}"
+        wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
+        
+        h += f'''
+                        <tr data-type="mission" data-area="daily" data-id="{mission_id}">
+                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{mission_id}" data-area="daily"></td>
+                            <td><a href="{wiki_url}" target="_blank" class="quest-link">🗺️ {name}</a></td>
+                            <td style="color:#8b949e;">{campaign}</td>
+                            <td style="color:#79c0ff;">{region}</td>
+                        </tr>'''
+    
+    h += '''
+                    </tbody>
+                </table>
+                
+                <h3 style="color:#1f6feb;margin:30px 0 10px 0;">🎯 Zaishen Bounties (''' + str(len(ZAISHEN_BOUNTIES)) + ''')</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:50px">Done</th>
+                            <th>Boss</th>
+                            <th>Campaign</th>
+                            <th>Region</th>
+                        </tr>
+                    </thead>
+                    <tbody>'''
+    
+    for bounty in ZAISHEN_BOUNTIES:
+        name, campaign, region, wiki = bounty
+        bounty_id = f"zb_{name.lower().replace(' ', '_').replace(chr(39), '').replace(',', '')}"
+        wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
+        
+        h += f'''
+                        <tr data-type="bounty" data-area="daily" data-id="{bounty_id}">
+                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{bounty_id}" data-area="daily"></td>
+                            <td><a href="{wiki_url}" target="_blank" class="quest-link">🎯 {name}</a></td>
+                            <td style="color:#8b949e;">{campaign}</td>
+                            <td style="color:#79c0ff;">{region}</td>
+                        </tr>'''
+    
+    h += '''
+                    </tbody>
+                </table>
+                
+                <h3 style="color:#ffa657;margin:30px 0 10px 0;">🛡️ Pre-Searing Vanguard Dailies (''' + str(len(VANGUARD_QUESTS)) + ''')</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:50px">Done</th>
+                            <th>Quest</th>
+                            <th>Type</th>
+                            <th>Location</th>
+                        </tr>
+                    </thead>
+                    <tbody>'''
+    
+    for quest in VANGUARD_QUESTS:
+        name, qtype, location, wiki = quest
+        quest_id = f"vg_{name.lower().replace(' ', '_').replace(chr(39), '')}"
+        wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
+        
+        h += f'''
+                        <tr data-type="vanguard" data-area="daily" data-id="{quest_id}">
+                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{quest_id}" data-area="daily"></td>
+                            <td><a href="{wiki_url}" target="_blank" class="quest-link">🛡️ {name}</a></td>
+                            <td><span class="badge badge-vanguard">{qtype}</span></td>
+                            <td style="color:#79c0ff;">{location}</td>
+                        </tr>'''
+    
+    h += '''
+                    </tbody>
+                </table>
+            </div>
+            
+            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 About Zaishen Quests</h4>
+                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                    <li><strong>Zaishen Missions</strong> - Complete the mission for Zaishen Coins + gold</li>
+                    <li><strong>Zaishen Bounties</strong> - Kill the boss for Zaishen Coins</li>
+                    <li><strong>Vanguard Quests</strong> - Pre-Searing daily quests for XP</li>
+                    <li><strong>Rotation</strong> - Missions: 69-day cycle, Bounties: 66-day cycle</li>
+                </ul>
+            </div>
+        </div>
+    </div>'''
+    return h
+
+html += generate_daily_html()
 
 # === MISSIONS ===
 def generate_missions_html():
@@ -2298,6 +2439,9 @@ html += '''
                 // Show selected quest region
                 const region = document.getElementById('region-select').value || 'pre';
                 document.getElementById('area-' + region).classList.add('active');
+            } else if (category === 'daily') {
+                document.getElementById('area-daily').classList.add('active');
+                updateTodaysZaishen();
             } else if (category === 'missions') {
                 document.getElementById('area-missions').classList.add('active');
             } else if (category === 'elites') {
@@ -2492,6 +2636,7 @@ html += '''
             updateProgress('vanquish');
             updateProgress('armor');
             updateProgress('minis');
+            updateProgress('daily');
             updateProgress('uniques');
             updateElitesCampaignProgress();
         }
@@ -2832,6 +2977,37 @@ html += '''
                 saveProgress();
                 updateProgress('titles');
             }
+        }
+        
+        // Calculate and display today's Zaishen quests
+        function updateTodaysZaishen() {
+            // Zaishen Mission: 69-day cycle starting March 4, 2011
+            const missionStart = new Date(2011, 2, 4); // March 4, 2011
+            const missions = ''' + str([m[0] for m in ZAISHEN_MISSIONS]) + ''';
+            const missionInfo = ''' + str([(m[1], m[2]) for m in ZAISHEN_MISSIONS]) + ''';
+            
+            // Zaishen Bounty: 66-day cycle starting June 12, 2009
+            const bountyStart = new Date(2009, 5, 12); // June 12, 2009
+            const bounties = ''' + str([b[0] for b in ZAISHEN_BOUNTIES]) + ''';
+            const bountyInfo = ''' + str([(b[1], b[2]) for b in ZAISHEN_BOUNTIES]) + ''';
+            
+            const today = new Date();
+            today.setHours(0, 0, 0, 0);
+            
+            // Calculate mission index
+            const missionDays = Math.floor((today - missionStart) / (1000 * 60 * 60 * 24));
+            const missionIndex = ((missionDays % missions.length) + missions.length) % missions.length;
+            
+            // Calculate bounty index
+            const bountyDays = Math.floor((today - bountyStart) / (1000 * 60 * 60 * 24));
+            const bountyIndex = ((bountyDays % bounties.length) + bounties.length) % bounties.length;
+            
+            // Update display
+            document.getElementById('today-mission').textContent = missions[missionIndex];
+            document.getElementById('today-mission-info').textContent = missionInfo[missionIndex][0] + ' - ' + missionInfo[missionIndex][1];
+            
+            document.getElementById('today-bounty').textContent = bounties[bountyIndex];
+            document.getElementById('today-bounty-info').textContent = bountyInfo[bountyIndex][0] + ' - ' + bountyInfo[bountyIndex][1];
         }
         
         // Open official HoM Calculator with character name
