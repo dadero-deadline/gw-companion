@@ -8,7 +8,7 @@ from datetime import datetime, timedelta
 
 # ==================== ZAISHEN MISSION ====================
 # 69-day cycle, started March 3, 2011
-ZAISHEN_MISSION_START = datetime(2011, 3, 4)  # Day after update
+ZAISHEN_MISSION_START = datetime(2025, 11, 26)  # Calibrated: Nov 28 = index 2 = Ice Caves  # Day after update
 ZAISHEN_MISSIONS = [
     ("Augury Rock", "Prophecies", "Crystal Desert", "Augury_Rock_(Zaishen_quest)"),
     ("Grand Court of Sebelkeh", "Nightfall", "Vabbi", "Grand_Court_of_Sebelkeh_(Zaishen_quest)"),
@@ -83,7 +83,7 @@ ZAISHEN_MISSIONS = [
 
 # ==================== ZAISHEN BOUNTY ====================
 # 66-day cycle
-ZAISHEN_BOUNTY_START = datetime(2009, 6, 12)  # After June 11 2009 update
+ZAISHEN_BOUNTY_START = datetime(2025, 11, 20)  # Calibrated: Nov 28 = index 8 = Mohby  # After June 11 2009 update
 ZAISHEN_BOUNTIES = [
     ("Droajam, Mage of the Sands", "Nightfall", "Desolation", "Droajam,_Mage_of_the_Sands_(Zaishen_quest)"),
     ("Royen Beastkeeper", "Prophecies", "Maguuma", "Royen_Beastkeeper_(Zaishen_quest)"),
@@ -156,7 +156,7 @@ ZAISHEN_BOUNTIES = [
 # ==================== ZAISHEN VANQUISH ====================
 # 136-day cycle - Nov 28 2025 = Traveler's Vale (index 79)
 # So start = Nov 28 2025 - 79 days = Sept 11 2025
-ZAISHEN_VANQUISH_START = datetime(2025, 9, 11)  # Calibrated
+ZAISHEN_VANQUISH_START = datetime(2025, 9, 9)  # Calibrated: Nov 28 = index 80 = Traveler's Vale
 ZAISHEN_VANQUISHES = [
     ("Jaya Bluffs", "Factions", "Shing Jea", "Jaya_Bluffs_(Zaishen_vanquish)"),
     ("Holdings of Chokhin", "Nightfall", "Vabbi", "Holdings_of_Chokhin_(Zaishen_vanquish)"),
