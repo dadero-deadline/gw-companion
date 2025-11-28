@@ -16754,946 +16754,104 @@
     </div>
     <div class="area" id="area-daily">
         <div class="content">
-            <div style="text-align:center;margin-bottom:20px;">
-                <h2 style="color:#ffd700;margin:0;">📅 Daily & Repeatable Quests</h2>
-                <p style="color:#8b949e;margin:5px 0;">Zaishen quests rotate daily on a fixed cycle</p>
+            <div style="text-align:center;margin-bottom:30px;">
+                <h2 style="color:#ffd700;margin:0;">📅 Today's Daily Quests</h2>
+                <p style="color:#8b949e;margin:5px 0;">Reset at midnight UTC</p>
             </div>
             
-            <div style="display:grid;grid-template-columns:repeat(auto-fit, minmax(300px, 1fr));gap:20px;margin-bottom:30px;">
-                <div style="background:#238636;padding:20px;border-radius:10px;">
-                    <h3 style="color:#fff;margin:0 0 10px 0;">🗺️ Today's Zaishen Mission</h3>
-                    <div id="today-mission" style="font-size:1.2em;color:#fff;font-weight:bold;"></div>
-                    <div id="today-mission-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;margin-top:5px;"></div>
-                </div>
-                <div style="background:#1f6feb;padding:20px;border-radius:10px;">
-                    <h3 style="color:#fff;margin:0 0 10px 0;">🎯 Today's Zaishen Bounty</h3>
-                    <div id="today-bounty" style="font-size:1.2em;color:#fff;font-weight:bold;"></div>
-                    <div id="today-bounty-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;margin-top:5px;"></div>
-                </div>
-            </div>
-            
-            <div class="filters" data-area="daily">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="mission">Missions</button>
-                <button class="filter-btn" data-filter="bounty">Bounties</button>
-                <button class="filter-btn" data-filter="vanguard">Vanguard</button>
-            </div>
-            
-            <div class="container">
-                <h3 style="color:#238636;margin:20px 0 10px 0;">🗺️ Zaishen Missions (69)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width:50px">Done</th>
-                            <th>Mission</th>
-                            <th>Campaign</th>
-                            <th>Region</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-type="mission" data-area="daily" data-id="zm_augury_rock">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_augury_rock" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Augury_Rock_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Augury Rock</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Crystal Desert</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_grand_court_of_sebelkeh">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_grand_court_of_sebelkeh" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Grand_Court_of_Sebelkeh_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Grand Court of Sebelkeh</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_ice_caves_of_sorrow">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_ice_caves_of_sorrow" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ice_Caves_of_Sorrow_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Ice Caves of Sorrow</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Southern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_raisu_palace">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_raisu_palace" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Raisu_Palace_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Raisu Palace</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_gate_of_desolation">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_gate_of_desolation" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Gate_of_Desolation_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Gate of Desolation</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_thirsty_river">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_thirsty_river" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Thirsty_River_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Thirsty River</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Crystal Desert</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_blacktide_den">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_blacktide_den" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Blacktide_Den_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Blacktide Den</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Istan</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_against_the_charr">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_against_the_charr" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Against_the_Charr_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Against the Charr</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Charr Homelands</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_abaddons_mouth">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_abaddons_mouth" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Abaddon%27s_Mouth_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Abaddon's Mouth</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ring of Fire</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_nundu_bay">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_nundu_bay" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Nundu_Bay_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Nundu Bay</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_divinity_coast">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_divinity_coast" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Divinity_Coast_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Divinity Coast</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_zen_daijun">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_zen_daijun" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Zen_Daijun_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Zen Daijun</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Shing Jea</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_pogahn_passage">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_pogahn_passage" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Pogahn_Passage_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Pogahn Passage</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_tahnnakai_temple">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_tahnnakai_temple" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Tahnnakai_Temple_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Tahnnakai Temple</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_the_great_northern_wall">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_the_great_northern_wall" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Great_Northern_Wall_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ The Great Northern Wall</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ascalon</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_dasha_vestibule">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_dasha_vestibule" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Dasha_Vestibule_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Dasha Vestibule</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_the_wilds">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_the_wilds" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Wilds_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ The Wilds</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Maguuma</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_unwaking_waters">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_unwaking_waters" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Unwaking_Waters_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Unwaking Waters</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_chahbek_village">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_chahbek_village" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Chahbek_Village_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Chahbek Village</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Istan</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_aurora_glade">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_aurora_glade" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Aurora_Glade_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Aurora Glade</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Maguuma</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_a_time_for_heroes">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_a_time_for_heroes" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/A_Time_for_Heroes_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ A Time for Heroes</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_consulate_docks">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_consulate_docks" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Consulate_Docks_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Consulate Docks</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Istan</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_ring_of_fire">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_ring_of_fire" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ring_of_Fire_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Ring of Fire</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ring of Fire</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_nahpui_quarter">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_nahpui_quarter" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Nahpui_Quarter_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Nahpui Quarter</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_the_dragons_lair">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_the_dragons_lair" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Dragon%27s_Lair_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ The Dragon's Lair</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Crystal Desert</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_dzagonur_bastion">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_dzagonur_bastion" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Dzagonur_Bastion_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Dzagonur Bastion</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_dalessio_seaboard">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_dalessio_seaboard" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/D%27Alessio_Seaboard_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ D'Alessio Seaboard</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_assault_on_the_stronghold">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_assault_on_the_stronghold" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Assault_on_the_Stronghold_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Assault on the Stronghold</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Charr Homelands</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_the_eternal_grove">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_the_eternal_grove" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Eternal_Grove_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ The Eternal Grove</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Echovald</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_sanctum_cay">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_sanctum_cay" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Sanctum_Cay_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Sanctum Cay</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_rilohn_refuge">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_rilohn_refuge" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Rilohn_Refuge_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Rilohn Refuge</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_warband_of_brothers">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_warband_of_brothers" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Warband_of_Brothers_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Warband of Brothers</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Charr Homelands</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_borlis_pass">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_borlis_pass" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Borlis_Pass_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Borlis Pass</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Northern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_imperial_sanctum">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_imperial_sanctum" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Imperial_Sanctum_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Imperial Sanctum</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_moddok_crevice">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_moddok_crevice" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Moddok_Crevice_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Moddok Crevice</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_nolani_academy">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_nolani_academy" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Nolani_Academy_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Nolani Academy</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ascalon</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_destructions_depths">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_destructions_depths" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Destruction%27s_Depths_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Destruction's Depths</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_venta_cemetery">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_venta_cemetery" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Venta_Cemetery_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Venta Cemetery</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_fort_ranik">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_fort_ranik" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Fort_Ranik_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Fort Ranik</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ascalon</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_a_gate_too_far">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_a_gate_too_far" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/A_Gate_Too_Far_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ A Gate Too Far</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_minister_chos_estate">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_minister_chos_estate" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Minister_Cho%27s_Estate_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Minister Cho's Estate</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Shing Jea</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_thunderhead_keep">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_thunderhead_keep" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Thunderhead_Keep_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Thunderhead Keep</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Southern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_tihark_orchard">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_tihark_orchard" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Tihark_Orchard_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Tihark Orchard</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_finding_the_bloodstone">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_finding_the_bloodstone" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Finding_the_Bloodstone_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Finding the Bloodstone</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_dunes_of_despair">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_dunes_of_despair" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Dunes_of_Despair_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Dunes of Despair</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Crystal Desert</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_vizunah_square">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_vizunah_square" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Vizunah_Square_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Vizunah Square</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_jokanur_diggings">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_jokanur_diggings" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Jokanur_Diggings_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Jokanur Diggings</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Istan</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_iron_mines_of_moladune">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_iron_mines_of_moladune" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Iron_Mines_of_Moladune_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Iron Mines of Moladune</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Southern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_kodonur_crossroads">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_kodonur_crossroads" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Kodonur_Crossroads_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Kodonur Crossroads</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_g.o.l.e.m.">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_g.o.l.e.m." data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/G.O.L.E.M._(Zaishen_quest)" target="_blank" class="quest-link">🗺️ G.O.L.E.M.</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_arborstone">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_arborstone" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Arborstone_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Arborstone</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Echovald</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_gates_of_kryta">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_gates_of_kryta" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Gates_of_Kryta_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Gates of Kryta</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_gate_of_madness">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_gate_of_madness" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Gate_of_Madness_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Gate of Madness</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Realm of Torment</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_the_elusive_golemancer">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_the_elusive_golemancer" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Elusive_Golemancer_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ The Elusive Golemancer</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_riverside_province">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_riverside_province" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Riverside_Province_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Riverside Province</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_boreas_seabed">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_boreas_seabed" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Boreas_Seabed_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Boreas Seabed</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_ruins_of_morah">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_ruins_of_morah" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ruins_of_Morah_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Ruins of Morah</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_hells_precipice">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_hells_precipice" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Hell%27s_Precipice_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Hell's Precipice</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ring of Fire</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_ruins_of_surmia">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_ruins_of_surmia" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ruins_of_Surmia_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Ruins of Surmia</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ascalon</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_curse_of_the_nornbear">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_curse_of_the_nornbear" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Curse_of_the_Nornbear_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Curse of the Nornbear</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Far Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_sunjiang_district">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_sunjiang_district" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Sunjiang_District_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Sunjiang District</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_elona_reach">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_elona_reach" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Elona_Reach_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Elona Reach</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Crystal Desert</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_gate_of_pain">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_gate_of_pain" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Gate_of_Pain_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Gate of Pain</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Realm of Torment</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_blood_washes_blood">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_blood_washes_blood" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Blood_Washes_Blood_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Blood Washes Blood</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Charr Homelands</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_bloodstone_fen">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_bloodstone_fen" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Bloodstone_Fen_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Bloodstone Fen</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Maguuma</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_jennurs_horde">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_jennurs_horde" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Jennur%27s_Horde_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Jennur's Horde</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_gyala_hatchery">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_gyala_hatchery" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Gyala_Hatchery_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Gyala Hatchery</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_abaddons_gate">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_abaddons_gate" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Abaddon%27s_Gate_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ Abaddon's Gate</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Realm of Torment</td>
-                        </tr>
-                        <tr data-type="mission" data-area="daily" data-id="zm_the_frost_gate">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zm_the_frost_gate" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Frost_Gate_(Zaishen_quest)" target="_blank" class="quest-link">🗺️ The Frost Gate</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Northern Shiverpeaks</td>
-                        </tr>
-                    </tbody>
-                </table>
+            <!-- Today's Zaishen Quests -->
+            <div style="max-width:600px;margin:0 auto;">
                 
-                <h3 style="color:#1f6feb;margin:30px 0 10px 0;">🎯 Zaishen Bounties (66)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width:50px">Done</th>
-                            <th>Boss</th>
-                            <th>Campaign</th>
-                            <th>Region</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_droajam_mage_of_the_sands">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_droajam_mage_of_the_sands" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Droajam,_Mage_of_the_Sands_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Droajam, Mage of the Sands</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_royen_beastkeeper">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_royen_beastkeeper" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Royen_Beastkeeper_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Royen Beastkeeper</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Maguuma</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_eldritch_ettin">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_eldritch_ettin" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Eldritch_Ettin_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Eldritch Ettin</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Southern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_vengeful_aatxe">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_vengeful_aatxe" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Vengeful_Aatxe_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Vengeful Aatxe</a></td>
-                            <td style="color:#8b949e;">Core</td>
-                            <td style="color:#79c0ff;">Underworld</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_fronis_irontoe">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_fronis_irontoe" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Fronis_Irontoe_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Fronis Irontoe</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_urgoz">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_urgoz" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Urgoz_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Urgoz</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Echovald</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_fenrir">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_fenrir" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Fenrir_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Fenrir</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Far Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_selvetarm">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_selvetarm" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Selvetarm_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Selvetarm</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_mohby_windbeak">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_mohby_windbeak" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Mohby_Windbeak_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Mohby Windbeak</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Istan</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_charged_blackness">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_charged_blackness" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Charged_Blackness_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Charged Blackness</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ring of Fire</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_rotscale">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_rotscale" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Rotscale_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Rotscale</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_zoldark_the_unholy">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_zoldark_the_unholy" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Zoldark_the_Unholy_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Zoldark the Unholy</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_korshek_the_immolated">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_korshek_the_immolated" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Korshek_the_Immolated_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Korshek the Immolated</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_myish_lady_of_the_lake">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_myish_lady_of_the_lake" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Myish,_Lady_of_the_Lake_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Myish, Lady of the Lake</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Far Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_frostmaw_the_kinslayer">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_frostmaw_the_kinslayer" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Frostmaw_the_Kinslayer_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Frostmaw the Kinslayer</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Far Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_kunvie_firewing">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_kunvie_firewing" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Kunvie_Firewing_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Kunvie Firewing</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Echovald</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_zhim_monns">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_zhim_monns" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Z%27him_Monns_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Z'him Monns</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_greater_darkness">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_greater_darkness" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Greater_Darkness_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Greater Darkness</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_tps_regulator_golem">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_tps_regulator_golem" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/TPS_Regulator_Golem_(Zaishen_quest)" target="_blank" class="quest-link">🎯 TPS Regulator Golem</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_plague_of_destruction">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_plague_of_destruction" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Plague_of_Destruction_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Plague of Destruction</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_darknesses">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_darknesses" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Darknesses_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Darknesses</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_admiral_kantoh">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_admiral_kantoh" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Admiral_Kantoh_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Admiral Kantoh</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_borrguus_blisterbark">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_borrguus_blisterbark" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Borrguus_Blisterbark_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Borrguus Blisterbark</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_forgewight">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_forgewight" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Forgewight_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Forgewight</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_baubao_wavewrath">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_baubao_wavewrath" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Baubao_Wavewrath_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Baubao Wavewrath</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_joffs_the_mitigator">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_joffs_the_mitigator" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Joffs_the_Mitigator_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Joffs the Mitigator</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_rragar_maneater">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_rragar_maneater" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Rragar_Maneater_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Rragar Maneater</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Charr Homelands</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_chung_the_attuned">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_chung_the_attuned" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Chung,_the_Attuned_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Chung, the Attuned</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Kaineng City</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_lord_jadoth">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_lord_jadoth" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Lord_Jadoth_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Lord Jadoth</a></td>
-                            <td style="color:#8b949e;">Core</td>
-                            <td style="color:#79c0ff;">Domain of Anguish</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_nulfastu_earthbound">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_nulfastu_earthbound" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Nulfastu,_Earthbound_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Nulfastu, Earthbound</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Far Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_iron_forgeman">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_iron_forgeman" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Iron_Forgeman_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Iron Forgeman</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_magmus">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_magmus" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Magmus_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Magmus</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_mobrin_lord_of_the_marsh">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_mobrin_lord_of_the_marsh" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Mobrin,_Lord_of_the_Marsh_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Mobrin, Lord of the Marsh</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Echovald</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_jarimiya_the_unmerciful">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_jarimiya_the_unmerciful" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Jarimiya_the_Unmerciful_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Jarimiya the Unmerciful</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_duncan_the_black">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_duncan_the_black" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Duncan_the_Black_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Duncan the Black</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_quansong_spiritspeak">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_quansong_spiritspeak" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Quansong_Spiritspeak_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Quansong Spiritspeak</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Echovald</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_stygian_underlords">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_stygian_underlords" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Stygian_Underlords_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Stygian Underlords</a></td>
-                            <td style="color:#8b949e;">Core</td>
-                            <td style="color:#79c0ff;">Domain of Anguish</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_fozzy_yeoryios">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_fozzy_yeoryios" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Fozzy_Yeoryios_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Fozzy Yeoryios</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_black_beast_of_arrgh">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_black_beast_of_arrgh" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Black_Beast_of_Arrgh_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Black Beast of Arrgh</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_arachni">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_arachni" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Arachni_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Arachni</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_four_horsemen">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_four_horsemen" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Four_Horsemen_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Four Horsemen</a></td>
-                            <td style="color:#8b949e;">Core</td>
-                            <td style="color:#79c0ff;">Underworld</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_remnant_of_antiquities">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_remnant_of_antiquities" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Remnant_of_Antiquities_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Remnant of Antiquities</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_arbor_earthcall">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_arbor_earthcall" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Arbor_Earthcall_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Arbor Earthcall</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_prismatic_ooze">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_prismatic_ooze" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Prismatic_Ooze_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Prismatic Ooze</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Tarnished Coast</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_lord_khobay">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_lord_khobay" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Lord_Khobay_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Lord Khobay</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_jedeh_the_mighty">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_jedeh_the_mighty" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Jedeh_the_Mighty_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Jedeh the Mighty</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_ssuns_blessed_of_dwayna">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_ssuns_blessed_of_dwayna" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ssuns,_Blessed_of_Dwayna_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Ssuns, Blessed of Dwayna</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Realm of Torment</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_justiciar_thommis">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_justiciar_thommis" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Justiciar_Thommis_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Justiciar Thommis</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_harn_and_maxine_coldstone">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_harn_and_maxine_coldstone" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Harn_and_Maxine_Coldstone_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Harn and Maxine Coldstone</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Southern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_pywatt_the_swift">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_pywatt_the_swift" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Pywatt_the_Swift_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Pywatt the Swift</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Kourna</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_fendi_nin">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_fendi_nin" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Fendi_Nin_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Fendi Nin</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_mungri_magicbox">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_mungri_magicbox" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Mungri_Magicbox_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Mungri Magicbox</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Istan</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_priest_of_menzies">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_priest_of_menzies" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Priest_of_Menzies_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Priest of Menzies</a></td>
-                            <td style="color:#8b949e;">Core</td>
-                            <td style="color:#79c0ff;">Fissure of Woe</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_ilsundur_lord_of_fire">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_ilsundur_lord_of_fire" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ilsundur,_Lord_of_Fire_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Ilsundur, Lord of Fire</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_kepkhet_marrowfeast">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_kepkhet_marrowfeast" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Kepkhet_Marrowfeast_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Kepkhet Marrowfeast</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_commander_wahli">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_commander_wahli" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Commander_Wahli_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Commander Wahli</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_kanaxai">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_kanaxai" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Kanaxai_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Kanaxai</a></td>
-                            <td style="color:#8b949e;">Factions</td>
-                            <td style="color:#79c0ff;">Jade Sea</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_khabuus">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_khabuus" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Khabuus_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Khabuus</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Vabbi</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_molotov_rocktail">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_molotov_rocktail" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Molotov_Rocktail_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Molotov Rocktail</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Charr Homelands</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_the_stygian_lords">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_the_stygian_lords" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Stygian_Lords_(Zaishen_quest)" target="_blank" class="quest-link">🎯 The Stygian Lords</a></td>
-                            <td style="color:#8b949e;">Core</td>
-                            <td style="color:#79c0ff;">Domain of Anguish</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_dragon_lich">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_dragon_lich" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Dragon_Lich_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Dragon Lich</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Ring of Fire</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_havok_soulwail">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_havok_soulwail" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Havok_Soulwail_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Havok Soulwail</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_ghial_the_bone_dancer">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_ghial_the_bone_dancer" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Ghial_the_Bone_Dancer_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Ghial the Bone Dancer</a></td>
-                            <td style="color:#8b949e;">Nightfall</td>
-                            <td style="color:#79c0ff;">Desolation</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_murakai_lady_of_the_night">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_murakai_lady_of_the_night" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Murakai,_Lady_of_the_Night_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Murakai, Lady of the Night</a></td>
-                            <td style="color:#8b949e;">Eye of the North</td>
-                            <td style="color:#79c0ff;">Depths</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_rand_stormweaver">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_rand_stormweaver" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Rand_Stormweaver_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Rand Stormweaver</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Northern Shiverpeaks</td>
-                        </tr>
-                        <tr data-type="bounty" data-area="daily" data-id="zb_verata">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="zb_verata" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Verata_(Zaishen_quest)" target="_blank" class="quest-link">🎯 Verata</a></td>
-                            <td style="color:#8b949e;">Prophecies</td>
-                            <td style="color:#79c0ff;">Kryta</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Today's Mission -->
+                <div style="background:linear-gradient(135deg, #238636 0%, #2ea043 100%);padding:20px;border-radius:12px;margin-bottom:15px;">
+                    <div style="display:flex;align-items:center;gap:15px;">
+                        <input type="checkbox" id="daily-mission-check" class="quest-checkbox" style="width:24px;height:24px;" onchange="saveDailyProgress()">
+                        <div style="flex:1;">
+                            <div style="font-size:0.85em;color:rgba(255,255,255,0.7);">🗺️ ZAISHEN MISSION</div>
+                            <div id="today-mission-name" style="font-size:1.3em;color:#fff;font-weight:bold;"></div>
+                            <div id="today-mission-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;"></div>
+                        </div>
+                        <a id="today-mission-link" href="#" target="_blank" style="background:#fff;color:#238636;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">Wiki</a>
+                    </div>
+                </div>
                 
-                <h3 style="color:#ffa657;margin:30px 0 10px 0;">🛡️ Pre-Searing Vanguard Dailies (9)</h3>
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width:50px">Done</th>
-                            <th>Quest</th>
-                            <th>Type</th>
-                            <th>Location</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_charr_at_the_gate">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_charr_at_the_gate" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Charr_at_the_Gate" target="_blank" class="quest-link">🛡️ Charr at the Gate</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Ascalon City</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_farmer_hamnet">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_farmer_hamnet" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Farmer_Hamnet_(quest)" target="_blank" class="quest-link">🛡️ Farmer Hamnet</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Lakeside County</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_the_worm_problem">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_the_worm_problem" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Worm_Problem" target="_blank" class="quest-link">🛡️ The Worm Problem</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Lakeside County</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_bandit_raid">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_bandit_raid" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Bandit_Raid" target="_blank" class="quest-link">🛡️ Bandit Raid</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Lakeside County</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_the_prize_moa_bird">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_the_prize_moa_bird" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/The_Prize_Moa_Bird" target="_blank" class="quest-link">🛡️ The Prize Moa Bird</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Wizard's Folly</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_undead_invasion">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_undead_invasion" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Undead_Invasion" target="_blank" class="quest-link">🛡️ Undead Invasion</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Green Hills County</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_supplies_of_war">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_supplies_of_war" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Supplies_of_War" target="_blank" class="quest-link">🛡️ Supplies of War</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">The Northlands</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_a_guilds_burden">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_a_guilds_burden" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/A_Guild%27s_Burden" target="_blank" class="quest-link">🛡️ A Guilds Burden</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Wizard's Folly</td>
-                        </tr>
-                        <tr data-type="vanguard" data-area="daily" data-id="vg_little_thom">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="vg_little_thom" data-area="daily"></td>
-                            <td><a href="https://wiki.guildwars.com/wiki/Little_Thom_(quest)" target="_blank" class="quest-link">🛡️ Little Thom</a></td>
-                            <td><span class="badge badge-vanguard">Daily</span></td>
-                            <td style="color:#79c0ff;">Regent Valley</td>
-                        </tr>
-                    </tbody>
-                </table>
+                <!-- Today's Bounty -->
+                <div style="background:linear-gradient(135deg, #1f6feb 0%, #388bfd 100%);padding:20px;border-radius:12px;margin-bottom:15px;">
+                    <div style="display:flex;align-items:center;gap:15px;">
+                        <input type="checkbox" id="daily-bounty-check" class="quest-checkbox" style="width:24px;height:24px;" onchange="saveDailyProgress()">
+                        <div style="flex:1;">
+                            <div style="font-size:0.85em;color:rgba(255,255,255,0.7);">🎯 ZAISHEN BOUNTY</div>
+                            <div id="today-bounty-name" style="font-size:1.3em;color:#fff;font-weight:bold;"></div>
+                            <div id="today-bounty-info" style="color:rgba(255,255,255,0.8);font-size:0.9em;"></div>
+                        </div>
+                        <a id="today-bounty-link" href="#" target="_blank" style="background:#fff;color:#1f6feb;padding:8px 16px;border-radius:6px;text-decoration:none;font-weight:bold;">Wiki</a>
+                    </div>
+                </div>
+                
+                <!-- Vanguard Dailies (Pre-Searing) -->
+                <div style="background:#21262d;padding:20px;border-radius:12px;margin-bottom:15px;">
+                    <h3 style="color:#ffa657;margin:0 0 15px 0;">🛡️ Pre-Searing Vanguard (all daily)</h3>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_charr_at_the_gate" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/Charr_at_the_Gate" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Charr at the Gate</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Ascalon City</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_farmer_hamnet" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/Farmer_Hamnet_(quest)" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Farmer Hamnet</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Lakeside County</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_the_worm_problem" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/The_Worm_Problem" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">The Worm Problem</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Lakeside County</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_bandit_raid" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/Bandit_Raid" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Bandit Raid</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Lakeside County</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_the_prize_moa_bird" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/The_Prize_Moa_Bird" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">The Prize Moa Bird</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Wizard's Folly</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_undead_invasion" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/Undead_Invasion" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Undead Invasion</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Green Hills County</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_supplies_of_war" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/Supplies_of_War" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Supplies of War</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">The Northlands</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_a_guilds_burden" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/A_Guild%27s_Burden" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">A Guilds Burden</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Wizard's Folly</span>
+                    </div>
+                    <div style="display:flex;align-items:center;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">
+                        <input type="checkbox" class="quest-checkbox" data-id="vg_little_thom" data-area="daily" style="width:20px;height:20px;">
+                        <a href="https://wiki.guildwars.com/wiki/Little_Thom_(quest)" target="_blank" style="color:#c9d1d9;text-decoration:none;flex:1;">Little Thom</a>
+                        <span style="color:#79c0ff;font-size:0.85em;">Regent Valley</span>
+                    </div>
+                </div>
+                
+                <!-- Upcoming -->
+                <div style="background:#21262d;padding:20px;border-radius:12px;">
+                    <h3 style="color:#8b949e;margin:0 0 15px 0;">📆 Upcoming (next 5 days)</h3>
+                    <div id="upcoming-quests" style="font-size:0.9em;"></div>
+                </div>
+                
             </div>
             
-            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 About Zaishen Quests</h4>
+            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;max-width:600px;margin:20px auto 0;">
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Tips</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
-                    <li><strong>Zaishen Missions</strong> - Complete the mission for Zaishen Coins + gold</li>
-                    <li><strong>Zaishen Bounties</strong> - Kill the boss for Zaishen Coins</li>
-                    <li><strong>Vanguard Quests</strong> - Pre-Searing daily quests for XP</li>
-                    <li><strong>Rotation</strong> - Missions: 69-day cycle, Bounties: 66-day cycle</li>
+                    <li><strong>Zaishen Coins</strong> can buy Balthazar faction, lockpicks, tomes</li>
+                    <li><strong>Missions</strong> rotate every 69 days</li>
+                    <li><strong>Bounties</strong> rotate every 66 days</li>
                 </ul>
             </div>
         </div>
@@ -23891,13 +23049,11 @@
         function updateTodaysZaishen() {
             // Zaishen Mission: 69-day cycle starting March 4, 2011
             const missionStart = new Date(2011, 2, 4); // March 4, 2011
-            const missions = ['Augury Rock', 'Grand Court of Sebelkeh', 'Ice Caves of Sorrow', 'Raisu Palace', 'Gate of Desolation', 'Thirsty River', 'Blacktide Den', 'Against the Charr', "Abaddon's Mouth", 'Nundu Bay', 'Divinity Coast', 'Zen Daijun', 'Pogahn Passage', 'Tahnnakai Temple', 'The Great Northern Wall', 'Dasha Vestibule', 'The Wilds', 'Unwaking Waters', 'Chahbek Village', 'Aurora Glade', 'A Time for Heroes', 'Consulate Docks', 'Ring of Fire', 'Nahpui Quarter', "The Dragon's Lair", 'Dzagonur Bastion', "D'Alessio Seaboard", 'Assault on the Stronghold', 'The Eternal Grove', 'Sanctum Cay', 'Rilohn Refuge', 'Warband of Brothers', 'Borlis Pass', 'Imperial Sanctum', 'Moddok Crevice', 'Nolani Academy', "Destruction's Depths", 'Venta Cemetery', 'Fort Ranik', 'A Gate Too Far', "Minister Cho's Estate", 'Thunderhead Keep', 'Tihark Orchard', 'Finding the Bloodstone', 'Dunes of Despair', 'Vizunah Square', 'Jokanur Diggings', 'Iron Mines of Moladune', 'Kodonur Crossroads', 'G.O.L.E.M.', 'Arborstone', 'Gates of Kryta', 'Gate of Madness', 'The Elusive Golemancer', 'Riverside Province', 'Boreas Seabed', 'Ruins of Morah', "Hell's Precipice", 'Ruins of Surmia', 'Curse of the Nornbear', 'Sunjiang District', 'Elona Reach', 'Gate of Pain', 'Blood Washes Blood', 'Bloodstone Fen', "Jennur's Horde", 'Gyala Hatchery', "Abaddon's Gate", 'The Frost Gate'];
-            const missionInfo = [('Prophecies', 'Crystal Desert'), ('Nightfall', 'Vabbi'), ('Prophecies', 'Southern Shiverpeaks'), ('Factions', 'Kaineng City'), ('Nightfall', 'Desolation'), ('Prophecies', 'Crystal Desert'), ('Nightfall', 'Istan'), ('Eye of the North', 'Charr Homelands'), ('Prophecies', 'Ring of Fire'), ('Nightfall', 'Kourna'), ('Prophecies', 'Kryta'), ('Factions', 'Shing Jea'), ('Nightfall', 'Kourna'), ('Factions', 'Kaineng City'), ('Prophecies', 'Ascalon'), ('Nightfall', 'Vabbi'), ('Prophecies', 'Maguuma'), ('Factions', 'Jade Sea'), ('Nightfall', 'Istan'), ('Prophecies', 'Maguuma'), ('Eye of the North', 'Depths'), ('Nightfall', 'Istan'), ('Prophecies', 'Ring of Fire'), ('Factions', 'Kaineng City'), ('Prophecies', 'Crystal Desert'), ('Nightfall', 'Vabbi'), ('Prophecies', 'Kryta'), ('Eye of the North', 'Charr Homelands'), ('Factions', 'Echovald'), ('Prophecies', 'Kryta'), ('Nightfall', 'Kourna'), ('Eye of the North', 'Charr Homelands'), ('Prophecies', 'Northern Shiverpeaks'), ('Factions', 'Kaineng City'), ('Nightfall', 'Vabbi'), ('Prophecies', 'Ascalon'), ('Eye of the North', 'Depths'), ('Nightfall', 'Kourna'), ('Prophecies', 'Ascalon'), ('Eye of the North', 'Depths'), ('Factions', 'Shing Jea'), ('Prophecies', 'Southern Shiverpeaks'), ('Nightfall', 'Vabbi'), ('Eye of the North', 'Tarnished Coast'), ('Prophecies', 'Crystal Desert'), ('Factions', 'Kaineng City'), ('Nightfall', 'Istan'), ('Prophecies', 'Southern Shiverpeaks'), ('Nightfall', 'Kourna'), ('Eye of the North', 'Tarnished Coast'), ('Factions', 'Echovald'), ('Prophecies', 'Kryta'), ('Nightfall', 'Realm of Torment'), ('Eye of the North', 'Tarnished Coast'), ('Prophecies', 'Kryta'), ('Factions', 'Jade Sea'), ('Nightfall', 'Desolation'), ('Prophecies', 'Ring of Fire'), ('Prophecies', 'Ascalon'), ('Eye of the North', 'Far Shiverpeaks'), ('Factions', 'Kaineng City'), ('Prophecies', 'Crystal Desert'), ('Nightfall', 'Realm of Torment'), ('Eye of the North', 'Charr Homelands'), ('Prophecies', 'Maguuma'), ('Nightfall', 'Desolation'), ('Factions', 'Jade Sea'), ('Nightfall', 'Realm of Torment'), ('Prophecies', 'Northern Shiverpeaks')];
+            const missions = [['Augury Rock', 'Prophecies', 'Crystal Desert', 'Augury_Rock_(Zaishen_quest)'], ['Grand Court of Sebelkeh', 'Nightfall', 'Vabbi', 'Grand_Court_of_Sebelkeh_(Zaishen_quest)'], ['Ice Caves of Sorrow', 'Prophecies', 'Southern Shiverpeaks', 'Ice_Caves_of_Sorrow_(Zaishen_quest)'], ['Raisu Palace', 'Factions', 'Kaineng City', 'Raisu_Palace_(Zaishen_quest)'], ['Gate of Desolation', 'Nightfall', 'Desolation', 'Gate_of_Desolation_(Zaishen_quest)'], ['Thirsty River', 'Prophecies', 'Crystal Desert', 'Thirsty_River_(Zaishen_quest)'], ['Blacktide Den', 'Nightfall', 'Istan', 'Blacktide_Den_(Zaishen_quest)'], ['Against the Charr', 'Eye of the North', 'Charr Homelands', 'Against_the_Charr_(Zaishen_quest)'], ["Abaddon's Mouth", 'Prophecies', 'Ring of Fire', 'Abaddon%27s_Mouth_(Zaishen_quest)'], ['Nundu Bay', 'Nightfall', 'Kourna', 'Nundu_Bay_(Zaishen_quest)'], ['Divinity Coast', 'Prophecies', 'Kryta', 'Divinity_Coast_(Zaishen_quest)'], ['Zen Daijun', 'Factions', 'Shing Jea', 'Zen_Daijun_(Zaishen_quest)'], ['Pogahn Passage', 'Nightfall', 'Kourna', 'Pogahn_Passage_(Zaishen_quest)'], ['Tahnnakai Temple', 'Factions', 'Kaineng City', 'Tahnnakai_Temple_(Zaishen_quest)'], ['The Great Northern Wall', 'Prophecies', 'Ascalon', 'The_Great_Northern_Wall_(Zaishen_quest)'], ['Dasha Vestibule', 'Nightfall', 'Vabbi', 'Dasha_Vestibule_(Zaishen_quest)'], ['The Wilds', 'Prophecies', 'Maguuma', 'The_Wilds_(Zaishen_quest)'], ['Unwaking Waters', 'Factions', 'Jade Sea', 'Unwaking_Waters_(Zaishen_quest)'], ['Chahbek Village', 'Nightfall', 'Istan', 'Chahbek_Village_(Zaishen_quest)'], ['Aurora Glade', 'Prophecies', 'Maguuma', 'Aurora_Glade_(Zaishen_quest)'], ['A Time for Heroes', 'Eye of the North', 'Depths', 'A_Time_for_Heroes_(Zaishen_quest)'], ['Consulate Docks', 'Nightfall', 'Istan', 'Consulate_Docks_(Zaishen_quest)'], ['Ring of Fire', 'Prophecies', 'Ring of Fire', 'Ring_of_Fire_(Zaishen_quest)'], ['Nahpui Quarter', 'Factions', 'Kaineng City', 'Nahpui_Quarter_(Zaishen_quest)'], ["The Dragon's Lair", 'Prophecies', 'Crystal Desert', 'The_Dragon%27s_Lair_(Zaishen_quest)'], ['Dzagonur Bastion', 'Nightfall', 'Vabbi', 'Dzagonur_Bastion_(Zaishen_quest)'], ["D'Alessio Seaboard", 'Prophecies', 'Kryta', 'D%27Alessio_Seaboard_(Zaishen_quest)'], ['Assault on the Stronghold', 'Eye of the North', 'Charr Homelands', 'Assault_on_the_Stronghold_(Zaishen_quest)'], ['The Eternal Grove', 'Factions', 'Echovald', 'The_Eternal_Grove_(Zaishen_quest)'], ['Sanctum Cay', 'Prophecies', 'Kryta', 'Sanctum_Cay_(Zaishen_quest)'], ['Rilohn Refuge', 'Nightfall', 'Kourna', 'Rilohn_Refuge_(Zaishen_quest)'], ['Warband of Brothers', 'Eye of the North', 'Charr Homelands', 'Warband_of_Brothers_(Zaishen_quest)'], ['Borlis Pass', 'Prophecies', 'Northern Shiverpeaks', 'Borlis_Pass_(Zaishen_quest)'], ['Imperial Sanctum', 'Factions', 'Kaineng City', 'Imperial_Sanctum_(Zaishen_quest)'], ['Moddok Crevice', 'Nightfall', 'Vabbi', 'Moddok_Crevice_(Zaishen_quest)'], ['Nolani Academy', 'Prophecies', 'Ascalon', 'Nolani_Academy_(Zaishen_quest)'], ["Destruction's Depths", 'Eye of the North', 'Depths', 'Destruction%27s_Depths_(Zaishen_quest)'], ['Venta Cemetery', 'Nightfall', 'Kourna', 'Venta_Cemetery_(Zaishen_quest)'], ['Fort Ranik', 'Prophecies', 'Ascalon', 'Fort_Ranik_(Zaishen_quest)'], ['A Gate Too Far', 'Eye of the North', 'Depths', 'A_Gate_Too_Far_(Zaishen_quest)'], ["Minister Cho's Estate", 'Factions', 'Shing Jea', 'Minister_Cho%27s_Estate_(Zaishen_quest)'], ['Thunderhead Keep', 'Prophecies', 'Southern Shiverpeaks', 'Thunderhead_Keep_(Zaishen_quest)'], ['Tihark Orchard', 'Nightfall', 'Vabbi', 'Tihark_Orchard_(Zaishen_quest)'], ['Finding the Bloodstone', 'Eye of the North', 'Tarnished Coast', 'Finding_the_Bloodstone_(Zaishen_quest)'], ['Dunes of Despair', 'Prophecies', 'Crystal Desert', 'Dunes_of_Despair_(Zaishen_quest)'], ['Vizunah Square', 'Factions', 'Kaineng City', 'Vizunah_Square_(Zaishen_quest)'], ['Jokanur Diggings', 'Nightfall', 'Istan', 'Jokanur_Diggings_(Zaishen_quest)'], ['Iron Mines of Moladune', 'Prophecies', 'Southern Shiverpeaks', 'Iron_Mines_of_Moladune_(Zaishen_quest)'], ['Kodonur Crossroads', 'Nightfall', 'Kourna', 'Kodonur_Crossroads_(Zaishen_quest)'], ['G.O.L.E.M.', 'Eye of the North', 'Tarnished Coast', 'G.O.L.E.M._(Zaishen_quest)'], ['Arborstone', 'Factions', 'Echovald', 'Arborstone_(Zaishen_quest)'], ['Gates of Kryta', 'Prophecies', 'Kryta', 'Gates_of_Kryta_(Zaishen_quest)'], ['Gate of Madness', 'Nightfall', 'Realm of Torment', 'Gate_of_Madness_(Zaishen_quest)'], ['The Elusive Golemancer', 'Eye of the North', 'Tarnished Coast', 'The_Elusive_Golemancer_(Zaishen_quest)'], ['Riverside Province', 'Prophecies', 'Kryta', 'Riverside_Province_(Zaishen_quest)'], ['Boreas Seabed', 'Factions', 'Jade Sea', 'Boreas_Seabed_(Zaishen_quest)'], ['Ruins of Morah', 'Nightfall', 'Desolation', 'Ruins_of_Morah_(Zaishen_quest)'], ["Hell's Precipice", 'Prophecies', 'Ring of Fire', 'Hell%27s_Precipice_(Zaishen_quest)'], ['Ruins of Surmia', 'Prophecies', 'Ascalon', 'Ruins_of_Surmia_(Zaishen_quest)'], ['Curse of the Nornbear', 'Eye of the North', 'Far Shiverpeaks', 'Curse_of_the_Nornbear_(Zaishen_quest)'], ['Sunjiang District', 'Factions', 'Kaineng City', 'Sunjiang_District_(Zaishen_quest)'], ['Elona Reach', 'Prophecies', 'Crystal Desert', 'Elona_Reach_(Zaishen_quest)'], ['Gate of Pain', 'Nightfall', 'Realm of Torment', 'Gate_of_Pain_(Zaishen_quest)'], ['Blood Washes Blood', 'Eye of the North', 'Charr Homelands', 'Blood_Washes_Blood_(Zaishen_quest)'], ['Bloodstone Fen', 'Prophecies', 'Maguuma', 'Bloodstone_Fen_(Zaishen_quest)'], ["Jennur's Horde", 'Nightfall', 'Desolation', 'Jennur%27s_Horde_(Zaishen_quest)'], ['Gyala Hatchery', 'Factions', 'Jade Sea', 'Gyala_Hatchery_(Zaishen_quest)'], ["Abaddon's Gate", 'Nightfall', 'Realm of Torment', 'Abaddon%27s_Gate_(Zaishen_quest)'], ['The Frost Gate', 'Prophecies', 'Northern Shiverpeaks', 'The_Frost_Gate_(Zaishen_quest)']];
             
             // Zaishen Bounty: 66-day cycle starting June 12, 2009
             const bountyStart = new Date(2009, 5, 12); // June 12, 2009
-            const bounties = ['Droajam, Mage of the Sands', 'Royen Beastkeeper', 'Eldritch Ettin', 'Vengeful Aatxe', 'Fronis Irontoe', 'Urgoz', 'Fenrir', 'Selvetarm', 'Mohby Windbeak', 'Charged Blackness', 'Rotscale', 'Zoldark the Unholy', 'Korshek the Immolated', 'Myish, Lady of the Lake', 'Frostmaw the Kinslayer', 'Kunvie Firewing', "Z'him Monns", 'The Greater Darkness', 'TPS Regulator Golem', 'Plague of Destruction', 'The Darknesses', 'Admiral Kantoh', 'Borrguus Blisterbark', 'Forgewight', 'Baubao Wavewrath', 'Joffs the Mitigator', 'Rragar Maneater', 'Chung, the Attuned', 'Lord Jadoth', 'Nulfastu, Earthbound', 'The Iron Forgeman', 'Magmus', 'Mobrin, Lord of the Marsh', 'Jarimiya the Unmerciful', 'Duncan the Black', 'Quansong Spiritspeak', 'The Stygian Underlords', 'Fozzy Yeoryios', 'The Black Beast of Arrgh', 'Arachni', 'The Four Horsemen', 'Remnant of Antiquities', 'Arbor Earthcall', 'Prismatic Ooze', 'Lord Khobay', 'Jedeh the Mighty', 'Ssuns, Blessed of Dwayna', 'Justiciar Thommis', 'Harn and Maxine Coldstone', 'Pywatt the Swift', 'Fendi Nin', 'Mungri Magicbox', 'Priest of Menzies', 'Ilsundur, Lord of Fire', 'Kepkhet Marrowfeast', 'Commander Wahli', 'Kanaxai', 'Khabuus', 'Molotov Rocktail', 'The Stygian Lords', 'Dragon Lich', 'Havok Soulwail', 'Ghial the Bone Dancer', 'Murakai, Lady of the Night', 'Rand Stormweaver', 'Verata'];
-            const bountyInfo = [('Nightfall', 'Desolation'), ('Prophecies', 'Maguuma'), ('Prophecies', 'Southern Shiverpeaks'), ('Core', 'Underworld'), ('Eye of the North', 'Depths'), ('Factions', 'Echovald'), ('Eye of the North', 'Far Shiverpeaks'), ('Eye of the North', 'Depths'), ('Nightfall', 'Istan'), ('Prophecies', 'Ring of Fire'), ('Prophecies', 'Kryta'), ('Eye of the North', 'Depths'), ('Nightfall', 'Desolation'), ('Eye of the North', 'Far Shiverpeaks'), ('Eye of the North', 'Far Shiverpeaks'), ('Factions', 'Echovald'), ('Nightfall', 'Desolation'), ('Eye of the North', 'Depths'), ('Eye of the North', 'Depths'), ('Eye of the North', 'Tarnished Coast'), ('Eye of the North', 'Depths'), ('Factions', 'Jade Sea'), ('Eye of the North', 'Tarnished Coast'), ('Eye of the North', 'Depths'), ('Factions', 'Jade Sea'), ('Nightfall', 'Kourna'), ('Eye of the North', 'Charr Homelands'), ('Factions', 'Kaineng City'), ('Core', 'Domain of Anguish'), ('Eye of the North', 'Far Shiverpeaks'), ('Eye of the North', 'Depths'), ('Eye of the North', 'Depths'), ('Factions', 'Echovald'), ('Nightfall', 'Desolation'), ('Eye of the North', 'Depths'), ('Factions', 'Echovald'), ('Core', 'Domain of Anguish'), ('Nightfall', 'Vabbi'), ('Eye of the North', 'Depths'), ('Eye of the North', 'Tarnished Coast'), ('Core', 'Underworld'), ('Eye of the North', 'Depths'), ('Factions', 'Jade Sea'), ('Eye of the North', 'Tarnished Coast'), ('Nightfall', 'Desolation'), ('Nightfall', 'Desolation'), ('Nightfall', 'Realm of Torment'), ('Prophecies', 'Kryta'), ('Prophecies', 'Southern Shiverpeaks'), ('Nightfall', 'Kourna'), ('Eye of the North', 'Depths'), ('Nightfall', 'Istan'), ('Core', 'Fissure of Woe'), ('Eye of the North', 'Depths'), ('Nightfall', 'Desolation'), ('Factions', 'Jade Sea'), ('Factions', 'Jade Sea'), ('Nightfall', 'Vabbi'), ('Eye of the North', 'Charr Homelands'), ('Core', 'Domain of Anguish'), ('Prophecies', 'Ring of Fire'), ('Eye of the North', 'Depths'), ('Nightfall', 'Desolation'), ('Eye of the North', 'Depths'), ('Prophecies', 'Northern Shiverpeaks'), ('Prophecies', 'Kryta')];
+            const bounties = [['Droajam, Mage of the Sands', 'Nightfall', 'Desolation', 'Droajam,_Mage_of_the_Sands_(Zaishen_quest)'], ['Royen Beastkeeper', 'Prophecies', 'Maguuma', 'Royen_Beastkeeper_(Zaishen_quest)'], ['Eldritch Ettin', 'Prophecies', 'Southern Shiverpeaks', 'Eldritch_Ettin_(Zaishen_quest)'], ['Vengeful Aatxe', 'Core', 'Underworld', 'Vengeful_Aatxe_(Zaishen_quest)'], ['Fronis Irontoe', 'Eye of the North', 'Depths', 'Fronis_Irontoe_(Zaishen_quest)'], ['Urgoz', 'Factions', 'Echovald', 'Urgoz_(Zaishen_quest)'], ['Fenrir', 'Eye of the North', 'Far Shiverpeaks', 'Fenrir_(Zaishen_quest)'], ['Selvetarm', 'Eye of the North', 'Depths', 'Selvetarm_(Zaishen_quest)'], ['Mohby Windbeak', 'Nightfall', 'Istan', 'Mohby_Windbeak_(Zaishen_quest)'], ['Charged Blackness', 'Prophecies', 'Ring of Fire', 'Charged_Blackness_(Zaishen_quest)'], ['Rotscale', 'Prophecies', 'Kryta', 'Rotscale_(Zaishen_quest)'], ['Zoldark the Unholy', 'Eye of the North', 'Depths', 'Zoldark_the_Unholy_(Zaishen_quest)'], ['Korshek the Immolated', 'Nightfall', 'Desolation', 'Korshek_the_Immolated_(Zaishen_quest)'], ['Myish, Lady of the Lake', 'Eye of the North', 'Far Shiverpeaks', 'Myish,_Lady_of_the_Lake_(Zaishen_quest)'], ['Frostmaw the Kinslayer', 'Eye of the North', 'Far Shiverpeaks', 'Frostmaw_the_Kinslayer_(Zaishen_quest)'], ['Kunvie Firewing', 'Factions', 'Echovald', 'Kunvie_Firewing_(Zaishen_quest)'], ["Z'him Monns", 'Nightfall', 'Desolation', 'Z%27him_Monns_(Zaishen_quest)'], ['The Greater Darkness', 'Eye of the North', 'Depths', 'The_Greater_Darkness_(Zaishen_quest)'], ['TPS Regulator Golem', 'Eye of the North', 'Depths', 'TPS_Regulator_Golem_(Zaishen_quest)'], ['Plague of Destruction', 'Eye of the North', 'Tarnished Coast', 'Plague_of_Destruction_(Zaishen_quest)'], ['The Darknesses', 'Eye of the North', 'Depths', 'The_Darknesses_(Zaishen_quest)'], ['Admiral Kantoh', 'Factions', 'Jade Sea', 'Admiral_Kantoh_(Zaishen_quest)'], ['Borrguus Blisterbark', 'Eye of the North', 'Tarnished Coast', 'Borrguus_Blisterbark_(Zaishen_quest)'], ['Forgewight', 'Eye of the North', 'Depths', 'Forgewight_(Zaishen_quest)'], ['Baubao Wavewrath', 'Factions', 'Jade Sea', 'Baubao_Wavewrath_(Zaishen_quest)'], ['Joffs the Mitigator', 'Nightfall', 'Kourna', 'Joffs_the_Mitigator_(Zaishen_quest)'], ['Rragar Maneater', 'Eye of the North', 'Charr Homelands', 'Rragar_Maneater_(Zaishen_quest)'], ['Chung, the Attuned', 'Factions', 'Kaineng City', 'Chung,_the_Attuned_(Zaishen_quest)'], ['Lord Jadoth', 'Core', 'Domain of Anguish', 'Lord_Jadoth_(Zaishen_quest)'], ['Nulfastu, Earthbound', 'Eye of the North', 'Far Shiverpeaks', 'Nulfastu,_Earthbound_(Zaishen_quest)'], ['The Iron Forgeman', 'Eye of the North', 'Depths', 'The_Iron_Forgeman_(Zaishen_quest)'], ['Magmus', 'Eye of the North', 'Depths', 'Magmus_(Zaishen_quest)'], ['Mobrin, Lord of the Marsh', 'Factions', 'Echovald', 'Mobrin,_Lord_of_the_Marsh_(Zaishen_quest)'], ['Jarimiya the Unmerciful', 'Nightfall', 'Desolation', 'Jarimiya_the_Unmerciful_(Zaishen_quest)'], ['Duncan the Black', 'Eye of the North', 'Depths', 'Duncan_the_Black_(Zaishen_quest)'], ['Quansong Spiritspeak', 'Factions', 'Echovald', 'Quansong_Spiritspeak_(Zaishen_quest)'], ['The Stygian Underlords', 'Core', 'Domain of Anguish', 'The_Stygian_Underlords_(Zaishen_quest)'], ['Fozzy Yeoryios', 'Nightfall', 'Vabbi', 'Fozzy_Yeoryios_(Zaishen_quest)'], ['The Black Beast of Arrgh', 'Eye of the North', 'Depths', 'The_Black_Beast_of_Arrgh_(Zaishen_quest)'], ['Arachni', 'Eye of the North', 'Tarnished Coast', 'Arachni_(Zaishen_quest)'], ['The Four Horsemen', 'Core', 'Underworld', 'The_Four_Horsemen_(Zaishen_quest)'], ['Remnant of Antiquities', 'Eye of the North', 'Depths', 'Remnant_of_Antiquities_(Zaishen_quest)'], ['Arbor Earthcall', 'Factions', 'Jade Sea', 'Arbor_Earthcall_(Zaishen_quest)'], ['Prismatic Ooze', 'Eye of the North', 'Tarnished Coast', 'Prismatic_Ooze_(Zaishen_quest)'], ['Lord Khobay', 'Nightfall', 'Desolation', 'Lord_Khobay_(Zaishen_quest)'], ['Jedeh the Mighty', 'Nightfall', 'Desolation', 'Jedeh_the_Mighty_(Zaishen_quest)'], ['Ssuns, Blessed of Dwayna', 'Nightfall', 'Realm of Torment', 'Ssuns,_Blessed_of_Dwayna_(Zaishen_quest)'], ['Justiciar Thommis', 'Prophecies', 'Kryta', 'Justiciar_Thommis_(Zaishen_quest)'], ['Harn and Maxine Coldstone', 'Prophecies', 'Southern Shiverpeaks', 'Harn_and_Maxine_Coldstone_(Zaishen_quest)'], ['Pywatt the Swift', 'Nightfall', 'Kourna', 'Pywatt_the_Swift_(Zaishen_quest)'], ['Fendi Nin', 'Eye of the North', 'Depths', 'Fendi_Nin_(Zaishen_quest)'], ['Mungri Magicbox', 'Nightfall', 'Istan', 'Mungri_Magicbox_(Zaishen_quest)'], ['Priest of Menzies', 'Core', 'Fissure of Woe', 'Priest_of_Menzies_(Zaishen_quest)'], ['Ilsundur, Lord of Fire', 'Eye of the North', 'Depths', 'Ilsundur,_Lord_of_Fire_(Zaishen_quest)'], ['Kepkhet Marrowfeast', 'Nightfall', 'Desolation', 'Kepkhet_Marrowfeast_(Zaishen_quest)'], ['Commander Wahli', 'Factions', 'Jade Sea', 'Commander_Wahli_(Zaishen_quest)'], ['Kanaxai', 'Factions', 'Jade Sea', 'Kanaxai_(Zaishen_quest)'], ['Khabuus', 'Nightfall', 'Vabbi', 'Khabuus_(Zaishen_quest)'], ['Molotov Rocktail', 'Eye of the North', 'Charr Homelands', 'Molotov_Rocktail_(Zaishen_quest)'], ['The Stygian Lords', 'Core', 'Domain of Anguish', 'The_Stygian_Lords_(Zaishen_quest)'], ['Dragon Lich', 'Prophecies', 'Ring of Fire', 'Dragon_Lich_(Zaishen_quest)'], ['Havok Soulwail', 'Eye of the North', 'Depths', 'Havok_Soulwail_(Zaishen_quest)'], ['Ghial the Bone Dancer', 'Nightfall', 'Desolation', 'Ghial_the_Bone_Dancer_(Zaishen_quest)'], ['Murakai, Lady of the Night', 'Eye of the North', 'Depths', 'Murakai,_Lady_of_the_Night_(Zaishen_quest)'], ['Rand Stormweaver', 'Prophecies', 'Northern Shiverpeaks', 'Rand_Stormweaver_(Zaishen_quest)'], ['Verata', 'Prophecies', 'Kryta', 'Verata_(Zaishen_quest)']];
             
             const today = new Date();
             today.setHours(0, 0, 0, 0);
@@ -23910,12 +23066,72 @@
             const bountyDays = Math.floor((today - bountyStart) / (1000 * 60 * 60 * 24));
             const bountyIndex = ((bountyDays % bounties.length) + bounties.length) % bounties.length;
             
-            // Update display
-            document.getElementById('today-mission').textContent = missions[missionIndex];
-            document.getElementById('today-mission-info').textContent = missionInfo[missionIndex][0] + ' - ' + missionInfo[missionIndex][1];
+            // Update today's mission
+            const todayMission = missions[missionIndex];
+            document.getElementById('today-mission-name').textContent = todayMission[0];
+            document.getElementById('today-mission-info').textContent = todayMission[1] + ' • ' + todayMission[2];
+            document.getElementById('today-mission-link').href = 'https://wiki.guildwars.com/wiki/' + todayMission[3];
             
-            document.getElementById('today-bounty').textContent = bounties[bountyIndex];
-            document.getElementById('today-bounty-info').textContent = bountyInfo[bountyIndex][0] + ' - ' + bountyInfo[bountyIndex][1];
+            // Update today's bounty
+            const todayBounty = bounties[bountyIndex];
+            document.getElementById('today-bounty-name').textContent = todayBounty[0];
+            document.getElementById('today-bounty-info').textContent = todayBounty[1] + ' • ' + todayBounty[2];
+            document.getElementById('today-bounty-link').href = 'https://wiki.guildwars.com/wiki/' + todayBounty[3];
+            
+            // Load saved daily progress
+            loadDailyProgress();
+            
+            // Generate upcoming quests
+            let upcomingHtml = '';
+            for (let i = 1; i <= 5; i++) {
+                const futureDate = new Date(today);
+                futureDate.setDate(futureDate.getDate() + i);
+                
+                const futureMissionDays = Math.floor((futureDate - missionStart) / (1000 * 60 * 60 * 24));
+                const futureMissionIdx = ((futureMissionDays % missions.length) + missions.length) % missions.length;
+                
+                const futureBountyDays = Math.floor((futureDate - bountyStart) / (1000 * 60 * 60 * 24));
+                const futureBountyIdx = ((futureBountyDays % bounties.length) + bounties.length) % bounties.length;
+                
+                const dateStr = futureDate.toLocaleDateString('en-US', { weekday: 'short', month: 'short', day: 'numeric' });
+                
+                upcomingHtml += '<div style="display:flex;gap:10px;padding:8px 0;border-bottom:1px solid #30363d;">';
+                upcomingHtml += '<span style="color:#8b949e;min-width:100px;">' + dateStr + '</span>';
+                upcomingHtml += '<span style="color:#238636;">🗺️ ' + missions[futureMissionIdx][0] + '</span>';
+                upcomingHtml += '<span style="color:#1f6feb;">🎯 ' + bounties[futureBountyIdx][0] + '</span>';
+                upcomingHtml += '</div>';
+            }
+            document.getElementById('upcoming-quests').innerHTML = upcomingHtml;
+        }
+        
+        // Save daily quest progress (resets each day)
+        function saveDailyProgress() {
+            const today = new Date().toISOString().split('T')[0];
+            const charName = getCurrentCharacter();
+            const key = 'gw-daily-' + charName + '-' + today;
+            
+            const progress = {
+                mission: document.getElementById('daily-mission-check').checked,
+                bounty: document.getElementById('daily-bounty-check').checked
+            };
+            localStorage.setItem(key, JSON.stringify(progress));
+        }
+        
+        // Load daily quest progress
+        function loadDailyProgress() {
+            const today = new Date().toISOString().split('T')[0];
+            const charName = getCurrentCharacter();
+            const key = 'gw-daily-' + charName + '-' + today;
+            
+            const saved = localStorage.getItem(key);
+            if (saved) {
+                const progress = JSON.parse(saved);
+                document.getElementById('daily-mission-check').checked = progress.mission || false;
+                document.getElementById('daily-bounty-check').checked = progress.bounty || false;
+            } else {
+                document.getElementById('daily-mission-check').checked = false;
+                document.getElementById('daily-bounty-check').checked = false;
+            }
         }
         
         // Open official HoM Calculator with character name
