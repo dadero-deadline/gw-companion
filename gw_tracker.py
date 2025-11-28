@@ -1565,7 +1565,7 @@ html += '''
                 <span style="font-size:1.5em;">🔗</span>
                 <div style="flex:1;">
                     <strong>Official HoM Calculator</strong><br>
-                    <span style="font-size:0.85em;opacity:0.9;">Check your real HoM status with your GW1 character</span>
+                    <span style="font-size:0.85em;opacity:0.9;">Check your HoM rewards for GW2</span>
                 </div>
                 <button onclick="openHoMCalculator()" style="padding:10px 20px;background:#fff;color:#238636;border:none;border-radius:6px;font-weight:bold;cursor:pointer;">
                     🌐 Open
@@ -2848,7 +2848,7 @@ html += '''
                 
                 // Show a helpful message
                 setTimeout(() => {
-                    alert('Enter your GW1 character name: ' + charName + '\\n\\n(Copy the name and paste it in the search field)');
+                    alert('Search for your character: ' + charName + '\\n\\n(Copy the name and paste it in the search field)');
                 }, 500);
             } else {
                 window.open(baseUrl, '_blank');
