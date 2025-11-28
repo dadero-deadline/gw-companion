@@ -987,8 +987,9 @@ def generate_daily_html():
     combat_idx = combat_days % len(ZAISHEN_COMBAT)
     today_combat = ZAISHEN_COMBAT[combat_idx]
     
-    # Vanguard (9-day cycle)
-    vanguard_start = datetime(2009, 4, 23)
+    # Vanguard (9-day cycle) - Nov 28 2025 = Save the Ascalonian Noble (index 2)
+    # So start is Nov 26 2025 (2 days ago)
+    vanguard_start = datetime(2025, 11, 26)
     vanguard_days = (today - vanguard_start).days
     vanguard_idx = vanguard_days % len(VANGUARD_QUESTS)
     today_vanguard = VANGUARD_QUESTS[vanguard_idx]
