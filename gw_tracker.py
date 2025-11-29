@@ -3210,6 +3210,9 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     this.classList.add('active');
                 }
                 
+                if (areaId === 'armor') {
+                    try { specialArmorRestrict && specialArmorRestrict(); } catch (e) {}
+                }
                 applyFilters(areaId);
             });
         });
@@ -3569,33 +3572,18 @@ updateArmorPreviews();
         updateArmorVisibility();
     
                 function specialArmorRestrict() {
-            const primary = document.getElementById('primary-prof')?.value || '';
+            const primary = document.getElementById('primary-prof') ? document.getElementById('primary-prof').value : '';
             const prof = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
-            const aRt = (prof === 'assassin' || prof === 'ritualist');
+            const isAR = (prof === 'assassin' || prof === 'ritualist');
+            const isPd = (prof === 'paragon' || prof === 'dervish');
             document.querySelectorAll('tr[data-area="armor"]').forEach(row => {
-                const link = row.querySelector('a.quest-link');
-                if (!link) return;
-                const href = link.getAttribute('href') || '';
-                if (/Elite_Exotic_armor|Elite_Imperial_armor/i.test(href)) {
-                    const hide = !aRt;
-                    row.classList.toggle('hidden-restrict', hide);
-                    row.classList.toggle('hidden', hide);
-                }
-                // Paragon & Dervish do not have Factions elite lines (Kurzick/Luxon/Canthan)
-                if (/Elite_(Kurzick|Luxon|Canthan)_armor/i.test(href)) {
-                    const hide = (prof === 'paragon' || prof === 'dervish');
-                    row.classList.toggle('hidden-restrict', hide);
-                    row.classList.toggle('hidden', hide);
-                }
-                // Assassin/Ritualist do not have Nightfall Primeval/Sunspear elite lines
-                if (/Primeval_armor/i.test(href)) {
-                    row.classList.toggle('hidden-restrict', aRt);
-                    row.classList.toggle('hidden', aRt);
-                }
-                if (/(?:Elite_)?Sunspear_armor/i.test(href)) {
-                    row.classList.toggle('hidden-restrict', aRt);
-                    row.classList.toggle('hidden', aRt);
-                }
+                const id = row.dataset.id || '';
+                let hide = false;
+                if (id === 'armor_elite_exotic' || id === 'armor_elite_imperial') { hide = !isAR; }
+                if (id === 'armor_elite_kurzick' || id === 'armor_elite_luxon' || id === 'armor_elite_canthan') { hide = hide || isPd; }
+                if (id === 'armor_primeval' || id === 'armor_elite_sunspear') { hide = hide || isAR; }
+                row.classList.toggle('hidden-restrict', hide);
+                row.classList.toggle('hidden', hide);
             });
         }\n        specialArmorRestrict();\n        console.log('GW Companion initialized!');
     </script>

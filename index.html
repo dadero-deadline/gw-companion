@@ -30972,6 +30972,9 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     this.classList.add('active');
                 }
                 
+                if (areaId === 'armor') {
+                    try { specialArmorRestrict && specialArmorRestrict(); } catch (e) {}
+                }
                 applyFilters(areaId);
             });
         });
@@ -31331,33 +31334,27 @@ updateArmorPreviews();
         updateArmorVisibility();
     
                 function specialArmorRestrict() {
-            const primary = document.getElementById('primary-prof')?.value || '';
+            const primary = document.getElementById('primary-prof') ? document.getElementById('primary-prof').value : '';
             const prof = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
-            const aRt = (prof === 'assassin' || prof === 'ritualist');
+            const isAR = (prof === 'assassin' || prof === 'ritualist');
+            const isPd = (prof === 'paragon' || prof === 'dervish');
             document.querySelectorAll('tr[data-area="armor"]').forEach(row => {
-                const link = row.querySelector('a.quest-link');
-                if (!link) return;
-                const href = link.getAttribute('href') || '';
-                if (/Elite_Exotic_armor|Elite_Imperial_armor/i.test(href)) {
-                    const hide = !aRt;
-                    row.classList.toggle('hidden-restrict', hide);
-                    row.classList.toggle('hidden', hide);
+                const id = row.dataset.id || '';
+                let hide = false;
+                // Exotic/Imperial: A/Rt only
+                if (id === 'armor_elite_exotic' || id === 'armor_elite_imperial') {
+                    hide = !isAR;
                 }
-                // Paragon & Dervish do not have Factions elite lines (Kurzick/Luxon/Canthan)
-                if (/Elite_(Kurzick|Luxon|Canthan)_armor/i.test(href)) {
-                    const hide = (prof === 'paragon' || prof === 'dervish');
-                    row.classList.toggle('hidden-restrict', hide);
-                    row.classList.toggle('hidden', hide);
+                // Kurzick/Luxon/Canthan: unavailable to Paragon/Dervish
+                if (id === 'armor_elite_kurzick' || id === 'armor_elite_luxon' || id === 'armor_elite_canthan') {
+                    hide = hide || isPd;
                 }
-                // Assassin/Ritualist do not have Nightfall Primeval/Sunspear elite lines
-                if (/Primeval_armor/i.test(href)) {
-                    row.classList.toggle('hidden-restrict', aRt);
-                    row.classList.toggle('hidden', aRt);
+                // Primeval and Elite Sunspear: unavailable to Assassin/Ritualist
+                if (id === 'armor_primeval' || id === 'armor_elite_sunspear') {
+                    hide = hide || isAR;
                 }
-                if (/(?:Elite_)?Sunspear_armor/i.test(href)) {
-                    row.classList.toggle('hidden-restrict', aRt);
-                    row.classList.toggle('hidden', aRt);
-                }
+                row.classList.toggle('hidden-restrict', hide);
+                row.classList.toggle('hidden', hide);
             });
         }
         specialArmorRestrict();
