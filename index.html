@@ -260,7 +260,7 @@
         tr:hover { background: rgba(255,255,255,0.03); }
         tr.completed { opacity: 0.5; }
         tr.completed td { text-decoration: line-through; }
-        tr.hidden { display: none; }
+        tr.hidden, tr.hidden-restrict { display: none; }
         
         .type-main { background: rgba(88,166,255,0.1); }
         .type-mission { background: rgba(112,48,160,0.15); }
@@ -30679,7 +30679,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
             // - For armor: also exclude rows currently hidden by profession rules
-            const hiddenFilter = (areaId === 'armor') ? ':not(.hidden)' : '';
+            const hiddenFilter = (areaId === 'armor') ? ':not(.hidden):not(.hidden-restrict)' : '';
             const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}`);
             let total = allRows.length;
             let completed;
@@ -31023,11 +31023,13 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 // For elites, filter by campaign
                 if (areaId === 'elites') {
                     let showCampaign = (typeFilter === 'all' || rowCampaign === typeFilter);
-                    row.classList.toggle('hidden', !showCampaign);
+                    const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
+                    row.classList.toggle('hidden', !showCampaign || restricted);
                 } else if (areaId === 'skills' || areaId === 'outposts') {
                     // Simple profession/campaign filter for skills and outposts
                     let show = (typeFilter === 'all' || rowType === typeFilter);
-                    row.classList.toggle('hidden', !show);
+                    const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
+                    row.classList.toggle('hidden', !show || restricted);
                 } else {
                     let showType = (typeFilter === 'all' || rowType === typeFilter);
                     // Heroes: allow filtering by region 'special' even if campaign differs (e.g., Beyond heroes in Special region)
@@ -31040,7 +31042,8 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                         showProf = activeProfs.includes(rowProf);
                     }
                     
-                    row.classList.toggle('hidden', !(showType && showProf));
+                    const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
+                    row.classList.toggle('hidden', !(showType && showProf) || restricted);
                 }
             });
             
@@ -31320,6 +31323,7 @@ updateArmorPreviews();
         const pref = known.find(p => slug.startsWith(p + '_'));
         if (pref) { allowed = (pref === prof); }
         if (/^elite_(exotic|imperial)_armor$/.test(slug)) { allowed = (prof === 'assassin' || prof === 'ritualist'); }
+        row.classList.toggle('hidden-restrict', !allowed);
         row.classList.toggle('hidden', !allowed);
     });
 }
@@ -31335,17 +31339,23 @@ updateArmorPreviews();
                 if (!link) return;
                 const href = link.getAttribute('href') || '';
                 if (/Elite_Exotic_armor|Elite_Imperial_armor/i.test(href)) {
-                    row.classList.toggle('hidden', !aRt);
+                    const hide = !aRt;
+                    row.classList.toggle('hidden-restrict', hide);
+                    row.classList.toggle('hidden', hide);
                 }
                 // Paragon & Dervish do not have Factions elite lines (Kurzick/Luxon/Canthan)
                 if (/Elite_(Kurzick|Luxon|Canthan)_armor/i.test(href)) {
-                    row.classList.toggle('hidden', (prof === 'paragon' || prof === 'dervish'));
+                    const hide = (prof === 'paragon' || prof === 'dervish');
+                    row.classList.toggle('hidden-restrict', hide);
+                    row.classList.toggle('hidden', hide);
                 }
                 // Assassin/Ritualist do not have Nightfall Primeval/Sunspear elite lines
                 if (/Primeval_armor/i.test(href)) {
+                    row.classList.toggle('hidden-restrict', aRt);
                     row.classList.toggle('hidden', aRt);
                 }
                 if (/(?:Elite_)?Sunspear_armor/i.test(href)) {
+                    row.classList.toggle('hidden-restrict', aRt);
                     row.classList.toggle('hidden', aRt);
                 }
             });
