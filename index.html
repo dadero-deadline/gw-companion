@@ -30525,6 +30525,10 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 document.getElementById('area-vanquish').classList.add('active');
             } else if (category === 'armor') {
                 document.getElementById('area-armor').classList.add('active');
+                try { updateArmorPreviews && updateArmorPreviews(); } catch(e) {}
+                try { updateArmorVisibility && updateArmorVisibility(); } catch(e) {}
+                try { specialArmorRestrict && specialArmorRestrict(); } catch(e) {}
+                try { updateProgress && updateProgress('armor'); } catch(e) {}
             } else if (category === 'minis') {
                 document.getElementById('area-minis').classList.add('active');
             } else if (category === 'menagerie') {
