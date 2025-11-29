@@ -377,19 +377,10 @@ html = '''<!DOCTYPE html>
         .missions-table th:nth-child(2),
         .missions-table th:nth-child(3),
         .missions-table th:nth-child(4) { text-align: center; width: 50px !important; }
-        .missions-table td:nth-child(1),
-        .missions-table td:nth-child(2),
-        .missions-table td:nth-child(3),
-        .missions-table td:nth-child(4) { text-align: center; width: 50px !important; padding: 8px 0 !important; vertical-align: middle; }
+        
         /* Force exact centering of inputs in the first 4 columns */
-        .missions-table td:nth-child(1),
-        .missions-table td:nth-child(2),
-        .missions-table td:nth-child(3),
-        .missions-table td:nth-child(4) { display: flex; justify-content: center; align-items: center; }
-        .missions-table td:nth-child(1) > *,
-        .missions-table td:nth-child(2) > *,
-        .missions-table td:nth-child(3) > *,
-        .missions-table td:nth-child(4) > * { margin: 0 !important; }
+        
+        
         /* Normalize checkbox size across all four columns in Missions and center them exactly */
         .missions-table .quest-checkbox,
         .missions-table .bonus-checkbox,
@@ -440,6 +431,14 @@ html = '''<!DOCTYPE html>
         .reward { color: #7ee787; font-size: 0.9em; }
         .order { color: #484f58; text-align: center; width: 40px; }
         .checkbox-cell { text-align: center; width: 50px; }
+        /* Checkbox grid styles */
+        .checks4-table td:nth-child(1) input,
+        .checks4-table td:nth-child(2) input,
+        .checks4-table td:nth-child(3) input,
+        .checks4-table td:nth-child(4) input { display:block; margin:0 auto; width:18px; height:18px; }
+        .has-checkbox-first th:nth-child(1) { text-align:center; width:50px; }
+        .has-checkbox-first td:nth-child(1) { text-align:center; width:50px; padding:8px 0; }
+        .has-checkbox-first td:nth-child(1) input { display:block; margin:0 auto; width:18px; height:18px; }
         .quest-checkbox { width: 20px; height: 20px; cursor: pointer; accent-color: #238636; }
         .bonus-checkbox { width: 18px; height: 18px; cursor: pointer; accent-color: #ffd700; }
         .bonus-done .bonus-checkbox { box-shadow: 0 0 8px #ffd700; }
@@ -739,7 +738,7 @@ def generate_area_html(quests, area_id, area_name, is_active=False):
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1247,13 +1246,12 @@ def generate_missions_html():
         campaign_lower = campaign_name.lower()
         h += f'''
             <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ {campaign_name} ({len(missions)} missions)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
-                        <th style="width:50px">HM</th>
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
+                        <th style="width:50px">HM</th>                        <th style="width:50px"><span title="Hard Mode + Bonus/Masters">HM+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -1341,7 +1339,7 @@ def generate_dungeons_html():
             
             <!-- ELITE MISSIONS -->
             <h3 style="color:#ff6b6b;margin:15px 0 10px 0;">⚔️ Elite Missions (End-Game Content)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1381,7 +1379,7 @@ def generate_dungeons_html():
             
             <!-- EOTN DUNGEONS -->
             <h3 style="color:#58a6ff;margin:25px 0 10px 0;">🏔️ Eye of the North Dungeons (18)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1464,7 +1462,7 @@ def generate_vanquish_html():
         campaign_lower = campaign_name.lower()
         h += f'''
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">⚔️ {campaign_name} ({len(areas)} areas)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1534,7 +1532,7 @@ def generate_armor_html():
             </div>
             
             <div class="container">
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -1622,7 +1620,7 @@ def generate_minis_html():
     for source_name, minis in sources:
         h += f'''
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 {source_name} ({len(minis)})</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -3499,5 +3497,9 @@ if BUILD_ONLY:
     raise SystemExit(0)
 
 HTTPServer(('localhost', PORT), Handler).serve_forever()
+
+
+
+
 
 

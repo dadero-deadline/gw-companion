@@ -248,19 +248,10 @@
         .missions-table th:nth-child(2),
         .missions-table th:nth-child(3),
         .missions-table th:nth-child(4) { text-align: center; width: 50px !important; }
-        .missions-table td:nth-child(1),
-        .missions-table td:nth-child(2),
-        .missions-table td:nth-child(3),
-        .missions-table td:nth-child(4) { text-align: center; width: 50px !important; padding: 8px 0 !important; vertical-align: middle; }
+        
         /* Force exact centering of inputs in the first 4 columns */
-        .missions-table td:nth-child(1),
-        .missions-table td:nth-child(2),
-        .missions-table td:nth-child(3),
-        .missions-table td:nth-child(4) { display: flex; justify-content: center; align-items: center; }
-        .missions-table td:nth-child(1) > *,
-        .missions-table td:nth-child(2) > *,
-        .missions-table td:nth-child(3) > *,
-        .missions-table td:nth-child(4) > * { margin: 0 !important; }
+        
+        
         /* Normalize checkbox size across all four columns in Missions and center them exactly */
         .missions-table .quest-checkbox,
         .missions-table .bonus-checkbox,
@@ -311,6 +302,14 @@
         .reward { color: #7ee787; font-size: 0.9em; }
         .order { color: #484f58; text-align: center; width: 40px; }
         .checkbox-cell { text-align: center; width: 50px; }
+        /* Checkbox grid styles */
+        .checks4-table td:nth-child(1) input,
+        .checks4-table td:nth-child(2) input,
+        .checks4-table td:nth-child(3) input,
+        .checks4-table td:nth-child(4) input { display:block; margin:0 auto; width:18px; height:18px; }
+        .has-checkbox-first th:nth-child(1) { text-align:center; width:50px; }
+        .has-checkbox-first td:nth-child(1) { text-align:center; width:50px; padding:8px 0; }
+        .has-checkbox-first td:nth-child(1) input { display:block; margin:0 auto; width:18px; height:18px; }
         .quest-checkbox { width: 20px; height: 20px; cursor: pointer; accent-color: #238636; }
         .bonus-checkbox { width: 18px; height: 18px; cursor: pointer; accent-color: #ffd700; }
         .bonus-done .bonus-checkbox { box-shadow: 0 0 8px #ffd700; }
@@ -499,7 +498,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1490,7 +1489,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -2423,7 +2422,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -2798,7 +2797,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -3268,7 +3267,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -3472,7 +3471,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -3789,7 +3788,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -4231,7 +4230,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -4338,7 +4337,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -5958,7 +5957,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -6891,7 +6890,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -7376,7 +7375,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -7891,7 +7890,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -9440,7 +9439,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -10317,7 +10316,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -11138,7 +11137,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -11568,7 +11567,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -12167,7 +12166,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -12820,7 +12819,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -13251,7 +13250,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -13877,7 +13876,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -14068,7 +14067,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -14720,7 +14719,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -14924,7 +14923,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -15855,7 +15854,7 @@
             </div>
             
             <div class="container">
-            <table class="missions-table">
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -17309,13 +17308,12 @@
             
             <div class="container">
             <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ Prophecies (26 missions)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
-                        <th style="width:50px">HM</th>
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
+                        <th style="width:50px">HM</th>                        <th style="width:50px"><span title="Hard Mode + Bonus/Masters">HM+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -17532,13 +17530,12 @@
                 </tbody>
             </table>
             <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ Factions (12 missions)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
-                        <th style="width:50px">HM</th>
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
+                        <th style="width:50px">HM</th>                        <th style="width:50px"><span title="Hard Mode + Bonus/Masters">HM+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -17643,13 +17640,12 @@
                 </tbody>
             </table>
             <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ Nightfall (20 missions)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
-                        <th style="width:50px">HM</th>
-\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
+                        <th style="width:50px">HM</th>                        <th style="width:50px"><span title="Hard Mode + Bonus/Masters">HM+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -17853,7 +17849,7 @@
             
             <!-- ELITE MISSIONS -->
             <h3 style="color:#ff6b6b;margin:15px 0 10px 0;">⚔️ Elite Missions (End-Game Content)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -17918,7 +17914,7 @@
             
             <!-- EOTN DUNGEONS -->
             <h3 style="color:#58a6ff;margin:25px 0 10px 0;">🏔️ Eye of the North Dungeons (18)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -18091,7 +18087,7 @@
             
             <div class="container">
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">⚔️ Prophecies (54 areas)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -18373,7 +18369,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">⚔️ Factions (32 areas)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -18545,7 +18541,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">⚔️ Nightfall (41 areas)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -18762,7 +18758,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">⚔️ Eye of the North (17 areas)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -18893,7 +18889,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -19207,7 +19203,7 @@
             
             <div class="container">
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 1st Birthday (14)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -19374,7 +19370,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 2nd Birthday (14)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -19541,7 +19537,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 3rd Birthday (14)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -19708,7 +19704,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 4th Birthday (14)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -19875,7 +19871,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 5th Birthday (14)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -20042,7 +20038,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 In-Game Rewards (20)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
@@ -20275,7 +20271,7 @@
                 </tbody>
             </table>
             <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 Festivals (15)</h3>
-            <table>
+            <table class="has-checkbox-first">
                 <thead>
                     <tr>
                         <th style="width:50px">Got</th>
