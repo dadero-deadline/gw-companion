@@ -71,6 +71,38 @@ HERO_IMAGE_OVERRIDES = {
     'M.O.X.': 'M.O.X.jpg',
     'Zei_Ri': 'Initiate_Zei_Ri.jpg',
 }
+# Cache for armor images (female/male previews)
+_ARMOR_IMG_CACHE = {}
+def get_wiki_armor_images(slug):
+    if slug in _ARMOR_IMG_CACHE:
+        return _ARMOR_IMG_CACHE[slug]
+    url = f'https://wiki.guildwars.com/wiki/{slug}'
+    f_url = None
+    m_url = None
+    try:
+        with urllib.request.urlopen(url, timeout=7) as resp:
+            html = resp.read().decode('utf-8', 'ignore')
+        # Collect file links on the page
+        files = re.findall(r'href=\"/wiki/File:([^\"\s]+\.(?:jpg|png|gif))\"', html, flags=re.I)
+        # Prefer filenames that explicitly indicate female/male
+        for fn in files:
+            lf = fn.lower()
+            if f_url is None and ('_f.' in lf or '-female' in lf):
+                f_url = f'https://wiki.guildwars.com/wiki/Special:FilePath/{fn}'
+            if m_url is None and ('_m.' in lf or '-male' in lf):
+                m_url = f'https://wiki.guildwars.com/wiki/Special:FilePath/{fn}'
+            if f_url and m_url:
+                break
+        # Fallback: first two images on the page
+        if (f_url is None or m_url is None) and files:
+            if f_url is None and len(files) >= 1:
+                f_url = f'https://wiki.guildwars.com/wiki/Special:FilePath/{files[0]}'
+            if m_url is None and len(files) >= 2:
+                m_url = f'https://wiki.guildwars.com/wiki/Special:FilePath/{files[1]}'
+    except Exception:
+        pass
+    _ARMOR_IMG_CACHE[slug] = {'f': f_url, 'm': m_url}
+    return _ARMOR_IMG_CACHE[slug]
 
 # Load both Excel files
 def load_quests(filename, area_id):
@@ -1555,7 +1587,15 @@ def generate_armor_html():
         h += f'''
                     <tr data-type="{campaign_lower}" data-area="armor" data-id="{armor_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{armor_id}" data-area="armor"></td>
-                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{campaign_icon} {name}</a></td>
+                        <td>
+    <div style=\"display:flex;align-items:center;gap:8px;\">
+        <div style=\"display:flex;gap:4px;flex:0 0 auto;\">
+            <img src=\"{get_wiki_armor_images(wiki).get('f') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:40px;height:40px;border-radius:6px;background:#0d1117;border:1px solid #30363d;object-fit:cover;\" onerror=\"this.style.display='none'\">
+            <img src=\"{get_wiki_armor_images(wiki).get('m') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:40px;height:40px;border-radius:6px;background:#0d1117;border:1px solid #30363d;object-fit:cover;\" onerror=\"this.style.display='none'\">
+        </div>
+        <a href=\"{wiki_url}\" target=\"_blank\" class=\"quest-link\">{campaign_icon} {name}</a>
+    </div>
+</td>
                         <td style="color:#8b949e;">{location}</td>
                         <td style="font-size:0.85em;color:#ffa657;">{requirement}</td>
                         <td style="text-align:center;">{hom_badge}</td>
@@ -3497,6 +3537,8 @@ if BUILD_ONLY:
     raise SystemExit(0)
 
 HTTPServer(('localhost', PORT), Handler).serve_forever()
+
+
 
 
 
