@@ -2383,6 +2383,18 @@ html += '''
                              ' <button class="char-btn" onclick="toolboxPing()" title="Connect to Toolbox">Toolbox</button>'+
                              ' <button class="char-btn" onclick="toolboxPromptPort()" title="Set Toolbox port">⚙</button>';
             host.appendChild(span);
+            try {
+                const conn = span;
+                const bTest = document.createElement('button');
+                bTest.className = 'char-btn'; bTest.textContent = 'Test'; bTest.title = 'Send test chat';
+                bTest.onclick = toolboxTest; conn.appendChild(bTest);
+                const bSync = document.createElement('button');
+                bSync.className = 'char-btn'; bSync.textContent = 'Sync'; bSync.title = 'Sync progress';
+                bSync.onclick = toolboxSyncProgress; conn.appendChild(bSync);
+                const bCfg = document.createElement('button');
+                bCfg.className = 'char-btn'; bCfg.textContent = '⚙'; bCfg.title = 'Set Toolbox port';
+                bCfg.onclick = toolboxPromptPort; conn.appendChild(bCfg);
+            } catch (e) {}
         }
         function initToolboxBridge() {
             ensureToolboxUI();
