@@ -1,4 +1,4 @@
-from http.server import HTTPServer, SimpleHTTPRequestHandler
+﻿from http.server import HTTPServer, SimpleHTTPRequestHandler
 import openpyxl
 import sys
 import os
@@ -371,6 +371,30 @@ html = '''<!DOCTYPE html>
             border-bottom: 2px solid #30363d;
         }
         td { padding: 10px 8px; border-bottom: 1px solid #21262d; }
+        /* Tighter, perfectly aligned checkbox columns for Missions */
+        .missions-table { table-layout: fixed; }
+        .missions-table th:nth-child(1),
+        .missions-table th:nth-child(2),
+        .missions-table th:nth-child(3),
+        .missions-table th:nth-child(4) { text-align: center; width: 50px !important; }
+        .missions-table td:nth-child(1),
+        .missions-table td:nth-child(2),
+        .missions-table td:nth-child(3),
+        .missions-table td:nth-child(4) { text-align: center; width: 50px !important; padding: 8px 0 !important; vertical-align: middle; }
+        /* Force exact centering of inputs in the first 4 columns */
+        .missions-table td:nth-child(1),
+        .missions-table td:nth-child(2),
+        .missions-table td:nth-child(3),
+        .missions-table td:nth-child(4) { display: flex; justify-content: center; align-items: center; }
+        .missions-table td:nth-child(1) > *,
+        .missions-table td:nth-child(2) > *,
+        .missions-table td:nth-child(3) > *,
+        .missions-table td:nth-child(4) > * { margin: 0 !important; }
+        /* Normalize checkbox size across all four columns in Missions and center them exactly */
+        .missions-table .quest-checkbox,
+        .missions-table .bonus-checkbox,
+        .missions-table .hm-checkbox,
+        .missions-table .hm-bonus-checkbox { width: 18px !important; height: 18px !important; display: block; margin: 0 auto; }
         tr:hover { background: rgba(255,255,255,0.03); }
         tr.completed { opacity: 0.5; }
         tr.completed td { text-decoration: line-through; }
@@ -715,7 +739,7 @@ def generate_area_html(quests, area_id, area_name, is_active=False):
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1229,6 +1253,7 @@ def generate_missions_html():
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
                         <th style="width:50px">HM</th>
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -1240,14 +1265,29 @@ def generate_missions_html():
             mission_id = f"mission_{name.lower().replace(' ', '_').replace(chr(39), '')}"
             bonus_id = f"bonus_{name.lower().replace(' ', '_').replace(chr(39), '')}"
             hm_id = f"hm_{name.lower().replace(' ', '_').replace(chr(39), '')}"
+            hm_bonus_id = f"hm_bonus_{name.lower().replace(' ', '_').replace(chr(39), '')}"
             region_icon = MISSION_REGIONS.get(region, "🗺️")
             wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
-            
+
+            # Availability rules
+            has_bonus = True
+            has_hm = True
+            has_hm_bonus = True
+            if campaign_name == 'Prophecies' and region == 'Pre-Searing' and name == 'Ascalon Academy':
+                has_bonus = False
+                has_hm = False
+                has_hm_bonus = False
+
+            bonus_cell = f'<input type="checkbox" class="quest-checkbox" data-id="{bonus_id}" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;">' if has_bonus else ''
+            hm_cell = f'<input type="checkbox" class="quest-checkbox" data-id="{hm_id}" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;">' if has_hm else ''
+            hmb_cell = f'<input type="checkbox" class="hm-bonus-checkbox" data-id="{hm_bonus_id}" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;">' if (has_hm and has_bonus and has_hm_bonus) else ''
+
             h += f'''
                     <tr data-type="{campaign_lower}" data-area="missions" data-id="{mission_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{mission_id}" data-area="missions" title="Normal Mode"></td>
-                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{bonus_id}" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
-                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{hm_id}" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell">{bonus_cell}</td>
+                        <td class="checkbox-cell">{hm_cell}</td>
+                        <td class="checkbox-cell">{hmb_cell}</td>
                         <td><a href="{wiki_url}" target="_blank" class="quest-link">{name}</a></td>
                         <td style="color:#8b949e;">{region_icon} {region}</td>
                     </tr>'''
@@ -2840,9 +2880,15 @@ html += '''
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
             const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)`);
-            const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession) .quest-checkbox:checked`);
-            const total = allRows.length;
-            const completed = allChecked.length;
+            let total = allRows.length;
+            let completed;
+            if (areaId === 'missions') {
+                // Count only main mission completion (exclude bonus/hm checkboxes)
+                completed = document.querySelectorAll(`tr[data-area="missions"] .quest-checkbox[data-id^="mission_"]:checked`).length;
+            } else {
+                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession) .quest-checkbox:checked`);
+                completed = allChecked.length;
+            }
             const percent = total > 0 ? (completed / total * 100) : 0;
             
             // Update dropdown with counts
@@ -3032,6 +3078,19 @@ html += '''
             cb.addEventListener('change', function() {
                 const row = this.closest('tr');
                 if (row) row.classList.toggle('completed', this.checked);
+
+                // Missions: keep HM+Bonus in sync when HM/Bonus are toggled
+                const id = this.dataset.id || '';
+                if (this.dataset.area === 'missions' && (id.startsWith('hm_') || id.startsWith('bonus_'))) {
+                    const slug = id.startsWith('hm_') ? id.substring(3) : id.substring(6);
+                    const hm = document.querySelector(`.quest-checkbox[data-id="hm_${slug}"]`);
+                    const bonus = document.querySelector(`.quest-checkbox[data-id="bonus_${slug}"]`);
+                    const hmb = document.querySelector(`.hm-bonus-checkbox[data-id="hm_bonus_${slug}"]`);
+                    if (hmb) {
+                        hmb.checked = !!(hm && hm.checked && bonus && bonus.checked);
+                    }
+                }
+
                 saveProgress();
                 updateProgress(this.dataset.area);
                 if (this.dataset.area === 'elites') updateElitesCampaignProgress();
@@ -3061,6 +3120,20 @@ html += '''
         document.querySelectorAll('.armor-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
                 saveProgress();
+            });
+        });
+
+        // Missions: HM+Bonus handler (auto-toggle HM and Bonus)
+        document.querySelectorAll('.hm-bonus-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const id = this.dataset.id || '';
+                const slug = id.replace(/^hm_bonus_/, '');
+                const hm = document.querySelector(`.quest-checkbox[data-id="hm_${slug}"]`);
+                const bonus = document.querySelector(`.quest-checkbox[data-id="bonus_${slug}"]`);
+                if (hm) hm.checked = this.checked;
+                if (bonus) bonus.checked = this.checked;
+                saveProgress();
+                updateProgress('missions');
             });
         });
         
@@ -3426,3 +3499,5 @@ if BUILD_ONLY:
     raise SystemExit(0)
 
 HTTPServer(('localhost', PORT), Handler).serve_forever()
+
+

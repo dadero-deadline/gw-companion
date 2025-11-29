@@ -242,6 +242,30 @@
             border-bottom: 2px solid #30363d;
         }
         td { padding: 10px 8px; border-bottom: 1px solid #21262d; }
+        /* Tighter, perfectly aligned checkbox columns for Missions */
+        .missions-table { table-layout: fixed; }
+        .missions-table th:nth-child(1),
+        .missions-table th:nth-child(2),
+        .missions-table th:nth-child(3),
+        .missions-table th:nth-child(4) { text-align: center; width: 50px !important; }
+        .missions-table td:nth-child(1),
+        .missions-table td:nth-child(2),
+        .missions-table td:nth-child(3),
+        .missions-table td:nth-child(4) { text-align: center; width: 50px !important; padding: 8px 0 !important; vertical-align: middle; }
+        /* Force exact centering of inputs in the first 4 columns */
+        .missions-table td:nth-child(1),
+        .missions-table td:nth-child(2),
+        .missions-table td:nth-child(3),
+        .missions-table td:nth-child(4) { display: flex; justify-content: center; align-items: center; }
+        .missions-table td:nth-child(1) > *,
+        .missions-table td:nth-child(2) > *,
+        .missions-table td:nth-child(3) > *,
+        .missions-table td:nth-child(4) > * { margin: 0 !important; }
+        /* Normalize checkbox size across all four columns in Missions and center them exactly */
+        .missions-table .quest-checkbox,
+        .missions-table .bonus-checkbox,
+        .missions-table .hm-checkbox,
+        .missions-table .hm-bonus-checkbox { width: 18px !important; height: 18px !important; display: block; margin: 0 auto; }
         tr:hover { background: rgba(255,255,255,0.03); }
         tr.completed { opacity: 0.5; }
         tr.completed td { text-decoration: line-through; }
@@ -475,7 +499,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -1466,7 +1490,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -2399,7 +2423,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -2774,7 +2798,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -3244,7 +3268,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -3448,7 +3472,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -3765,7 +3789,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -4207,7 +4231,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -4314,7 +4338,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -5934,7 +5958,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -6867,7 +6891,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -7352,7 +7376,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -7867,7 +7891,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -9416,7 +9440,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -10293,7 +10317,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -11114,7 +11138,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -11544,7 +11568,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -12143,7 +12167,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -12796,7 +12820,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -13227,7 +13251,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -13853,7 +13877,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -14044,7 +14068,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -14696,7 +14720,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -14900,7 +14924,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -15831,7 +15855,7 @@
             </div>
             
             <div class="container">
-            <table>
+            <table class="missions-table">
                 <thead>
                     <tr>
                         <th style="width:50px">Done</th>
@@ -17291,6 +17315,7 @@
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
                         <th style="width:50px">HM</th>
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -17298,8 +17323,9 @@
                 <tbody>
                     <tr data-type="prophecies" data-area="missions" data-id="mission_ascalon_academy">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_ascalon_academy" data-area="missions" title="Normal Mode"></td>
-                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_ascalon_academy" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
-                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_ascalon_academy" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"></td>
+                        <td class="checkbox-cell"></td>
+                        <td class="checkbox-cell"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Ascalon_Academy" target="_blank" class="quest-link">Ascalon Academy</a></td>
                         <td style="color:#8b949e;">🌅 Pre-Searing</td>
                     </tr>
@@ -17307,6 +17333,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_the_great_northern_wall" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_the_great_northern_wall" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_the_great_northern_wall" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_the_great_northern_wall" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Great_Northern_Wall" target="_blank" class="quest-link">The Great Northern Wall</a></td>
                         <td style="color:#8b949e;">🏚️ Ascalon</td>
                     </tr>
@@ -17314,6 +17341,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_fort_ranik" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_fort_ranik" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_fort_ranik" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_fort_ranik" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Fort_Ranik" target="_blank" class="quest-link">Fort Ranik</a></td>
                         <td style="color:#8b949e;">🏚️ Ascalon</td>
                     </tr>
@@ -17321,6 +17349,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_ruins_of_surmia" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_ruins_of_surmia" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_ruins_of_surmia" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_ruins_of_surmia" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Ruins_of_Surmia" target="_blank" class="quest-link">Ruins of Surmia</a></td>
                         <td style="color:#8b949e;">🏚️ Ascalon</td>
                     </tr>
@@ -17328,6 +17357,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_nolani_academy" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_nolani_academy" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_nolani_academy" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_nolani_academy" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Nolani_Academy" target="_blank" class="quest-link">Nolani Academy</a></td>
                         <td style="color:#8b949e;">🏚️ Ascalon</td>
                     </tr>
@@ -17335,6 +17365,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_borlis_pass" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_borlis_pass" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_borlis_pass" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_borlis_pass" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Borlis_Pass" target="_blank" class="quest-link">Borlis Pass</a></td>
                         <td style="color:#8b949e;">❄️ Northern Shiverpeaks</td>
                     </tr>
@@ -17342,6 +17373,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_the_frost_gate" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_the_frost_gate" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_the_frost_gate" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_the_frost_gate" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Frost_Gate" target="_blank" class="quest-link">The Frost Gate</a></td>
                         <td style="color:#8b949e;">❄️ Northern Shiverpeaks</td>
                     </tr>
@@ -17349,6 +17381,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_gates_of_kryta" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_gates_of_kryta" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_gates_of_kryta" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_gates_of_kryta" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Gates_of_Kryta" target="_blank" class="quest-link">Gates of Kryta</a></td>
                         <td style="color:#8b949e;">🌳 Kryta</td>
                     </tr>
@@ -17356,6 +17389,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_dalessio_seaboard" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_dalessio_seaboard" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_dalessio_seaboard" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_dalessio_seaboard" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/D%27Alessio_Seaboard" target="_blank" class="quest-link">D'Alessio Seaboard</a></td>
                         <td style="color:#8b949e;">🌳 Kryta</td>
                     </tr>
@@ -17363,6 +17397,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_divinity_coast" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_divinity_coast" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_divinity_coast" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_divinity_coast" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Divinity_Coast" target="_blank" class="quest-link">Divinity Coast</a></td>
                         <td style="color:#8b949e;">🌳 Kryta</td>
                     </tr>
@@ -17370,6 +17405,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_the_wilds" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_the_wilds" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_the_wilds" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_the_wilds" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Wilds" target="_blank" class="quest-link">The Wilds</a></td>
                         <td style="color:#8b949e;">🌿 Maguuma Jungle</td>
                     </tr>
@@ -17377,6 +17413,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_bloodstone_fen" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_bloodstone_fen" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_bloodstone_fen" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_bloodstone_fen" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Bloodstone_Fen" target="_blank" class="quest-link">Bloodstone Fen</a></td>
                         <td style="color:#8b949e;">🌿 Maguuma Jungle</td>
                     </tr>
@@ -17384,6 +17421,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_aurora_glade" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_aurora_glade" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_aurora_glade" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_aurora_glade" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Aurora_Glade" target="_blank" class="quest-link">Aurora Glade</a></td>
                         <td style="color:#8b949e;">🌿 Maguuma Jungle</td>
                     </tr>
@@ -17391,6 +17429,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_riverside_province" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_riverside_province" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_riverside_province" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_riverside_province" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Riverside_Province" target="_blank" class="quest-link">Riverside Province</a></td>
                         <td style="color:#8b949e;">🌳 Kryta</td>
                     </tr>
@@ -17398,6 +17437,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_sanctum_cay" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_sanctum_cay" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_sanctum_cay" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_sanctum_cay" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Sanctum_Cay" target="_blank" class="quest-link">Sanctum Cay</a></td>
                         <td style="color:#8b949e;">🌳 Kryta</td>
                     </tr>
@@ -17405,6 +17445,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_dunes_of_despair" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_dunes_of_despair" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_dunes_of_despair" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_dunes_of_despair" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Dunes_of_Despair" target="_blank" class="quest-link">Dunes of Despair</a></td>
                         <td style="color:#8b949e;">🏜️ Crystal Desert</td>
                     </tr>
@@ -17412,6 +17453,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_thirsty_river" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_thirsty_river" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_thirsty_river" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_thirsty_river" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Thirsty_River" target="_blank" class="quest-link">Thirsty River</a></td>
                         <td style="color:#8b949e;">🏜️ Crystal Desert</td>
                     </tr>
@@ -17419,6 +17461,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_elona_reach" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_elona_reach" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_elona_reach" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_elona_reach" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Elona_Reach" target="_blank" class="quest-link">Elona Reach</a></td>
                         <td style="color:#8b949e;">🏜️ Crystal Desert</td>
                     </tr>
@@ -17426,6 +17469,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_augury_rock" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_augury_rock" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_augury_rock" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_augury_rock" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Augury_Rock" target="_blank" class="quest-link">Augury Rock</a></td>
                         <td style="color:#8b949e;">🏜️ Crystal Desert</td>
                     </tr>
@@ -17433,6 +17477,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_the_dragons_lair" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_the_dragons_lair" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_the_dragons_lair" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_the_dragons_lair" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Dragon%27s_Lair" target="_blank" class="quest-link">The Dragon's Lair</a></td>
                         <td style="color:#8b949e;">🏜️ Crystal Desert</td>
                     </tr>
@@ -17440,6 +17485,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_ice_caves_of_sorrow" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_ice_caves_of_sorrow" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_ice_caves_of_sorrow" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_ice_caves_of_sorrow" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Ice_Caves_of_Sorrow" target="_blank" class="quest-link">Ice Caves of Sorrow</a></td>
                         <td style="color:#8b949e;">🏔️ Southern Shiverpeaks</td>
                     </tr>
@@ -17447,6 +17493,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_iron_mines_of_moladune" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_iron_mines_of_moladune" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_iron_mines_of_moladune" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_iron_mines_of_moladune" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Iron_Mines_of_Moladune" target="_blank" class="quest-link">Iron Mines of Moladune</a></td>
                         <td style="color:#8b949e;">🏔️ Southern Shiverpeaks</td>
                     </tr>
@@ -17454,6 +17501,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_thunderhead_keep" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_thunderhead_keep" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_thunderhead_keep" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_thunderhead_keep" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Thunderhead_Keep" target="_blank" class="quest-link">Thunderhead Keep</a></td>
                         <td style="color:#8b949e;">🏔️ Southern Shiverpeaks</td>
                     </tr>
@@ -17461,6 +17509,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_ring_of_fire" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_ring_of_fire" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_ring_of_fire" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_ring_of_fire" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Ring_of_Fire" target="_blank" class="quest-link">Ring of Fire</a></td>
                         <td style="color:#8b949e;">🌋 Ring of Fire</td>
                     </tr>
@@ -17468,6 +17517,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_abaddons_mouth" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_abaddons_mouth" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_abaddons_mouth" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_abaddons_mouth" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Abaddon%27s_Mouth" target="_blank" class="quest-link">Abaddon's Mouth</a></td>
                         <td style="color:#8b949e;">🌋 Ring of Fire</td>
                     </tr>
@@ -17475,6 +17525,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_hells_precipice" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_hells_precipice" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_hells_precipice" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_hells_precipice" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Hell%27s_Precipice" target="_blank" class="quest-link">Hell's Precipice</a></td>
                         <td style="color:#8b949e;">🌋 Ring of Fire</td>
                     </tr>
@@ -17487,6 +17538,7 @@
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
                         <th style="width:50px">HM</th>
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -17496,6 +17548,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_minister_chos_estate" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_minister_chos_estate" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_minister_chos_estate" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_minister_chos_estate" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Minister_Cho%27s_Estate" target="_blank" class="quest-link">Minister Cho's Estate</a></td>
                         <td style="color:#8b949e;">🏝️ Shing Jea Island</td>
                     </tr>
@@ -17503,6 +17556,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_zen_daijun" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_zen_daijun" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_zen_daijun" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_zen_daijun" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Zen_Daijun" target="_blank" class="quest-link">Zen Daijun</a></td>
                         <td style="color:#8b949e;">🏝️ Shing Jea Island</td>
                     </tr>
@@ -17510,6 +17564,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_vizunah_square" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_vizunah_square" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_vizunah_square" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_vizunah_square" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Vizunah_Square" target="_blank" class="quest-link">Vizunah Square</a></td>
                         <td style="color:#8b949e;">🏙️ Kaineng City</td>
                     </tr>
@@ -17517,6 +17572,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_nahpui_quarter" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_nahpui_quarter" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_nahpui_quarter" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_nahpui_quarter" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Nahpui_Quarter" target="_blank" class="quest-link">Nahpui Quarter</a></td>
                         <td style="color:#8b949e;">🏙️ Kaineng City</td>
                     </tr>
@@ -17524,6 +17580,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_tahnnakai_temple" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_tahnnakai_temple" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_tahnnakai_temple" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_tahnnakai_temple" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Tahnnakai_Temple" target="_blank" class="quest-link">Tahnnakai Temple</a></td>
                         <td style="color:#8b949e;">🏙️ Kaineng City</td>
                     </tr>
@@ -17531,6 +17588,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_arborstone" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_arborstone" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_arborstone" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_arborstone" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Arborstone" target="_blank" class="quest-link">Arborstone</a></td>
                         <td style="color:#8b949e;">🌲 Echovald Forest</td>
                     </tr>
@@ -17538,6 +17596,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_boreas_seabed" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_boreas_seabed" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_boreas_seabed" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_boreas_seabed" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Boreas_Seabed" target="_blank" class="quest-link">Boreas Seabed</a></td>
                         <td style="color:#8b949e;">💎 The Jade Sea</td>
                     </tr>
@@ -17545,6 +17604,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_the_eternal_grove" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_the_eternal_grove" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_the_eternal_grove" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_the_eternal_grove" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Eternal_Grove" target="_blank" class="quest-link">The Eternal Grove</a></td>
                         <td style="color:#8b949e;">🌲 Echovald Forest</td>
                     </tr>
@@ -17552,6 +17612,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_gyala_hatchery" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_gyala_hatchery" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_gyala_hatchery" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_gyala_hatchery" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Gyala_Hatchery" target="_blank" class="quest-link">Gyala Hatchery</a></td>
                         <td style="color:#8b949e;">💎 The Jade Sea</td>
                     </tr>
@@ -17559,6 +17620,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_unwaking_waters" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_unwaking_waters" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_unwaking_waters" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_unwaking_waters" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Unwaking_Waters" target="_blank" class="quest-link">Unwaking Waters</a></td>
                         <td style="color:#8b949e;">💎 The Jade Sea</td>
                     </tr>
@@ -17566,6 +17628,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_raisu_palace" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_raisu_palace" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_raisu_palace" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_raisu_palace" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Raisu_Palace" target="_blank" class="quest-link">Raisu Palace</a></td>
                         <td style="color:#8b949e;">🏙️ Kaineng City</td>
                     </tr>
@@ -17573,6 +17636,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_imperial_sanctum" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_imperial_sanctum" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_imperial_sanctum" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_imperial_sanctum" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Imperial_Sanctum" target="_blank" class="quest-link">Imperial Sanctum</a></td>
                         <td style="color:#8b949e;">🏙️ Kaineng City</td>
                     </tr>
@@ -17585,6 +17649,7 @@
                         <th style="width:50px">Done</th>
                         <th style="width:50px">Bonus</th>
                         <th style="width:50px">HM</th>
+\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ <th\ style="width:50px"><span\ title="Hard\ Mode\ \+\ Bonus/Masters">HM\+B</span></th>
                         <th>Mission</th>
                         <th>Region</th>
                     </tr>
@@ -17594,6 +17659,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_chahbek_village" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_chahbek_village" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_chahbek_village" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_chahbek_village" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Chahbek_Village" target="_blank" class="quest-link">Chahbek Village</a></td>
                         <td style="color:#8b949e;">☀️ Istan</td>
                     </tr>
@@ -17601,6 +17667,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_jokanur_diggings" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_jokanur_diggings" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_jokanur_diggings" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_jokanur_diggings" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Jokanur_Diggings" target="_blank" class="quest-link">Jokanur Diggings</a></td>
                         <td style="color:#8b949e;">☀️ Istan</td>
                     </tr>
@@ -17608,6 +17675,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_blacktide_den" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_blacktide_den" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_blacktide_den" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_blacktide_den" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Blacktide_Den" target="_blank" class="quest-link">Blacktide Den</a></td>
                         <td style="color:#8b949e;">☀️ Istan</td>
                     </tr>
@@ -17615,6 +17683,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_consulate_docks" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_consulate_docks" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_consulate_docks" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_consulate_docks" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Consulate_Docks" target="_blank" class="quest-link">Consulate Docks</a></td>
                         <td style="color:#8b949e;">☀️ Istan</td>
                     </tr>
@@ -17622,6 +17691,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_venta_cemetery" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_venta_cemetery" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_venta_cemetery" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_venta_cemetery" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Venta_Cemetery" target="_blank" class="quest-link">Venta Cemetery</a></td>
                         <td style="color:#8b949e;">⚔️ Kourna</td>
                     </tr>
@@ -17629,6 +17699,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_kodonur_crossroads" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_kodonur_crossroads" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_kodonur_crossroads" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_kodonur_crossroads" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Kodonur_Crossroads" target="_blank" class="quest-link">Kodonur Crossroads</a></td>
                         <td style="color:#8b949e;">⚔️ Kourna</td>
                     </tr>
@@ -17636,6 +17707,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_pogahn_passage" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_pogahn_passage" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_pogahn_passage" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_pogahn_passage" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Pogahn_Passage" target="_blank" class="quest-link">Pogahn Passage</a></td>
                         <td style="color:#8b949e;">⚔️ Kourna</td>
                     </tr>
@@ -17643,6 +17715,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_rilohn_refuge" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_rilohn_refuge" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_rilohn_refuge" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_rilohn_refuge" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Rilohn_Refuge" target="_blank" class="quest-link">Rilohn Refuge</a></td>
                         <td style="color:#8b949e;">⚔️ Kourna</td>
                     </tr>
@@ -17650,6 +17723,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_moddok_crevice" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_moddok_crevice" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_moddok_crevice" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_moddok_crevice" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Moddok_Crevice" target="_blank" class="quest-link">Moddok Crevice</a></td>
                         <td style="color:#8b949e;">⚔️ Kourna</td>
                     </tr>
@@ -17657,6 +17731,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_tihark_orchard" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_tihark_orchard" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_tihark_orchard" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_tihark_orchard" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Tihark_Orchard" target="_blank" class="quest-link">Tihark Orchard</a></td>
                         <td style="color:#8b949e;">💰 Vabbi</td>
                     </tr>
@@ -17664,6 +17739,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_dasha_vestibule" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_dasha_vestibule" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_dasha_vestibule" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_dasha_vestibule" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Dasha_Vestibule" target="_blank" class="quest-link">Dasha Vestibule</a></td>
                         <td style="color:#8b949e;">💰 Vabbi</td>
                     </tr>
@@ -17671,6 +17747,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_dzagonur_bastion" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_dzagonur_bastion" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_dzagonur_bastion" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_dzagonur_bastion" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Dzagonur_Bastion" target="_blank" class="quest-link">Dzagonur Bastion</a></td>
                         <td style="color:#8b949e;">💰 Vabbi</td>
                     </tr>
@@ -17678,6 +17755,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_grand_court_of_sebelkeh" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_grand_court_of_sebelkeh" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_grand_court_of_sebelkeh" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_grand_court_of_sebelkeh" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Grand_Court_of_Sebelkeh" target="_blank" class="quest-link">Grand Court of Sebelkeh</a></td>
                         <td style="color:#8b949e;">💰 Vabbi</td>
                     </tr>
@@ -17685,6 +17763,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_jennurs_horde" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_jennurs_horde" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_jennurs_horde" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_jennurs_horde" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Jennur%27s_Horde" target="_blank" class="quest-link">Jennur's Horde</a></td>
                         <td style="color:#8b949e;">💀 The Desolation</td>
                     </tr>
@@ -17692,6 +17771,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_nundu_bay" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_nundu_bay" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_nundu_bay" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_nundu_bay" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Nundu_Bay" target="_blank" class="quest-link">Nundu Bay</a></td>
                         <td style="color:#8b949e;">💀 The Desolation</td>
                     </tr>
@@ -17699,6 +17779,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_gate_of_desolation" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_gate_of_desolation" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_gate_of_desolation" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_gate_of_desolation" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Gate_of_Desolation" target="_blank" class="quest-link">Gate of Desolation</a></td>
                         <td style="color:#8b949e;">💀 The Desolation</td>
                     </tr>
@@ -17706,6 +17787,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_ruins_of_morah" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_ruins_of_morah" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_ruins_of_morah" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_ruins_of_morah" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Ruins_of_Morah" target="_blank" class="quest-link">Ruins of Morah</a></td>
                         <td style="color:#8b949e;">💀 The Desolation</td>
                     </tr>
@@ -17713,6 +17795,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_gate_of_pain" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_gate_of_pain" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_gate_of_pain" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_gate_of_pain" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Gate_of_Pain" target="_blank" class="quest-link">Gate of Pain</a></td>
                         <td style="color:#8b949e;">😈 Realm of Torment</td>
                     </tr>
@@ -17720,6 +17803,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_gate_of_madness" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_gate_of_madness" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_gate_of_madness" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_gate_of_madness" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Gate_of_Madness" target="_blank" class="quest-link">Gate of Madness</a></td>
                         <td style="color:#8b949e;">😈 Realm of Torment</td>
                     </tr>
@@ -17727,6 +17811,7 @@
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="mission_abaddons_gate" data-area="missions" title="Normal Mode"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="bonus_abaddons_gate" data-area="missions" title="Bonus/Masters" style="accent-color:#ffa657;"></td>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hm_abaddons_gate" data-area="missions" title="Hard Mode" style="accent-color:#ff6b6b;"></td>
+                        <td class="checkbox-cell"><input type="checkbox" class="hm-bonus-checkbox" data-id="hm_bonus_abaddons_gate" data-area="missions" title="Hard Mode + Bonus/Masters" style="accent-color:#d97706;"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Abaddon%27s_Gate" target="_blank" class="quest-link">Abaddon's Gate</a></td>
                         <td style="color:#8b949e;">😈 Realm of Torment</td>
                     </tr>
@@ -30299,9 +30384,15 @@
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
             const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)`);
-            const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession) .quest-checkbox:checked`);
-            const total = allRows.length;
-            const completed = allChecked.length;
+            let total = allRows.length;
+            let completed;
+            if (areaId === 'missions') {
+                // Count only main mission completion (exclude bonus/hm checkboxes)
+                completed = document.querySelectorAll(`tr[data-area="missions"] .quest-checkbox[data-id^="mission_"]:checked`).length;
+            } else {
+                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession) .quest-checkbox:checked`);
+                completed = allChecked.length;
+            }
             const percent = total > 0 ? (completed / total * 100) : 0;
             
             // Update dropdown with counts
@@ -30491,6 +30582,19 @@
             cb.addEventListener('change', function() {
                 const row = this.closest('tr');
                 if (row) row.classList.toggle('completed', this.checked);
+
+                // Missions: keep HM+Bonus in sync when HM/Bonus are toggled
+                const id = this.dataset.id || '';
+                if (this.dataset.area === 'missions' && (id.startsWith('hm_') || id.startsWith('bonus_'))) {
+                    const slug = id.startsWith('hm_') ? id.substring(3) : id.substring(6);
+                    const hm = document.querySelector(`.quest-checkbox[data-id="hm_${slug}"]`);
+                    const bonus = document.querySelector(`.quest-checkbox[data-id="bonus_${slug}"]`);
+                    const hmb = document.querySelector(`.hm-bonus-checkbox[data-id="hm_bonus_${slug}"]`);
+                    if (hmb) {
+                        hmb.checked = !!(hm && hm.checked && bonus && bonus.checked);
+                    }
+                }
+
                 saveProgress();
                 updateProgress(this.dataset.area);
                 if (this.dataset.area === 'elites') updateElitesCampaignProgress();
@@ -30520,6 +30624,20 @@
         document.querySelectorAll('.armor-checkbox').forEach(cb => {
             cb.addEventListener('change', function() {
                 saveProgress();
+            });
+        });
+
+        // Missions: HM+Bonus handler (auto-toggle HM and Bonus)
+        document.querySelectorAll('.hm-bonus-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
+                const id = this.dataset.id || '';
+                const slug = id.replace(/^hm_bonus_/, '');
+                const hm = document.querySelector(`.quest-checkbox[data-id="hm_${slug}"]`);
+                const bonus = document.querySelector(`.quest-checkbox[data-id="bonus_${slug}"]`);
+                if (hm) hm.checked = this.checked;
+                if (bonus) bonus.checked = this.checked;
+                saveProgress();
+                updateProgress('missions');
             });
         });
         
