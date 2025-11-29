@@ -24,6 +24,15 @@ python gw_tracker.py
 
 Open http://localhost:8000
 
+Need a different port (for example to reuse http://127.0.0.1:57033/)? Pass it as the first argument or set the `GW_COMPANION_PORT` env var before running:
+
+```bash
+python gw_tracker.py 57033
+# or
+$env:GW_COMPANION_PORT=57033  # PowerShell
+python gw_tracker.py
+```
+
 Windows: Double-click `GW_Quest_Tracker.bat`
 
 ## Structure

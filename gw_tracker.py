@@ -1,10 +1,11 @@
 from http.server import HTTPServer, SimpleHTTPRequestHandler
 import openpyxl
 import sys
+import os
 sys.path.insert(0, 'data')
 
 from elite_skills import ELITE_SKILLS
-from heroes import HEROES, HERO_PROFESSIONS
+from heroes import HEROES, HERO_PROFESSIONS, HERO_ARMOR
 from unique_items import UNIQUE_QUEST_ITEMS, ITEM_CATEGORIES, PRE_SEARING_REWARDS, GREEN_UNIQUES, HOM_WEAPON_SETS
 from elite_content import ELITE_MISSIONS, EOTN_DUNGEONS, DUNGEON_REGIONS, CAMPAIGN_ICONS
 from vanquishes import ALL_VANQUISHES, VANQUISH_REGIONS, PROPHECIES_VANQUISHES, FACTIONS_VANQUISHES, NIGHTFALL_VANQUISHES, EOTN_VANQUISHES
@@ -15,6 +16,61 @@ from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, ZAISHEN_VANQUISHES,
 from outposts import OUTPOSTS
 from collectibles import MINIATURES, MENAGERIE
 from non_elite_skills import NON_ELITE_SKILLS
+import urllib.request, re, urllib.parse
+
+# Simple helper to fetch OpenGraph image from GW wiki hero page
+_OG_IMG_CACHE = {}
+def get_wiki_og_image(slug):
+    if slug in _OG_IMG_CACHE:
+        return _OG_IMG_CACHE[slug]
+    url = f'https://wiki.guildwars.com/wiki/{slug}'
+    try:
+        with urllib.request.urlopen(url, timeout=5) as resp:
+            html = resp.read().decode('utf-8', 'ignore')
+        m = re.search(r'<meta property="og:image" content="([^"]+)"', html)
+        if m:
+            _OG_IMG_CACHE[slug] = m.group(1)
+            return _OG_IMG_CACHE[slug]
+    except Exception:
+        pass
+    _OG_IMG_CACHE[slug] = None
+    return None
+
+# Prefer the hero page's infobox image (typically a clean full-body render)
+_INFOBOX_IMG_CACHE = {}
+def get_wiki_infobox_image(slug):
+    if slug in _INFOBOX_IMG_CACHE:
+        return _INFOBOX_IMG_CACHE[slug]
+    url = f'https://wiki.guildwars.com/wiki/{slug}'
+    try:
+        with urllib.request.urlopen(url, timeout=5) as resp:
+            html = resp.read().decode('utf-8', 'ignore')
+        # Try to find a File: link that matches the slug first
+        # Example: href="/wiki/File:Gwen.jpg"
+        pat_slug = rf'href="/wiki/File:{re.escape(slug)}[^"\s]*\.(?:jpg|png|gif)"'
+        m = re.search(pat_slug, html, flags=re.IGNORECASE)
+        if not m:
+            # Fallback: first image File: reference on the page
+            m = re.search(r'href="/wiki/File:([^"\s]+\.(?:jpg|png|gif))"', html, flags=re.IGNORECASE)
+            if m:
+                file_name = m.group(1)
+                _INFOBOX_IMG_CACHE[slug] = f'https://wiki.guildwars.com/wiki/Special:FilePath/{file_name}'
+                return _INFOBOX_IMG_CACHE[slug]
+        else:
+            href = m.group(0)
+            file_name = href.split('/wiki/File:')[-1].split('"')[0]
+            _INFOBOX_IMG_CACHE[slug] = f'https://wiki.guildwars.com/wiki/Special:FilePath/{file_name}'
+            return _INFOBOX_IMG_CACHE[slug]
+    except Exception:
+        pass
+    _INFOBOX_IMG_CACHE[slug] = None
+    return None
+
+# Explicit overrides for tricky hero pages
+HERO_IMAGE_OVERRIDES = {
+    'M.O.X.': 'M.O.X.jpg',
+    'Zei_Ri': 'Initiate_Zei_Ri.jpg',
+}
 
 # Load both Excel files
 def load_quests(filename, area_id):
@@ -918,6 +974,7 @@ def generate_heroes_html():
                     <tr>
                         <th style="width:50px">Got</th>
                         <th>Hero</th>
+                        <th style="width:220px">Armor</th>
                         <th>Profession</th>
                         <th>Region</th>
                         <th>Unlock Quest</th>
@@ -943,13 +1000,58 @@ def generate_heroes_html():
         
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
         quest_url = f"https://wiki.guildwars.com/wiki/{quest.replace(' ', '_')}"
+        # Prefer explicit override -> infobox portrait -> direct file path -> OG image
+        override_file = HERO_IMAGE_OVERRIDES.get(wiki)
+        hero_img = None
+        if override_file:
+            hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{override_file}"
+        if not hero_img:
+            hero_img = get_wiki_infobox_image(wiki)
+        if not hero_img:
+            hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}.jpg"
+        if not hero_img:
+            hero_img = get_wiki_og_image(wiki)
+        
+        # Hero armor variants (non-exclusive toggles), based on campaign
+        variants = []
+        if campaign == "Nightfall":
+            variants = ["Sunspear", "Ancient", "Primeval"]
+        elif campaign == "Eye of the North":
+            variants = ["Brotherhood", "Deldrimor", "Mysterious"]
+        else:
+            variants = []
+        
+        if variants:
+            armor_items = []
+            for v in variants:
+                armor_id = f"{hero_id}_armor_{v.lower()}"
+                info = HERO_ARMOR.get(v, {})
+                loc = info.get("location", "")
+                cost = info.get("cost", "")
+                tip = f"{v} — {loc} ({cost})".strip()
+                armor_items.append(f'''<label title="{tip}" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                    <input type="checkbox" class="armor-checkbox" data-id="{armor_id}" data-hero="{hero_id}" data-variant="{v.lower()}" style="width:18px;height:18px;accent-color:#58a6ff;">
+                    <span>{v}</span>
+                </label>''')
+            armor_html = '<div class="hero-armor-wrap">' + ''.join(armor_items) + '</div>'
+        else:
+            armor_html = '<span style="color:#8b949e;">—</span>'
         
         h += f'''
                     <tr data-type="{campaign_lower}" data-area="heroes" data-id="{hero_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{hero_id}" data-area="heroes"></td>
-                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{icon} {name}</a></td>
+                        <td>
+                            <div style="display:flex;align-items:center;gap:8px;">
+                                <div style="width:120px;height:120px;border-radius:10px;overflow:hidden;background:#0d1117;border:1px solid #30363d;display:flex;align-items:center;justify-content:center;flex:0 0 auto;">
+                                    <img src="{hero_img}" alt="{name}" referrerpolicy="no-referrer" loading="lazy" style="width:100%;height:100%;object-fit:contain;display:block;background:#0d1117;" onerror="this.onerror=null; this.src='https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}.png'; this.onerror=function(){{this.src='https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}.gif'; this.onerror=function(){{this.style.display='none'; var f=this.parentNode.querySelector('.hero-fallback'); if(f) f.style.display='inline-flex';}}}}">
+                                    <span class="hero-fallback" style="display:none;width:100%;height:100%;align-items:center;justify-content:center;color:#c9d1d9;font-weight:600;">{name[0]}</span>
+                                </div>
+                                <a href="{wiki_url}" target="_blank" class="quest-link">{name}</a>
+                            </div>
+                        </td>
                         <td style="color:#ffa657;">{profession}</td>
                         <td>{region}</td>
+                        <td>{armor_html}</td>
                         <td><a href="{quest_url}" target="_blank" style="color:#8b949e;">{quest}</a></td>
                     </tr>'''
     
@@ -1496,14 +1598,23 @@ def generate_minis_html():
             rarity_lower = rarity.lower()
             rarity_color = RARITY_COLORS.get(rarity, "#fff")
             wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
-            
+            # Build a base file path and fall back across extensions; also avoid sending referrers.
+            # On the Guild Wars Wiki, Special:FilePath works reliably for images.
+            icon_base = f"https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}"
+
             h += f'''
                     <tr data-type="{rarity_lower}" data-area="minis" data-id="{mini_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{mini_id}" data-area="minis"></td>
-                        <td><a href="{wiki_url}" target="_blank" class="quest-link" style="color:{rarity_color};">🐾 {name}</a></td>
+                        <td>
+                            <div style="display:flex;align-items:center;gap:6px;">
+                                <img src="{icon_base}.png" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:32px;height:32px;border-radius:4px;" onerror="this.onerror=null; this.src='{icon_base}.jpg'; this.onerror=function(){{this.src='{icon_base}.gif'; this.onerror=function(){{this.style.display='none'}}}}">
+                                <a href="{wiki_url}" target="_blank" class="quest-link" style="color:{rarity_color};">{name}</a>
+                            </div>
+                        </td>
                         <td style="color:{rarity_color};font-weight:bold;">{rarity}</td>
                         <td style="color:#8b949e;font-size:0.9em;">{source}</td>
                     </tr>'''
+
         
         h += '''
                 </tbody>
@@ -2662,6 +2773,12 @@ html += '''
                 input.value = val;
                 updateTitleProgressBar(input);
             });
+            // Load hero armor toggles (non-exclusive)
+            document.querySelectorAll('.armor-checkbox').forEach(cb => {
+                if (saved[cb.dataset.id]) {
+                    cb.checked = true;
+                }
+            });
             updateAllProgress();
         }
         
@@ -2682,6 +2799,10 @@ html += '''
             // Save title progress
             document.querySelectorAll('.title-progress-input').forEach(input => {
                 progress[input.dataset.id + '_progress'] = parseInt(input.value) || 0;
+            });
+            // Save hero armor toggles
+            document.querySelectorAll('.armor-checkbox:checked').forEach(cb => {
+                progress[cb.dataset.id] = true;
             });
             localStorage.setItem(getProgressKey(), JSON.stringify(progress));
         }
@@ -2931,6 +3052,13 @@ html += '''
             cb.addEventListener('change', function() {
                 const row = this.closest('tr');
                 if (row) row.classList.toggle('bonus-done', this.checked);
+                saveProgress();
+            });
+        });
+        
+        // Hero armor toggles handler
+        document.querySelectorAll('.armor-checkbox').forEach(cb => {
+            cb.addEventListener('change', function() {
                 saveProgress();
             });
         });
@@ -3254,8 +3382,30 @@ html += '''
 with open('gw_tracker.html', 'w', encoding='utf-8') as f:
     f.write(html)
 
+with open('index.html', 'w', encoding='utf-8') as f:
+    f.write(html)
+
+DEFAULT_PORT = 8000
+
+def parse_port(value, label):
+    if value is None:
+        return None
+    try:
+        port = int(value)
+    except ValueError:
+        print(f"{label} '{value}' is not a valid port. Ignoring.", file=sys.stderr)
+        return None
+    if not (1 <= port <= 65535):
+        print(f"{label} '{value}' is outside the valid range (1-65535). Ignoring.", file=sys.stderr)
+        return None
+    return port
+
+cli_port = parse_port(sys.argv[1], 'CLI port') if len(sys.argv) > 1 else None
+env_port = parse_port(os.environ.get('GW_COMPANION_PORT'), 'GW_COMPANION_PORT')
+PORT = cli_port or env_port or DEFAULT_PORT
+
 print("Guild Wars Companion gestartet!")
-print("http://localhost:8000")
+print(f"http://localhost:{PORT}")
 
 class Handler(SimpleHTTPRequestHandler):
     def do_GET(self):
@@ -3263,4 +3413,10 @@ class Handler(SimpleHTTPRequestHandler):
             self.path = '/gw_tracker.html'
         return super().do_GET()
 
-HTTPServer(('localhost', 8000), Handler).serve_forever()
+# Build-only mode: exit after generating HTML (no server)
+BUILD_ONLY = any(a in ('build','--build','--build-only') for a in sys.argv[1:]) or os.environ.get('GW_COMPANION_BUILD_ONLY') == '1'
+if BUILD_ONLY:
+    print('Build complete (no server started).')
+    raise SystemExit(0)
+
+HTTPServer(('localhost', PORT), Handler).serve_forever()
