@@ -220,6 +220,11 @@ html = '''<!DOCTYPE html>
         .char-btn.delete { color: #f85149; }
         .char-label { color: #8b949e; font-size: 0.85em; }
         .prof-dropdown { padding: 4px 8px; border-radius: 6px; border: 1px solid #30363d; background: #21262d; color: #c9d1d9; font-size: 0.85em; min-width: 90px; }
+        /* Toolbox connector */
+        .tb-conn { display: inline-flex; align-items: center; gap: 6px; margin-left: 8px; }
+        .tb-dot { width: 10px; height: 10px; border-radius: 50%; border: 1px solid #30363d; background: #6e7681; display: inline-block; }
+        .tb-dot.ok { background: #2ea043; }
+        .tb-dot.err { background: #f85149; }
         
         /* Elite skill highlighting based on profession */
         tr.elite-capturable { background: rgba(63, 185, 80, 0.15) !important; }
@@ -2326,6 +2331,65 @@ html += '''
     <script>
         // ==================== CHARACTER MANAGEMENT ====================
         let currentCharacter = null;
+        // ==================== TOOLBOX BRIDGE (LOCAL) ====================
+        function getToolboxPort() {
+            const p = parseInt(localStorage.getItem('gw-toolbox-port') || '61337');
+            return isNaN(p) ? 61337 : p;
+        }
+        function setToolboxPort(p) {
+            const n = parseInt(p);
+            if (!isNaN(n) && n > 0) localStorage.setItem('gw-toolbox-port', String(n));
+        }
+        function toolboxBase() { return `http://127.0.0.1:${getToolboxPort()}`; }
+        function toolboxSetDot(ok) {
+            const dot = document.getElementById('tb-dot');
+            if (!dot) return;
+            dot.classList.toggle('ok', !!ok);
+            dot.classList.toggle('err', !ok);
+        }
+        async function toolboxPing() {
+            try {
+                const ctrl = new AbortController();
+                const t = setTimeout(() => ctrl.abort(), 1200);
+                const r = await fetch(toolboxBase() + '/ping', { cache: 'no-store', signal: ctrl.signal });
+                clearTimeout(t);
+                const j = await r.json().catch(() => ({}));
+                const ok = r.ok && j && (j.ok !== false);
+                toolboxSetDot(ok);
+                return ok;
+            } catch (e) {
+                toolboxSetDot(false);
+                return false;
+            }
+        }
+        function toolboxPromptPort() {
+            const cur = getToolboxPort();
+            const p = prompt('Toolbox local port', String(cur));
+            if (p != null && p.trim() !== '') { setToolboxPort(p.trim()); toolboxPing(); }
+        }
+        async function toolboxSendChat(msg) {
+            try {
+                const r = await fetch(toolboxBase() + '/chat', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ msg }) });
+                return await r.json();
+            } catch (e) { return { ok: false, error: String(e) }; }
+        }
+        function ensureToolboxUI() {
+            if (document.getElementById('tb-dot')) return;
+            const host = document.querySelector('.char-selector');
+            if (!host) return;
+            const span = document.createElement('span');
+            span.className = 'tb-conn';
+            span.innerHTML = '<span id="tb-dot" class="tb-dot" title="Toolbox connection"></span>'+
+                             ' <button class="char-btn" onclick="toolboxPing()" title="Connect to Toolbox">Toolbox</button>'+
+                             ' <button class="char-btn" onclick="toolboxPromptPort()" title="Set Toolbox port">⚙</button>';
+            host.appendChild(span);
+        }
+        function initToolboxBridge() {
+            ensureToolboxUI();
+            toolboxPing();
+            if (window.__tbTimer) clearInterval(window.__tbTimer);
+            window.__tbTimer = setInterval(toolboxPing, 5000);
+        }
         
         function getCharacters() {
             return JSON.parse(localStorage.getItem('gw-characters') || '["Default"]');
