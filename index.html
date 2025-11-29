@@ -30839,6 +30839,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             updateProgress('missions');
             updateProgress('dungeons');
             updateProgress('vanquish');
+            try { updateVanquisherTitlesFromVanquish && updateVanquisherTitlesFromVanquish(); } catch (e) {}
             updateProgress('armor');
             updateProgress('minis');
             updateProgress('daily');
@@ -30865,6 +30866,25 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             
             // Update profession progress grid
             updateProfessionProgress();
+        }
+
+        // Auto-calc Vanquisher titles progress from Vanquish tab
+        function updateVanquisherTitlesFromVanquish() {
+            const mapping = { prophecies: 'title_vanq_tyria', factions: 'title_vanq_cantha', nightfall: 'title_vanq_elona' };
+            Object.entries(mapping).forEach(([type, titleId]) => {
+                const total = document.querySelectorAll(`tr[data-area="vanquish"][data-type="${type}"] .quest-checkbox`).length;
+                const done = document.querySelectorAll(`tr[data-area="vanquish"][data-type="${type}"] .quest-checkbox:checked`).length;
+                const input = document.querySelector(`.title-progress-input[data-id="${titleId}"]`);
+                if (input) { input.value = Math.min(done, parseInt(input.dataset.max)||done); updateTitleProgressBar(input); }
+            });
+            const tv = document.querySelector('.quest-checkbox[data-id="title_vanq_tyria"]');
+            const cv = document.querySelector('.quest-checkbox[data-id="title_vanq_cantha"]');
+            const ev = document.querySelector('.quest-checkbox[data-id="title_vanq_elona"]');
+            const lv = document.querySelector('.quest-checkbox[data-id="title_leg_vanq"]');
+            if (tv && cv && ev && lv) {
+                const all = !!(tv.checked && cv.checked && ev.checked);
+                if (lv.checked !== all) { lv.checked = all; const row=lv.closest('tr'); if (row) row.classList.toggle('completed', all); }
+            }
         }
         
         // Update profession progress grid
@@ -30998,6 +31018,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 updateProgress(this.dataset.area);
                 if (this.dataset.area === 'elites') updateElitesCampaignProgress();
                 if (this.dataset.area === 'titles') checkLegendaryTitles();
+                if (this.dataset.area === 'vanquish') { try { updateVanquisherTitlesFromVanquish && updateVanquisherTitlesFromVanquish(); } catch(e){} updateProgress('titles'); checkLegendaryTitles(); }
             });
         });
         
