@@ -1581,17 +1581,21 @@ def generate_armor_html():
         armor_id = f"armor_{name.lower().replace(' ', '_').replace(chr(39), '')}"
         campaign_lower = campaign.lower()
         campaign_icon = ARMOR_ICONS.get(campaign, "🛡️")
+        # profession from slug prefix if present (e.g., Warrior_Elite_...)
+        _prof_prefix = wiki.split('_')[0].lower() if '_' in wiki else ''
+        _known_profs = ['warrior','ranger','monk','necromancer','mesmer','elementalist','assassin','ritualist','paragon','dervish']
+        prof_lower = _prof_prefix if _prof_prefix in _known_profs else 'all'
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
         hom_badge = "✅" if hom_eligible else "❌"
         
         h += f'''
-                    <tr data-type="{campaign_lower}" data-area="armor" data-id="{armor_id}">
+                    <tr data-type="{campaign_lower}" data-area="armor" data-profession="{prof_lower}" data-id="{armor_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{armor_id}" data-area="armor"></td>
                         <td>
     <div style=\"display:flex;align-items:center;gap:8px;\">
         <div style=\"display:flex;gap:4px;flex:0 0 auto;\">
-            <img src=\"{get_wiki_armor_images(wiki).get('f') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:40px;height:40px;border-radius:6px;background:#0d1117;border:1px solid #30363d;object-fit:cover;\" onerror=\"this.style.display='none'\">
-            <img src=\"{get_wiki_armor_images(wiki).get('m') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:40px;height:40px;border-radius:6px;background:#0d1117;border:1px solid #30363d;object-fit:cover;\" onerror=\"this.style.display='none'\">
+            <img class=\"armor-preview-f\" src=\"{get_wiki_armor_images(wiki).get('f') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:96px;height:96px;border-radius:10px;background:#0d1117;border:1px solid #30363d;object-fit:contain;\" onerror=\"this.style.display='none'\">
+            <img class=\"armor-preview-m\" src=\"{get_wiki_armor_images(wiki).get('m') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:96px;height:96px;border-radius:10px;background:#0d1117;border:1px solid #30363d;object-fit:contain;\" onerror=\"this.style.display='none'\">
         </div>
         <a href=\"{wiki_url}\" target=\"_blank\" class=\"quest-link\">{campaign_icon} {name}</a>
     </div>
@@ -2517,9 +2521,7 @@ html += '''
             document.querySelectorAll('details[data-profession]').forEach(d => {
                 d.classList.remove('prof-match', 'prof-partial');
             });
-            document.querySelectorAll('tr[data-profession]').forEach(row => {
-                row.classList.remove('elite-capturable', 'elite-other');
-            });
+document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row => { row.classList.remove('elite-capturable', 'elite-other'); });
             
             // Reset quest profession highlighting
             document.querySelectorAll('tr[data-type="profession"]').forEach(row => {
@@ -2545,14 +2547,7 @@ html += '''
             });
             
             // Highlight capturable elite skills
-            document.querySelectorAll('tr[data-profession]').forEach(row => {
-                const prof = row.dataset.profession;
-                if (myProfs.includes(prof)) {
-                    row.classList.add('elite-capturable');
-                } else {
-                    row.classList.add('elite-other');
-                }
-            });
+document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row => { const prof = row.dataset.profession; if (myProfs.includes(prof)) { row.classList.add('elite-capturable'); } else { row.classList.add('elite-other'); } });
             
             // Highlight profession quests based on Wiki research:
             // 1. "[Class] Test" quests = PRIMARY only (never secondary!)
@@ -2914,17 +2909,19 @@ html += '''
         
         // Update progress for an area
         function updateProgress(areaId) {
-            // Count only DOABLE quests:
+            // Count only DOABLE quests/pieces
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
-            const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)`);
+            // - For armor: also exclude rows currently hidden by profession rules
+            const hiddenFilter = (areaId === 'armor') ? ':not(.hidden)' : '';
+            const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}`);
             let total = allRows.length;
             let completed;
             if (areaId === 'missions') {
                 // Count only main mission completion (exclude bonus/hm checkboxes)
                 completed = document.querySelectorAll(`tr[data-area="missions"] .quest-checkbox[data-id^="mission_"]:checked`).length;
             } else {
-                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession) .quest-checkbox:checked`);
+                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter} .quest-checkbox:checked`);
                 completed = allChecked.length;
             }
             const percent = total > 0 ? (completed / total * 100) : 0;
@@ -3491,7 +3488,102 @@ html += '''
         applyProfessionHighlighting();
         checkLegendaryTitles(); // Auto-check legendary titles on load
         
-        console.log('GW Companion initialized!');
+        
+// === Armor Preview Helpers ===
+function getPrimaryOrDefault() {
+    const el = document.getElementById('primary-prof');
+    const p = el ? (el.value || '') : '';
+    return (p && p !== 'none') ? p.toLowerCase() : 'warrior';
+}
+function armorCandidatesFor(prof, slug, gender) {
+    prof = (prof || 'warrior').toLowerCase();
+    const Prof = prof.charAt(0).toUpperCase() + prof.slice(1);
+    const clean = slug || '';
+    const alt = clean.replace(/^Elite_/i, '');
+    const names = [];
+    if (clean.toLowerCase().startsWith(prof + '_')) {
+        names.push(clean + '_' + gender);
+    } else {
+        names.push(Prof + '_' + clean + '_' + gender);
+        names.push(Prof + '_' + alt + '_' + gender);
+        names.push(clean + '_' + gender);
+    }
+    const exts = ['.jpg','.png','.gif'];
+    const urls = [];
+    names.forEach(n => exts.forEach(e => urls.push('https://wiki.guildwars.com/wiki/Special:FilePath/' + n + e)));
+    return urls;
+}
+function setArmorImage(img, urls) {
+    if (!img) return;
+    if (!urls || urls.length === 0) { img.style.display='none'; return; }
+    let i = 0;
+    img.onerror = function(){ i++; if (i < urls.length) { this.src = urls[i]; } else { this.style.display='none'; } };
+    img.style.display='';
+    img.src = urls[0];
+}
+function updateArmorPreviews() {
+    const prof = getPrimaryOrDefault();
+    document.querySelectorAll('tr[data-area="armor"][data-id]').forEach(row => {
+        const link = row.querySelector('a.quest-link');
+        if (!link) return;
+        const href = link.getAttribute('href') || '';
+        const m = href.match(/\/wiki\/(.+)$/);
+        const slug = m ? decodeURIComponent(m[1]) : '';
+        const fImg = row.querySelector('img.armor-preview-f');
+        const mImg = row.querySelector('img.armor-preview-m');
+        setArmorImage(fImg, armorCandidatesFor(prof, slug, 'f'));
+        setArmorImage(mImg, armorCandidatesFor(prof, slug, 'm'));
+    });
+}
+(document.getElementById('primary-prof')||{})&& (function(el){ if(el && el.addEventListener){ el.addEventListener('change', function(){ try{ updateArmorPreviews && updateArmorPreviews(); updateArmorVisibility && updateArmorVisibility(); specialArmorRestrict && specialArmorRestrict(); updateAllProgress && updateAllProgress(); }catch(e){} }); } })(document.getElementById('primary-prof')); 
+updateArmorPreviews();
+        specialArmorRestrict();
+        if (typeof updateAllProgress === 'function') { updateAllProgress(); }
+
+
+        function updateArmorVisibility() {
+    const primary = document.getElementById('primary-prof') ? document.getElementById('primary-prof').value : '';
+    const prof = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
+    const known = ['warrior','ranger','monk','necromancer','mesmer','elementalist','assassin','ritualist','paragon','dervish'];
+    document.querySelectorAll('tr[data-area="armor"][data-id]').forEach(row => {
+        const link = row.querySelector('a.quest-link');
+        const href = link ? (link.getAttribute('href') || '') : '';
+        const m = href.match(/\/wiki\/(.+)$/);
+        const slug = m ? decodeURIComponent(m[1]).toLowerCase() : '';
+        let allowed = true;
+        const pref = known.find(p => slug.startsWith(p + '_'));
+        if (pref) { allowed = (pref === prof); }
+        if (/^elite_(exotic|imperial)_armor$/.test(slug)) { allowed = (prof === 'assassin' || prof === 'ritualist'); }
+        row.classList.toggle('hidden', !allowed);
+    });
+}
+        (document.getElementById('primary-prof')||{}).addEventListener?.('change', function(){ updateArmorPreviews?.(); updateArmorVisibility(); updateAllProgress?.(); });
+        updateArmorVisibility();
+    
+                function specialArmorRestrict() {
+            const primary = document.getElementById('primary-prof')?.value || '';
+            const prof = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
+            const aRt = (prof === 'assassin' || prof === 'ritualist');
+            document.querySelectorAll('tr[data-area="armor"]').forEach(row => {
+                const link = row.querySelector('a.quest-link');
+                if (!link) return;
+                const href = link.getAttribute('href') || '';
+                if (/Elite_Exotic_armor|Elite_Imperial_armor/i.test(href)) {
+                    row.classList.toggle('hidden', !aRt);
+                }
+                // Paragon & Dervish do not have Factions elite lines (Kurzick/Luxon/Canthan)
+                if (/Elite_(Kurzick|Luxon|Canthan)_armor/i.test(href)) {
+                    row.classList.toggle('hidden', (prof === 'paragon' || prof === 'dervish'));
+                }
+                // Assassin/Ritualist do not have Nightfall Primeval/Sunspear elite lines
+                if (/Primeval_armor/i.test(href)) {
+                    row.classList.toggle('hidden', aRt);
+                }
+                if (/(?:Elite_)?Sunspear_armor/i.test(href)) {
+                    row.classList.toggle('hidden', aRt);
+                }
+            });
+        }\n        specialArmorRestrict();\n        console.log('GW Companion initialized!');
     </script>
 </body>
 </html>'''
@@ -3537,6 +3629,11 @@ if BUILD_ONLY:
     raise SystemExit(0)
 
 HTTPServer(('localhost', PORT), Handler).serve_forever()
+
+
+
+
+
 
 
 
