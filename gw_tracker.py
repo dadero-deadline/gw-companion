@@ -988,6 +988,7 @@ def generate_heroes_html():
         hero_id = f"hero_{name.lower().replace(' ', '_').replace('.', '')}"
         icon = HERO_PROFESSIONS.get(profession, "")
         campaign_lower = campaign.lower()
+        region_lower = region.lower()
         
         # Badge color based on campaign
         badge_class = {
@@ -1038,7 +1039,7 @@ def generate_heroes_html():
             armor_html = '<span style="color:#8b949e;">—</span>'
         
         h += f'''
-                    <tr data-type="{campaign_lower}" data-area="heroes" data-id="{hero_id}">
+                    <tr data-type="{campaign_lower}" data-area="heroes" data-region="{region_lower}" data-id="{hero_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{hero_id}" data-area="heroes"></td>
                         <td>
                             <div style="display:flex;align-items:center;gap:8px;">
@@ -3143,6 +3144,7 @@ html += '''
                 const rowType = row.dataset.type;
                 const rowProf = row.dataset.prof;
                 const rowCampaign = row.dataset.campaign;
+                const rowRegion = row.dataset.region;
                 
                 // For elites, filter by campaign
                 if (areaId === 'elites') {
@@ -3154,6 +3156,10 @@ html += '''
                     row.classList.toggle('hidden', !show);
                 } else {
                     let showType = (typeFilter === 'all' || rowType === typeFilter);
+                    // Heroes: allow filtering by region 'special' even if campaign differs (e.g., Beyond heroes in Special region)
+                    if (areaId === 'heroes' && typeFilter === 'special') {
+                        showType = (rowRegion === 'special');
+                    }
                     let showProf = (activeProfs.length === 0 || activeProfs.includes(rowProf) || rowType !== 'profession');
                     
                     if (activeProfs.length > 0 && rowType === 'profession') {
