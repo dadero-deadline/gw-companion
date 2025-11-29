@@ -12,6 +12,9 @@ from missions import ALL_MISSIONS, MISSION_REGIONS, PROPHECIES_MISSIONS, FACTION
 from armor_sets import ALL_ARMOR, HOM_ARMOR, ARMOR_ICONS, CORE_ARMOR, PROPHECIES_ARMOR, FACTIONS_ARMOR, NIGHTFALL_ARMOR, EOTN_ARMOR, STANDALONE_PIECES
 from minipets import ALL_MINIS, RARITY_COLORS, YEAR1_MINIS, YEAR2_MINIS, YEAR3_MINIS, YEAR4_MINIS, YEAR5_MINIS, INGAME_MINIS, FESTIVAL_MINIS
 from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, ZAISHEN_VANQUISHES, ZAISHEN_COMBAT, VANGUARD_QUESTS, ZAISHEN_MISSION_START, ZAISHEN_BOUNTY_START, ZAISHEN_VANQUISH_START, ZAISHEN_COMBAT_START
+from outposts import OUTPOSTS
+from collectibles import MINIATURES, MENAGERIE
+from non_elite_skills import NON_ELITE_SKILLS
 
 # Load both Excel files
 def load_quests(filename, area_id):
@@ -460,13 +463,16 @@ html = '''<!DOCTYPE html>
         <button class="main-tab active" data-category="quests" onclick="switchCategory('quests')">📜 Quests</button>
         <button class="main-tab" data-category="daily" onclick="switchCategory('daily')">📅 Daily</button>
         <button class="main-tab" data-category="missions" onclick="switchCategory('missions')">🗺️ Missions</button>
-        <button class="main-tab" data-category="elites" onclick="switchCategory('elites')">🎯 Skills</button>
+        <button class="main-tab" data-category="elites" onclick="switchCategory('elites')">🎯 Elite Skills</button>
+        <button class="main-tab" data-category="skills" onclick="switchCategory('skills')">📚 All Skills</button>
         <button class="main-tab" data-category="heroes" onclick="switchCategory('heroes')">🦸 Heroes</button>
         <button class="main-tab" data-category="dungeons" onclick="switchCategory('dungeons')">🏰 Dungeons</button>
         <button class="main-tab" data-category="vanquish" onclick="switchCategory('vanquish')">⚔️ Vanquish</button>
         <button class="main-tab" data-category="armor" onclick="switchCategory('armor')">🛡️ Armor</button>
         <button class="main-tab" data-category="minis" onclick="switchCategory('minis')">🐾 Minis</button>
+        <button class="main-tab" data-category="menagerie" onclick="switchCategory('menagerie')">🦁 Menagerie</button>
         <button class="main-tab" data-category="uniques" onclick="switchCategory('uniques')">💎 Items</button>
+        <button class="main-tab" data-category="outposts" onclick="switchCategory('outposts')">🏘️ Outposts</button>
         <button class="main-tab" data-category="titles" onclick="switchCategory('titles')">🏆 Titles</button>
         <button class="main-tab" data-category="hom" onclick="switchCategory('hom')">🏛️ HoM</button>
     </div>
@@ -1803,19 +1809,238 @@ html += '''
     </div>
 '''
 
-# === ELITE SKILLS (SKILL HUNTER) ===
-def generate_elite_skills_html():
-    prof_colors = {
-        "Warrior": "#FFD700", "Ranger": "#228B22", "Monk": "#87CEEB", 
-        "Necromancer": "#2E8B57", "Mesmer": "#DA70D6", "Elementalist": "#FF4500",
-        "Assassin": "#4B0082", "Ritualist": "#008B8B", "Paragon": "#FF8C00", "Dervish": "#8B4513"
+# === OUTPOSTS ===
+def generate_outposts_html():
+    # Group by campaign
+    campaigns = {}
+    for name, campaign, wiki_slug in OUTPOSTS:
+        if campaign not in campaigns:
+            campaigns[campaign] = []
+        campaigns[campaign].append((name, wiki_slug))
+    
+    total = len(OUTPOSTS)
+    
+    h = f'''
+    <div class="area" id="area-outposts">
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span class="progress-text">🏘️ Cities & Outposts ({total} total)</span>
+                    <span class="progress-count"><span id="outposts-completed">0</span> / <span id="outposts-total">{total}</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="outposts-progress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div class="filters" data-area="outposts">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="Prophecies">Prophecies</button>
+                <button class="filter-btn" data-filter="Factions">Factions</button>
+                <button class="filter-btn" data-filter="Nightfall">Nightfall</button>
+                <button class="filter-btn" data-filter="Eye of the North">EotN</button>
+            </div>
+            
+            <table class="quest-table">
+                <thead>
+                    <tr>
+                        <th style="width:40px;">✓</th>
+                        <th>Location</th>
+                        <th>Campaign</th>
+                    </tr>
+                </thead>
+                <tbody>'''
+    
+    campaign_badges = {
+        "Prophecies": "badge-main",
+        "Factions": "badge-endgame",
+        "Nightfall": "badge-side",
+        "Eye of the North": "badge-special"
     }
     
-    # Count totals
+    for name, campaign, wiki_slug in OUTPOSTS:
+        outpost_id = f"outpost_{name.lower().replace(' ', '_').replace(chr(39), '')}"
+        badge_cls = campaign_badges.get(campaign, "badge-side")
+        wiki_url = f"https://wiki.guildwars.com/wiki/{wiki_slug}"
+        
+        h += f'''
+                    <tr data-type="{campaign}" data-area="outposts" data-id="{outpost_id}">
+                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{outpost_id}" data-area="outposts"></td>
+                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{name}</a></td>
+                        <td><span class="badge {badge_cls}">{campaign}</span></td>
+                    </tr>'''
+    
+    h += '''
+                </tbody>
+            </table>
+        </div>
+    </div>'''
+    return h
+
+html += generate_outposts_html()
+
+# === NON-ELITE SKILLS ===
+def generate_skills_html():
+    prof_data = {
+        "Common": {"color": "#9CA3AF", "icon": "🌟"},
+        "Warrior": {"color": "#FFD700", "icon": "⚔️"},
+        "Ranger": {"color": "#228B22", "icon": "🏹"},
+        "Monk": {"color": "#87CEEB", "icon": "✨"},
+        "Necromancer": {"color": "#2E8B57", "icon": "💀"},
+        "Mesmer": {"color": "#DA70D6", "icon": "🎭"},
+        "Elementalist": {"color": "#FF4500", "icon": "🔥"},
+        "Assassin": {"color": "#4B0082", "icon": "🗡️"},
+        "Ritualist": {"color": "#008B8B", "icon": "👻"},
+        "Paragon": {"color": "#FF8C00", "icon": "🛡️"},
+        "Dervish": {"color": "#8B4513", "icon": "🌀"},
+    }
+    
+    total = len(NON_ELITE_SKILLS)
+    
+    # Group by profession
+    skills_by_prof = {}
+    for name, prof, slug in NON_ELITE_SKILLS:
+        if prof not in skills_by_prof:
+            skills_by_prof[prof] = []
+        skills_by_prof[prof].append((name, slug))
+    
+    h = f'''
+    <div class="area" id="area-skills">
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span class="progress-text">📚 Non-Elite Skills ({total} total)</span>
+                    <span class="progress-count"><span id="skills-completed">0</span> / <span id="skills-total">{total}</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="skills-progress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0;" id="skills-prof-grid">'''
+    
+    # Profession progress grid
+    prof_order = ["Common", "Warrior", "Ranger", "Monk", "Necromancer", "Mesmer", "Elementalist", "Assassin", "Ritualist", "Paragon", "Dervish"]
+    for prof in prof_order:
+        if prof in skills_by_prof:
+            count = len(skills_by_prof[prof])
+            data = prof_data.get(prof, {"color": "#9CA3AF", "icon": "❓"})
+            h += f'''
+                <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-{prof.lower()}').scrollIntoView({{behavior:'smooth'}});">
+                    <div style="font-size:1.3em;">{data["icon"]}</div>
+                    <div style="font-size:0.7em;color:{data["color"]};font-weight:bold;">{prof}</div>
+                    <div style="font-size:0.8em;" id="skills-{prof.lower()}-count">0/{count}</div>
+                </div>'''
+    
+    h += '''
+            </div>'''
+    
+    # Skills by profession in collapsible sections
+    for prof in prof_order:
+        if prof in skills_by_prof:
+            skills = skills_by_prof[prof]
+            data = prof_data.get(prof, {"color": "#9CA3AF", "icon": "❓"})
+            
+            h += f'''
+            <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-{prof.lower()}">
+                <summary style="padding:12px;cursor:pointer;font-weight:bold;color:{data["color"]};">
+                    {data["icon"]} {prof} ({len(skills)} skills)
+                </summary>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">'''
+            
+            for name, wiki_slug in skills:
+                clean_name = name.lower().replace(' ', '_').replace("'", '').replace('!', '').replace('"', '')
+                skill_id = f"skill_{clean_name}"
+                wiki_url = f"https://wiki.guildwars.com/wiki/{wiki_slug}"
+                icon_url = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{wiki_slug}.jpg"
+                
+                h += f'''
+                    <div data-type="{prof}" data-area="skills" data-id="{skill_id}" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
+                        <input type="checkbox" class="quest-checkbox" data-id="{skill_id}" data-area="skills" style="width:16px;height:16px;">
+                        <img src="{icon_url}" alt="" style="width:32px;height:32px;border-radius:4px;" onerror="this.style.display='none'">
+                        <a href="{wiki_url}" target="_blank" class="quest-link" style="font-size:0.85em;">{name}</a>
+                    </div>'''
+            
+            h += '''
+                </div>
+            </details>'''
+    
+    h += '''
+        </div>
+    </div>'''
+    return h
+
+html += generate_skills_html()
+
+# === MENAGERIE ===
+def generate_menagerie_html():
+    total = len(MENAGERIE)
+    
+    h = f'''
+    <div class="area" id="area-menagerie">
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span class="progress-text">🦁 Zaishen Menagerie ({total} animals)</span>
+                    <span class="progress-count"><span id="menagerie-completed">0</span> / <span id="menagerie-total">{total}</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="menagerie-progress" style="width: 0%"></div>
+                </div>
+            </div>
+            
+            <p style="color:#8b949e;margin:15px 0;font-size:0.9em;">
+                Collect and donate animals to the <a href="https://wiki.guildwars.com/wiki/Zaishen_Menagerie" target="_blank" style="color:#58a6ff;">Zaishen Menagerie</a> to unlock them as pets for all characters!
+            </p>
+            
+            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">'''
+    
+    # Some animals have different image names on the wiki
+    img_name_map = {
+        "Moa_Bird": "Strider",
+    }
+    
+    for name, wiki_slug in MENAGERIE:
+        animal_id = f"animal_{name.lower().replace(' ', '_')}"
+        wiki_url = f"https://wiki.guildwars.com/wiki/{wiki_slug}"
+        
+        # Get the image name (may differ from wiki_slug)
+        img_name = img_name_map.get(wiki_slug, wiki_slug)
+        img_url = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{img_name}.jpg"
+        img_url_png = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{img_name}.png"
+        
+        h += f'''
+                <div data-area="menagerie" data-id="{animal_id}" style="display:flex;align-items:center;gap:15px;padding:12px;background:#161b22;border-radius:10px;border:1px solid #30363d;">
+                    <input type="checkbox" class="quest-checkbox" data-id="{animal_id}" data-area="menagerie" style="width:22px;height:22px;cursor:pointer;">
+                    <img src="{img_url}" alt="{name}" style="width:80px;height:80px;object-fit:contain;border-radius:8px;" onerror="this.onerror=null;this.src='{img_url_png}';this.onerror=function(){{this.style.display='none';this.nextElementSibling.style.display='flex';}}">
+                    <span style="display:none;width:96px;height:96px;background:#21262d;border-radius:8px;align-items:center;justify-content:center;font-size:40px;">🐾</span>
+                    <a href="{wiki_url}" target="_blank" class="quest-link" style="flex:1;font-size:1.1em;">{name}</a>
+                </div>'''
+    
+    h += '''
+            </div>
+        </div>
+    </div>'''
+    return h
+
+html += generate_menagerie_html()
+
+# === ELITE SKILLS (SKILL HUNTER) ===
+def generate_elite_skills_html():
+    prof_data = {
+        "Warrior": {"color": "#FFD700", "icon": "⚔️"},
+        "Ranger": {"color": "#228B22", "icon": "🏹"},
+        "Monk": {"color": "#87CEEB", "icon": "✨"},
+        "Necromancer": {"color": "#2E8B57", "icon": "💀"},
+        "Mesmer": {"color": "#DA70D6", "icon": "🎭"},
+        "Elementalist": {"color": "#FF4500", "icon": "🔥"},
+        "Assassin": {"color": "#4B0082", "icon": "🗡️"},
+        "Ritualist": {"color": "#008B8B", "icon": "👻"},
+        "Paragon": {"color": "#FF8C00", "icon": "🛡️"},
+        "Dervish": {"color": "#8B4513", "icon": "🌀"},
+    }
+    
     total_skills = sum(len(skills) for skills in ELITE_SKILLS.values())
-    tyria_count = sum(len([s for s in skills if s[2] == "Prophecies"]) for skills in ELITE_SKILLS.values())
-    cantha_count = sum(len([s for s in skills if s[2] == "Factions"]) for skills in ELITE_SKILLS.values())
-    elona_count = sum(len([s for s in skills if s[2] == "Nightfall"]) for skills in ELITE_SKILLS.values())
     
     h = f'''
     <div class="area" id="area-elites">
@@ -1830,152 +2055,69 @@ def generate_elite_skills_html():
                 </div>
             </div>
             
-            <div style="display:flex;gap:20px;margin:15px 0;flex-wrap:wrap;">
-                <div style="flex:1;min-width:200px;background:#161b22;padding:10px;border-radius:8px;">
-                    <div style="color:#ffd700;font-weight:bold;">Tyrian Skill Hunter</div>
-                    <div style="font-size:0.9em;color:#8b949e;">{tyria_count} skills</div>
-                    <div class="progress-bar" style="height:6px;margin-top:5px;">
-                        <div class="progress-fill" id="elites-tyria-progress" style="width:0%;"></div>
-                    </div>
-                </div>
-                <div style="flex:1;min-width:200px;background:#161b22;padding:10px;border-radius:8px;">
-                    <div style="color:#ff6b6b;font-weight:bold;">Canthan Skill Hunter</div>
-                    <div style="font-size:0.9em;color:#8b949e;">{cantha_count} skills</div>
-                    <div class="progress-bar" style="height:6px;margin-top:5px;">
-                        <div class="progress-fill" id="elites-cantha-progress" style="width:0%;"></div>
-                    </div>
-                </div>
-                <div style="flex:1;min-width:200px;background:#161b22;padding:10px;border-radius:8px;">
-                    <div style="color:#9d4edd;font-weight:bold;">Elonian Skill Hunter</div>
-                    <div style="font-size:0.9em;color:#8b949e;">{elona_count} skills</div>
-                    <div class="progress-bar" style="height:6px;margin-top:5px;">
-                        <div class="progress-fill" id="elites-elona-progress" style="width:0%;"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <div style="background:#161b22;padding:15px;border-radius:8px;margin:15px 0;">
-                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                    <span style="font-weight:bold;color:#58a6ff;">📊 Profession Progress (Secondary Switching Planner)</span>
-                    <span style="font-size:0.85em;color:#8b949e;">Deine Primary: <span id="prof-progress-primary" style="color:#3fb950;">-</span> | Secondary: <span id="prof-progress-secondary" style="color:#ffa657;">-</span></span>
-                </div>
-                <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;" id="profession-progress-grid">
-                    <div class="prof-progress-item" data-prof="warrior" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">⚔️</div>
-                        <div style="font-size:0.75em;color:#FFD700;">Warrior</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-warrior-count">0/{len(ELITE_SKILLS.get('Warrior', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-warrior-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="ranger" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">🏹</div>
-                        <div style="font-size:0.75em;color:#228B22;">Ranger</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-ranger-count">0/{len(ELITE_SKILLS.get('Ranger', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-ranger-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="monk" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">✨</div>
-                        <div style="font-size:0.75em;color:#87CEEB;">Monk</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-monk-count">0/{len(ELITE_SKILLS.get('Monk', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-monk-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="necromancer" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">💀</div>
-                        <div style="font-size:0.75em;color:#2E8B57;">Necromancer</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-necromancer-count">0/{len(ELITE_SKILLS.get('Necromancer', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-necromancer-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="mesmer" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">🎭</div>
-                        <div style="font-size:0.75em;color:#DA70D6;">Mesmer</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-mesmer-count">0/{len(ELITE_SKILLS.get('Mesmer', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-mesmer-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="elementalist" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">🔥</div>
-                        <div style="font-size:0.75em;color:#FF4500;">Elementalist</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-elementalist-count">0/{len(ELITE_SKILLS.get('Elementalist', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-elementalist-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="assassin" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">🗡️</div>
-                        <div style="font-size:0.75em;color:#4B0082;">Assassin</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-assassin-count">0/{len(ELITE_SKILLS.get('Assassin', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-assassin-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="ritualist" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">👻</div>
-                        <div style="font-size:0.75em;color:#008B8B;">Ritualist</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-ritualist-count">0/{len(ELITE_SKILLS.get('Ritualist', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-ritualist-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="paragon" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">🛡️</div>
-                        <div style="font-size:0.75em;color:#FF8C00;">Paragon</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-paragon-count">0/{len(ELITE_SKILLS.get('Paragon', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-paragon-bar" style="width:0%;"></div></div>
-                    </div>
-                    <div class="prof-progress-item" data-prof="dervish" style="background:#21262d;padding:8px;border-radius:6px;text-align:center;">
-                        <div style="font-size:1.2em;">🌀</div>
-                        <div style="font-size:0.75em;color:#8B4513;">Dervish</div>
-                        <div style="font-size:0.85em;font-weight:bold;" id="prof-dervish-count">0/{len(ELITE_SKILLS.get('Dervish', []))}</div>
-                        <div class="progress-bar" style="height:4px;margin-top:4px;"><div class="progress-fill" id="prof-dervish-bar" style="width:0%;"></div></div>
-                    </div>
-                </div>
-                <div style="margin-top:10px;font-size:0.8em;color:#8b949e;">
-                    💡 <strong>Tip:</strong> Select your Primary/Secondary above. Green = your professions, Orange = recommended next (most missing skills).
-                </div>
-            </div>
-            
-            <div class="filters" data-area="elites">
-                <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="myskills" style="background:#238636;border-color:#238636;">🎯 My Skills</button>
-                <button class="filter-btn" data-filter="core">Core</button>
-                <button class="filter-btn" data-filter="prophecies">Prophecies</button>
-                <button class="filter-btn" data-filter="factions">Factions</button>
-                <button class="filter-btn" data-filter="nightfall">Nightfall</button>
-            </div>
-'''
+            <div style="display:grid;grid-template-columns:repeat(5,1fr);gap:8px;margin:15px 0;" id="elites-prof-grid">'''
     
-    # Generate tables per profession
-    for prof, skills in ELITE_SKILLS.items():
-        color = prof_colors.get(prof, "#8b949e")
-        prof_id = prof.lower()
-        h += f'''
-            <details style="margin-top:15px;" data-profession="{prof_id}" open>
-                <summary style="cursor:pointer;padding:10px;background:#21262d;border-radius:8px;font-weight:bold;color:{color};">
-                    {prof} <span style="color:#8b949e;font-weight:normal;">({len(skills)} skills)</span>
-                </summary>
-                <div class="container" style="margin-top:10px;">
-                <table>
-                    <thead>
-                        <tr>
-                            <th style="width:50px">Cap</th>
-                            <th>Skill Name</th>
-                            <th>Attribute</th>
-                            <th>Campaign</th>
-                        </tr>
-                    </thead>
-                    <tbody>'''
-        
-        for skill in skills:
-            skill_name, _, campaign, attribute, wiki = skill
-            skill_id = f"elite_{prof_id}_{skill_name.lower().replace(' ', '_').replace('!', '').replace(chr(39), '')}"
-            campaign_lower = campaign.lower()
-            wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
-            
-            campaign_badge = {"Core": "badge-side", "Prophecies": "badge-main", "Factions": "badge-special", "Nightfall": "badge-endgame"}.get(campaign, "badge-side")
+    # Profession progress grid
+    prof_order = ["Warrior", "Ranger", "Monk", "Necromancer", "Mesmer", "Elementalist", "Assassin", "Ritualist", "Paragon", "Dervish"]
+    for prof in prof_order:
+        if prof in ELITE_SKILLS:
+            count = len(ELITE_SKILLS[prof])
+            data = prof_data.get(prof, {"color": "#9CA3AF", "icon": "❓"})
+            h += f'''
+                <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-{prof.lower()}').scrollIntoView({{behavior:'smooth'}});">
+                    <div style="font-size:1.3em;">{data["icon"]}</div>
+                    <div style="font-size:0.7em;color:{data["color"]};font-weight:bold;">{prof}</div>
+                    <div style="font-size:0.8em;" id="elites-{prof.lower()}-count">0/{count}</div>
+                </div>'''
+    
+    h += '''
+            </div>'''
+    
+    # Icon name mapping for skills with special characters (shouts have quotes - URL encoded as %22)
+    icon_map = {
+        "Charge!": '%22Charge!%22',
+        "Coward!": '%22Coward!%22',
+        "Together_as_One!": '%22Together_as_One!%22',
+        "You%27re_All_Alone!": '%22You%27re_All_Alone!%22',
+        "Incoming!": '%22Incoming!%22',
+        "It%27s_Just_a_Flesh_Wound": '%22It%27s_Just_a_Flesh_Wound.%22',
+    }
+    
+    # Skills by profession in collapsible sections
+    for prof in prof_order:
+        if prof in ELITE_SKILLS:
+            skills = ELITE_SKILLS[prof]
+            data = prof_data.get(prof, {"color": "#9CA3AF", "icon": "❓"})
+            prof_id = prof.lower()
             
             h += f'''
-                        <tr data-type="{campaign_lower}" data-area="elites" data-id="{skill_id}" data-campaign="{campaign_lower}" data-profession="{prof_id}">
-                            <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{skill_id}" data-area="elites" data-campaign="{campaign_lower}" data-profession="{prof_id}"></td>
-                            <td><a href="{wiki_url}" target="_blank" class="quest-link">{skill_name}</a></td>
-                            <td style="color:#8b949e;">{attribute if attribute else "-"}</td>
-                            <td><span class="badge {campaign_badge}">{campaign}</span></td>
-                        </tr>'''
-        
-        h += '''
-                    </tbody>
-                </table>
+            <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-{prof_id}">
+                <summary style="padding:12px;cursor:pointer;font-weight:bold;color:{data["color"]};">
+                    {data["icon"]} {prof} ({len(skills)} elite skills)
+                </summary>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">'''
+            
+            for skill in skills:
+                skill_name, _, campaign, attribute, wiki = skill
+                skill_id = f"elite_{prof_id}_{skill_name.lower().replace(' ', '_').replace('!', '').replace(chr(39), '')}"
+                wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
+                # Get icon name - strip ! and special chars for image URL
+                icon_name = icon_map.get(wiki, wiki.replace('!', '').replace('%27', "'"))
+                icon_url = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{icon_name}.jpg"
+                
+                campaign_color = {"Core": "#8b949e", "Prophecies": "#ffd700", "Factions": "#ff6b6b", "Nightfall": "#9d4edd"}.get(campaign, "#8b949e")
+                
+                h += f'''
+                    <div data-area="elites" data-id="{skill_id}" data-campaign="{campaign.lower()}" data-profession="{prof_id}" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
+                        <input type="checkbox" class="quest-checkbox" data-id="{skill_id}" data-area="elites" data-campaign="{campaign.lower()}" data-profession="{prof_id}" style="width:16px;height:16px;">
+                        <img src="{icon_url}" alt="" style="width:32px;height:32px;border-radius:4px;border:2px solid {campaign_color};" onerror="this.style.display='none'">
+                        <div style="flex:1;min-width:0;">
+                            <a href="{wiki_url}" target="_blank" class="quest-link" style="font-size:0.85em;display:block;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{skill_name}</a>
+                            <span style="font-size:0.7em;color:{campaign_color};">{campaign}</span>
+                        </div>
+                    </div>'''
+            
+            h += '''
                 </div>
             </details>'''
     
@@ -2438,8 +2580,14 @@ html += '''
                 document.getElementById('area-armor').classList.add('active');
             } else if (category === 'minis') {
                 document.getElementById('area-minis').classList.add('active');
+            } else if (category === 'menagerie') {
+                document.getElementById('area-menagerie').classList.add('active');
             } else if (category === 'uniques') {
                 document.getElementById('area-uniques').classList.add('active');
+            } else if (category === 'outposts') {
+                document.getElementById('area-outposts').classList.add('active');
+            } else if (category === 'skills') {
+                document.getElementById('area-skills').classList.add('active');
             } else if (category === 'titles') {
                 document.getElementById('area-titles').classList.add('active');
             } else if (category === 'hom') {
@@ -2624,6 +2772,9 @@ html += '''
             updateProgress('minis');
             updateProgress('daily');
             updateProgress('uniques');
+            updateProgress('outposts');
+            updateProgress('skills');
+            updateProgress('menagerie');
             updateElitesCampaignProgress();
         }
         
@@ -2803,7 +2954,11 @@ html += '''
                 const filter = this.dataset.filter;
                 const isProfFilter = profFilters.includes(filter);
                 
-                if (isProfFilter) {
+                // For skills and outposts: simple exclusive filters (only one active at a time)
+                if (areaId === 'skills' || areaId === 'outposts') {
+                    container.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                } else if (isProfFilter) {
                     this.classList.toggle('active');
                 } else {
                     container.querySelectorAll('.filter-btn').forEach(b => {
@@ -2865,6 +3020,10 @@ html += '''
                 if (areaId === 'elites') {
                     let showCampaign = (typeFilter === 'all' || rowCampaign === typeFilter);
                     row.classList.toggle('hidden', !showCampaign);
+                } else if (areaId === 'skills' || areaId === 'outposts') {
+                    // Simple profession/campaign filter for skills and outposts
+                    let show = (typeFilter === 'all' || rowType === typeFilter);
+                    row.classList.toggle('hidden', !show);
                 } else {
                     let showType = (typeFilter === 'all' || rowType === typeFilter);
                     let showProf = (activeProfs.length === 0 || activeProfs.includes(rowProf) || rowType !== 'profession');
