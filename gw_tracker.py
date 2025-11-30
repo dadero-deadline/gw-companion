@@ -14,25 +14,6 @@ from armor_sets import ALL_ARMOR, HOM_ARMOR, ARMOR_ICONS, CORE_ARMOR, PROPHECIES
 from minipets import ALL_MINIS, RARITY_COLORS, YEAR1_MINIS, YEAR2_MINIS, YEAR3_MINIS, YEAR4_MINIS, YEAR5_MINIS, INGAME_MINIS, FESTIVAL_MINIS
 from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, ZAISHEN_VANQUISHES, ZAISHEN_COMBAT, VANGUARD_QUESTS, ZAISHEN_MISSION_START, ZAISHEN_BOUNTY_START, ZAISHEN_VANQUISH_START, ZAISHEN_COMBAT_START
 from outposts import OUTPOSTS
-
-        // Auto-calc Vanquisher titles progress from Vanquish tab
-        function updateVanquisherTitlesFromVanquish() {
-            const mapping = { prophecies: 'title_vanq_tyria', factions: 'title_vanq_cantha', nightfall: 'title_vanq_elona' };
-            Object.entries(mapping).forEach(([type, titleId]) => {
-                const total = document.querySelectorAll(`tr[data-area="vanquish"][data-type="${type}"] .quest-checkbox`).length;
-                const done = document.querySelectorAll(`tr[data-area="vanquish"][data-type="${type}"] .quest-checkbox:checked`).length;
-                const input = document.querySelector(`.title-progress-input[data-id="${titleId}"]`);
-                if (input) { input.value = Math.min(done, parseInt(input.dataset.max)||done); updateTitleProgressBar(input); }
-            });
-            const tv = document.querySelector('.quest-checkbox[data-id="title_vanq_tyria"]');
-            const cv = document.querySelector('.quest-checkbox[data-id="title_vanq_cantha"]');
-            const ev = document.querySelector('.quest-checkbox[data-id="title_vanq_elona"]');
-            const lv = document.querySelector('.quest-checkbox[data-id="title_leg_vanq"]');
-            if (tv && cv && ev && lv) {
-                const all = !!(tv.checked && cv.checked && ev.checked);
-                if (lv.checked !== all) { lv.checked = all; const row=lv.closest('tr'); if (row) row.classList.toggle('completed', all); }
-            }
-        }
 from collectibles import MINIATURES, MENAGERIE
 from non_elite_skills import NON_ELITE_SKILLS
 import urllib.request, re, urllib.parse
@@ -247,14 +228,14 @@ html = '''<!DOCTYPE html>
         
         /* Elite skill highlighting based on profession */
         tr.elite-capturable { background: rgba(63, 185, 80, 0.15) !important; }
-        tr.elite-capturable td:first-child::before { content: "âœ“ "; color: #3fb950; }
+        tr.elite-capturable td:first-child::before { content: "✓ "; color: #3fb950; }
         tr.elite-other { opacity: 0.5; }
         details.prof-match > summary { border-left: 3px solid #3fb950 !important; }
         details.prof-partial > summary { border-left: 3px solid #ffa657 !important; }
         
         /* Quest profession highlighting - highlight matching, dim others */
         tr.my-profession { background: rgba(63, 185, 80, 0.2) !important; border-left: 3px solid #3fb950; }
-        tr.my-profession td:first-child::before { content: "â­ "; }
+        tr.my-profession td:first-child::before { content: "⭐ "; }
         tr.my-secondary-profession { background: rgba(255, 166, 87, 0.15) !important; border-left: 3px solid #ffa657; }
         tr.my-secondary-profession td:first-child::before { content: "ðŸ”¶ "; }
         tr.other-profession { opacity: 0.5; }
@@ -264,7 +245,7 @@ html = '''<!DOCTYPE html>
         .prof-progress-item.is-primary { border-color: #3fb950; background: rgba(63,185,80,0.15) !important; }
         .prof-progress-item.is-secondary { border-color: #ffa657; background: rgba(255,166,87,0.15) !important; }
         .prof-progress-item.is-complete { opacity: 0.6; }
-        .prof-progress-item.is-complete::after { content: "âœ“"; position: absolute; top: 2px; right: 5px; color: #3fb950; font-size: 0.8em; }
+        .prof-progress-item.is-complete::after { content: "✓"; position: absolute; top: 2px; right: 5px; color: #3fb950; font-size: 0.8em; }
         .prof-progress-item { position: relative; }
         .prof-progress-item.recommend { border-color: #f0883e; animation: pulse-recommend 2s infinite; }
         @keyframes pulse-recommend { 0%, 100% { box-shadow: 0 0 0 0 rgba(240,136,62,0.4); } 50% { box-shadow: 0 0 0 4px rgba(240,136,62,0); } }
@@ -550,21 +531,21 @@ html = '''<!DOCTYPE html>
 </head>
 <body>
     <div class="header">
-        <h1>âš”ï¸ Guild Wars Companion</h1>
+        <h1>⚔️ Guild Wars Companion</h1>
         <div class="char-selector">
             <span class="char-label">Character:</span>
             <select id="char-select" onchange="switchCharacter()"></select>
             <select id="campaign-select" class="campaign-dropdown" onchange="setCampaign()">
                 <option value="">-- Campaign --</option>
-                <option value="prophecies">âš”ï¸ Prophecies</option>
+                <option value="prophecies">⚔️ Prophecies</option>
                 <option value="factions">ðŸ‰ Factions</option>
                 <option value="nightfall">ðŸŒ™ Nightfall</option>
             </select>
             <select id="primary-prof" class="prof-dropdown" onchange="setProfessions()" title="Primary Profession">
                 <option value="">Primary</option>
-                <option value="warrior">âš”ï¸ Warrior</option>
-                <option value="ranger">ðŸ¹ Ranger</option>
-                <option value="monk">âœ¨ Monk</option>
+                <option value="warrior">⚔️ Warrior</option>
+                <option value="ranger">🏹 Ranger</option>
+                <option value="monk">✨ Monk</option>
                 <option value="necromancer">ðŸ’€ Necromancer</option>
                 <option value="mesmer">ðŸŽ­ Mesmer</option>
                 <option value="elementalist">ðŸ”¥ Elementalist</option>
@@ -575,9 +556,9 @@ html = '''<!DOCTYPE html>
             </select>
             <select id="secondary-prof" class="prof-dropdown" onchange="setProfessions()" title="Secondary Profession">
                 <option value="">Secondary</option>
-                <option value="warrior">âš”ï¸ Warrior</option>
-                <option value="ranger">ðŸ¹ Ranger</option>
-                <option value="monk">âœ¨ Monk</option>
+                <option value="warrior">⚔️ Warrior</option>
+                <option value="ranger">🏹 Ranger</option>
+                <option value="monk">✨ Monk</option>
                 <option value="necromancer">ðŸ’€ Necromancer</option>
                 <option value="mesmer">ðŸŽ­ Mesmer</option>
                 <option value="elementalist">ðŸ”¥ Elementalist</option>
@@ -602,9 +583,9 @@ html = '''<!DOCTYPE html>
         <button class="main-tab" data-category="skills" onclick="switchCategory('skills')">ðŸ“š All Skills</button>
         <button class="main-tab" data-category="heroes" onclick="switchCategory('heroes')">ðŸ¦¸ Heroes</button>
         <button class="main-tab" data-category="dungeons" onclick="switchCategory('dungeons')">ðŸ° Dungeons</button>
-        <button class="main-tab" data-category="vanquish" onclick="switchCategory('vanquish')">âš”ï¸ Vanquish</button>
+        <button class="main-tab" data-category="vanquish" onclick="switchCategory('vanquish')">⚔️ Vanquish</button>
         <button class="main-tab" data-category="armor" onclick="switchCategory('armor')">ðŸ›¡ï¸ Armor</button>
-        <button class="main-tab" data-category="minis" onclick="switchCategory('minis')">ðŸ¾ Minis</button>
+        <button class="main-tab" data-category="minis" onclick="switchCategory('minis')">🐾 Minis</button>
         <button class="main-tab" data-category="menagerie" onclick="switchCategory('menagerie')">ðŸ¦ Menagerie</button>
         <button class="main-tab" data-category="uniques" onclick="switchCategory('uniques')">ðŸ’Ž Items</button>
         <button class="main-tab" data-category="outposts" onclick="switchCategory('outposts')">ðŸ˜ï¸ Outposts</button>
@@ -614,7 +595,7 @@ html = '''<!DOCTYPE html>
     
     <div class="region-selector" id="quests-selector">
         <select id="region-select" class="region-select" onchange="switchRegion()">
-            <optgroup label="âš”ï¸ PROPHECIES">
+            <optgroup label="⚔️ PROPHECIES">
                 <option value="pre" data-total="''' + str(len(pre_quests)) + '''">Pre-Searing (0/''' + str(len(pre_quests)) + ''')</option>
                 <option value="post" data-total="''' + str(len(post_quests)) + '''">Post-Searing Ascalon (0/''' + str(len(post_quests)) + ''')</option>
                 <option value="shiver" data-total="''' + str(len(shiver_quests)) + '''">Northern Shiverpeaks (0/''' + str(len(shiver_quests)) + ''')</option>
@@ -1086,11 +1067,7 @@ def generate_heroes_html():
         if override_file:
             hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{override_file}"
         if not hero_img:
-            hero_img = get_wiki_infobox_image(wiki)
-        if not hero_img:
             hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}.jpg"
-        if not hero_img:
-            hero_img = get_wiki_og_image(wiki)
         
         # Hero armor variants (non-exclusive toggles), based on campaign
         variants = []
@@ -1198,7 +1175,7 @@ def generate_daily_html():
             </div>
             
             <div style="max-width:600px;margin:0 auto;">
-                <h3 style="color:#ffa657;margin:0 0 15px 0;">âš”ï¸ Zaishen Dailies</h3>
+                <h3 style="color:#ffa657;margin:0 0 15px 0;">⚔️ Zaishen Dailies</h3>
                 
                 <div style="background:#21262d;border-radius:12px;overflow:hidden;">
                     <!-- Mission -->
@@ -1225,7 +1202,7 @@ def generate_daily_html():
                     <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
                         <input type="checkbox" id="daily-vanquish" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanquish">
                         <div style="flex:1;">
-                            <span style="color:#f85149;font-weight:bold;">âš”ï¸ Vanquish:</span>
+                            <span style="color:#f85149;font-weight:bold;">⚔️ Vanquish:</span>
                             <a href="https://wiki.guildwars.com/wiki/{today_vanquish[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_vanquish[0]}</a>
                             <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_vanquish[1]})</span>
                         </div>
@@ -1387,14 +1364,14 @@ def generate_dungeons_html():
             
             <div class="filters" data-area="dungeons">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="elite">âš”ï¸ Elite Missions</button>
+                <button class="filter-btn" data-filter="elite">⚔️ Elite Missions</button>
                 <button class="filter-btn" data-filter="dungeon">ðŸ”ï¸ EotN Dungeons</button>
             </div>
             
             <div class="container">
             
             <!-- ELITE MISSIONS -->
-            <h3 style="color:#ff6b6b;margin:15px 0 10px 0;">âš”ï¸ Elite Missions (End-Game Content)</h3>
+            <h3 style="color:#ff6b6b;margin:15px 0 10px 0;">⚔️ Elite Missions (End-Game Content)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -1488,7 +1465,7 @@ def generate_vanquish_html():
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">âš”ï¸ Vanquish Areas (''' + str(len(ALL_VANQUISHES)) + ''' total)</span>
+                    <span class="progress-text">⚔️ Vanquish Areas (''' + str(len(ALL_VANQUISHES)) + ''' total)</span>
                     <span class="progress-count"><span id="vanquish-completed">0</span> / <span id="vanquish-total">''' + str(len(ALL_VANQUISHES)) + '''</span></span>
                 </div>
                 <div class="progress-bar">
@@ -1517,7 +1494,7 @@ def generate_vanquish_html():
     for campaign_name, areas, badge_class in campaigns:
         campaign_lower = campaign_name.lower()
         h += f'''
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">âš”ï¸ {campaign_name} ({len(areas)} areas)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">⚔️ {campaign_name} ({len(areas)} areas)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -1616,12 +1593,12 @@ def generate_armor_html():
                     <tr data-type="{campaign_lower}" data-area="armor" data-profession="{prof_lower}" data-id="{armor_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{armor_id}" data-area="armor"></td>
                         <td>
-    <div style=\"display:flex;align-items:center;gap:8px;\">
-        <div style=\"display:flex;gap:4px;flex:0 0 auto;\">
-            <img class=\"armor-preview-f\" src=\"{get_wiki_armor_images(wiki).get('f') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:96px;height:96px;border-radius:10px;background:#0d1117;border:1px solid #30363d;object-fit:contain;\" onerror=\"this.style.display='none'\">
-            <img class=\"armor-preview-m\" src=\"{get_wiki_armor_images(wiki).get('m') or ''}\" alt=\"\" referrerpolicy=\"no-referrer\" loading=\"lazy\" style=\"width:96px;height:96px;border-radius:10px;background:#0d1117;border:1px solid #30363d;object-fit:contain;\" onerror=\"this.style.display='none'\">
+    <div style="display:flex;align-items:center;gap:8px;">
+        <div style="display:flex;gap:4px;flex:0 0 auto;">
+            <img class="armor-preview-f" src="" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:96px;height:96px;border-radius:10px;background:#0d1117;border:1px solid #30363d;object-fit:contain;display:none;" onerror="this.style.display='none'">
+            <img class="armor-preview-m" src="" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:96px;height:96px;border-radius:10px;background:#0d1117;border:1px solid #30363d;object-fit:contain;display:none;" onerror="this.style.display='none'">
         </div>
-        <a href=\"{wiki_url}\" target=\"_blank\" class=\"quest-link\">{campaign_icon} {name}</a>
+        <a href="{wiki_url}" target="_blank" class="quest-link">{campaign_icon} {name}</a>
     </div>
 </td>
                         <td style="color:#8b949e;">{location}</td>
@@ -1656,7 +1633,7 @@ def generate_minis_html():
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ¾ Miniatures (''' + str(len(ALL_MINIS)) + ''' total, 20 for max HoM)</span>
+                    <span class="progress-text">🐾 Miniatures (''' + str(len(ALL_MINIS)) + ''' total, 20 for max HoM)</span>
                     <span class="progress-count"><span id="minis-completed">0</span> / <span id="minis-total">''' + str(len(ALL_MINIS)) + '''</span></span>
                 </div>
                 <div class="progress-bar">
@@ -1827,7 +1804,7 @@ def generate_uniques_html():
         h += f'''
                     <tr data-type="hom" data-area="uniques" data-id="{item_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{item_id}" data-area="uniques"></td>
-                        <td><a href="{wiki_url}" target="_blank" class="quest-link">âš”ï¸ {name}</a></td>
+                        <td><a href="{wiki_url}" target="_blank" class="quest-link">⚔️ {name}</a></td>
                         <td style="color:#ffa657;">{source}</td>
                         <td style="color:#238636;font-weight:bold;">{points}</td>
                     </tr>'''
@@ -2062,7 +2039,7 @@ def generate_outposts_html():
             <table class="quest-table">
                 <thead>
                     <tr>
-                        <th style="width:40px;">âœ“</th>
+                        <th style="width:40px;">✓</th>
                         <th>Location</th>
                         <th>Campaign</th>
                     </tr>
@@ -2101,9 +2078,9 @@ html += generate_outposts_html()
 def generate_skills_html():
     prof_data = {
         "Common": {"color": "#9CA3AF", "icon": "ðŸŒŸ"},
-        "Warrior": {"color": "#FFD700", "icon": "âš”ï¸"},
-        "Ranger": {"color": "#228B22", "icon": "ðŸ¹"},
-        "Monk": {"color": "#87CEEB", "icon": "âœ¨"},
+        "Warrior": {"color": "#FFD700", "icon": "⚔️"},
+        "Ranger": {"color": "#228B22", "icon": "🏹"},
+        "Monk": {"color": "#87CEEB", "icon": "✨"},
         "Necromancer": {"color": "#2E8B57", "icon": "ðŸ’€"},
         "Mesmer": {"color": "#DA70D6", "icon": "ðŸŽ­"},
         "Elementalist": {"color": "#FF4500", "icon": "ðŸ”¥"},
@@ -2231,7 +2208,7 @@ def generate_menagerie_html():
                 <div data-area="menagerie" data-id="{animal_id}" style="display:flex;align-items:center;gap:15px;padding:12px;background:#161b22;border-radius:10px;border:1px solid #30363d;">
                     <input type="checkbox" class="quest-checkbox" data-id="{animal_id}" data-area="menagerie" style="width:22px;height:22px;cursor:pointer;">
                     <img src="{img_url}" alt="{name}" style="width:80px;height:80px;object-fit:contain;border-radius:8px;" onerror="this.onerror=null;this.src='{img_url_png}';this.onerror=function(){{this.style.display='none';this.nextElementSibling.style.display='flex';}}">
-                    <span style="display:none;width:96px;height:96px;background:#21262d;border-radius:8px;align-items:center;justify-content:center;font-size:40px;">ðŸ¾</span>
+                    <span style="display:none;width:96px;height:96px;background:#21262d;border-radius:8px;align-items:center;justify-content:center;font-size:40px;">🐾</span>
                     <a href="{wiki_url}" target="_blank" class="quest-link" style="flex:1;font-size:1.1em;">{name}</a>
                 </div>'''
     
@@ -2246,9 +2223,9 @@ html += generate_menagerie_html()
 # === ELITE SKILLS (SKILL HUNTER) ===
 def generate_elite_skills_html():
     prof_data = {
-        "Warrior": {"color": "#FFD700", "icon": "âš”ï¸"},
-        "Ranger": {"color": "#228B22", "icon": "ðŸ¹"},
-        "Monk": {"color": "#87CEEB", "icon": "âœ¨"},
+        "Warrior": {"color": "#FFD700", "icon": "⚔️"},
+        "Ranger": {"color": "#228B22", "icon": "🏹"},
+        "Monk": {"color": "#87CEEB", "icon": "✨"},
         "Necromancer": {"color": "#2E8B57", "icon": "ðŸ’€"},
         "Mesmer": {"color": "#DA70D6", "icon": "ðŸŽ­"},
         "Elementalist": {"color": "#FF4500", "icon": "ðŸ”¥"},
@@ -3714,6 +3691,13 @@ print("Guild Wars Companion gestartet!")
 print(f"http://localhost:{PORT}")
 
 class Handler(SimpleHTTPRequestHandler):
+    # Force UTF-8 for all HTML files
+    extensions_map = {
+        **SimpleHTTPRequestHandler.extensions_map,
+        '.html': 'text/html; charset=utf-8',
+        '.htm': 'text/html; charset=utf-8',
+    }
+    
     def do_GET(self):
         if self.path == '/':
             self.path = '/gw_tracker.html'

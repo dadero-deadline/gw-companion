@@ -7,8 +7,16 @@ __pycache__/
 *.egg-info/
 .eggs/
 
-# Generated files
+# Build artifacts
 gw_tracker.html
+index_fresh.html
+
+# Development files
+server.js
+emoji-test.html
+test_browser.html
+dev/
+*.pyc
 
 # IDE
 .vscode/
@@ -22,10 +30,14 @@ Thumbs.db
 
 # Logs
 *.log
-# Debug snippets / temp HTML & text
+
+# Temp/debug files
 *snip*.html
 *header_block*.html
 *_in_index.html
 *section*.txt
 mission_table.html
 armor_block.html
+build_*.py
+count_*.py
+remove_*.py
