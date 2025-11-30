@@ -35,14 +35,16 @@
             font-weight: 700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
             letter-spacing: 1px;
-            opacity: 0;
-            transition: opacity 0.2s ease-in;
         }
-        .header h1.loaded { opacity: 1; }
         .header h1 img { 
             width: 32px; 
             height: 32px; 
             filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            opacity: 0;
+            transition: opacity 0.2s ease-in;
+        }
+        .header h1 img.loaded {
+            opacity: 1;
         }
         
         /* Character Selector */
@@ -435,7 +437,7 @@
 <body>
     <div class="header">
         <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page">
-            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" onerror="this.style.display='none'" onload="document.getElementById('main-header').classList.add('loaded')">
+            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
             Guild Wars Companion
         </h1>
         <div class="char-selector">
