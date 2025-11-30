@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preload" href="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" as="image">
     <title>Guild Wars Companion</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -34,7 +35,10 @@
             font-weight: 700;
             text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
             letter-spacing: 1px;
+            opacity: 0;
+            transition: opacity 0.2s ease-in;
         }
+        .header h1.loaded { opacity: 1; }
         .header h1 img { 
             width: 32px; 
             height: 32px; 
@@ -321,7 +325,7 @@
         tr:hover { background: rgba(255,255,255,0.03); }
         tr.completed { opacity: 0.5; }
         tr.completed td { text-decoration: line-through; }
-        tr.hidden, tr.hidden-restrict { display: none; }
+        tr.hidden, tr.hidden-restrict { display: none !important; }
         
         .type-main { background: rgba(88,166,255,0.1); }
         .type-mission { background: rgba(112,48,160,0.15); }
@@ -408,36 +412,30 @@
             .filters { gap: 5px; flex-wrap: wrap; }
             .filter-btn { padding: 4px 8px; font-size: 0.7em; }
             .io-btn { padding: 4px 8px; font-size: 0.7em; }
-            table { font-size: 0.75em; }
+            table { font-size: 0.7em; }
             td, th { padding: 4px 2px; }
-            /* Make quest name column wider and wrap text */
-            .quest-link { 
-                display: block; 
-                max-width: 150px; 
-                word-wrap: break-word; 
-                white-space: normal; 
-                line-height: 1.3;
-            }
-            /* Hide less important columns: Order(3), HM+(4), Profession(8), Prerequisite(7), Reward(9) */
+            /* Hide less important columns: Bonus(3), HM+B(4), Giver(7), Type(9), Profession(10), Prerequisite(11), Reward(12) */
             th:nth-child(3), td:nth-child(3),
             th:nth-child(4), td:nth-child(4),
             th:nth-child(7), td:nth-child(7),
-            th:nth-child(8), td:nth-child(8),
-            th:nth-child(9), td:nth-child(9) { display: none; }
+            th:nth-child(9), td:nth-child(9),
+            th:nth-child(10), td:nth-child(10),
+            th:nth-child(11), td:nth-child(11),
+            th:nth-child(12), td:nth-child(12) { display: none; }
+            /* Keep: Done(1), HM(2), #(5), Quest(6), Location(8) */
         }
         
         @media (max-width: 480px) {
             .header h1 { display: none; }
-            /* Also hide: Location(6), Profession(8) */
-            th:nth-child(6), td:nth-child(6),
+            /* Also hide Location(8) on very small screens */
             th:nth-child(8), td:nth-child(8) { display: none; }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <h1 style="cursor:pointer;" onclick="location.reload()" title="Reload page">
-            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" onerror="this.style.display='none'">
+        <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page">
+            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" onerror="this.style.display='none'" onload="document.getElementById('main-header').classList.add('loaded')">
             Guild Wars Companion
         </h1>
         <div class="char-selector">
@@ -32058,10 +32056,12 @@
             const data = JSON.parse(localStorage.getItem(getProfessionKey()) || '{}');
             const primary = data.primary || '';
             const secondary = data.secondary || '';
+            console.log('[Load Professions] Loaded from storage:', { primary, secondary });
             
             // Set hidden input values
             document.getElementById('primary-prof').value = primary;
             document.getElementById('secondary-prof').value = secondary;
+            console.log('[Load Professions] Set dropdown values to:', primary || '(empty)', secondary || '(empty)');
             
             // Update displayed values in custom dropdowns
             const profMap = {
@@ -32093,6 +32093,12 @@
             }
             
             applyProfessionHighlighting();
+            
+            // Update armor filtering based on loaded profession
+            if (typeof updateArmorPreviews === 'function') updateArmorPreviews();
+            if (typeof updateArmorVisibility === 'function') updateArmorVisibility();
+            if (typeof specialArmorRestrict === 'function') specialArmorRestrict();
+            
             updateAllProgress(); // Update counters after profession highlighting
         }
         
@@ -32349,11 +32355,24 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             } else if (category === 'cartographer') {
                 document.getElementById('area-cartographer').classList.add('active');
             } else if (category === 'armor') {
+                console.log('[Tab Switch] Switching to Armor tab');
                 document.getElementById('area-armor').classList.add('active');
-                try { updateArmorPreviews && updateArmorPreviews(); } catch(e) {}
-                try { updateArmorVisibility && updateArmorVisibility(); } catch(e) {}
-                try { specialArmorRestrict && specialArmorRestrict(); } catch(e) {}
-                try { updateProgress && updateProgress('armor'); } catch(e) {}
+                try { 
+                    console.log('[Tab Switch] Calling updateArmorPreviews');
+                    updateArmorPreviews && updateArmorPreviews(); 
+                } catch(e) { console.error('[Tab Switch] updateArmorPreviews failed:', e); }
+                try { 
+                    console.log('[Tab Switch] Calling specialArmorRestrict FIRST');
+                    specialArmorRestrict && specialArmorRestrict(); 
+                } catch(e) { console.error('[Tab Switch] specialArmorRestrict failed:', e); }
+                try { 
+                    console.log('[Tab Switch] Calling updateArmorVisibility AFTER restrict');
+                    updateArmorVisibility && updateArmorVisibility(); 
+                } catch(e) { console.error('[Tab Switch] updateArmorVisibility failed:', e); }
+                try { 
+                    console.log('[Tab Switch] Calling updateProgress');
+                    updateProgress && updateProgress('armor'); 
+                } catch(e) { console.error('[Tab Switch] updateProgress failed:', e); }
             } else if (category === 'minis') {
                 document.getElementById('area-minis').classList.add('active');
             } else if (category === 'menagerie') {
@@ -32829,9 +32848,11 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         });
         
         function applyFilters(areaId) {
+            console.log('[applyFilters] Called for area:', areaId);
             const container = document.querySelector(`.filters[data-area="${areaId}"]`);
             const activeType = container.querySelector('.filter-btn.active:not(.prof-warrior):not(.prof-ranger):not(.prof-monk):not(.prof-necromancer):not(.prof-mesmer):not(.prof-elementalist):not(.prof-assassin):not(.prof-ritualist):not(.prof-paragon):not(.prof-dervish)');
             const typeFilter = activeType ? activeType.dataset.filter : 'all';
+            console.log('[applyFilters] Active campaign filter:', typeFilter);
             
             const activeProfs = [];
             container.querySelectorAll('.filter-btn.active').forEach(btn => {
@@ -32894,8 +32915,17 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                         showProf = activeProfs.includes(rowProf);
                     }
                     
+                    // Special handling for armor: check profession-based visibility from dropdown
+                    let professionAllowed = true;
+                    if (areaId === 'armor') {
+                        const armorProf = (row.dataset.profession || '').toLowerCase();
+                        const primary = document.getElementById('primary-prof') ? document.getElementById('primary-prof').value : '';
+                        const selectedProf = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
+                        professionAllowed = (armorProf === 'all' || armorProf === selectedProf);
+                    }
+                    
                     const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
-                    row.classList.toggle('hidden', !(showType && showProf) || restricted);
+                    row.classList.toggle('hidden', !(showType && showProf && professionAllowed) || restricted);
                 }
             });
             
@@ -33156,37 +33186,42 @@ function updateArmorPreviews() {
         setArmorImage(mImg, armorCandidatesFor(prof, slug, 'm'));
     });
 }
-(document.getElementById('primary-prof')||{})&& (function(el){ if(el && el.addEventListener){ el.addEventListener('change', function(){ try{ updateArmorPreviews && updateArmorPreviews(); updateArmorVisibility && updateArmorVisibility(); specialArmorRestrict && specialArmorRestrict(); updateAllProgress && updateAllProgress(); }catch(e){} }); } })(document.getElementById('primary-prof')); 
-updateArmorPreviews();
-        specialArmorRestrict();
-        if (typeof updateAllProgress === 'function') { updateAllProgress(); }
+(document.getElementById('primary-prof')||{})&& (function(el){ if(el && el.addEventListener){ el.addEventListener('change', function(){ try{ updateArmorPreviews && updateArmorPreviews(); updateArmorVisibility && updateArmorVisibility(); specialArmorRestrict && specialArmorRestrict(); updateAllProgress && updateAllProgress(); }catch(e){} }); } })(document.getElementById('primary-prof'));
 
 
         function updateArmorVisibility() {
     const primary = document.getElementById('primary-prof') ? document.getElementById('primary-prof').value : '';
     const prof = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
-    const known = ['warrior','ranger','monk','necromancer','mesmer','elementalist','assassin','ritualist','paragon','dervish'];
+    console.log('[Armor Filter] Primary profession:', primary, '→ Using:', prof);
+    let hiddenCount = 0, visibleCount = 0;
+    let hiddenExamples = [];
     document.querySelectorAll('tr[data-area="armor"][data-id]').forEach(row => {
-        const link = row.querySelector('a.quest-link');
-        const href = link ? (link.getAttribute('href') || '') : '';
-        const m = href.match(/\/wiki\/(.+)$/);
-        const slug = m ? decodeURIComponent(m[1]).toLowerCase() : '';
-        let allowed = true;
-        const pref = known.find(p => slug.startsWith(p + '_'));
-        if (pref) { allowed = (pref === prof); }
-        if (/^elite_(exotic|imperial)_armor$/.test(slug)) { allowed = (prof === 'assassin' || prof === 'ritualist'); }
-        row.classList.toggle('hidden-restrict', !allowed);
-        row.classList.toggle('hidden', !allowed);
+        const rowProf = (row.dataset.profession || '').toLowerCase();
+        const armorName = row.querySelector('a.quest-link')?.textContent || row.dataset.id;
+        // 'all' means available to all professions (like Obsidian Armor)
+        const allowed = (rowProf === 'all' || rowProf === prof);
+        const restricted = row.classList.contains('hidden-restrict');
+        // Hide if EITHER profession doesn't match OR it's restricted by campaign
+        row.classList.toggle('hidden', !allowed || restricted);
+        if (allowed && !restricted) {
+            visibleCount++;
+        } else {
+            hiddenCount++;
+            if (hiddenExamples.length < 5) hiddenExamples.push(`${armorName} (${rowProf})`);
+        }
     });
+    console.log(`[Armor Filter] Visible: ${visibleCount}, Hidden: ${hiddenCount}`);
+    console.log('[Armor Filter] Hidden examples:', hiddenExamples);
 }
-        (document.getElementById('primary-prof')||{}).addEventListener?.('change', function(){ updateArmorPreviews?.(); updateArmorVisibility(); updateAllProgress?.(); });
-        updateArmorVisibility();
+        (document.getElementById('primary-prof')||{}).addEventListener?.('change', function(){ updateArmorPreviews?.(); specialArmorRestrict?.(); updateArmorVisibility(); updateAllProgress?.(); });
     
                 function specialArmorRestrict() {
             const primary = document.getElementById('primary-prof') ? document.getElementById('primary-prof').value : '';
             const prof = (primary && primary !== 'none') ? primary.toLowerCase() : 'warrior';
             const isAR = (prof === 'assassin' || prof === 'ritualist');
             const isPd = (prof === 'paragon' || prof === 'dervish');
+            console.log('[Special Armor] Applying special restrictions for:', prof, { isAR, isPd });
+            let restrictedCount = 0;
             document.querySelectorAll('tr[data-area="armor"]').forEach(row => {
                 const id = row.dataset.id || '';
                 let hide = false;
@@ -33203,10 +33238,11 @@ updateArmorPreviews();
                     hide = hide || isAR;
                 }
                 row.classList.toggle('hidden-restrict', hide);
-                row.classList.toggle('hidden', hide);
+                // Don't set 'hidden' here - let updateArmorVisibility and applyFilters handle it
+                if (hide) restrictedCount++;
             });
+            console.log('[Special Armor] Restricted', restrictedCount, 'special armor pieces');
         }
-        specialArmorRestrict();
         console.log('GW Companion initialized!');
     </script>
     
@@ -33214,10 +33250,18 @@ updateArmorPreviews();
         <div style="display:flex;justify-content:center;align-items:center;gap:15px;flex-wrap:wrap;">
             <span>Created by <strong style="color:#ffd700;">Dadero</strong></span>
             <span style="color:#30363d;">|</span>
-            <a href="https://discord.com/users/810553351020085270" target="_blank" style="color:#5865F2;text-decoration:none;display:flex;align-items:center;gap:5px;" title="Discord: daestro420">
+            <span id="discord-copy" style="color:#5865F2;display:flex;align-items:center;gap:5px;cursor:pointer;transition:opacity 0.2s;" title="Click to copy Discord username" onclick="
+                navigator.clipboard.writeText('daestro420').then(() => {
+                    const el = document.getElementById('discord-copy');
+                    const orig = el.innerHTML;
+                    el.innerHTML = '<svg width=16 height=16 viewBox=\'0 0 24 24\' fill=\'currentColor\'><path d=\'M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z\'/></svg> ✓ Copied!';
+                    el.style.opacity = '0.7';
+                    setTimeout(() => { el.innerHTML = orig; el.style.opacity = '1'; }, 1500);
+                });
+            ">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M20.317 4.37a19.791 19.791 0 0 0-4.885-1.515a.074.074 0 0 0-.079.037c-.21.375-.444.864-.608 1.25a18.27 18.27 0 0 0-5.487 0a12.64 12.64 0 0 0-.617-1.25a.077.077 0 0 0-.079-.037A19.736 19.736 0 0 0 3.677 4.37a.07.07 0 0 0-.032.027C.533 9.046-.32 13.58.099 18.057a.082.082 0 0 0 .031.057a19.9 19.9 0 0 0 5.993 3.03a.078.078 0 0 0 .084-.028a14.09 14.09 0 0 0 1.226-1.994a.076.076 0 0 0-.041-.106a13.107 13.107 0 0 1-1.872-.892a.077.077 0 0 1-.008-.128a10.2 10.2 0 0 0 .372-.292a.074.074 0 0 1 .077-.01c3.928 1.793 8.18 1.793 12.062 0a.074.074 0 0 1 .078.01c.12.098.246.198.373.292a.077.077 0 0 1-.006.127a12.299 12.299 0 0 1-1.873.892a.077.077 0 0 0-.041.107c.36.698.772 1.362 1.225 1.993a.076.076 0 0 0 .084.028a19.839 19.839 0 0 0 6.002-3.03a.077.077 0 0 0 .032-.054c.5-5.177-.838-9.674-3.549-13.66a.061.061 0 0 0-.031-.03zM8.02 15.33c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.956-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.956 2.418-2.157 2.418zm7.975 0c-1.183 0-2.157-1.085-2.157-2.419c0-1.333.955-2.419 2.157-2.419c1.21 0 2.176 1.096 2.157 2.42c0 1.333-.946 2.418-2.157 2.418z"/></svg>
                 daestro420
-            </a>
+            </span>
             <span style="color:#30363d;">|</span>
             <a href="https://github.com/dadero-deadline/gw-companion/issues" target="_blank" style="color:#58a6ff;text-decoration:none;">📝 Feedback</a>
         </div>
