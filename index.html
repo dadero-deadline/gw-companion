@@ -32035,6 +32035,12 @@
             const data = { primary, secondary };
             localStorage.setItem(getProfessionKey(), JSON.stringify(data));
             applyProfessionHighlighting();
+            
+            // Force armor filtering update
+            if (typeof updateArmorPreviews === 'function') updateArmorPreviews();
+            if (typeof updateArmorVisibility === 'function') updateArmorVisibility();
+            if (typeof specialArmorRestrict === 'function') specialArmorRestrict();
+            
             updateAllProgress(); // Update counters after profession change
         }
         
