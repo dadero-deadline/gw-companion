@@ -919,9 +919,9 @@ TITLES = [
     ("leg_guard", "Legendary Guardian", "Guardian", 1, 3, "legendary", "Core", "All 3 Guardians"),
     ("leg_skill", "Legendary Skill Hunter", "Skill_Hunter", 1, 3, "legendary", "Core", "All 3 Skill Hunters"),
     ("leg_vanq", "Legendary Vanquisher", "Vanquisher", 1, 3, "legendary", "Core", "All 3 Vanquishers"),
-    ("survivor1", "Survivor (Tier 1)", "Survivor", 1, 140600, "legendary", "Core", "140,600 XP ohne Tod"),
-    ("survivor2", "Survivor (Tier 2)", "Survivor", 2, 587500, "legendary", "Core", "587,500 XP ohne Tod"),
-    ("survivor3", "Survivor (Tier 3 - Max)", "Survivor", 3, 1337500, "legendary", "Core", "1,337,500 XP ohne Tod"),
+    ("survivor1", "Survivor (Tier 1)", "Survivor", 1, 140600, "legendary", "Core", "140,600 XP without dying"),
+    ("survivor2", "Survivor (Tier 2)", "Survivor", 2, 587500, "legendary", "Core", "587,500 XP without dying"),
+    ("survivor3", "Survivor (Tier 3 - Max)", "Survivor", 3, 1337500, "legendary", "Core", "1,337,500 XP without dying"),
 ]
 
 def generate_titles_html():
@@ -972,7 +972,7 @@ def generate_titles_html():
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
         
         # Legendary titles have auto-calculated progress, no manual input
-        if ttype == "legendary":
+        if ttype == "legendary" and tid in ("leg_cart", "leg_guard", "leg_skill", "leg_vanq"):
             progress_html = f'''
                             <span style="color:#8b949e;font-style:italic;">Auto-calculated</span>'''
         else:
