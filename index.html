@@ -17376,8 +17376,8 @@
                         <input type="checkbox" id="daily-mission" class="quest-checkbox" style="width:22px;height:22px;" data-daily="mission">
                         <div style="flex:1;">
                             <span style="color:#238636;font-weight:bold;">🗺️ Mission:</span>
-                            <a href="https://wiki.guildwars.com/wiki/Raisu_Palace_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Raisu Palace</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Factions)</span>
+                            <a id="daily-mission-link" href="https://wiki.guildwars.com/wiki/Raisu_Palace_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Raisu Palace</a>
+                            <span id="daily-mission-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Factions)</span>
                         </div>
                     </div>
                     
@@ -17386,8 +17386,8 @@
                         <input type="checkbox" id="daily-bounty" class="quest-checkbox" style="width:22px;height:22px;" data-daily="bounty">
                         <div style="flex:1;">
                             <span style="color:#1f6feb;font-weight:bold;">🎯 Bounty:</span>
-                            <a href="https://wiki.guildwars.com/wiki/Charged_Blackness_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Charged Blackness</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
+                            <a id="daily-bounty-link" href="https://wiki.guildwars.com/wiki/Charged_Blackness_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Charged Blackness</a>
+                            <span id="daily-bounty-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
                         </div>
                     </div>
                     
@@ -17396,8 +17396,8 @@
                         <input type="checkbox" id="daily-vanquish" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanquish">
                         <div style="flex:1;">
                             <span style="color:#f85149;font-weight:bold;">⚔️ Vanquish:</span>
-                            <a href="https://wiki.guildwars.com/wiki/The_Breach_(Zaishen_vanquish)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">The Breach</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
+                            <a id="daily-vanquish-link" href="https://wiki.guildwars.com/wiki/The_Breach_(Zaishen_vanquish)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">The Breach</a>
+                            <span id="daily-vanquish-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
                         </div>
                     </div>
                     
@@ -17406,7 +17406,7 @@
                         <input type="checkbox" id="daily-combat" class="quest-checkbox" style="width:22px;height:22px;" data-daily="combat">
                         <div style="flex:1;">
                             <span style="color:#a855f7;font-weight:bold;">🏆 PvP:</span>
-                            <a href="https://wiki.guildwars.com/wiki/Heroes%27_Ascent_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Heroes' Ascent</a>
+                            <a id="daily-combat-link" href="https://wiki.guildwars.com/wiki/Heroes%27_Ascent_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Heroes' Ascent</a>
                         </div>
                     </div>
                 </div>
@@ -17417,8 +17417,8 @@
                         <input type="checkbox" id="daily-vanguard" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanguard">
                         <div style="flex:1;">
                             <span style="color:#ffa657;font-weight:bold;">🛡️ Vanguard:</span>
-                            <a href="https://wiki.guildwars.com/wiki/Vanguard_Annihilation:_Undead" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Vanguard Annihilation: Undead</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Pre-Searing)</span>
+                            <a id="daily-vanguard-link" href="https://wiki.guildwars.com/wiki/Vanguard_Annihilation:_Undead" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Vanguard Annihilation: Undead</a>
+                            <span id="daily-vanguard-region" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Pre-Searing)</span>
                         </div>
                     </div>
                 </div>
@@ -33112,9 +33112,379 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at midnight UTC`;
         }
         
+        const ZAISHEN_MISSION_START_UTC = Date.UTC(2025, 10, 26);
+        const ZAISHEN_MISSIONS_DATA = [
+            { name: 'Augury Rock', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Augury_Rock_(Zaishen_quest)' },
+            { name: 'Grand Court of Sebelkeh', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Grand_Court_of_Sebelkeh_(Zaishen_quest)' },
+            { name: 'Ice Caves of Sorrow', campaign: 'Prophecies', region: 'Southern Shiverpeaks', wiki: 'Ice_Caves_of_Sorrow_(Zaishen_quest)' },
+            { name: 'Raisu Palace', campaign: 'Factions', region: 'Kaineng City', wiki: 'Raisu_Palace_(Zaishen_quest)' },
+            { name: 'Gate of Desolation', campaign: 'Nightfall', region: 'Desolation', wiki: 'Gate_of_Desolation_(Zaishen_quest)' },
+            { name: 'Thirsty River', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Thirsty_River_(Zaishen_quest)' },
+            { name: 'Blacktide Den', campaign: 'Nightfall', region: 'Istan', wiki: 'Blacktide_Den_(Zaishen_quest)' },
+            { name: 'Against the Charr', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Against_the_Charr_(Zaishen_quest)' },
+            { name: "Abaddon's Mouth", campaign: 'Prophecies', region: 'Ring of Fire', wiki: 'Abaddon%27s_Mouth_(Zaishen_quest)' },
+            { name: 'Nundu Bay', campaign: 'Nightfall', region: 'Kourna', wiki: 'Nundu_Bay_(Zaishen_quest)' },
+            { name: 'Divinity Coast', campaign: 'Prophecies', region: 'Kryta', wiki: 'Divinity_Coast_(Zaishen_quest)' },
+            { name: 'Zen Daijun', campaign: 'Factions', region: 'Shing Jea', wiki: 'Zen_Daijun_(Zaishen_quest)' },
+            { name: 'Pogahn Passage', campaign: 'Nightfall', region: 'Kourna', wiki: 'Pogahn_Passage_(Zaishen_quest)' },
+            { name: 'Tahnnakai Temple', campaign: 'Factions', region: 'Kaineng City', wiki: 'Tahnnakai_Temple_(Zaishen_quest)' },
+            { name: 'The Great Northern Wall', campaign: 'Prophecies', region: 'Ascalon', wiki: 'The_Great_Northern_Wall_(Zaishen_quest)' },
+            { name: 'Dasha Vestibule', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Dasha_Vestibule_(Zaishen_quest)' },
+            { name: 'The Wilds', campaign: 'Prophecies', region: 'Maguuma', wiki: 'The_Wilds_(Zaishen_quest)' },
+            { name: 'Unwaking Waters', campaign: 'Factions', region: 'Jade Sea', wiki: 'Unwaking_Waters_(Zaishen_quest)' },
+            { name: 'Chahbek Village', campaign: 'Nightfall', region: 'Istan', wiki: 'Chahbek_Village_(Zaishen_quest)' },
+            { name: 'Aurora Glade', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Aurora_Glade_(Zaishen_quest)' },
+            { name: 'A Time for Heroes', campaign: 'Eye of the North', region: 'Depths', wiki: 'A_Time_for_Heroes_(Zaishen_quest)' },
+            { name: 'Consulate Docks', campaign: 'Nightfall', region: 'Istan', wiki: 'Consulate_Docks_(Zaishen_quest)' },
+            { name: 'Ring of Fire', campaign: 'Prophecies', region: 'Ring of Fire', wiki: 'Ring_of_Fire_(Zaishen_quest)' },
+            { name: 'Nahpui Quarter', campaign: 'Factions', region: 'Kaineng City', wiki: 'Nahpui_Quarter_(Zaishen_quest)' },
+            { name: "The Dragon's Lair", campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'The_Dragon%27s_Lair_(Zaishen_quest)' },
+            { name: 'Dzagonur Bastion', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Dzagonur_Bastion_(Zaishen_quest)' },
+            { name: "D'Alessio Seaboard", campaign: 'Prophecies', region: 'Kryta', wiki: 'D%27Alessio_Seaboard_(Zaishen_quest)' },
+            { name: 'Assault on the Stronghold', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Assault_on_the_Stronghold_(Zaishen_quest)' },
+            { name: 'The Eternal Grove', campaign: 'Factions', region: 'Echovald', wiki: 'The_Eternal_Grove_(Zaishen_quest)' },
+            { name: 'Sanctum Cay', campaign: 'Prophecies', region: 'Kryta', wiki: 'Sanctum_Cay_(Zaishen_quest)' },
+            { name: 'Rilohn Refuge', campaign: 'Nightfall', region: 'Kourna', wiki: 'Rilohn_Refuge_(Zaishen_quest)' },
+            { name: 'Warband of Brothers', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Warband_of_Brothers_(Zaishen_quest)' },
+            { name: 'Borlis Pass', campaign: 'Prophecies', region: 'Northern Shiverpeaks', wiki: 'Borlis_Pass_(Zaishen_quest)' },
+            { name: 'Imperial Sanctum', campaign: 'Factions', region: 'Kaineng City', wiki: 'Imperial_Sanctum_(Zaishen_quest)' },
+            { name: 'Moddok Crevice', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Moddok_Crevice_(Zaishen_quest)' },
+            { name: 'Nolani Academy', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Nolani_Academy_(Zaishen_quest)' },
+            { name: "Destruction's Depths", campaign: 'Eye of the North', region: 'Depths', wiki: 'Destruction%27s_Depths_(Zaishen_quest)' },
+            { name: 'Venta Cemetery', campaign: 'Nightfall', region: 'Kourna', wiki: 'Venta_Cemetery_(Zaishen_quest)' },
+            { name: 'Fort Ranik', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Fort_Ranik_(Zaishen_quest)' },
+            { name: 'A Gate Too Far', campaign: 'Eye of the North', region: 'Depths', wiki: 'A_Gate_Too_Far_(Zaishen_quest)' },
+            { name: "Minister Cho's Estate", campaign: 'Factions', region: 'Shing Jea', wiki: 'Minister_Cho%27s_Estate_(Zaishen_quest)' },
+            { name: 'Thunderhead Keep', campaign: 'Prophecies', region: 'Southern Shiverpeaks', wiki: 'Thunderhead_Keep_(Zaishen_quest)' },
+            { name: 'Tihark Orchard', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Tihark_Orchard_(Zaishen_quest)' },
+            { name: 'Finding the Bloodstone', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Finding_the_Bloodstone_(Zaishen_quest)' },
+            { name: 'Dunes of Despair', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Dunes_of_Despair_(Zaishen_quest)' },
+            { name: 'Vizunah Square', campaign: 'Factions', region: 'Kaineng City', wiki: 'Vizunah_Square_(Zaishen_quest)' },
+            { name: 'Jokanur Diggings', campaign: 'Nightfall', region: 'Istan', wiki: 'Jokanur_Diggings_(Zaishen_quest)' },
+            { name: 'Iron Mines of Moladune', campaign: 'Prophecies', region: 'Southern Shiverpeaks', wiki: 'Iron_Mines_of_Moladune_(Zaishen_quest)' },
+            { name: 'Kodonur Crossroads', campaign: 'Nightfall', region: 'Kourna', wiki: 'Kodonur_Crossroads_(Zaishen_quest)' },
+            { name: 'G.O.L.E.M.', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'G.O.L.E.M._(Zaishen_quest)' },
+            { name: 'Arborstone', campaign: 'Factions', region: 'Echovald', wiki: 'Arborstone_(Zaishen_quest)' },
+            { name: 'Gates of Kryta', campaign: 'Prophecies', region: 'Kryta', wiki: 'Gates_of_Kryta_(Zaishen_quest)' },
+            { name: 'Gate of Madness', campaign: 'Nightfall', region: 'Realm of Torment', wiki: 'Gate_of_Madness_(Zaishen_quest)' },
+            { name: 'The Elusive Golemancer', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'The_Elusive_Golemancer_(Zaishen_quest)' },
+            { name: 'Riverside Province', campaign: 'Prophecies', region: 'Kryta', wiki: 'Riverside_Province_(Zaishen_quest)' },
+            { name: 'Boreas Seabed', campaign: 'Factions', region: 'Jade Sea', wiki: 'Boreas_Seabed_(Zaishen_quest)' },
+            { name: 'Ruins of Morah', campaign: 'Nightfall', region: 'Desolation', wiki: 'Ruins_of_Morah_(Zaishen_quest)' },
+            { name: "Hell's Precipice", campaign: 'Prophecies', region: 'Ring of Fire', wiki: 'Hell%27s_Precipice_(Zaishen_quest)' },
+            { name: 'Ruins of Surmia', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Ruins_of_Surmia_(Zaishen_quest)' },
+            { name: 'Curse of the Nornbear', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Curse_of_the_Nornbear_(Zaishen_quest)' },
+            { name: 'Sunjiang District', campaign: 'Factions', region: 'Kaineng City', wiki: 'Sunjiang_District_(Zaishen_quest)' },
+            { name: 'Elona Reach', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Elona_Reach_(Zaishen_quest)' },
+            { name: 'Gate of Pain', campaign: 'Nightfall', region: 'Realm of Torment', wiki: 'Gate_of_Pain_(Zaishen_quest)' },
+            { name: 'Blood Washes Blood', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Blood_Washes_Blood_(Zaishen_quest)' },
+            { name: 'Bloodstone Fen', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Bloodstone_Fen_(Zaishen_quest)' },
+            { name: "Jennur's Horde", campaign: 'Nightfall', region: 'Desolation', wiki: 'Jennur%27s_Horde_(Zaishen_quest)' },
+            { name: 'Gyala Hatchery', campaign: 'Factions', region: 'Jade Sea', wiki: 'Gyala_Hatchery_(Zaishen_quest)' },
+            { name: "Abaddon's Gate", campaign: 'Nightfall', region: 'Realm of Torment', wiki: 'Abaddon%27s_Gate_(Zaishen_quest)' },
+            { name: 'The Frost Gate', campaign: 'Prophecies', region: 'Northern Shiverpeaks', wiki: 'The_Frost_Gate_(Zaishen_quest)' }
+        ];
+        
+        const ZAISHEN_BOUNTY_START_UTC = Date.UTC(2025, 10, 20);
+        const ZAISHEN_BOUNTIES_DATA = [
+            { name: 'Droajam, Mage of the Sands', campaign: 'Nightfall', region: 'Desolation', wiki: 'Droajam,_Mage_of_the_Sands_(Zaishen_quest)' },
+            { name: 'Royen Beastkeeper', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Royen_Beastkeeper_(Zaishen_quest)' },
+            { name: 'Eldritch Ettin', campaign: 'Prophecies', region: 'Southern Shiverpeaks', wiki: 'Eldritch_Ettin_(Zaishen_quest)' },
+            { name: 'Vengeful Aatxe', campaign: 'Core', region: 'Underworld', wiki: 'Vengeful_Aatxe_(Zaishen_quest)' },
+            { name: 'Fronis Irontoe', campaign: 'Eye of the North', region: 'Depths', wiki: 'Fronis_Irontoe_(Zaishen_quest)' },
+            { name: 'Urgoz', campaign: 'Factions', region: 'Echovald', wiki: 'Urgoz_(Zaishen_quest)' },
+            { name: 'Fenrir', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Fenrir_(Zaishen_quest)' },
+            { name: 'Selvetarm', campaign: 'Eye of the North', region: 'Depths', wiki: 'Selvetarm_(Zaishen_quest)' },
+            { name: 'Mohby Windbeak', campaign: 'Nightfall', region: 'Istan', wiki: 'Mohby_Windbeak_(Zaishen_quest)' },
+            { name: 'Charged Blackness', campaign: 'Prophecies', region: 'Ring of Fire', wiki: 'Charged_Blackness_(Zaishen_quest)' },
+            { name: 'Rotscale', campaign: 'Prophecies', region: 'Kryta', wiki: 'Rotscale_(Zaishen_quest)' },
+            { name: 'Zoldark the Unholy', campaign: 'Eye of the North', region: 'Depths', wiki: 'Zoldark_the_Unholy_(Zaishen_quest)' },
+            { name: 'Korshek the Immolated', campaign: 'Nightfall', region: 'Desolation', wiki: 'Korshek_the_Immolated_(Zaishen_quest)' },
+            { name: 'Myish, Lady of the Lake', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Myish,_Lady_of_the_Lake_(Zaishen_quest)' },
+            { name: 'Frostmaw the Kinslayer', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Frostmaw_the_Kinslayer_(Zaishen_quest)' },
+            { name: 'Kunvie Firewing', campaign: 'Factions', region: 'Echovald', wiki: 'Kunvie_Firewing_(Zaishen_quest)' },
+            { name: "Z'him Monns", campaign: 'Nightfall', region: 'Desolation', wiki: 'Z%27him_Monns_(Zaishen_quest)' },
+            { name: 'The Greater Darkness', campaign: 'Eye of the North', region: 'Depths', wiki: 'The_Greater_Darkness_(Zaishen_quest)' },
+            { name: 'TPS Regulator Golem', campaign: 'Eye of the North', region: 'Depths', wiki: 'TPS_Regulator_Golem_(Zaishen_quest)' },
+            { name: 'Plague of Destruction', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Plague_of_Destruction_(Zaishen_quest)' },
+            { name: 'The Darknesses', campaign: 'Eye of the North', region: 'Depths', wiki: 'The_Darknesses_(Zaishen_quest)' },
+            { name: 'Admiral Kantoh', campaign: 'Factions', region: 'Jade Sea', wiki: 'Admiral_Kantoh_(Zaishen_quest)' },
+            { name: 'Borrguus Blisterbark', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Borrguus_Blisterbark_(Zaishen_quest)' },
+            { name: 'Forgewight', campaign: 'Eye of the North', region: 'Depths', wiki: 'Forgewight_(Zaishen_quest)' },
+            { name: 'Baubao Wavewrath', campaign: 'Factions', region: 'Jade Sea', wiki: 'Baubao_Wavewrath_(Zaishen_quest)' },
+            { name: 'Joffs the Mitigator', campaign: 'Nightfall', region: 'Kourna', wiki: 'Joffs_the_Mitigator_(Zaishen_quest)' },
+            { name: 'Rragar Maneater', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Rragar_Maneater_(Zaishen_quest)' },
+            { name: 'Chung, the Attuned', campaign: 'Factions', region: 'Kaineng City', wiki: 'Chung,_the_Attuned_(Zaishen_quest)' },
+            { name: 'Lord Jadoth', campaign: 'Core', region: 'Domain of Anguish', wiki: 'Lord_Jadoth_(Zaishen_quest)' },
+            { name: 'Nulfastu, Earthbound', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Nulfastu,_Earthbound_(Zaishen_quest)' },
+            { name: 'The Iron Forgeman', campaign: 'Eye of the North', region: 'Depths', wiki: 'The_Iron_Forgeman_(Zaishen_quest)' },
+            { name: 'Magmus', campaign: 'Eye of the North', region: 'Depths', wiki: 'Magmus_(Zaishen_quest)' },
+            { name: 'Mobrin, Lord of the Marsh', campaign: 'Factions', region: 'Echovald', wiki: 'Mobrin,_Lord_of_the_Marsh_(Zaishen_quest)' },
+            { name: 'Jarimiya the Unmerciful', campaign: 'Nightfall', region: 'Desolation', wiki: 'Jarimiya_the_Unmerciful_(Zaishen_quest)' },
+            { name: 'Duncan the Black', campaign: 'Eye of the North', region: 'Depths', wiki: 'Duncan_the_Black_(Zaishen_quest)' },
+            { name: 'Quansong Spiritspeak', campaign: 'Factions', region: 'Echovald', wiki: 'Quansong_Spiritspeak_(Zaishen_quest)' },
+            { name: 'The Stygian Underlords', campaign: 'Core', region: 'Domain of Anguish', wiki: 'The_Stygian_Underlords_(Zaishen_quest)' },
+            { name: 'Fozzy Yeoryios', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Fozzy_Yeoryios_(Zaishen_quest)' },
+            { name: 'The Black Beast of Arrgh', campaign: 'Eye of the North', region: 'Depths', wiki: 'The_Black_Beast_of_Arrgh_(Zaishen_quest)' },
+            { name: 'Arachni', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Arachni_(Zaishen_quest)' },
+            { name: 'The Four Horsemen', campaign: 'Core', region: 'Underworld', wiki: 'The_Four_Horsemen_(Zaishen_quest)' },
+            { name: 'Remnant of Antiquities', campaign: 'Eye of the North', region: 'Depths', wiki: 'Remnant_of_Antiquities_(Zaishen_quest)' },
+            { name: 'Arbor Earthcall', campaign: 'Factions', region: 'Jade Sea', wiki: 'Arbor_Earthcall_(Zaishen_quest)' },
+            { name: 'Prismatic Ooze', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Prismatic_Ooze_(Zaishen_quest)' },
+            { name: 'Lord Khobay', campaign: 'Nightfall', region: 'Desolation', wiki: 'Lord_Khobay_(Zaishen_quest)' },
+            { name: 'Jedeh the Mighty', campaign: 'Nightfall', region: 'Desolation', wiki: 'Jedeh_the_Mighty_(Zaishen_quest)' },
+            { name: 'Ssuns, Blessed of Dwayna', campaign: 'Nightfall', region: 'Realm of Torment', wiki: 'Ssuns,_Blessed_of_Dwayna_(Zaishen_quest)' },
+            { name: 'Justiciar Thommis', campaign: 'Prophecies', region: 'Kryta', wiki: 'Justiciar_Thommis_(Zaishen_quest)' },
+            { name: 'Harn and Maxine Coldstone', campaign: 'Prophecies', region: 'Southern Shiverpeaks', wiki: 'Harn_and_Maxine_Coldstone_(Zaishen_quest)' },
+            { name: 'Pywatt the Swift', campaign: 'Nightfall', region: 'Kourna', wiki: 'Pywatt_the_Swift_(Zaishen_quest)' },
+            { name: 'Fendi Nin', campaign: 'Eye of the North', region: 'Depths', wiki: 'Fendi_Nin_(Zaishen_quest)' },
+            { name: 'Mungri Magicbox', campaign: 'Nightfall', region: 'Istan', wiki: 'Mungri_Magicbox_(Zaishen_quest)' },
+            { name: 'Priest of Menzies', campaign: 'Core', region: 'Fissure of Woe', wiki: 'Priest_of_Menzies_(Zaishen_quest)' },
+            { name: 'Ilsundur, Lord of Fire', campaign: 'Eye of the North', region: 'Depths', wiki: 'Ilsundur,_Lord_of_Fire_(Zaishen_quest)' },
+            { name: 'Kepkhet Marrowfeast', campaign: 'Nightfall', region: 'Desolation', wiki: 'Kepkhet_Marrowfeast_(Zaishen_quest)' },
+            { name: 'Commander Wahli', campaign: 'Factions', region: 'Jade Sea', wiki: 'Commander_Wahli_(Zaishen_quest)' },
+            { name: 'Kanaxai', campaign: 'Factions', region: 'Jade Sea', wiki: 'Kanaxai_(Zaishen_quest)' },
+            { name: 'Khabuus', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Khabuus_(Zaishen_quest)' },
+            { name: 'Molotov Rocktail', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Molotov_Rocktail_(Zaishen_quest)' },
+            { name: 'The Stygian Lords', campaign: 'Core', region: 'Domain of Anguish', wiki: 'The_Stygian_Lords_(Zaishen_quest)' },
+            { name: 'Dragon Lich', campaign: 'Prophecies', region: 'Ring of Fire', wiki: 'Dragon_Lich_(Zaishen_quest)' },
+            { name: 'Havok Soulwail', campaign: 'Eye of the North', region: 'Depths', wiki: 'Havok_Soulwail_(Zaishen_quest)' },
+            { name: 'Ghial the Bone Dancer', campaign: 'Nightfall', region: 'Desolation', wiki: 'Ghial_the_Bone_Dancer_(Zaishen_quest)' },
+            { name: 'Murakai, Lady of the Night', campaign: 'Eye of the North', region: 'Depths', wiki: 'Murakai,_Lady_of_the_Night_(Zaishen_quest)' },
+            { name: 'Rand Stormweaver', campaign: 'Prophecies', region: 'Northern Shiverpeaks', wiki: 'Rand_Stormweaver_(Zaishen_quest)' },
+            { name: 'Verata', campaign: 'Prophecies', region: 'Kryta', wiki: 'Verata_(Zaishen_quest)' }
+        ];
+        
+        const ZAISHEN_VANQUISH_START_UTC = Date.UTC(2025, 8, 9);
+        const ZAISHEN_VANQUISHES_DATA = [
+            { name: 'Jaya Bluffs', campaign: 'Factions', region: 'Shing Jea', wiki: 'Jaya_Bluffs_(Zaishen_vanquish)' },
+            { name: 'Holdings of Chokhin', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Holdings_of_Chokhin_(Zaishen_vanquish)' },
+            { name: 'Ice Cliff Chasms', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Ice_Cliff_Chasms_(Zaishen_vanquish)' },
+            { name: "Griffon's Mouth", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Griffon%27s_Mouth_(Zaishen_vanquish)' },
+            { name: 'Kinya Province', campaign: 'Factions', region: 'Shing Jea', wiki: 'Kinya_Province_(Zaishen_vanquish)' },
+            { name: 'Issnur Isles', campaign: 'Nightfall', region: 'Istan', wiki: 'Issnur_Isles_(Zaishen_vanquish)' },
+            { name: 'Jaga Moraine', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Jaga_Moraine_(Zaishen_vanquish)' },
+            { name: 'Ice Floe', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Ice_Floe_(Zaishen_vanquish)' },
+            { name: 'Maishang Hills', campaign: 'Factions', region: 'Jade Sea', wiki: 'Maishang_Hills_(Zaishen_vanquish)' },
+            { name: 'Jahai Bluffs', campaign: 'Nightfall', region: 'Kourna', wiki: 'Jahai_Bluffs_(Zaishen_vanquish)' },
+            { name: 'Riven Earth', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Riven_Earth_(Zaishen_vanquish)' },
+            { name: 'Icedome', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Icedome_(Zaishen_vanquish)' },
+            { name: "Minister Cho's Estate", campaign: 'Factions', region: 'Shing Jea', wiki: 'Minister_Cho%27s_Estate_(Zaishen_vanquish)' },
+            { name: 'Mehtani Keys', campaign: 'Nightfall', region: 'Istan', wiki: 'Mehtani_Keys_(Zaishen_vanquish)' },
+            { name: 'Sacnoth Valley', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Sacnoth_Valley_(Zaishen_vanquish)' },
+            { name: 'Iron Horse Mine', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Iron_Horse_Mine_(Zaishen_vanquish)' },
+            { name: 'Morostav Trail', campaign: 'Factions', region: 'Echovald', wiki: 'Morostav_Trail_(Zaishen_vanquish)' },
+            { name: 'Plains of Jarin', campaign: 'Nightfall', region: 'Istan', wiki: 'Plains_of_Jarin_(Zaishen_vanquish)' },
+            { name: 'Sparkfly Swamp', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Sparkfly_Swamp_(Zaishen_vanquish)' },
+            { name: 'Kessex Peak', campaign: 'Prophecies', region: 'Kryta', wiki: 'Kessex_Peak_(Zaishen_vanquish)' },
+            { name: 'Mourning Veil Falls', campaign: 'Factions', region: 'Echovald', wiki: 'Mourning_Veil_Falls_(Zaishen_vanquish)' },
+            { name: 'The Alkali Pan', campaign: 'Nightfall', region: 'Desolation', wiki: 'The_Alkali_Pan_(Zaishen_vanquish)' },
+            { name: 'Varajar Fells', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Varajar_Fells_(Zaishen_vanquish)' },
+            { name: "Lornar's Pass", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Lornar%27s_Pass_(Zaishen_vanquish)' },
+            { name: 'Pongmei Valley', campaign: 'Factions', region: 'Kaineng', wiki: 'Pongmei_Valley_(Zaishen_vanquish)' },
+            { name: 'The Floodplain of Mahnkelon', campaign: 'Nightfall', region: 'Kourna', wiki: 'The_Floodplain_of_Mahnkelon_(Zaishen_vanquish)' },
+            { name: 'Verdant Cascades', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Verdant_Cascades_(Zaishen_vanquish)' },
+            { name: "Majesty's Rest", campaign: 'Prophecies', region: 'Maguuma', wiki: 'Majesty%27s_Rest_(Zaishen_vanquish)' },
+            { name: 'Raisu Palace', campaign: 'Factions', region: 'Kaineng', wiki: 'Raisu_Palace_(Zaishen_vanquish)' },
+            { name: 'The Hidden City of Ahdashim', campaign: 'Nightfall', region: 'Vabbi', wiki: 'The_Hidden_City_of_Ahdashim_(Zaishen_vanquish)' },
+            { name: "Rhea's Crater", campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Rhea%27s_Crater_(Zaishen_vanquish)' },
+            { name: 'Mamnoon Lagoon', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Mamnoon_Lagoon_(Zaishen_vanquish)' },
+            { name: "Shadow's Passage", campaign: 'Factions', region: 'Echovald', wiki: 'Shadow%27s_Passage_(Zaishen_vanquish)' },
+            { name: 'The Mirror of Lyss', campaign: 'Nightfall', region: 'Vabbi', wiki: 'The_Mirror_of_Lyss_(Zaishen_vanquish)' },
+            { name: 'Saoshang Trail', campaign: 'Factions', region: 'Shing Jea', wiki: 'Saoshang_Trail_(Zaishen_vanquish)' },
+            { name: 'Nebo Terrace', campaign: 'Prophecies', region: 'Kryta', wiki: 'Nebo_Terrace_(Zaishen_vanquish)' },
+            { name: 'Shenzun Tunnels', campaign: 'Factions', region: 'Kaineng', wiki: 'Shenzun_Tunnels_(Zaishen_vanquish)' },
+            { name: 'The Ruptured Heart', campaign: 'Nightfall', region: 'Desolation', wiki: 'The_Ruptured_Heart_(Zaishen_vanquish)' },
+            { name: 'Salt Flats', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Salt_Flats_(Zaishen_vanquish)' },
+            { name: 'North Kryta Province', campaign: 'Prophecies', region: 'Kryta', wiki: 'North_Kryta_Province_(Zaishen_vanquish)' },
+            { name: 'Silent Surf', campaign: 'Factions', region: 'Jade Sea', wiki: 'Silent_Surf_(Zaishen_vanquish)' },
+            { name: 'The Shattered Ravines', campaign: 'Nightfall', region: 'Desolation', wiki: 'The_Shattered_Ravines_(Zaishen_vanquish)' },
+            { name: "Scoundrel's Rise", campaign: 'Prophecies', region: 'Kryta', wiki: 'Scoundrel%27s_Rise_(Zaishen_vanquish)' },
+            { name: 'Old Ascalon', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Old_Ascalon_(Zaishen_vanquish)' },
+            { name: 'Sunjiang District', campaign: 'Factions', region: 'Kaineng', wiki: 'Sunjiang_District_(Zaishen_vanquish)' },
+            { name: 'The Sulfurous Wastes', campaign: 'Nightfall', region: 'Desolation', wiki: 'The_Sulfurous_Wastes_(Zaishen_vanquish)' },
+            { name: 'Magus Stones', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Magus_Stones_(Zaishen_vanquish)' },
+            { name: 'Perdition Rock', campaign: 'Prophecies', region: 'Ring of Fire', wiki: 'Perdition_Rock_(Zaishen_vanquish)' },
+            { name: 'Sunqua Vale', campaign: 'Factions', region: 'Shing Jea', wiki: 'Sunqua_Vale_(Zaishen_vanquish)' },
+            { name: "Turai's Procession", campaign: 'Nightfall', region: 'Desolation', wiki: 'Turai%27s_Procession_(Zaishen_vanquish)' },
+            { name: 'Norrhart Domains', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Norrhart_Domains_(Zaishen_vanquish)' },
+            { name: 'Pockmark Flats', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Pockmark_Flats_(Zaishen_vanquish)' },
+            { name: 'Tahnnakai Temple', campaign: 'Factions', region: 'Kaineng', wiki: 'Tahnnakai_Temple_(Zaishen_vanquish)' },
+            { name: 'Vehjin Mines', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Vehjin_Mines_(Zaishen_vanquish)' },
+            { name: 'Poisoned Outcrops', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Poisoned_Outcrops_(Zaishen_vanquish)' },
+            { name: "Prophet's Path", campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Prophet%27s_Path_(Zaishen_vanquish)' },
+            { name: 'The Eternal Grove', campaign: 'Factions', region: 'Echovald', wiki: 'The_Eternal_Grove_(Zaishen_vanquish)' },
+            { name: "Tasca's Demise", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Tasca%27s_Demise_(Zaishen_vanquish)' },
+            { name: 'Resplendent Makuun', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Resplendent_Makuun_(Zaishen_vanquish)' },
+            { name: 'Reed Bog', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Reed_Bog_(Zaishen_vanquish)' },
+            { name: 'Unwaking Waters', campaign: 'Factions', region: 'Jade Sea', wiki: 'Unwaking_Waters_(Zaishen_vanquish)' },
+            { name: 'Stingray Strand', campaign: 'Nightfall', region: 'Istan', wiki: 'Stingray_Strand_(Zaishen_vanquish)' },
+            { name: 'Sunward Marches', campaign: 'Nightfall', region: 'Kourna', wiki: 'Sunward_Marches_(Zaishen_vanquish)' },
+            { name: 'Regent Valley', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Regent_Valley_(Zaishen_vanquish)' },
+            { name: 'Wajjun Bazaar', campaign: 'Factions', region: 'Kaineng', wiki: 'Wajjun_Bazaar_(Zaishen_vanquish)' },
+            { name: 'Yatendi Canyons', campaign: 'Nightfall', region: 'Kourna', wiki: 'Yatendi_Canyons_(Zaishen_vanquish)' },
+            { name: 'Twin Serpent Lakes', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Twin_Serpent_Lakes_(Zaishen_vanquish)' },
+            { name: 'Sage Lands', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Sage_Lands_(Zaishen_vanquish)' },
+            { name: 'Xaquang Skyway', campaign: 'Factions', region: 'Kaineng', wiki: 'Xaquang_Skyway_(Zaishen_vanquish)' },
+            { name: 'Zehlon Reach', campaign: 'Nightfall', region: 'Istan', wiki: 'Zehlon_Reach_(Zaishen_vanquish)' },
+            { name: 'Tangle Root', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Tangle_Root_(Zaishen_vanquish)' },
+            { name: 'Silverwood', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Silverwood_(Zaishen_vanquish)' },
+            { name: 'Zen Daijun', campaign: 'Factions', region: 'Shing Jea', wiki: 'Zen_Daijun_(Zaishen_vanquish)' },
+            { name: 'The Arid Sea', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'The_Arid_Sea_(Zaishen_vanquish)' },
+            { name: 'Nahpui Quarter', campaign: 'Factions', region: 'Kaineng', wiki: 'Nahpui_Quarter_(Zaishen_vanquish)' },
+            { name: 'Skyward Reach', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Skyward_Reach_(Zaishen_vanquish)' },
+            { name: 'The Scar', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'The_Scar_(Zaishen_vanquish)' },
+            { name: 'The Black Curtain', campaign: 'Prophecies', region: 'Kryta', wiki: 'The_Black_Curtain_(Zaishen_vanquish)' },
+            { name: 'Panjiang Peninsula', campaign: 'Factions', region: 'Shing Jea', wiki: 'Panjiang_Peninsula_(Zaishen_vanquish)' },
+            { name: 'Snake Dance', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Snake_Dance_(Zaishen_vanquish)' },
+            { name: "Traveler's Vale", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Traveler%27s_Vale_(Zaishen_vanquish)' },
+            { name: 'The Breach', campaign: 'Prophecies', region: 'Ascalon', wiki: 'The_Breach_(Zaishen_vanquish)' },
+            { name: 'Lahtenda Bog', campaign: 'Nightfall', region: 'Istan', wiki: 'Lahtenda_Bog_(Zaishen_vanquish)' },
+            { name: 'Spearhead Peak', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Spearhead_Peak_(Zaishen_vanquish)' },
+            { name: 'Mount Qinkai', campaign: 'Factions', region: 'Jade Sea', wiki: 'Mount_Qinkai_(Zaishen_vanquish)' },
+            { name: 'Marga Coast', campaign: 'Nightfall', region: 'Kourna', wiki: 'Marga_Coast_(Zaishen_vanquish)' },
+            { name: "Melandru's Hope", campaign: 'Prophecies', region: 'Maguuma', wiki: 'Melandru%27s_Hope_(Zaishen_vanquish)' },
+            { name: 'The Falls', campaign: 'Prophecies', region: 'Maguuma', wiki: 'The_Falls_(Zaishen_vanquish)' },
+            { name: "Joko's Domain", campaign: 'Nightfall', region: 'Desolation', wiki: 'Joko%27s_Domain_(Zaishen_vanquish)' },
+            { name: 'Vulture Drifts', campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Vulture_Drifts_(Zaishen_vanquish)' },
+            { name: 'Wilderness of Bahdza', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Wilderness_of_Bahdza_(Zaishen_vanquish)' },
+            { name: 'Talmark Wilderness', campaign: 'Prophecies', region: 'Kryta', wiki: 'Talmark_Wilderness_(Zaishen_vanquish)' },
+            { name: 'Vehtendi Valley', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Vehtendi_Valley_(Zaishen_vanquish)' },
+            { name: 'Talus Chute', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Talus_Chute_(Zaishen_vanquish)' },
+            { name: 'Mineral Springs', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Mineral_Springs_(Zaishen_vanquish)' },
+            { name: 'Anvil Rock', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Anvil_Rock_(Zaishen_vanquish)' },
+            { name: 'Arborstone', campaign: 'Factions', region: 'Echovald', wiki: 'Arborstone_(Zaishen_vanquish)' },
+            { name: "Witman's Folly", campaign: 'Prophecies', region: 'Ascalon', wiki: 'Witman%27s_Folly_(Zaishen_vanquish)' },
+            { name: 'Arkjok Ward', campaign: 'Nightfall', region: 'Kourna', wiki: 'Arkjok_Ward_(Zaishen_vanquish)' },
+            { name: 'Ascalon Foothills', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Ascalon_Foothills_(Zaishen_vanquish)' },
+            { name: 'Bahdok Caverns', campaign: 'Nightfall', region: 'Kourna', wiki: 'Bahdok_Caverns_(Zaishen_vanquish)' },
+            { name: 'Cursed Lands', campaign: 'Prophecies', region: 'Kryta', wiki: 'Cursed_Lands_(Zaishen_vanquish)' },
+            { name: 'Alcazia Tangle', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Alcazia_Tangle_(Zaishen_vanquish)' },
+            { name: 'Archipelagos', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Archipelagos_(Zaishen_vanquish)' },
+            { name: 'Eastern Frontier', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Eastern_Frontier_(Zaishen_vanquish)' },
+            { name: 'Dejarin Estate', campaign: 'Nightfall', region: 'Istan', wiki: 'Dejarin_Estate_(Zaishen_vanquish)' },
+            { name: 'Watchtower Coast', campaign: 'Prophecies', region: 'Kryta', wiki: 'Watchtower_Coast_(Zaishen_vanquish)' },
+            { name: 'Arbor Bay', campaign: 'Eye of the North', region: 'Tarnished Coast', wiki: 'Arbor_Bay_(Zaishen_vanquish)' },
+            { name: 'Barbarous Shore', campaign: 'Nightfall', region: 'Kourna', wiki: 'Barbarous_Shore_(Zaishen_vanquish)' },
+            { name: 'Deldrimor Bowl', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Deldrimor_Bowl_(Zaishen_vanquish)' },
+            { name: 'Boreas Seabed', campaign: 'Factions', region: 'Jade Sea', wiki: 'Boreas_Seabed_(Zaishen_vanquish)' },
+            { name: 'Cliffs of Dohjok', campaign: 'Nightfall', region: 'Istan', wiki: 'Cliffs_of_Dohjok_(Zaishen_vanquish)' },
+            { name: 'Diessa Lowlands', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Diessa_Lowlands_(Zaishen_vanquish)' },
+            { name: 'Bukdek Byway', campaign: 'Factions', region: 'Kaineng', wiki: 'Bukdek_Byway_(Zaishen_vanquish)' },
+            { name: 'Bjora Marches', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Bjora_Marches_(Zaishen_vanquish)' },
+            { name: 'Crystal Overlook', campaign: 'Nightfall', region: 'Desolation', wiki: 'Crystal_Overlook_(Zaishen_vanquish)' },
+            { name: "Diviner's Ascent", campaign: 'Prophecies', region: 'Crystal Desert', wiki: 'Diviner%27s_Ascent_(Zaishen_vanquish)' },
+            { name: 'Dalada Uplands', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Dalada_Uplands_(Zaishen_vanquish)' },
+            { name: 'Drazach Thicket', campaign: 'Factions', region: 'Echovald', wiki: 'Drazach_Thicket_(Zaishen_vanquish)' },
+            { name: 'Fahranur, the First City', campaign: 'Nightfall', region: 'Istan', wiki: 'Fahranur,_the_First_City_(Zaishen_vanquish)' },
+            { name: "Dragon's Gullet", campaign: 'Prophecies', region: 'Ascalon', wiki: 'Dragon%27s_Gullet_(Zaishen_vanquish)' },
+            { name: 'Ferndale', campaign: 'Factions', region: 'Echovald', wiki: 'Ferndale_(Zaishen_vanquish)' },
+            { name: 'Forum Highlands', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Forum_Highlands_(Zaishen_vanquish)' },
+            { name: "Dreadnought's Drift", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Dreadnought%27s_Drift_(Zaishen_vanquish)' },
+            { name: 'Drakkar Lake', campaign: 'Eye of the North', region: 'Far Shiverpeaks', wiki: 'Drakkar_Lake_(Zaishen_vanquish)' },
+            { name: 'Dry Top', campaign: 'Prophecies', region: 'Maguuma', wiki: 'Dry_Top_(Zaishen_vanquish)' },
+            { name: 'Tears of the Fallen', campaign: 'Eye of the North', region: 'Depths', wiki: 'Tears_of_the_Fallen_(Zaishen_vanquish)' },
+            { name: 'Gyala Hatchery', campaign: 'Factions', region: 'Jade Sea', wiki: 'Gyala_Hatchery_(Zaishen_vanquish)' },
+            { name: "Ettin's Back", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Ettin%27s_Back_(Zaishen_vanquish)' },
+            { name: 'Gandara, the Moon Fortress', campaign: 'Nightfall', region: 'Kourna', wiki: 'Gandara,_the_Moon_Fortress_(Zaishen_vanquish)' },
+            { name: 'Grothmar Wardowns', campaign: 'Eye of the North', region: 'Charr Homelands', wiki: 'Grothmar_Wardowns_(Zaishen_vanquish)' },
+            { name: 'Flame Temple Corridor', campaign: 'Prophecies', region: 'Ascalon', wiki: 'Flame_Temple_Corridor_(Zaishen_vanquish)' },
+            { name: 'Haiju Lagoon', campaign: 'Factions', region: 'Shing Jea', wiki: 'Haiju_Lagoon_(Zaishen_vanquish)' },
+            { name: 'Frozen Forest', campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Frozen_Forest_(Zaishen_vanquish)' },
+            { name: 'Garden of Seborhin', campaign: 'Nightfall', region: 'Vabbi', wiki: 'Garden_of_Seborhin_(Zaishen_vanquish)' },
+            { name: "Grenth's Footprint", campaign: 'Prophecies', region: 'Shiverpeaks', wiki: 'Grenth%27s_Footprint_(Zaishen_vanquish)' }
+        ];
+        
+        const ZAISHEN_COMBAT_START_UTC = Date.UTC(2025, 10, 27);
+        const ZAISHEN_COMBAT_DATA = [
+            { name: 'Random Arena', wiki: 'Random_Arena_(Zaishen_quest)' },
+            { name: 'Codex Arena', wiki: 'Codex_Arena_(Zaishen_quest)' },
+            { name: "Heroes' Ascent", wiki: 'Heroes%27_Ascent_(Zaishen_quest)' },
+            { name: 'Guild versus Guild', wiki: 'Guild_Versus_Guild_(Zaishen_quest)' },
+            { name: 'Alliance Battles', wiki: 'Alliance_Battles_(Zaishen_quest)' },
+            { name: 'Fort Aspenwood', wiki: 'Fort_Aspenwood_(Zaishen_quest)' },
+            { name: 'Jade Quarry', wiki: 'Jade_Quarry_(Zaishen_quest)' }
+        ];
+        
+        const VANGUARD_START_UTC = Date.UTC(2025, 10, 26);
+        const VANGUARD_QUESTS_DATA = [
+            { name: 'Vanguard Annihilation: Bandits', type: 'Annihilation', region: 'Pre-Searing', wiki: 'Vanguard_Annihilation:_Bandits' },
+            { name: 'Vanguard Bounty: Utini Wupwup', type: 'Bounty', region: 'Pre-Searing', wiki: 'Vanguard_Bounty:_Utini_Wupwup' },
+            { name: 'Vanguard Rescue: Ascalonian Noble', type: 'Rescue', region: 'Pre-Searing', wiki: 'Vanguard_Rescue:_Save_the_Ascalonian_Noble' },
+            { name: 'Vanguard Annihilation: Undead', type: 'Annihilation', region: 'Pre-Searing', wiki: 'Vanguard_Annihilation:_Undead' },
+            { name: 'Vanguard Bounty: Blazefiend Griefblade', type: 'Bounty', region: 'Pre-Searing', wiki: 'Vanguard_Bounty:_Blazefiend_Griefblade' },
+            { name: 'Vanguard Rescue: Farmer Hamnet', type: 'Rescue', region: 'Pre-Searing', wiki: 'Vanguard_Rescue:_Farmer_Hamnet' },
+            { name: 'Vanguard Annihilation: Charr', type: 'Annihilation', region: 'Pre-Searing', wiki: 'Vanguard_Annihilation:_Charr' },
+            { name: 'Vanguard Bounty: Countess Nadya', type: 'Bounty', region: 'Pre-Searing', wiki: 'Vanguard_Bounty:_Countess_Nadya' },
+            { name: 'Vanguard Rescue: Footman Tate', type: 'Rescue', region: 'Pre-Searing', wiki: 'Vanguard_Rescue:_Footman_Tate' }
+        ];
+        
+        function getUtcDayOffset(startUtc) {
+            const now = new Date();
+            const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
+            return Math.floor((todayUtc - startUtc) / 86400000);
+        }
+        
+        function updateDailyRotation() {
+            const missionLink = document.getElementById('daily-mission-link');
+            const missionCampaign = document.getElementById('daily-mission-campaign');
+            const bountyLink = document.getElementById('daily-bounty-link');
+            const bountyCampaign = document.getElementById('daily-bounty-campaign');
+            const vanquishLink = document.getElementById('daily-vanquish-link');
+            const vanquishCampaign = document.getElementById('daily-vanquish-campaign');
+            const combatLink = document.getElementById('daily-combat-link');
+            const vanguardLink = document.getElementById('daily-vanguard-link');
+            const vanguardRegion = document.getElementById('daily-vanguard-region');
+            
+            if (missionLink && missionCampaign && ZAISHEN_MISSIONS_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_MISSION_START_UTC);
+                const idx = ((days % ZAISHEN_MISSIONS_DATA.length) + ZAISHEN_MISSIONS_DATA.length) % ZAISHEN_MISSIONS_DATA.length;
+                const m = ZAISHEN_MISSIONS_DATA[idx];
+                missionLink.href = 'https://wiki.guildwars.com/wiki/' + m.wiki;
+                missionLink.textContent = m.name;
+                missionCampaign.textContent = '(' + m.campaign + ')';
+            }
+            
+            if (bountyLink && bountyCampaign && ZAISHEN_BOUNTIES_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_BOUNTY_START_UTC);
+                const idx = ((days % ZAISHEN_BOUNTIES_DATA.length) + ZAISHEN_BOUNTIES_DATA.length) % ZAISHEN_BOUNTIES_DATA.length;
+                const b = ZAISHEN_BOUNTIES_DATA[idx];
+                bountyLink.href = 'https://wiki.guildwars.com/wiki/' + b.wiki;
+                bountyLink.textContent = b.name;
+                bountyCampaign.textContent = '(' + b.campaign + ')';
+            }
+            
+            if (vanquishLink && vanquishCampaign && ZAISHEN_VANQUISHES_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_VANQUISH_START_UTC);
+                const idx = ((days % ZAISHEN_VANQUISHES_DATA.length) + ZAISHEN_VANQUISHES_DATA.length) % ZAISHEN_VANQUISHES_DATA.length;
+                const v = ZAISHEN_VANQUISHES_DATA[idx];
+                vanquishLink.href = 'https://wiki.guildwars.com/wiki/' + v.wiki;
+                vanquishLink.textContent = v.name;
+                vanquishCampaign.textContent = '(' + v.campaign + ')';
+            }
+            
+            if (combatLink && ZAISHEN_COMBAT_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_COMBAT_START_UTC);
+                const idx = ((days % ZAISHEN_COMBAT_DATA.length) + ZAISHEN_COMBAT_DATA.length) % ZAISHEN_COMBAT_DATA.length;
+                const c = ZAISHEN_COMBAT_DATA[idx];
+                combatLink.href = 'https://wiki.guildwars.com/wiki/' + c.wiki;
+                combatLink.textContent = c.name;
+            }
+            
+            if (vanguardLink && vanguardRegion && VANGUARD_QUESTS_DATA.length) {
+                const days = getUtcDayOffset(VANGUARD_START_UTC);
+                const idx = ((days % VANGUARD_QUESTS_DATA.length) + VANGUARD_QUESTS_DATA.length) % VANGUARD_QUESTS_DATA.length;
+                const q = VANGUARD_QUESTS_DATA[idx];
+                vanguardLink.href = 'https://wiki.guildwars.com/wiki/' + q.wiki;
+                vanguardLink.textContent = q.name;
+                vanguardRegion.textContent = '(' + q.region + ')';
+            }
+        }
+        
         // Load/save daily checkboxes
         function updateTodaysZaishen() {
             updateDailyDate();
+            updateDailyRotation();
             loadDailyCheckboxes();
         }
         
