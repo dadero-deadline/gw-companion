@@ -428,7 +428,10 @@
         }
         
         @media (max-width: 480px) {
-            .header h1 { display: none; }
+            .header h1 {
+                font-size: 0.8em;
+                white-space: normal;
+            }
             /* Also hide Location(8) on very small screens */
             th:nth-child(8), td:nth-child(8) { display: none; }
         }
@@ -17361,7 +17364,7 @@
         <div class="content">
             <div style="text-align:center;margin-bottom:30px;">
                 <h2 style="color:#ffd700;margin:0;">📅 Today's Daily Quests</h2>
-                <p style="color:#8b949e;margin:5px 0;">Saturday, November 29, 2025 • Resets at midnight UTC</p>
+                <p id="daily-date" style="color:#8b949e;margin:5px 0;">Loading daily date…</p>
             </div>
             
             <div style="max-width:600px;margin:0 auto;">
@@ -32043,6 +32046,9 @@
             // Trigger change event (1:1 like before - let existing event listeners handle it)
             const event = new Event('change', { bubbles: true });
             input.dispatchEvent(event);
+            if (typeof setProfessions === 'function') {
+                setProfessions();
+            }
         }
         
         // Close dropdowns when clicking outside
@@ -33095,8 +33101,20 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             }
         }
         
+        function updateDailyDate() {
+            const el = document.getElementById('daily-date');
+            if (!el) return;
+            const now = new Date();
+            const weekday = now.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+            const month = now.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
+            const day = now.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
+            const year = now.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
+            el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at midnight UTC`;
+        }
+        
         // Load/save daily checkboxes
         function updateTodaysZaishen() {
+            updateDailyDate();
             loadDailyCheckboxes();
         }
         
@@ -33157,6 +33175,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         updateAllProgress();
         updateElitesCampaignProgress();
         applyProfessionHighlighting();
+        updateTodaysZaishen();
         checkLegendaryTitles(); // Auto-check legendary titles on load
         
         
