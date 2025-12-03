@@ -33018,9 +33018,9 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     });
                     
                     updateProgress(areaId);
-                    alert('Import erfolgreich für ' + currentCharacter + '! ' + Object.keys(importedProgress).length + ' Eintraege geladen.');
+                    alert('Import successful for ' + currentCharacter + '! ' + Object.keys(importedProgress).length + ' entries loaded.');
                 } catch (err) {
-                    alert('Import Fehler: ' + err.message);
+                    alert('Import error: ' + err.message);
                 }
             };
             reader.readAsText(file);
@@ -33029,7 +33029,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         
         // Reset
         function resetProgress(areaId) {
-            if (!confirm('Progress für ' + currentCharacter + ' in dieser Region loeschen?')) return;
+            if (!confirm('Reset quest progress for this region for ' + currentCharacter + '?')) return;
             const progress = JSON.parse(localStorage.getItem(getProgressKey()) || '{}');
             Object.keys(progress).forEach(k => {
                 if (k.startsWith(areaId + '_')) delete progress[k];
