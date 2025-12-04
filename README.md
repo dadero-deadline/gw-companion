@@ -26,20 +26,20 @@ Comprehensive progress tracker for Guild Wars 1. Track every aspect of your jour
 Visit [gwcompanion.com](https://gwcompanion.com) and start tracking!
 
 **Option 2: Run Locally**
-- Öffne einfach `index.html` in deinem Browser.
-- Falls du Daten/Code änderst oder `index.html` neu generieren möchtest:
+- Simply open `index.html` in your browser.
+- If you change data/code or want to regenerate `index.html`:
 
 ```bash
 python gw_tracker.py --build-only
-# Danach index.html im Browser öffnen
+# Then open index.html in your browser
 ```
 
 ## 📁 Repository Structure
 
 ```
 gw-companion/
-├── index.html              # Main tracker app (statische HTML)
-├── gw_tracker.py           # Build script (generiert index.html aus Daten)
+├── index.html              # Main tracker app (static HTML)
+├── gw_tracker.py           # Build script (generates index.html from data)
 ├── data/                   # Game data
 ├── quests/                 # Quest definitions
 └── README.md
