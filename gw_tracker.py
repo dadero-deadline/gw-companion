@@ -671,13 +671,9 @@ def generate_area_html(quests, area_id, area_name, is_active=False):
             </div>
             
             <div class="filters" data-area="{area_id}">
-                <button class="filter-btn active" data-filter="all">All</button>'''
-    
-    # Add Main button only for areas that have Main quests
-    if area_id in ["pre", "post", "istan", "kourna", "vabbi", "desolation", "torment", "fshiver", "charr", "tarnished", "depths", "wik", "hotn", "woc"]:
-        h += '''
+                <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="main">Main</button>'''
-    
+
     if area_id == "pre":
         h += '''
                 <button class="filter-btn" data-filter="side">Side</button>

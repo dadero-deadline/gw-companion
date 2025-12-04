@@ -32883,7 +32883,27 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 saveProgress();
             });
         });
-        
+
+        // Ensure every quest area has a "Main" filter button
+        if (typeof questAreas !== 'undefined' && Array.isArray(questAreas)) {
+            document.querySelectorAll('.filters[data-area]').forEach(container => {
+                const areaId = container.dataset.area;
+                // Only apply to quest regions, not other areas like armor/skills
+                if (!questAreas.includes(areaId)) return;
+                if (container.querySelector('.filter-btn[data-filter="main"]')) return;
+                const allBtn = container.querySelector('.filter-btn[data-filter="all"]');
+                const mainBtn = document.createElement('button');
+                mainBtn.className = 'filter-btn';
+                mainBtn.dataset.filter = 'main';
+                mainBtn.textContent = 'Main';
+                if (allBtn && allBtn.parentNode === container) {
+                    allBtn.insertAdjacentElement('afterend', mainBtn);
+                } else {
+                    container.insertBefore(mainBtn, container.firstChild);
+                }
+            });
+        }
+
         // Filters
         const profFilters = ['Warrior','Ranger','Monk','Necromancer','Mesmer','Elementalist','Assassin','Ritualist','Paragon','Dervish'];
         
