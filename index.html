@@ -32574,6 +32574,14 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             if (progressBar) progressBar.style.width = percent + '%';
             if (completedEl) completedEl.textContent = completed;
             if (totalEl) totalEl.textContent = total;
+
+            // Update per-profession cards for skills / elites views
+            if (areaId === 'skills' && typeof updateSkillsProfessionCounts === 'function') {
+                updateSkillsProfessionCounts();
+            }
+            if (areaId === 'elites' && typeof updateElitesProfessionCounts === 'function') {
+                updateElitesProfessionCounts();
+            }
         }
         
         function updateAllProgress() {
@@ -32637,6 +32645,41 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             
             // Update profession progress grid
             updateProfessionProgress();
+        }
+
+        function updateSkillsProfessionCounts() {
+            const profs = ['Common','Warrior','Ranger','Monk','Necromancer','Mesmer','Elementalist','Assassin','Ritualist','Paragon','Dervish'];
+            profs.forEach(prof => {
+                const items = document.querySelectorAll(`div[data-area="skills"][data-type="${prof}"]`);
+                const total = items.length;
+                let done = 0;
+                items.forEach(item => {
+                    const cb = item.querySelector('.quest-checkbox');
+                    if (cb && cb.checked) done++;
+                });
+                const el = document.getElementById(`skills-${prof.toLowerCase()}-count`);
+                if (el) {
+                    el.textContent = `${done}/${total}`;
+                }
+            });
+        }
+
+        function updateElitesProfessionCounts() {
+            const profs = ['Warrior','Ranger','Monk','Necromancer','Mesmer','Elementalist','Assassin','Ritualist','Paragon','Dervish'];
+            profs.forEach(prof => {
+                const profId = prof.toLowerCase();
+                const items = document.querySelectorAll(`div[data-area="elites"][data-profession="${profId}"]`);
+                const total = items.length;
+                let done = 0;
+                items.forEach(item => {
+                    const cb = item.querySelector('.quest-checkbox');
+                    if (cb && cb.checked) done++;
+                });
+                const el = document.getElementById(`elites-${profId}-count`);
+                if (el) {
+                    el.textContent = `${done}/${total}`;
+                }
+            });
         }
 
         // Auto-calc Vanquisher titles progress from Vanquish tab
