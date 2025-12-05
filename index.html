@@ -33172,7 +33172,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             const month = now.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
             const day = now.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
             const year = now.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
-            el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at midnight UTC`;
+            el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at 16:01 UTC (8:01 AM Pacific Standard Time)`;
         }
         
         const ZAISHEN_MISSION_START_UTC = Date.UTC(2025, 10, 26);
@@ -33482,10 +33482,17 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             { name: 'Vanguard Rescue: Footman Tate', type: 'Rescue', region: 'Pre-Searing', wiki: 'Vanguard_Rescue:_Footman_Tate' }
         ];
         
+        // Returns the number of whole "daily reset" intervals that have passed since startUtc.
+        // Zaishen/Vanguard quests reset at 16:01 UTC, not at midnight. We model this by shifting
+        // the current time by the reset offset before computing the day difference, while keeping
+        // startUtc as the documented calendar date for the first entry in each rotation.
         function getUtcDayOffset(startUtc) {
+            const RESET_HOUR_UTC = 16;
+            const RESET_MINUTE_UTC = 1;
+            const resetOffsetMs = ((RESET_HOUR_UTC * 60) + RESET_MINUTE_UTC) * 60 * 1000;
             const now = new Date();
-            const todayUtc = Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate());
-            return Math.floor((todayUtc - startUtc) / 86400000);
+            const shiftedNow = now.getTime() - resetOffsetMs;
+            return Math.floor((shiftedNow - startUtc) / 86400000);
         }
         
         function updateDailyRotation() {

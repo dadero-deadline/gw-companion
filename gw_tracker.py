@@ -1167,7 +1167,7 @@ def generate_daily_html():
         <div class="content">
             <div style="text-align:center;margin-bottom:30px;">
                 <h2 style="color:#ffd700;margin:0;">ðŸ“… Today's Daily Quests</h2>
-                <p style="color:#8b949e;margin:5px 0;">{today.strftime("%A, %B %d, %Y")} â€¢ Resets at midnight UTC</p>
+                <p style="color:#8b949e;margin:5px 0;">{today.strftime("%A, %B %d, %Y")} â€¢ Resets at 16:01 UTC (8:01 AM Pacific Standard Time)</p>
             </div>
             
             <div style="max-width:600px;margin:0 auto;">
