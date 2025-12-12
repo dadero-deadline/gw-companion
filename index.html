@@ -3,6 +3,21 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations. Works offline using local storage.">
+    <meta name="theme-color" content="#0d1117">
+    <meta property="og:title" content="Guild Wars Companion">
+    <meta property="og:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gwcompanion.com/">
+    <meta property="og:image" content="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Guild Wars Companion">
+    <meta name="twitter:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
+    <meta name="twitter:image" content="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png">
+    <link rel="canonical" href="https://gwcompanion.com/">
+    <link rel="preconnect" href="https://wiki.guildwars.com">
+    <link rel="dns-prefetch" href="//wiki.guildwars.com">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23161b22%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-size%3D%2228%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffd700%22%20font-family%3D%22Segoe%20UI%2CArial%2Csans-serif%22%3EGW%3C/text%3E%3C/svg%3E">
     <link rel="preload" href="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" as="image">
     <title>Guild Wars Companion</title>
     <style>
@@ -12,6 +27,28 @@
             background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
             min-height: 100vh;
             color: #c9d1d9;
+        }
+
+        :focus-visible {
+            outline: 2px solid #58a6ff;
+            outline-offset: 2px;
+        }
+
+        .skip-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateY(-120%);
+            background: #58a6ff;
+            color: #0d1117;
+            padding: 8px 12px;
+            border-radius: 0 0 8px 0;
+            z-index: 2000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus {
+            transform: translateY(0);
         }
         
         /* Header */
@@ -438,9 +475,10 @@
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#app-main">Skip to main content</a>
     <div class="header">
-        <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page">
-            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
+        <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">
+            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" loading="eager" decoding="async" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
             Guild Wars Companion
         </h1>
         <div class="char-selector">
@@ -534,12 +572,13 @@
             </div>
             <input type="hidden" id="secondary-prof" value="">
             <button class="char-btn" onclick="resetCharacter()" title="Reset all progress for this character">🔄 Reset</button>
-            <button class="char-btn add" onclick="addCharacter()">+ New</button>
-            <button class="char-btn" onclick="renameCharacter()">✏️</button>
-            <button class="char-btn delete" onclick="deleteCharacter()">🗑️</button>
+            <button class="char-btn add" onclick="addCharacter()" aria-label="Add character" title="Add character">+ New</button>
+            <button class="char-btn" onclick="renameCharacter()" aria-label="Rename character" title="Rename character">✏️</button>
+            <button class="char-btn delete" onclick="deleteCharacter()" aria-label="Delete character" title="Delete character">🗑️</button>
         </div>
     </div>
     
+    <main id="app-main" role="main">
     <div class="main-tabs">
         <button class="main-tab active" data-category="quests" onclick="switchCategory('quests')">📜 Quests</button>
         <button class="main-tab" data-category="daily" onclick="switchCategory('daily')">📅 Daily</button>
@@ -31829,6 +31868,7 @@
             </details>
         </div>
     </div>
+    </main>
     <script>
         // ==================== CHARACTER MANAGEMENT ====================
         let currentCharacter = null;
@@ -32004,13 +32044,16 @@
         function toggleDropdown(dropdownId) {
             const wrapper = document.getElementById(dropdownId + '-wrapper');
             const list = document.getElementById(dropdownId + '-list');
+            if (!wrapper || !list) return;
             const header = wrapper.querySelector('.dropdown-header');
+            if (!header) return;
             
             // Close other dropdowns
             document.querySelectorAll('.dropdown-list').forEach(dl => {
                 if (dl.id !== dropdownId + '-list') {
                     dl.style.display = 'none';
-                    dl.previousElementSibling.classList.remove('open');
+                    dl.previousElementSibling?.classList.remove('open');
+                    dl.previousElementSibling?.setAttribute('aria-expanded', 'false');
                 }
             });
             
@@ -32018,9 +32061,11 @@
             if (list.style.display === 'none' || !list.style.display) {
                 list.style.display = 'block';
                 header.classList.add('open');
+                header.setAttribute('aria-expanded', 'true');
             } else {
                 list.style.display = 'none';
                 header.classList.remove('open');
+                header.setAttribute('aria-expanded', 'false');
             }
         }
         
@@ -32042,6 +32087,7 @@
             const header = list.previousElementSibling;
             list.style.display = 'none';
             header.classList.remove('open');
+            header.setAttribute('aria-expanded', 'false');
             
             // Trigger change event (1:1 like before - let existing event listeners handle it)
             const event = new Event('change', { bubbles: true });
@@ -32058,10 +32104,82 @@
                     dl.style.display = 'none';
                     if (dl.previousElementSibling) {
                         dl.previousElementSibling.classList.remove('open');
+                        dl.previousElementSibling.setAttribute('aria-expanded', 'false');
                     }
                 });
             }
         });
+
+        (function() {
+            document.querySelectorAll('.custom-dropdown').forEach(wrapper => {
+                const header = wrapper.querySelector('.dropdown-header');
+                const list = wrapper.querySelector('.dropdown-list');
+                if (!header || !list) return;
+
+                const dropdownId = (wrapper.id || '').replace(/-wrapper$/, '');
+
+                header.setAttribute('role', 'button');
+                header.tabIndex = 0;
+                header.setAttribute('aria-haspopup', 'listbox');
+                header.setAttribute('aria-controls', list.id);
+                header.setAttribute('aria-expanded', header.classList.contains('open') ? 'true' : 'false');
+                header.dataset.dropdownId = dropdownId;
+
+                list.setAttribute('role', 'listbox');
+
+                const options = Array.from(list.querySelectorAll('.dropdown-option'));
+                options.forEach((opt, idx) => {
+                    opt.setAttribute('role', 'option');
+                    opt.tabIndex = 0;
+                    opt.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            opt.click();
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            list.style.display = 'none';
+                            header.classList.remove('open');
+                            header.setAttribute('aria-expanded', 'false');
+                            header.focus();
+                        } else if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            options[(idx + 1) % options.length]?.focus();
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            options[(idx - 1 + options.length) % options.length]?.focus();
+                        }
+                    });
+                });
+
+                header.addEventListener('keydown', (e) => {
+                    const id = header.dataset.dropdownId;
+                    if (!id) return;
+
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleDropdown(id);
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const wasClosed = (list.style.display === 'none' || !list.style.display);
+                        if (wasClosed) toggleDropdown(id);
+                        options[0]?.focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const wasClosed = (list.style.display === 'none' || !list.style.display);
+                        if (wasClosed) toggleDropdown(id);
+                        options[options.length - 1]?.focus();
+                    } else if (e.key === 'Escape') {
+                        const isOpen = !(list.style.display === 'none' || !list.style.display);
+                        if (isOpen) {
+                            e.preventDefault();
+                            list.style.display = 'none';
+                            header.classList.remove('open');
+                            header.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
+        })();
         
         function setProfessions() {
             const primary = document.getElementById('primary-prof').value;
@@ -33611,6 +33729,30 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         
         
         // Initialize everything
+        (function() {
+            document.querySelectorAll('a[target="_blank"]').forEach(a => {
+                const rel = (a.getAttribute('rel') || '').split(/\s+/).filter(Boolean);
+                if (!rel.includes('noopener')) rel.push('noopener');
+                if (!rel.includes('noreferrer')) rel.push('noreferrer');
+                a.setAttribute('rel', rel.join(' '));
+            });
+        })();
+        (function() {
+            const header = document.getElementById('main-header');
+            if (!header) return;
+            header.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    location.reload();
+                }
+            });
+        })();
+        (function() {
+            document.querySelectorAll('img').forEach(img => {
+                if (!img.hasAttribute('loading')) img.setAttribute('loading', 'lazy');
+                if (!img.hasAttribute('decoding')) img.setAttribute('decoding', 'async');
+            });
+        })();
         loadProgress();
         updateAllProgress();
         updateElitesCampaignProgress();
