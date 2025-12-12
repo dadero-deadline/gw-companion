@@ -32384,7 +32384,10 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 document.querySelectorAll('tr[data-area="shingjea"]').forEach(row => lockRow(row));
                 
                 // Istan: ALL LOCKED - Prophecies chars skip Istan entirely, start in Kamadan later areas
-                document.querySelectorAll('tr[data-area="istan"]').forEach(row => lockRow(row));
+                document.querySelectorAll('tr[data-area="istan"]').forEach(row => {
+                    const loc = row.querySelector('td.location')?.textContent?.trim() || '';
+                    if (loc === 'Island of Shehkah') lockRow(row);
+                });
             }
             
             if (campaign === 'factions') {
@@ -32405,7 +32408,10 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 // Shing Jea: OK (home)
                 
                 // Istan: ALL LOCKED - Factions chars skip Istan entirely
-                document.querySelectorAll('tr[data-area="istan"]').forEach(row => lockRow(row));
+                document.querySelectorAll('tr[data-area="istan"]').forEach(row => {
+                    const loc = row.querySelector('td.location')?.textContent?.trim() || '';
+                    if (loc === 'Island of Shehkah') lockRow(row);
+                });
             }
             
             if (campaign === 'nightfall') {
