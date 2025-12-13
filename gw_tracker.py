@@ -636,7 +636,7 @@ html = '''<!DOCTYPE html>
     </div>
 '''
 
-def generate_area_html(quests, area_id, area_name, is_active=False):
+def generate_area_html(quests, area_id, area_name, is_first, is_bonus_pack=False):
     type_class = {"Main": "type-main", "Mission": "type-mission", "Mini": "type-mini", 
                   "Profession": "type-profession", "Vanguard": "type-vanguard", "Special": "type-special",
                   "Endgame": "type-endgame", "Attribute": "type-attribute",
@@ -798,6 +798,24 @@ def generate_area_html(quests, area_id, area_name, is_active=False):
         badge = badge_class.get(q['type'], 'badge-side')
         prof_badge = f'<span class="prof {prof_class.get(prof, "")}">{prof}</span>' if prof else ''
 
+        prereq = q.get('prereq', '')
+        if isinstance(prereq, str):
+            prereq = prereq.strip()
+
+        # Clarify campaign prerequisites (ownership/access) vs. origin-locking.
+        # Only touch values that are purely campaign names or campaign combinations.
+        campaign_prereqs = {
+            'Prophecies',
+            'Factions',
+            'Nightfall',
+            'Eye of the North',
+            'Prophecies/Factions',
+            'Prophecies/Nightfall',
+            'Factions/Nightfall',
+        }
+        if prereq in campaign_prereqs and not prereq.startswith('Requires '):
+            prereq = f'Requires {prereq}'
+
         # Missable quest: Message from a Friend (only in Pre-Searing list)
         missable_attr = ''
         missable_badge = ''
@@ -823,7 +841,7 @@ def generate_area_html(quests, area_id, area_name, is_active=False):
                         <td class="location">{q['location']}</td>
                         <td><span class="badge {badge}">{q['type']}</span>{missable_badge}</td>
                         <td>{prof_badge}</td>
-                        <td class="prereq">{q['prereq']}</td>
+                        <td class="prereq">{prereq}</td>
                         <td class="reward">{q['reward']}</td>
                     </tr>'''
     
