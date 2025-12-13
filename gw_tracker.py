@@ -2717,9 +2717,25 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 document.querySelectorAll('tr[data-area="shingjea"]').forEach(row => lockRow(row));
                 
                 // Istan: ALL LOCKED - Prophecies chars skip Istan entirely, start in Kamadan later areas
+                const allowedIstanIdsForNonNightfall = new Set([
+                    'istan_1',
+                    'istan_2',
+                    'istan_3',
+                    'istan_4',
+                    'istan_31',
+                    'istan_44',
+                    'istan_46',
+                    'istan_83',
+                    'istan_102',
+                    'istan_100',
+                    'istan_101',
+                    'istan_107'
+                ]);
                 document.querySelectorAll('tr[data-area="istan"]').forEach(row => {
-                    const loc = row.querySelector('td.location')?.textContent?.trim() || '';
-                    if (loc === 'Island of Shehkah') lockRow(row);
+                    const id = row.getAttribute('data-id') || '';
+                    const type = row.getAttribute('data-type') || '';
+                    if (type === 'mission' || type === 'travel' || allowedIstanIdsForNonNightfall.has(id)) return;
+                    lockRow(row);
                 });
             }
             
@@ -2741,9 +2757,25 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 // Shing Jea: OK (home)
                 
                 // Istan: ALL LOCKED - Factions chars skip Istan entirely
+                const allowedIstanIdsForNonNightfall = new Set([
+                    'istan_1',
+                    'istan_2',
+                    'istan_3',
+                    'istan_4',
+                    'istan_31',
+                    'istan_44',
+                    'istan_46',
+                    'istan_83',
+                    'istan_102',
+                    'istan_100',
+                    'istan_101',
+                    'istan_107'
+                ]);
                 document.querySelectorAll('tr[data-area="istan"]').forEach(row => {
-                    const loc = row.querySelector('td.location')?.textContent?.trim() || '';
-                    if (loc === 'Island of Shehkah') lockRow(row);
+                    const id = row.getAttribute('data-id') || '';
+                    const type = row.getAttribute('data-type') || '';
+                    if (type === 'mission' || type === 'travel' || allowedIstanIdsForNonNightfall.has(id)) return;
+                    lockRow(row);
                 });
             }
             
