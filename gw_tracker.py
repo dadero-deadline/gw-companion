@@ -2740,23 +2740,12 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             }
             
             if (campaign === 'factions') {
-                // Pre-Searing: ALL locked
+                // Pre-Searing: ALL locked (requires Prophecies-origin character)
                 document.querySelectorAll('tr[data-area="pre"]').forEach(row => lockRow(row));
                 
-                // Post-Searing: ALL QUESTS locked (require Prophecies char), only Missions OK
-                document.querySelectorAll('tr[data-area="post"][data-type="main"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="post"][data-type="side"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="post"][data-type="profession"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="post"][data-type="special"]').forEach(row => lockRow(row));
+                // Shing Jea: OK (home / Factions-origin only)
                 
-                // N. Shiverpeaks: ALL QUESTS locked (require Prophecies char), only Missions OK
-                document.querySelectorAll('tr[data-area="shiver"][data-type="main"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="shiver"][data-type="side"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="shiver"][data-type="profession"]').forEach(row => lockRow(row));
-                
-                // Shing Jea: OK (home)
-                
-                // Istan: ALL LOCKED - Factions chars skip Istan entirely
+                // Istan: lock Nightfall-only quests; allow cross-campaign missions/travel/whitelisted quests
                 const allowedIstanIdsForNonNightfall = new Set([
                     'istan_1',
                     'istan_2',
@@ -2783,17 +2772,6 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 // Pre-Searing: ALL locked
                 document.querySelectorAll('tr[data-area="pre"]').forEach(row => lockRow(row));
                 
-                // Post-Searing: ALL QUESTS locked (require Prophecies char), only Missions OK
-                document.querySelectorAll('tr[data-area="post"][data-type="main"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="post"][data-type="side"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="post"][data-type="profession"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="post"][data-type="special"]').forEach(row => lockRow(row));
-                
-                // N. Shiverpeaks: ALL QUESTS locked (require Prophecies char), only Missions OK
-                document.querySelectorAll('tr[data-area="shiver"][data-type="main"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="shiver"][data-type="side"]').forEach(row => lockRow(row));
-                document.querySelectorAll('tr[data-area="shiver"][data-type="profession"]').forEach(row => lockRow(row));
-                
                 // Shing Jea: ALL LOCKED - Nightfall chars skip Shing Jea entirely
                 document.querySelectorAll('tr[data-area="shingjea"]').forEach(row => lockRow(row));
                 
@@ -2812,23 +2790,12 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             if (campaign === 'prophecies') {
                 document.querySelectorAll('tr[data-area="desert"][data-type="attribute"]').forEach(row => row.classList.add('attr-highlight'));
                 document.querySelectorAll('tr[data-area="sshiver"][data-type="attribute"]').forEach(row => row.classList.add('attr-highlight'));
-                // Other campaigns' attribute quests are unavailable
-                document.querySelectorAll('tr[data-area="shingjea"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
-                document.querySelectorAll('tr[data-area="istan"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
             }
             if (campaign === 'factions') {
                 document.querySelectorAll('tr[data-area="shingjea"][data-type="attribute"]').forEach(row => row.classList.add('attr-highlight'));
-                // Other campaigns' attribute quests are unavailable
-                document.querySelectorAll('tr[data-area="desert"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
-                document.querySelectorAll('tr[data-area="sshiver"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
-                document.querySelectorAll('tr[data-area="istan"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
             }
             if (campaign === 'nightfall') {
                 document.querySelectorAll('tr[data-area="istan"][data-type="attribute"]').forEach(row => row.classList.add('attr-highlight'));
-                // Other campaigns' attribute quests are unavailable
-                document.querySelectorAll('tr[data-area="desert"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
-                document.querySelectorAll('tr[data-area="sshiver"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
-                document.querySelectorAll('tr[data-area="shingjea"][data-type="attribute"]').forEach(row => row.classList.add('attr-unavailable'));
             }
         }
         
