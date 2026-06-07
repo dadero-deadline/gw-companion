@@ -33544,6 +33544,11 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             const total = document.querySelectorAll('.quest-checkbox[data-area="menagerie"]').length;
             const completed = document.querySelectorAll('.quest-checkbox[data-area="menagerie"]:checked').length;
             const blocked = document.body.classList.contains('mode-melandru-on');
+            // Swap the counter for an "n/a" notice on the actual rendered spans (inline style beats any CSS)
+            const normal = document.querySelector('#area-menagerie .menagerie-normal');
+            const blockedEl = document.querySelector('#area-menagerie .menagerie-blocked');
+            if (normal) normal.style.display = blocked ? 'none' : 'inline';
+            if (blockedEl) blockedEl.style.display = blocked ? 'inline' : 'none';
             const cEl = document.getElementById('menagerie-completed');
             const tEl = document.getElementById('menagerie-total');
             const bar = document.getElementById('menagerie-progress');
