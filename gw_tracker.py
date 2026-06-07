@@ -2809,13 +2809,18 @@ html += '''
             chars.push(name.trim());
             saveCharacters(chars);
             setCurrentCharacter(name.trim());
+            // Explicit default modes for the new character (Reforged on, others off)
+            const modes = getModes();
+            modes[name.trim()] = { reforged: true, dhuum: false, melandru: false };
+            localStorage.setItem('gw-modes', JSON.stringify(modes));
             populateCharSelect();
             clearUI();
-            updateAllProgress();
+            applyModes();
         }
         
-        function switchCharacter() {
+        function switchCharacter(name) {
             const select = document.getElementById('char-select');
+            if (name && select) select.value = name;
             setCurrentCharacter(select.value);
             loadCampaign();
             loadProfessions();
@@ -2838,6 +2843,13 @@ html += '''
             // Move progress data
             const oldKey = getProgressKey();
             const progress = JSON.parse(localStorage.getItem(oldKey) || '{}');
+            // Migrate mode settings to the new name
+            const modes = getModes();
+            if (modes[currentCharacter] !== undefined) {
+                modes[newName.trim()] = modes[currentCharacter];
+                delete modes[currentCharacter];
+                localStorage.setItem('gw-modes', JSON.stringify(modes));
+            }
             setCurrentCharacter(newName.trim());
             localStorage.setItem(getProgressKey(), JSON.stringify(progress));
             localStorage.removeItem(oldKey);
@@ -2853,6 +2865,12 @@ html += '''
             if (!confirm(`Delete character "${currentCharacter}"?`)) return;
             // Remove progress data
             localStorage.removeItem(getProgressKey());
+            // Remove mode settings (no orphan entries)
+            const modes = getModes();
+            if (modes[currentCharacter] !== undefined) {
+                delete modes[currentCharacter];
+                localStorage.setItem('gw-modes', JSON.stringify(modes));
+            }
             // Remove from list
             const idx = chars.indexOf(currentCharacter);
             chars.splice(idx, 1);
@@ -2861,6 +2879,7 @@ html += '''
             setCurrentCharacter(chars[0]);
             populateCharSelect();
             loadProgress();
+            applyModes();
         }
         
         function resetCharacter() {
