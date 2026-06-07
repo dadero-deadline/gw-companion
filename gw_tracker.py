@@ -562,10 +562,14 @@ html = '''<!DOCTYPE html>
             .io-btn { padding: 4px 8px; font-size: 0.7em; }
             table { font-size: 0.7em; }
             td, th { padding: 4px 2px; }
-            /* Hide less important columns: Order(3), Prereq(7), Reward(9) */
+            /* Hide less important columns: Bonus(3), HM+B(4), Giver(7), Type(9), Profession(10), Prerequisite(11), Reward(12) */
             th:nth-child(3), td:nth-child(3),
+            th:nth-child(4), td:nth-child(4),
             th:nth-child(7), td:nth-child(7),
-            th:nth-child(9), td:nth-child(9) { display: none; }
+            th:nth-child(9), td:nth-child(9),
+            th:nth-child(10), td:nth-child(10),
+            th:nth-child(11), td:nth-child(11),
+            th:nth-child(12), td:nth-child(12) { display: none; }
         }
         
         @media (max-width: 480px) {
@@ -573,8 +577,7 @@ html = '''<!DOCTYPE html>
                 font-size: 0.8em;
                 white-space: normal;
             }
-            /* Also hide: Location(6), Profession(8) */
-            th:nth-child(6), td:nth-child(6),
+            /* Also hide Location(8) on very small screens */
             th:nth-child(8), td:nth-child(8) { display: none; }
         }
         .skip-link {
