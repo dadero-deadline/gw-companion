@@ -467,6 +467,19 @@
         .dropdown-option:hover { background: #21262d; }
         .dropdown-option:first-child { border-radius: 6px 6px 0 0; }
         .dropdown-option:last-child { border-radius: 0 0 6px 6px; }
+        /* Game mode toggles */
+        .mode-toggles { display: inline-flex; gap: 5px; align-items: center; margin-left: 4px; }
+        .mode-toggle { background: #21262d; border: 1px solid #30363d; border-radius: 6px; padding: 2px 5px; cursor: pointer; opacity: 0.4; filter: grayscale(100%); transition: all 0.2s; display: inline-flex; align-items: center; line-height: 0; }
+        .mode-toggle:hover { border-color: #58a6ff; opacity: 0.8; }
+        .mode-toggle.active { opacity: 1; filter: none; border-color: #58a6ff; box-shadow: 0 0 6px rgba(88,166,255,0.4); }
+        .mode-toggle img { width: 22px; height: 22px; }
+        .mode-badge { width: 20px; height: 20px; vertical-align: middle; margin-left: 4px; }
+        body.mode-reforged-off tr[data-reforged="1"] { display: none; }
+        body.mode-melandru-on #area-menagerie .content { opacity: 0.4; pointer-events: none; filter: grayscale(60%); }
+        .melandru-block { display: none; margin: 10px 0; padding: 10px 14px; border-radius: 8px; background: rgba(248,81,73,0.12); border: 1px solid #f85149; color: #f0a39c; font-weight: 600; }
+        body.mode-melandru-on .melandru-block { display: block; }
+        .melandru-hint { display: none; }
+        body.mode-melandru-on .melandru-hint { display: inline; color: #f85149; font-size: 0.85em; margin-left: 6px; }
     </style>
 </head>
 <body>
@@ -479,6 +492,12 @@
         <div class="char-selector">
             <span class="char-label">Character:</span>
             <select id="char-select" onchange="switchCharacter()"></select>
+            <span id="mode-badges"></span>
+            <div class="mode-toggles">
+                <button class="mode-toggle" id="toggle-reforged" onclick="toggleMode('reforged')" aria-pressed="true" title="Reforged Mode — overhauled Prophecies content (quests, heroes, Piken Square pre)"><img src="https://wiki.guildwars.com/images/1/19/ReforgedMode-Small.png" alt="Reforged Mode"></button>
+                <button class="mode-toggle" id="toggle-dhuum" onclick="toggleMode('dhuum')" aria-pressed="false" title="Dhuum's Covenant — One life. No resurrection."><img src="https://wiki.guildwars.com/images/0/05/DhuumCovenant-Small.png" alt="Dhuum's Covenant"></button>
+                <button class="mode-toggle" id="toggle-melandru" onclick="toggleMode('melandru')" aria-pressed="false" title="Melandru's Accord — Ironman: no trading, no tomes, no price traders"><img src="https://wiki.guildwars.com/images/1/11/Melandrus_Accord-Small.png" alt="Melandru's Accord"></button>
+            </div>
             <select id="campaign-select" class="campaign-dropdown" onchange="setCampaign()">
                 <option value="">-- Campaign --</option>
                 <option value="prophecies">⚔️ Prophecies</option>
@@ -1620,7 +1639,7 @@
                         <td class="prereq">Level 10+</td>
                         <td class="reward">1000 XP, Daily</td>
                     </tr>
-                    <tr class="type-main" data-id="pre_68" data-type="main" data-prof="" data-area="pre">
+                    <tr class="type-main" data-id="pre_68" data-type="main" data-prof="" data-area="pre" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="pre_68" data-area="pre"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -1634,7 +1653,7 @@
                         <td class="prereq">Reforged Mode</td>
                         <td class="reward">500 XP, 100g</td>
                     </tr>
-                    <tr class="" data-id="pre_69" data-type="side" data-prof="" data-area="pre">
+                    <tr class="" data-id="pre_69" data-type="side" data-prof="" data-area="pre" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="pre_69" data-area="pre"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -1648,7 +1667,7 @@
                         <td class="prereq">Reforged Mode, Across the Wall</td>
                         <td class="reward">250 XP, 100g</td>
                     </tr>
-                    <tr class="" data-id="pre_70" data-type="side" data-prof="" data-area="pre">
+                    <tr class="" data-id="pre_70" data-type="side" data-prof="" data-area="pre" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="pre_70" data-area="pre"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -1662,7 +1681,7 @@
                         <td class="prereq">A Bastion In the North</td>
                         <td class="reward">250 XP, 100g, Elemental Crystal Shard</td>
                     </tr>
-                    <tr class="" data-id="pre_71" data-type="side" data-prof="" data-area="pre">
+                    <tr class="" data-id="pre_71" data-type="side" data-prof="" data-area="pre" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="pre_71" data-area="pre"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -1676,7 +1695,7 @@
                         <td class="prereq">Long Thought Forgotten</td>
                         <td class="reward">250 XP, 100g</td>
                     </tr>
-                    <tr class="" data-id="pre_72" data-type="side" data-prof="" data-area="pre">
+                    <tr class="" data-id="pre_72" data-type="side" data-prof="" data-area="pre" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="pre_72" data-area="pre"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -2625,7 +2644,7 @@
                         <td class="prereq">The Geomancer's Test</td>
                         <td class="reward">500 XP, Skills</td>
                     </tr>
-                    <tr class="type-main" data-id="post_64" data-type="main" data-prof="-" data-area="post">
+                    <tr class="type-main" data-id="post_64" data-type="main" data-prof="-" data-area="post" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="post_64" data-area="post"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -2639,7 +2658,7 @@
                         <td class="prereq">Reforged Mode</td>
                         <td class="reward">1000 XP, 500g, 4 Skill Points, Sup. Kits</td>
                     </tr>
-                    <tr class="" data-id="post_65" data-type="side" data-prof="-" data-area="post">
+                    <tr class="" data-id="post_65" data-type="side" data-prof="-" data-area="post" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="post_65" data-area="post"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -2653,7 +2672,7 @@
                         <td class="prereq">Reforged Mode, Althea's Ashes</td>
                         <td class="reward">500 XP, 100g</td>
                     </tr>
-                    <tr class="" data-id="post_66" data-type="side" data-prof="-" data-area="post">
+                    <tr class="" data-id="post_66" data-type="side" data-prof="-" data-area="post" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="post_66" data-area="post"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -2667,7 +2686,7 @@
                         <td class="prereq">Elegy for Those Left Behind</td>
                         <td class="reward">500 XP, 100g</td>
                     </tr>
-                    <tr class="" data-id="post_67" data-type="side" data-prof="-" data-area="post">
+                    <tr class="" data-id="post_67" data-type="side" data-prof="-" data-area="post" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="post_67" data-area="post"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -3529,7 +3548,7 @@
                         <td class="prereq">Requires Eye of the North</td>
                         <td class="reward">2500 XP</td>
                     </tr>
-                    <tr class="" data-id="kryta_33" data-type="side" data-prof="-" data-area="kryta">
+                    <tr class="" data-id="kryta_33" data-type="side" data-prof="-" data-area="kryta" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="kryta_33" data-area="kryta"></td>
                         <td class="checkbox-cell"></td>
                         <td class="checkbox-cell"></td>
@@ -17535,7 +17554,7 @@
                         <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Winds_of_Change" target="_blank" style="color:#8b949e;">Winds of Change</a></td>
                     </tr>
-                    <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_devona">
+                    <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_devona" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hero_devona" data-area="heroes"></td>
                         <td>
                             <div style="display:flex;align-items:center;gap:8px;">
@@ -17551,7 +17570,7 @@
                         <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Scourge_Beneath_or_The_Hero_From_Ascalon" target="_blank" style="color:#8b949e;">The Scourge Beneath or The Hero From Ascalon</a></td>
                     </tr>
-                    <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_ghost_of_althea">
+                    <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_ghost_of_althea" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="hero_ghost_of_althea" data-area="heroes"></td>
                         <td>
                             <div style="display:flex;align-items:center;gap:8px;">
@@ -23837,7 +23856,7 @@
                         <td><a href="https://wiki.guildwars.com/wiki/Piken_Square" target="_blank" class="quest-link">Piken Square</a></td>
                         <td><span class="badge badge-main">Prophecies</span></td>
                     </tr>
-                    <tr data-type="Prophecies" data-area="outposts" data-id="outpost_piken_square_pre_searing">
+                    <tr data-type="Prophecies" data-area="outposts" data-id="outpost_piken_square_pre_searing" data-reforged="1">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="outpost_piken_square_pre_searing" data-area="outposts"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Piken_Square_(pre-Searing)" target="_blank" class="quest-link">Piken Square (pre-Searing)</a></td>
                         <td><span class="badge badge-main">Prophecies</span></td>
@@ -24570,7 +24589,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">📚 Non-Elite Skills (988 total)</span>
+                    <span class="progress-text">📚 Non-Elite Skills (988 total)</span><span class="melandru-hint">⚖️ Skill tomes blocked under Melandru's Accord</span>
                     <span class="progress-count"><span id="skills-completed">0</span> / <span id="skills-total">988</span></span>
                 </div>
                 <div class="progress-bar">
@@ -29655,6 +29674,7 @@
         </div>
     </div>
     <div class="area" id="area-menagerie">
+        <div class="melandru-block">🚫 Blocked under Melandru's Accord — the Zaishen Menagerie requires trading/donation, disallowed under Ironman rules.</div>
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
@@ -29900,7 +29920,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">🎯 Legendary Skill Hunter (300 Elite Skills)</span>
+                    <span class="progress-text">🎯 Legendary Skill Hunter (300 Elite Skills)</span><span class="melandru-hint">⚖️ Elite tomes blocked under Melandru's Accord</span>
                     <span class="progress-count"><span id="elites-completed">0</span> / <span id="elites-total">300</span></span>
                 </div>
                 <div class="progress-bar">
@@ -32559,6 +32579,7 @@
             loadCampaign();
             loadProfessions();
             loadProgress();
+            applyModes();
         }
         
         function renameCharacter() {
@@ -33448,6 +33469,50 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             }
         }
         
+        // ==================== GAME MODE TOGGLES (Reforged / Dhuum / Melandru) ====================
+        // Per-character mode state in localStorage 'gw-modes' (backward-compatible: missing = defaults).
+        function getModes() {
+            try { return JSON.parse(localStorage.getItem('gw-modes') || '{}'); } catch (e) { return {}; }
+        }
+        function getCharModes() {
+            const m = getModes()[currentCharacter] || {};
+            // Defaults: Reforged ON, Dhuum OFF, Melandru OFF
+            return { reforged: m.reforged !== false, dhuum: m.dhuum === true, melandru: m.melandru === true };
+        }
+        function setMode(name, val) {
+            const all = getModes();
+            const cur = getCharModes();
+            cur[name] = val;
+            all[currentCharacter] = cur;
+            localStorage.setItem('gw-modes', JSON.stringify(all));
+        }
+        function toggleMode(name) {
+            const cur = getCharModes();
+            setMode(name, !cur[name]);
+            applyModes();
+        }
+        function updateModeBadges(m) {
+            const el = document.getElementById('mode-badges');
+            if (!el) return;
+            let html = '';
+            if (m.dhuum) html += `<img class="mode-badge" src="https://wiki.guildwars.com/images/0/05/DhuumCovenant-Small.png" alt="Dhuum's Covenant" title="One life. No resurrection.">`;
+            if (m.melandru) html += `<img class="mode-badge" src="https://wiki.guildwars.com/images/1/11/Melandrus_Accord-Small.png" alt="Melandru's Accord" title="Melandru's Accord (Ironman)">`;
+            el.innerHTML = html;
+        }
+        function applyModes() {
+            const m = getCharModes();
+            document.body.classList.toggle('mode-reforged-off', !m.reforged);
+            document.body.classList.toggle('mode-dhuum-on', m.dhuum);
+            document.body.classList.toggle('mode-melandru-on', m.melandru);
+            const map = { reforged: 'toggle-reforged', dhuum: 'toggle-dhuum', melandru: 'toggle-melandru' };
+            Object.keys(map).forEach(k => {
+                const b = document.getElementById(map[k]);
+                if (b) { b.classList.toggle('active', m[k]); b.setAttribute('aria-pressed', m[k] ? 'true' : 'false'); }
+            });
+            updateModeBadges(m);
+            updateAllProgress();
+        }
+
         // Update progress for an area
         function updateProgress(areaId) {
             // Count only DOABLE quests/pieces
@@ -33455,14 +33520,15 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
             // - For armor: also exclude rows currently hidden by profession rules
             const hiddenFilter = (areaId === 'armor') ? ':not(.hidden):not(.hidden-restrict)' : '';
-            const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}`);
+            const reforgedFilter = document.body.classList.contains('mode-reforged-off') ? ':not([data-reforged="1"])' : '';
+            const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}${reforgedFilter}`);
             let total = allRows.length;
             let completed;
             if (areaId === 'missions') {
                 // Count only main mission completion (exclude bonus/hm checkboxes)
                 completed = document.querySelectorAll(`tr[data-area="missions"] .quest-checkbox[data-id^="mission_"]:checked`).length;
             } else {
-                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter} .quest-checkbox:checked`);
+                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}${reforgedFilter} .quest-checkbox:checked`);
                 completed = allChecked.length;
             }
             const percent = total > 0 ? (completed / total * 100) : 0;
@@ -34034,6 +34100,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         // Initialize everything
         loadProgress();
         updateAllProgress();
+        applyModes();
         updateElitesCampaignProgress();
         applyProfessionHighlighting();
         checkLegendaryTitles(); // Auto-check legendary titles on load

@@ -638,6 +638,19 @@ html = '''<!DOCTYPE html>
         .dropdown-option:hover { background: #21262d; }
         .dropdown-option:first-child { border-radius: 6px 6px 0 0; }
         .dropdown-option:last-child { border-radius: 0 0 6px 6px; }
+        /* Game mode toggles */
+        .mode-toggles { display: inline-flex; gap: 5px; align-items: center; margin-left: 4px; }
+        .mode-toggle { background: #21262d; border: 1px solid #30363d; border-radius: 6px; padding: 2px 5px; cursor: pointer; opacity: 0.4; filter: grayscale(100%); transition: all 0.2s; display: inline-flex; align-items: center; line-height: 0; }
+        .mode-toggle:hover { border-color: #58a6ff; opacity: 0.8; }
+        .mode-toggle.active { opacity: 1; filter: none; border-color: #58a6ff; box-shadow: 0 0 6px rgba(88,166,255,0.4); }
+        .mode-toggle img { width: 22px; height: 22px; }
+        .mode-badge { width: 20px; height: 20px; vertical-align: middle; margin-left: 4px; }
+        body.mode-reforged-off tr[data-reforged="1"] { display: none; }
+        body.mode-melandru-on #area-menagerie .content { opacity: 0.4; pointer-events: none; filter: grayscale(60%); }
+        .melandru-block { display: none; margin: 10px 0; padding: 10px 14px; border-radius: 8px; background: rgba(248,81,73,0.12); border: 1px solid #f85149; color: #f0a39c; font-weight: 600; }
+        body.mode-melandru-on .melandru-block { display: block; }
+        .melandru-hint { display: none; }
+        body.mode-melandru-on .melandru-hint { display: inline; color: #f85149; font-size: 0.85em; margin-left: 6px; }
     </style>
 </head>
 <body>
@@ -650,6 +663,12 @@ html = '''<!DOCTYPE html>
         <div class="char-selector">
             <span class="char-label">Character:</span>
             <select id="char-select" onchange="switchCharacter()"></select>
+            <span id="mode-badges"></span>
+            <div class="mode-toggles">
+                <button class="mode-toggle" id="toggle-reforged" onclick="toggleMode('reforged')" aria-pressed="true" title="Reforged Mode — overhauled Prophecies content (quests, heroes, Piken Square pre)"><img src="https://wiki.guildwars.com/images/1/19/ReforgedMode-Small.png" alt="Reforged Mode"></button>
+                <button class="mode-toggle" id="toggle-dhuum" onclick="toggleMode('dhuum')" aria-pressed="false" title="Dhuum's Covenant — One life. No resurrection."><img src="https://wiki.guildwars.com/images/0/05/DhuumCovenant-Small.png" alt="Dhuum's Covenant"></button>
+                <button class="mode-toggle" id="toggle-melandru" onclick="toggleMode('melandru')" aria-pressed="false" title="Melandru's Accord — Ironman: no trading, no tomes, no price traders"><img src="https://wiki.guildwars.com/images/1/11/Melandrus_Accord-Small.png" alt="Melandru's Accord"></button>
+            </div>
             <select id="campaign-select" class="campaign-dropdown" onchange="setCampaign()">
                 <option value="">-- Campaign --</option>
                 <option value="prophecies">⚔️ Prophecies</option>
@@ -1002,9 +1021,10 @@ def generate_area_html(quests, area_id, area_name, is_first, is_bonus_pack=False
 
         # Reforged Mode badge in the quest name cell (matches the deployed site)
         reforged_badge = '<br><span class="prereq">&#9874;&#65039; Reforged Mode</span>' if q['id'] in REFORGED_QUEST_IDS else ''
+        reforged_attr = ' data-reforged="1"' if q['id'] in REFORGED_QUEST_IDS else ''
 
         h += f'''
-                    <tr class="{row_cls}" data-id="{q['id']}" data-type="{q['type'].lower()}" data-prof="{prof}" data-area="{area_id}"{missable_attr}>
+                    <tr class="{row_cls}" data-id="{q['id']}" data-type="{q['type'].lower()}" data-prof="{prof}" data-area="{area_id}"{missable_attr}{reforged_attr}>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{q['id']}" data-area="{area_id}"></td>
                         <td class="checkbox-cell">{hm_cell}</td>
                         <td class="checkbox-cell">{bonus_cell}</td>
@@ -1234,6 +1254,7 @@ def generate_heroes_html():
     for hero in HEROES:
         name, profession, campaign, region, quest, wiki = hero
         hero_id = f"hero_{name.lower().replace(' ', '_').replace('.', '')}"
+        hero_reforged = ' data-reforged="1"' if name in ("Devona", "Ghost of Althea") else ''
         icon = HERO_PROFESSIONS.get(profession, "")
         campaign_lower = campaign.lower()
         region_lower = region.lower()
@@ -1283,7 +1304,7 @@ def generate_heroes_html():
             armor_html = '<span style="color:#8b949e;">—</span>'
         
         h += f'''
-                    <tr data-type="{campaign_lower}" data-area="heroes" data-region="{region_lower}" data-id="{hero_id}">
+                    <tr data-type="{campaign_lower}" data-area="heroes" data-region="{region_lower}" data-id="{hero_id}"{hero_reforged}>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{hero_id}" data-area="heroes"></td>
                         <td>
                             <div style="display:flex;align-items:center;gap:8px;">
@@ -2397,11 +2418,12 @@ def generate_outposts_html():
 
     for name, campaign, wiki_slug in OUTPOSTS:
         outpost_id = outpost_id_overrides.get(name) or f"outpost_{name.lower().replace(' ', '_').replace(chr(39), '')}"
+        outpost_reforged = ' data-reforged="1"' if outpost_id == "outpost_piken_square_pre_searing" else ''
         badge_cls = campaign_badges.get(campaign, "badge-side")
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki_slug}"
         
         h += f'''
-                    <tr data-type="{campaign}" data-area="outposts" data-id="{outpost_id}">
+                    <tr data-type="{campaign}" data-area="outposts" data-id="{outpost_id}"{outpost_reforged}>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{outpost_id}" data-area="outposts"></td>
                         <td><a href="{wiki_url}" target="_blank" class="quest-link">{name}</a></td>
                         <td><span class="badge {badge_cls}">{campaign}</span></td>
@@ -2446,7 +2468,7 @@ def generate_skills_html():
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">📚 Non-Elite Skills ({total} total)</span>
+                    <span class="progress-text">📚 Non-Elite Skills ({total} total)</span><span class="melandru-hint">⚖️ Skill tomes blocked under Melandru's Accord</span>
                     <span class="progress-count"><span id="skills-completed">0</span> / <span id="skills-total">{total}</span></span>
                 </div>
                 <div class="progress-bar">
@@ -2515,6 +2537,7 @@ def generate_menagerie_html():
     
     h = f'''
     <div class="area" id="area-menagerie">
+        <div class="melandru-block">🚫 Blocked under Melandru's Accord — the Zaishen Menagerie requires trading/donation, disallowed under Ironman rules.</div>
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
@@ -2585,7 +2608,7 @@ def generate_elite_skills_html():
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">🎯 Legendary Skill Hunter ({total_skills} Elite Skills)</span>
+                    <span class="progress-text">🎯 Legendary Skill Hunter ({total_skills} Elite Skills)</span><span class="melandru-hint">⚖️ Elite tomes blocked under Melandru's Accord</span>
                     <span class="progress-count"><span id="elites-completed">0</span> / <span id="elites-total">{total_skills}</span></span>
                 </div>
                 <div class="progress-bar">
@@ -2794,6 +2817,7 @@ html += '''
             loadCampaign();
             loadProfessions();
             loadProgress();
+            applyModes();
         }
         
         function renameCharacter() {
@@ -3683,6 +3707,50 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             }
         }
         
+        // ==================== GAME MODE TOGGLES (Reforged / Dhuum / Melandru) ====================
+        // Per-character mode state in localStorage 'gw-modes' (backward-compatible: missing = defaults).
+        function getModes() {
+            try { return JSON.parse(localStorage.getItem('gw-modes') || '{}'); } catch (e) { return {}; }
+        }
+        function getCharModes() {
+            const m = getModes()[currentCharacter] || {};
+            // Defaults: Reforged ON, Dhuum OFF, Melandru OFF
+            return { reforged: m.reforged !== false, dhuum: m.dhuum === true, melandru: m.melandru === true };
+        }
+        function setMode(name, val) {
+            const all = getModes();
+            const cur = getCharModes();
+            cur[name] = val;
+            all[currentCharacter] = cur;
+            localStorage.setItem('gw-modes', JSON.stringify(all));
+        }
+        function toggleMode(name) {
+            const cur = getCharModes();
+            setMode(name, !cur[name]);
+            applyModes();
+        }
+        function updateModeBadges(m) {
+            const el = document.getElementById('mode-badges');
+            if (!el) return;
+            let html = '';
+            if (m.dhuum) html += `<img class="mode-badge" src="https://wiki.guildwars.com/images/0/05/DhuumCovenant-Small.png" alt="Dhuum's Covenant" title="One life. No resurrection.">`;
+            if (m.melandru) html += `<img class="mode-badge" src="https://wiki.guildwars.com/images/1/11/Melandrus_Accord-Small.png" alt="Melandru's Accord" title="Melandru's Accord (Ironman)">`;
+            el.innerHTML = html;
+        }
+        function applyModes() {
+            const m = getCharModes();
+            document.body.classList.toggle('mode-reforged-off', !m.reforged);
+            document.body.classList.toggle('mode-dhuum-on', m.dhuum);
+            document.body.classList.toggle('mode-melandru-on', m.melandru);
+            const map = { reforged: 'toggle-reforged', dhuum: 'toggle-dhuum', melandru: 'toggle-melandru' };
+            Object.keys(map).forEach(k => {
+                const b = document.getElementById(map[k]);
+                if (b) { b.classList.toggle('active', m[k]); b.setAttribute('aria-pressed', m[k] ? 'true' : 'false'); }
+            });
+            updateModeBadges(m);
+            updateAllProgress();
+        }
+
         // Update progress for an area
         function updateProgress(areaId) {
             // Count only DOABLE quests/pieces
@@ -3690,14 +3758,15 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
             // - For armor: also exclude rows currently hidden by profession rules
             const hiddenFilter = (areaId === 'armor') ? ':not(.hidden):not(.hidden-restrict)' : '';
-            const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}`);
+            const reforgedFilter = document.body.classList.contains('mode-reforged-off') ? ':not([data-reforged="1"])' : '';
+            const allRows = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}${reforgedFilter}`);
             let total = allRows.length;
             let completed;
             if (areaId === 'missions') {
                 // Count only main mission completion (exclude bonus/hm checkboxes)
                 completed = document.querySelectorAll(`tr[data-area="missions"] .quest-checkbox[data-id^="mission_"]:checked`).length;
             } else {
-                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter} .quest-checkbox:checked`);
+                const allChecked = document.querySelectorAll(`tr[data-area="${areaId}"]:not(.campaign-locked):not(.other-profession)${hiddenFilter}${reforgedFilter} .quest-checkbox:checked`);
                 completed = allChecked.length;
             }
             const percent = total > 0 ? (completed / total * 100) : 0;
@@ -4268,6 +4337,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         // Initialize everything
         loadProgress();
         updateAllProgress();
+        applyModes();
         updateElitesCampaignProgress();
         applyProfessionHighlighting();
         checkLegendaryTitles(); // Auto-check legendary titles on load
