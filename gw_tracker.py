@@ -174,6 +174,9 @@ html = '''<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations. Works offline using local storage.">
+    <meta name="theme-color" content="#0d1117">
+    <link rel="canonical" href="https://gwcompanion.com/">
     <title>Guild Wars Companion</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -537,11 +540,27 @@ html = '''<!DOCTYPE html>
             th:nth-child(6), td:nth-child(6),
             th:nth-child(8), td:nth-child(8) { display: none; }
         }
+        .skip-link {
+            position: absolute;
+            top: 0;
+            left: 0;
+            transform: translateY(-120%);
+            background: #58a6ff;
+            color: #0d1117;
+            padding: 8px 12px;
+            border-radius: 0 0 8px 0;
+            z-index: 2000;
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .skip-link:focus { transform: translateY(0); }
+        :focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
     </style>
 </head>
 <body>
+    <a class="skip-link" href="#app-main">Skip to main content</a>
     <div class="header">
-        <h1>⚔️ Guild Wars Companion</h1>
+        <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">⚔️ Guild Wars Companion</h1>
         <div class="char-selector">
             <span class="char-label">Character:</span>
             <select id="char-select" onchange="switchCharacter()"></select>
@@ -579,12 +598,13 @@ html = '''<!DOCTYPE html>
                 <option value="none">❌ None</option>
             </select>
             <button class="char-btn" onclick="resetCharacter()" title="Reset all progress for this character">🔄 Reset</button>
-            <button class="char-btn add" onclick="addCharacter()">+ New</button>
-            <button class="char-btn" onclick="renameCharacter()">✏️</button>
-            <button class="char-btn delete" onclick="deleteCharacter()">🗑️</button>
+            <button class="char-btn add" onclick="addCharacter()" aria-label="Add character" title="Add character">+ New</button>
+            <button class="char-btn" onclick="renameCharacter()" aria-label="Rename character" title="Rename character">✏️</button>
+            <button class="char-btn delete" onclick="deleteCharacter()" aria-label="Delete character" title="Delete character">🗑️</button>
         </div>
     </div>
     
+    <main id="app-main" role="main">
     <div class="main-tabs">
         <button class="main-tab active" data-category="quests" onclick="switchCategory('quests')">📜 Quests</button>
         <button class="main-tab" data-category="daily" onclick="switchCategory('daily')">📅 Daily</button>
@@ -2504,6 +2524,7 @@ def generate_elite_skills_html():
 html += generate_elite_skills_html()
 
 html += '''
+    </main>
     <script>
         // ==================== CHARACTER MANAGEMENT ====================
         let currentCharacter = null;
