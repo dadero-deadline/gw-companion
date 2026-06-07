@@ -176,7 +176,20 @@ html = '''<!DOCTYPE html>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations. Works offline using local storage.">
     <meta name="theme-color" content="#0d1117">
+    <meta property="og:title" content="Guild Wars Companion">
+    <meta property="og:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://gwcompanion.com/">
+    <meta property="og:image" content="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png">
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Guild Wars Companion">
+    <meta name="twitter:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
+    <meta name="twitter:image" content="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png">
     <link rel="canonical" href="https://gwcompanion.com/">
+    <link rel="preconnect" href="https://wiki.guildwars.com">
+    <link rel="dns-prefetch" href="//wiki.guildwars.com">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23161b22%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-size%3D%2228%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffd700%22%20font-family%3D%22Segoe%20UI%2CArial%2Csans-serif%22%3EGW%3C/text%3E%3C/svg%3E">
+    <link rel="preload" href="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" as="image">
     <title>Guild Wars Companion</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -198,7 +211,27 @@ html = '''<!DOCTYPE html>
             flex-wrap: wrap;
             gap: 10px;
         }
-        .header h1 { color: #ffd700; font-size: 1.2em; white-space: nowrap; }
+        .header h1 { 
+            color: #ffd700; 
+            font-size: 1.4em; 
+            white-space: nowrap; 
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 215, 0, 0.5), 0 0 20px rgba(255, 215, 0, 0.3);
+            letter-spacing: 1px;
+        }
+        .header h1 img { 
+            width: 32px; 
+            height: 32px; 
+            filter: drop-shadow(0 0 8px rgba(255, 215, 0, 0.6));
+            opacity: 0;
+            transition: opacity 0.2s ease-in;
+        }
+        .header h1 img.loaded {
+            opacity: 1;
+        }
         
         /* Character Selector */
         .char-selector {
@@ -208,7 +241,7 @@ html = '''<!DOCTYPE html>
             flex-wrap: wrap;
         }
         .char-selector select {
-            background: #161b22;
+            background: #21262d;
             color: #c9d1d9;
             border: 1px solid #30363d;
             padding: 6px 10px;
@@ -216,8 +249,9 @@ html = '''<!DOCTYPE html>
             font-size: 0.85em;
             cursor: pointer;
             min-width: 100px;
+            transition: all 0.2s;
         }
-        .char-selector select:hover { border-color: #58a6ff; }
+        .char-selector select:hover { background: #30363d; border-color: #58a6ff; }
         .char-btn {
             background: #21262d;
             color: #c9d1d9;
@@ -439,7 +473,7 @@ html = '''<!DOCTYPE html>
         tr:hover { background: rgba(255,255,255,0.03); }
         tr.completed { opacity: 0.5; }
         tr.completed td { text-decoration: line-through; }
-        tr.hidden, tr.hidden-restrict { display: none; }
+        tr.hidden, tr.hidden-restrict { display: none !important; }
         
         .type-main { background: rgba(88,166,255,0.1); }
         .type-mission { background: rgba(112,48,160,0.15); }
@@ -526,8 +560,8 @@ html = '''<!DOCTYPE html>
             .filters { gap: 5px; flex-wrap: wrap; }
             .filter-btn { padding: 4px 8px; font-size: 0.7em; }
             .io-btn { padding: 4px 8px; font-size: 0.7em; }
-            table { font-size: 0.8em; }
-            td, th { padding: 6px 4px; }
+            table { font-size: 0.7em; }
+            td, th { padding: 4px 2px; }
             /* Hide less important columns: Order(3), Prereq(7), Reward(9) */
             th:nth-child(3), td:nth-child(3),
             th:nth-child(7), td:nth-child(7),
@@ -535,7 +569,10 @@ html = '''<!DOCTYPE html>
         }
         
         @media (max-width: 480px) {
-            .header h1 { display: none; }
+            .header h1 {
+                font-size: 0.8em;
+                white-space: normal;
+            }
             /* Also hide: Location(6), Profession(8) */
             th:nth-child(6), td:nth-child(6),
             th:nth-child(8), td:nth-child(8) { display: none; }
@@ -603,7 +640,10 @@ html = '''<!DOCTYPE html>
 <body>
     <a class="skip-link" href="#app-main">Skip to main content</a>
     <div class="header">
-        <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">⚔️ Guild Wars Companion</h1>
+        <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">
+            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" loading="eager" decoding="async" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
+            Guild Wars Companion
+        </h1>
         <div class="char-selector">
             <span class="char-label">Character:</span>
             <select id="char-select" onchange="switchCharacter()"></select>
