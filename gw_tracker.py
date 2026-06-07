@@ -555,6 +555,49 @@ html = '''<!DOCTYPE html>
         }
         .skip-link:focus { transform: translateY(0); }
         :focus-visible { outline: 2px solid #58a6ff; outline-offset: 2px; }
+        .custom-dropdown { position: relative; display: inline-block; min-width: 120px; }
+        .dropdown-header { 
+            padding: 6px 12px; 
+            border-radius: 6px; 
+            border: 1px solid #30363d; 
+            background: #21262d; 
+            color: #c9d1d9; 
+            font-size: 0.85em; 
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.2s;
+        }
+        .dropdown-header:hover { background: #30363d; border-color: #58a6ff; }
+        .dropdown-arrow { font-size: 0.7em; color: #8b949e; transition: transform 0.2s; }
+        .dropdown-header.open .dropdown-arrow { transform: rotate(180deg); }
+        .dropdown-list {
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            margin-top: 4px;
+            background: #161b22;
+            border: 1px solid #30363d;
+            border-radius: 6px;
+            box-shadow: 0 8px 24px rgba(0,0,0,0.4);
+            z-index: 1000;
+            max-height: 300px;
+            overflow-y: auto;
+        }
+        .dropdown-option {
+            padding: 8px 12px;
+            cursor: pointer;
+            color: #c9d1d9;
+            font-size: 0.85em;
+            transition: background 0.15s;
+            display: flex;
+            align-items: center;
+        }
+        .dropdown-option:hover { background: #21262d; }
+        .dropdown-option:first-child { border-radius: 6px 6px 0 0; }
+        .dropdown-option:last-child { border-radius: 0 0 6px 6px; }
     </style>
 </head>
 <body>
@@ -570,33 +613,87 @@ html = '''<!DOCTYPE html>
                 <option value="factions">🐉 Factions</option>
                 <option value="nightfall">🌙 Nightfall</option>
             </select>
-            <select id="primary-prof" class="prof-dropdown" onchange="setProfessions()" title="Primary Profession">
-                <option value="">Primary</option>
-                <option value="warrior">⚔️ Warrior</option>
-                <option value="ranger">🏹 Ranger</option>
-                <option value="monk">✨ Monk</option>
-                <option value="necromancer">💀 Necromancer</option>
-                <option value="mesmer">🎭 Mesmer</option>
-                <option value="elementalist">🔥 Elementalist</option>
-                <option value="assassin">🗡️ Assassin</option>
-                <option value="ritualist">👻 Ritualist</option>
-                <option value="paragon">🛡️ Paragon</option>
-                <option value="dervish">🌀 Dervish</option>
-            </select>
-            <select id="secondary-prof" class="prof-dropdown" onchange="setProfessions()" title="Secondary Profession">
-                <option value="">Secondary</option>
-                <option value="warrior">⚔️ Warrior</option>
-                <option value="ranger">🏹 Ranger</option>
-                <option value="monk">✨ Monk</option>
-                <option value="necromancer">💀 Necromancer</option>
-                <option value="mesmer">🎭 Mesmer</option>
-                <option value="elementalist">🔥 Elementalist</option>
-                <option value="assassin">🗡️ Assassin</option>
-                <option value="ritualist">👻 Ritualist</option>
-                <option value="paragon">🛡️ Paragon</option>
-                <option value="dervish">🌀 Dervish</option>
-                <option value="none">❌ None</option>
-            </select>
+            <div class="custom-dropdown" id="primary-prof-wrapper">
+                <div class="dropdown-header" onclick="toggleDropdown('primary-prof')">
+                    <span id="primary-prof-selected">Primary</span>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-list" id="primary-prof-list" style="display:none;">
+                    <div class="dropdown-option" data-value="" onclick="selectProf('primary-prof', '', 'Primary', null)">Primary</div>
+                    <div class="dropdown-option" data-value="warrior" onclick="selectProf('primary-prof', 'warrior', 'Warrior', 'https://wiki.guildwars.com/images/3/3b/Warrior-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/3/3b/Warrior-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Warrior
+                    </div>
+                    <div class="dropdown-option" data-value="ranger" onclick="selectProf('primary-prof', 'ranger', 'Ranger', 'https://wiki.guildwars.com/images/d/dc/Ranger-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/d/dc/Ranger-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Ranger
+                    </div>
+                    <div class="dropdown-option" data-value="monk" onclick="selectProf('primary-prof', 'monk', 'Monk', 'https://wiki.guildwars.com/images/f/f8/Monk-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/f/f8/Monk-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Monk
+                    </div>
+                    <div class="dropdown-option" data-value="necromancer" onclick="selectProf('primary-prof', 'necromancer', 'Necromancer', 'https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Necromancer
+                    </div>
+                    <div class="dropdown-option" data-value="mesmer" onclick="selectProf('primary-prof', 'mesmer', 'Mesmer', 'https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Mesmer
+                    </div>
+                    <div class="dropdown-option" data-value="elementalist" onclick="selectProf('primary-prof', 'elementalist', 'Elementalist', 'https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Elementalist
+                    </div>
+                    <div class="dropdown-option" data-value="assassin" onclick="selectProf('primary-prof', 'assassin', 'Assassin', 'https://wiki.guildwars.com/images/5/5f/Assassin-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/5/5f/Assassin-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Assassin
+                    </div>
+                    <div class="dropdown-option" data-value="ritualist" onclick="selectProf('primary-prof', 'ritualist', 'Ritualist', 'https://wiki.guildwars.com/images/8/81/Ritualist-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/8/81/Ritualist-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Ritualist
+                    </div>
+                    <div class="dropdown-option" data-value="paragon" onclick="selectProf('primary-prof', 'paragon', 'Paragon', 'https://wiki.guildwars.com/images/5/55/Paragon-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/5/55/Paragon-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Paragon
+                    </div>
+                    <div class="dropdown-option" data-value="dervish" onclick="selectProf('primary-prof', 'dervish', 'Dervish', 'https://wiki.guildwars.com/images/3/3e/Dervish-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/3/3e/Dervish-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Dervish
+                    </div>
+                </div>
+            </div>
+            <input type="hidden" id="primary-prof" value="">
+            <div class="custom-dropdown" id="secondary-prof-wrapper">
+                <div class="dropdown-header" onclick="toggleDropdown('secondary-prof')">
+                    <span id="secondary-prof-selected">Secondary</span>
+                    <span class="dropdown-arrow">▼</span>
+                </div>
+                <div class="dropdown-list" id="secondary-prof-list" style="display:none;">
+                    <div class="dropdown-option" data-value="" onclick="selectProf('secondary-prof', '', 'Secondary', null)">Secondary</div>
+                    <div class="dropdown-option" data-value="warrior" onclick="selectProf('secondary-prof', 'warrior', 'Warrior', 'https://wiki.guildwars.com/images/3/3b/Warrior-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/3/3b/Warrior-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Warrior
+                    </div>
+                    <div class="dropdown-option" data-value="ranger" onclick="selectProf('secondary-prof', 'ranger', 'Ranger', 'https://wiki.guildwars.com/images/d/dc/Ranger-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/d/dc/Ranger-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Ranger
+                    </div>
+                    <div class="dropdown-option" data-value="monk" onclick="selectProf('secondary-prof', 'monk', 'Monk', 'https://wiki.guildwars.com/images/f/f8/Monk-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/f/f8/Monk-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Monk
+                    </div>
+                    <div class="dropdown-option" data-value="necromancer" onclick="selectProf('secondary-prof', 'necromancer', 'Necromancer', 'https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Necromancer
+                    </div>
+                    <div class="dropdown-option" data-value="mesmer" onclick="selectProf('secondary-prof', 'mesmer', 'Mesmer', 'https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Mesmer
+                    </div>
+                    <div class="dropdown-option" data-value="elementalist" onclick="selectProf('secondary-prof', 'elementalist', 'Elementalist', 'https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Elementalist
+                    </div>
+                    <div class="dropdown-option" data-value="assassin" onclick="selectProf('secondary-prof', 'assassin', 'Assassin', 'https://wiki.guildwars.com/images/5/5f/Assassin-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/5/5f/Assassin-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Assassin
+                    </div>
+                    <div class="dropdown-option" data-value="ritualist" onclick="selectProf('secondary-prof', 'ritualist', 'Ritualist', 'https://wiki.guildwars.com/images/8/81/Ritualist-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/8/81/Ritualist-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Ritualist
+                    </div>
+                    <div class="dropdown-option" data-value="paragon" onclick="selectProf('secondary-prof', 'paragon', 'Paragon', 'https://wiki.guildwars.com/images/5/55/Paragon-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/5/55/Paragon-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Paragon
+                    </div>
+                    <div class="dropdown-option" data-value="dervish" onclick="selectProf('secondary-prof', 'dervish', 'Dervish', 'https://wiki.guildwars.com/images/3/3e/Dervish-tango-icon-20.png')">
+                        <img src="https://wiki.guildwars.com/images/3/3e/Dervish-tango-icon-20.png" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">Dervish
+                    </div>
+                    <div class="dropdown-option" data-value="none" onclick="selectProf('secondary-prof', 'none', '❌ None', null)">❌ None</div>
+                </div>
+            </div>
+            <input type="hidden" id="secondary-prof" value="">
             <button class="char-btn" onclick="resetCharacter()" title="Reset all progress for this character">🔄 Reset</button>
             <button class="char-btn add" onclick="addCharacter()" aria-label="Add character" title="Add character">+ New</button>
             <button class="char-btn" onclick="renameCharacter()" aria-label="Rename character" title="Rename character">✏️</button>
@@ -2776,11 +2873,193 @@ html += '''
             updateAllProgress(); // Update counters after profession change
         }
         
+        function toggleDropdown(dropdownId) {
+            const wrapper = document.getElementById(dropdownId + '-wrapper');
+            const list = document.getElementById(dropdownId + '-list');
+            if (!wrapper || !list) return;
+            const header = wrapper.querySelector('.dropdown-header');
+            if (!header) return;
+            
+            // Close other dropdowns
+            document.querySelectorAll('.dropdown-list').forEach(dl => {
+                if (dl.id !== dropdownId + '-list') {
+                    dl.style.display = 'none';
+                    dl.previousElementSibling?.classList.remove('open');
+                    dl.previousElementSibling?.setAttribute('aria-expanded', 'false');
+                }
+            });
+            
+            // Toggle this dropdown
+            if (list.style.display === 'none' || !list.style.display) {
+                list.style.display = 'block';
+                header.classList.add('open');
+                header.setAttribute('aria-expanded', 'true');
+            } else {
+                list.style.display = 'none';
+                header.classList.remove('open');
+                header.setAttribute('aria-expanded', 'false');
+            }
+        }
+        
+        function selectProf(dropdownId, value, label, iconUrl) {
+            // Update hidden input
+            const input = document.getElementById(dropdownId);
+            input.value = value;
+            
+            // Update displayed text
+            const selectedSpan = document.getElementById(dropdownId + '-selected');
+            if (iconUrl) {
+                selectedSpan.innerHTML = `<img src="${iconUrl}" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">${label}`;
+            } else {
+                selectedSpan.textContent = label;
+            }
+            
+            // Close dropdown
+            const list = document.getElementById(dropdownId + '-list');
+            const header = list.previousElementSibling;
+            list.style.display = 'none';
+            header.classList.remove('open');
+            header.setAttribute('aria-expanded', 'false');
+            
+            // Trigger change event (1:1 like before - let existing event listeners handle it)
+            const event = new Event('change', { bubbles: true });
+            input.dispatchEvent(event);
+            if (typeof setProfessions === 'function') {
+                setProfessions();
+            }
+        }
+        
+        // Close dropdowns when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!e.target.closest('.custom-dropdown')) {
+                document.querySelectorAll('.dropdown-list').forEach(dl => {
+                    dl.style.display = 'none';
+                    if (dl.previousElementSibling) {
+                        dl.previousElementSibling.classList.remove('open');
+                        dl.previousElementSibling.setAttribute('aria-expanded', 'false');
+                    }
+                });
+            }
+        });
+
+        (function() {
+            document.querySelectorAll('.custom-dropdown').forEach(wrapper => {
+                const header = wrapper.querySelector('.dropdown-header');
+                const list = wrapper.querySelector('.dropdown-list');
+                if (!header || !list) return;
+
+                const dropdownId = (wrapper.id || '').replace(/-wrapper$/, '');
+
+                header.setAttribute('role', 'button');
+                header.tabIndex = 0;
+                header.setAttribute('aria-haspopup', 'listbox');
+                header.setAttribute('aria-controls', list.id);
+                header.setAttribute('aria-expanded', header.classList.contains('open') ? 'true' : 'false');
+                header.dataset.dropdownId = dropdownId;
+
+                list.setAttribute('role', 'listbox');
+
+                const options = Array.from(list.querySelectorAll('.dropdown-option'));
+                options.forEach((opt, idx) => {
+                    opt.setAttribute('role', 'option');
+                    opt.tabIndex = 0;
+                    opt.addEventListener('keydown', (e) => {
+                        if (e.key === 'Enter' || e.key === ' ') {
+                            e.preventDefault();
+                            opt.click();
+                        } else if (e.key === 'Escape') {
+                            e.preventDefault();
+                            list.style.display = 'none';
+                            header.classList.remove('open');
+                            header.setAttribute('aria-expanded', 'false');
+                            header.focus();
+                        } else if (e.key === 'ArrowDown') {
+                            e.preventDefault();
+                            options[(idx + 1) % options.length]?.focus();
+                        } else if (e.key === 'ArrowUp') {
+                            e.preventDefault();
+                            options[(idx - 1 + options.length) % options.length]?.focus();
+                        }
+                    });
+                });
+
+                header.addEventListener('keydown', (e) => {
+                    const id = header.dataset.dropdownId;
+                    if (!id) return;
+
+                    if (e.key === 'Enter' || e.key === ' ') {
+                        e.preventDefault();
+                        toggleDropdown(id);
+                    } else if (e.key === 'ArrowDown') {
+                        e.preventDefault();
+                        const wasClosed = (list.style.display === 'none' || !list.style.display);
+                        if (wasClosed) toggleDropdown(id);
+                        options[0]?.focus();
+                    } else if (e.key === 'ArrowUp') {
+                        e.preventDefault();
+                        const wasClosed = (list.style.display === 'none' || !list.style.display);
+                        if (wasClosed) toggleDropdown(id);
+                        options[options.length - 1]?.focus();
+                    } else if (e.key === 'Escape') {
+                        const isOpen = !(list.style.display === 'none' || !list.style.display);
+                        if (isOpen) {
+                            e.preventDefault();
+                            list.style.display = 'none';
+                            header.classList.remove('open');
+                            header.setAttribute('aria-expanded', 'false');
+                        }
+                    }
+                });
+            });
+        })();
+
         function loadProfessions() {
             const data = JSON.parse(localStorage.getItem(getProfessionKey()) || '{}');
-            document.getElementById('primary-prof').value = data.primary || '';
-            document.getElementById('secondary-prof').value = data.secondary || '';
+            const primary = data.primary || '';
+            const secondary = data.secondary || '';
+            console.log('[Load Professions] Loaded from storage:', { primary, secondary });
+            
+            // Set hidden input values
+            document.getElementById('primary-prof').value = primary;
+            document.getElementById('secondary-prof').value = secondary;
+            console.log('[Load Professions] Set dropdown values to:', primary || '(empty)', secondary || '(empty)');
+            
+            // Update displayed values in custom dropdowns
+            const profMap = {
+                'warrior': { label: 'Warrior', icon: 'https://wiki.guildwars.com/images/3/3b/Warrior-tango-icon-20.png' },
+                'ranger': { label: 'Ranger', icon: 'https://wiki.guildwars.com/images/d/dc/Ranger-tango-icon-20.png' },
+                'monk': { label: 'Monk', icon: 'https://wiki.guildwars.com/images/f/f8/Monk-tango-icon-20.png' },
+                'necromancer': { label: 'Necromancer', icon: 'https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png' },
+                'mesmer': { label: 'Mesmer', icon: 'https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png' },
+                'elementalist': { label: 'Elementalist', icon: 'https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png' },
+                'assassin': { label: 'Assassin', icon: 'https://wiki.guildwars.com/images/e/ed/Assassin-tango-icon-20.png' },
+                'ritualist': { label: 'Ritualist', icon: 'https://wiki.guildwars.com/images/1/12/Ritualist-tango-icon-20.png' },
+                'paragon': { label: 'Paragon', icon: 'https://wiki.guildwars.com/images/3/30/Paragon-tango-icon-20.png' },
+                'dervish': { label: 'Dervish', icon: 'https://wiki.guildwars.com/images/5/58/Dervish-tango-icon-20.png' }
+            };
+            
+            const primarySpan = document.getElementById('primary-prof-selected');
+            const secondarySpan = document.getElementById('secondary-prof-selected');
+            
+            if (primary && profMap[primary]) {
+                primarySpan.innerHTML = `<img src="${profMap[primary].icon}" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">${profMap[primary].label}`;
+            } else {
+                primarySpan.textContent = 'None';
+            }
+            
+            if (secondary && profMap[secondary]) {
+                secondarySpan.innerHTML = `<img src="${profMap[secondary].icon}" style="width:16px;height:16px;vertical-align:middle;margin-right:6px;" alt="">${profMap[secondary].label}`;
+            } else {
+                secondarySpan.textContent = 'None';
+            }
+            
             applyProfessionHighlighting();
+            
+            // Update armor filtering based on loaded profession
+            if (typeof updateArmorPreviews === 'function') updateArmorPreviews();
+            if (typeof updateArmorVisibility === 'function') updateArmorVisibility();
+            if (typeof specialArmorRestrict === 'function') specialArmorRestrict();
+            
             updateAllProgress(); // Update counters after profession highlighting
         }
         
