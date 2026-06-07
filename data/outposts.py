@@ -41,6 +41,7 @@ OUTPOSTS = [
     ("Marhan's Grotto", "Prophecies", "Marhan's_Grotto"),
     ("Nolani Academy", "Prophecies", "Nolani_Academy_(outpost)"),
     ("Piken Square", "Prophecies", "Piken_Square"),
+    ("Piken Square (pre-Searing)", "Prophecies", "Piken_Square_(pre-Searing)"),
     ("Port Sledge", "Prophecies", "Port_Sledge"),
     ("Quarrel Falls", "Prophecies", "Quarrel_Falls"),
     ("Ring of Fire", "Prophecies", "Ring_of_Fire_(outpost)"),

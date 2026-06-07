@@ -51,6 +51,10 @@ HEROES = [
     ("Keiran Thackeray", "Paragon", "Beyond", "Special", "Hearts of the North", "Keiran_Thackeray"),
     ("Miku", "Assassin", "Beyond", "Special", "Winds of Change", "Miku"),
     ("Zei Ri", "Ritualist", "Beyond", "Special", "Winds of Change", "Zei_Ri"),
+
+    # ========== GUILD WARS REFORGED (Reforged Mode) ==========
+    ("Devona", "Warrior", "Beyond", "Special", "The Scourge Beneath or The Hero From Ascalon", "Devona"),
+    ("Ghost of Althea", "Mesmer", "Beyond", "Special", "The Dreamer and the Zealot", "Ghost_of_Althea"),
 ]
 
 # Hero armor locations for HoM

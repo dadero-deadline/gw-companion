@@ -649,7 +649,7 @@ def generate_area_html(quests, area_id, area_name, is_first, is_bonus_pack=False
                   "Assassin": "prof-assassin", "Ritualist": "prof-ritualist",
                   "Paragon": "prof-paragon", "Dervish": "prof-dervish"}
     
-    active = "active" if is_active else ""
+    active = "active" if is_first else ""
     h = f'''
     <div class="area {active}" id="area-{area_id}">
         <div class="content">
