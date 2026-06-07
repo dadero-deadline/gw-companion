@@ -76,7 +76,7 @@
         tr.my-profession { background: rgba(63, 185, 80, 0.2) !important; border-left: 3px solid #3fb950; }
         tr.my-profession td:first-child::before { content: "⭐ "; }
         tr.my-secondary-profession { background: rgba(255, 166, 87, 0.15) !important; border-left: 3px solid #ffa657; }
-        tr.my-secondary-profession td:first-child::before { content: "ðŸ”¶ "; }
+        tr.my-secondary-profession td:first-child::before { content: "🔶 "; }
         tr.other-profession { opacity: 0.5; }
         
         /* Profession progress grid */
@@ -377,59 +377,59 @@
             <select id="campaign-select" class="campaign-dropdown" onchange="setCampaign()">
                 <option value="">-- Campaign --</option>
                 <option value="prophecies">⚔️ Prophecies</option>
-                <option value="factions">ðŸ‰ Factions</option>
-                <option value="nightfall">ðŸŒ™ Nightfall</option>
+                <option value="factions">🐉 Factions</option>
+                <option value="nightfall">🌙 Nightfall</option>
             </select>
             <select id="primary-prof" class="prof-dropdown" onchange="setProfessions()" title="Primary Profession">
                 <option value="">Primary</option>
                 <option value="warrior">⚔️ Warrior</option>
                 <option value="ranger">🏹 Ranger</option>
                 <option value="monk">✨ Monk</option>
-                <option value="necromancer">ðŸ’€ Necromancer</option>
-                <option value="mesmer">ðŸŽ­ Mesmer</option>
-                <option value="elementalist">ðŸ”¥ Elementalist</option>
-                <option value="assassin">ðŸ—¡ï¸ Assassin</option>
-                <option value="ritualist">ðŸ‘» Ritualist</option>
-                <option value="paragon">ðŸ›¡ï¸ Paragon</option>
-                <option value="dervish">ðŸŒ€ Dervish</option>
+                <option value="necromancer">💀 Necromancer</option>
+                <option value="mesmer">🎭 Mesmer</option>
+                <option value="elementalist">🔥 Elementalist</option>
+                <option value="assassin">🗡️ Assassin</option>
+                <option value="ritualist">👻 Ritualist</option>
+                <option value="paragon">🛡️ Paragon</option>
+                <option value="dervish">🌀 Dervish</option>
             </select>
             <select id="secondary-prof" class="prof-dropdown" onchange="setProfessions()" title="Secondary Profession">
                 <option value="">Secondary</option>
                 <option value="warrior">⚔️ Warrior</option>
                 <option value="ranger">🏹 Ranger</option>
                 <option value="monk">✨ Monk</option>
-                <option value="necromancer">ðŸ’€ Necromancer</option>
-                <option value="mesmer">ðŸŽ­ Mesmer</option>
-                <option value="elementalist">ðŸ”¥ Elementalist</option>
-                <option value="assassin">ðŸ—¡ï¸ Assassin</option>
-                <option value="ritualist">ðŸ‘» Ritualist</option>
-                <option value="paragon">ðŸ›¡ï¸ Paragon</option>
-                <option value="dervish">ðŸŒ€ Dervish</option>
-                <option value="none">âŒ None</option>
+                <option value="necromancer">💀 Necromancer</option>
+                <option value="mesmer">🎭 Mesmer</option>
+                <option value="elementalist">🔥 Elementalist</option>
+                <option value="assassin">🗡️ Assassin</option>
+                <option value="ritualist">👻 Ritualist</option>
+                <option value="paragon">🛡️ Paragon</option>
+                <option value="dervish">🌀 Dervish</option>
+                <option value="none">❌ None</option>
             </select>
-            <button class="char-btn" onclick="resetCharacter()" title="Reset all progress for this character">ðŸ”„ Reset</button>
+            <button class="char-btn" onclick="resetCharacter()" title="Reset all progress for this character">🔄 Reset</button>
             <button class="char-btn add" onclick="addCharacter()">+ New</button>
-            <button class="char-btn" onclick="renameCharacter()">âœï¸</button>
-            <button class="char-btn delete" onclick="deleteCharacter()">ðŸ—‘ï¸</button>
+            <button class="char-btn" onclick="renameCharacter()">✏️</button>
+            <button class="char-btn delete" onclick="deleteCharacter()">🗑️</button>
         </div>
     </div>
     
     <div class="main-tabs">
-        <button class="main-tab active" data-category="quests" onclick="switchCategory('quests')">ðŸ“œ Quests</button>
-        <button class="main-tab" data-category="daily" onclick="switchCategory('daily')">ðŸ“… Daily</button>
-        <button class="main-tab" data-category="missions" onclick="switchCategory('missions')">ðŸ—ºï¸ Missions</button>
-        <button class="main-tab" data-category="elites" onclick="switchCategory('elites')">ðŸŽ¯ Elite Skills</button>
-        <button class="main-tab" data-category="skills" onclick="switchCategory('skills')">ðŸ“š All Skills</button>
-        <button class="main-tab" data-category="heroes" onclick="switchCategory('heroes')">ðŸ¦¸ Heroes</button>
-        <button class="main-tab" data-category="dungeons" onclick="switchCategory('dungeons')">ðŸ° Dungeons</button>
+        <button class="main-tab active" data-category="quests" onclick="switchCategory('quests')">📜 Quests</button>
+        <button class="main-tab" data-category="daily" onclick="switchCategory('daily')">📅 Daily</button>
+        <button class="main-tab" data-category="missions" onclick="switchCategory('missions')">🗺️ Missions</button>
+        <button class="main-tab" data-category="elites" onclick="switchCategory('elites')">🎯 Elite Skills</button>
+        <button class="main-tab" data-category="skills" onclick="switchCategory('skills')">📚 All Skills</button>
+        <button class="main-tab" data-category="heroes" onclick="switchCategory('heroes')">🦸 Heroes</button>
+        <button class="main-tab" data-category="dungeons" onclick="switchCategory('dungeons')">🏰 Dungeons</button>
         <button class="main-tab" data-category="vanquish" onclick="switchCategory('vanquish')">⚔️ Vanquish</button>
-        <button class="main-tab" data-category="armor" onclick="switchCategory('armor')">ðŸ›¡ï¸ Armor</button>
+        <button class="main-tab" data-category="armor" onclick="switchCategory('armor')">🛡️ Armor</button>
         <button class="main-tab" data-category="minis" onclick="switchCategory('minis')">🐾 Minis</button>
-        <button class="main-tab" data-category="menagerie" onclick="switchCategory('menagerie')">ðŸ¦ Menagerie</button>
-        <button class="main-tab" data-category="uniques" onclick="switchCategory('uniques')">ðŸ’Ž Items</button>
-        <button class="main-tab" data-category="outposts" onclick="switchCategory('outposts')">ðŸ˜ï¸ Outposts</button>
-        <button class="main-tab" data-category="titles" onclick="switchCategory('titles')">ðŸ† Titles</button>
-        <button class="main-tab" data-category="hom" onclick="switchCategory('hom')">ðŸ›ï¸ HoM</button>
+        <button class="main-tab" data-category="menagerie" onclick="switchCategory('menagerie')">🦁 Menagerie</button>
+        <button class="main-tab" data-category="uniques" onclick="switchCategory('uniques')">💎 Items</button>
+        <button class="main-tab" data-category="outposts" onclick="switchCategory('outposts')">🏘️ Outposts</button>
+        <button class="main-tab" data-category="titles" onclick="switchCategory('titles')">🏆 Titles</button>
+        <button class="main-tab" data-category="hom" onclick="switchCategory('hom')">🏛️ HoM</button>
     </div>
     
     <div class="region-selector" id="quests-selector">
@@ -444,31 +444,31 @@
                 <option value="sshiver" data-total="28">Southern Shiverpeaks (0/28)</option>
                 <option value="fire" data-total="4">Ring of Fire (0/4)</option>
             </optgroup>
-            <optgroup label="ðŸ‰ FACTIONS">
+            <optgroup label="🐉 FACTIONS">
                 <option value="shingjea" data-total="112">Shing Jea Island (0/112)</option>
                 <option value="kaineng" data-total="63">Kaineng City (0/63)</option>
                 <option value="echovald" data-total="31">Echovald Forest (0/31)</option>
                 <option value="jadesea" data-total="33">The Jade Sea (0/33)</option>
             </optgroup>
-            <optgroup label="ðŸŒ™ NIGHTFALL">
+            <optgroup label="🌙 NIGHTFALL">
                 <option value="istan" data-total="107">Istan (0/107)</option>
                 <option value="kourna" data-total="59">Kourna (0/59)</option>
                 <option value="vabbi" data-total="55">Vabbi (0/55)</option>
                 <option value="desolation" data-total="27">The Desolation (0/27)</option>
                 <option value="torment" data-total="39">Realm of Torment (0/39)</option>
             </optgroup>
-            <optgroup label="â›°ï¸ EYE OF THE NORTH">
+            <optgroup label="⛰️ EYE OF THE NORTH">
                 <option value="fshiver" data-total="43">Far Shiverpeaks (0/43)</option>
                 <option value="charr" data-total="27">Charr Homelands (0/27)</option>
                 <option value="tarnished" data-total="41">Tarnished Coast (0/41)</option>
                 <option value="depths" data-total="10">Depths of Tyria (0/10)</option>
             </optgroup>
-            <optgroup label="ðŸ’« BEYOND">
+            <optgroup label="💫 BEYOND">
                 <option value="wik" data-total="43">War in Kryta (0/43)</option>
                 <option value="hotn" data-total="11">Hearts of the North (0/11)</option>
                 <option value="woc" data-total="63">Winds of Change (0/63)</option>
             </optgroup>
-            <optgroup label="ðŸŽ BONUS">
+            <optgroup label="🎁 BONUS">
                 <option value="bmp" data-total="4">Bonus Mission Pack (0/4)</option>
             </optgroup>
         </select>
@@ -2926,7 +2926,7 @@
                 <button class="filter-btn" data-filter="side">Side</button>
                 <button class="filter-btn" data-filter="profession">Profession</button>
                 <button class="filter-btn" data-filter="special">Special</button>
-                <button class="filter-btn" data-filter="travel">âœˆï¸ Travel</button>
+                <button class="filter-btn" data-filter="travel">✈️ Travel</button>
             </div>
             
             <div class="container">
@@ -3934,7 +3934,7 @@
                 <button class="filter-btn" data-filter="main">Main</button>
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
-                <button class="filter-btn" data-filter="endgame">ðŸ† Endgame</button>
+                <button class="filter-btn" data-filter="endgame">🏆 Endgame</button>
             </div>
             
             <div class="container">
@@ -6106,7 +6106,7 @@
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
                 <button class="filter-btn" data-filter="special">Special</button>
-                <button class="filter-btn" data-filter="travel">âœˆï¸ Travel</button>
+                <button class="filter-btn" data-filter="travel">✈️ Travel</button>
             </div>
             
             <div class="container">
@@ -8041,7 +8041,7 @@
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
                 <button class="filter-btn" data-filter="special">Special</button>
-                <button class="filter-btn" data-filter="travel">âœˆï¸ Travel</button>
+                <button class="filter-btn" data-filter="travel">✈️ Travel</button>
             </div>
             
             <div class="container">
@@ -11718,7 +11718,7 @@
                 <button class="filter-btn" data-filter="main">Main</button>
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
-                <button class="filter-btn" data-filter="endgame">ðŸ† Endgame</button>
+                <button class="filter-btn" data-filter="endgame">🏆 Endgame</button>
             </div>
             
             <div class="container">
@@ -12317,7 +12317,7 @@
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
                 <button class="filter-btn" data-filter="special">Special</button>
-                <button class="filter-btn" data-filter="travel">âœˆï¸ Travel</button>
+                <button class="filter-btn" data-filter="travel">✈️ Travel</button>
             </div>
             
             <div class="container">
@@ -13401,7 +13401,7 @@
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
                 <button class="filter-btn" data-filter="special">Special</button>
-                <button class="filter-btn" data-filter="travel">âœˆï¸ Travel</button>
+                <button class="filter-btn" data-filter="travel">✈️ Travel</button>
             </div>
             
             <div class="container">
@@ -14027,7 +14027,7 @@
                 <button class="filter-btn" data-filter="main">Main</button>
                 <button class="filter-btn" data-filter="mission">Mission</button>
                 <button class="filter-btn" data-filter="side">Side</button>
-                <button class="filter-btn" data-filter="travel">âœˆï¸ Travel</button>
+                <button class="filter-btn" data-filter="travel">✈️ Travel</button>
             </div>
             
             <div class="container">
@@ -16094,7 +16094,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ† GWAMM Progress (30 Titles needed)</span>
+                    <span class="progress-text">🏆 GWAMM Progress (30 Titles needed)</span>
                     <span class="progress-count"><span id="titles-completed">0</span> / <span id="titles-total">30</span></span>
                 </div>
                 <div class="progress-bar">
@@ -16109,7 +16109,7 @@
                 <button class="filter-btn" data-filter="legendary">Legendary</button>
                 <span style="width:30px"></span>
                 <input type="file" id="toolbox-file" accept=".json" onchange="importToolboxFile(event)" style="display:none">
-                <button class="io-btn import" onclick="document.getElementById('toolbox-file').click()">ðŸ“ Import JSON</button>
+                <button class="io-btn import" onclick="document.getElementById('toolbox-file').click()">📁 Import JSON</button>
                 <span id="toolbox-status" style="color:#8b949e;font-size:0.85em;"></span>
             </div>
             
@@ -16665,7 +16665,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ¦¸ Heroes (31 total)</span>
+                    <span class="progress-text">🦸 Heroes (31 total)</span>
                     <span class="progress-count"><span id="heroes-completed">0</span> / <span id="heroes-total">31</span></span>
                 </div>
                 <div class="progress-bar">
@@ -16707,13 +16707,13 @@
                         </td>
                         <td style="color:#ffa657;">Warrior</td>
                         <td>Istan</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_koss_armor_sunspear" data-hero="hero_koss" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_koss_armor_ancient" data-hero="hero_koss" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_koss_armor_primeval" data-hero="hero_koss" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16732,13 +16732,13 @@
                         </td>
                         <td style="color:#ffa657;">Monk</td>
                         <td>Istan</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_dunkoro_armor_sunspear" data-hero="hero_dunkoro" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_dunkoro_armor_ancient" data-hero="hero_dunkoro" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_dunkoro_armor_primeval" data-hero="hero_dunkoro" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16757,13 +16757,13 @@
                         </td>
                         <td style="color:#ffa657;">Dervish</td>
                         <td>Istan</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_melonni_armor_sunspear" data-hero="hero_melonni" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_melonni_armor_ancient" data-hero="hero_melonni" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_melonni_armor_primeval" data-hero="hero_melonni" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16782,13 +16782,13 @@
                         </td>
                         <td style="color:#ffa657;">Ranger</td>
                         <td>Istan</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_acolyte_jin_armor_sunspear" data-hero="hero_acolyte_jin" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_acolyte_jin_armor_ancient" data-hero="hero_acolyte_jin" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_acolyte_jin_armor_primeval" data-hero="hero_acolyte_jin" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16807,13 +16807,13 @@
                         </td>
                         <td style="color:#ffa657;">Elementalist</td>
                         <td>Istan</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_acolyte_sousuke_armor_sunspear" data-hero="hero_acolyte_sousuke" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_acolyte_sousuke_armor_ancient" data-hero="hero_acolyte_sousuke" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_acolyte_sousuke_armor_primeval" data-hero="hero_acolyte_sousuke" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16832,13 +16832,13 @@
                         </td>
                         <td style="color:#ffa657;">Monk</td>
                         <td>Istan</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_tahlkora_armor_sunspear" data-hero="hero_tahlkora" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_tahlkora_armor_ancient" data-hero="hero_tahlkora" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_tahlkora_armor_primeval" data-hero="hero_tahlkora" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16857,13 +16857,13 @@
                         </td>
                         <td style="color:#ffa657;">Elementalist</td>
                         <td>Kourna</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_zhed_shadowhoof_armor_sunspear" data-hero="hero_zhed_shadowhoof" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_zhed_shadowhoof_armor_ancient" data-hero="hero_zhed_shadowhoof" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_zhed_shadowhoof_armor_primeval" data-hero="hero_zhed_shadowhoof" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16882,13 +16882,13 @@
                         </td>
                         <td style="color:#ffa657;">Ranger</td>
                         <td>Kourna</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_margrid_the_sly_armor_sunspear" data-hero="hero_margrid_the_sly" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_margrid_the_sly_armor_ancient" data-hero="hero_margrid_the_sly" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_margrid_the_sly_armor_primeval" data-hero="hero_margrid_the_sly" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16907,13 +16907,13 @@
                         </td>
                         <td style="color:#ffa657;">Necromancer</td>
                         <td>Kourna</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_master_of_whispers_armor_sunspear" data-hero="hero_master_of_whispers" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_master_of_whispers_armor_ancient" data-hero="hero_master_of_whispers" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_master_of_whispers_armor_primeval" data-hero="hero_master_of_whispers" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16932,13 +16932,13 @@
                         </td>
                         <td style="color:#ffa657;">Warrior</td>
                         <td>Vabbi</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_goren_armor_sunspear" data-hero="hero_goren" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_goren_armor_ancient" data-hero="hero_goren" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_goren_armor_primeval" data-hero="hero_goren" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16957,13 +16957,13 @@
                         </td>
                         <td style="color:#ffa657;">Mesmer</td>
                         <td>Vabbi</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_norgu_armor_sunspear" data-hero="hero_norgu" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_norgu_armor_ancient" data-hero="hero_norgu" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_norgu_armor_primeval" data-hero="hero_norgu" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -16982,13 +16982,13 @@
                         </td>
                         <td style="color:#ffa657;">Paragon</td>
                         <td>Vabbi</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_general_morgahn_armor_sunspear" data-hero="hero_general_morgahn" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_general_morgahn_armor_ancient" data-hero="hero_general_morgahn" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_general_morgahn_armor_primeval" data-hero="hero_general_morgahn" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -17007,13 +17007,13 @@
                         </td>
                         <td style="color:#ffa657;">Ritualist</td>
                         <td>Realm of Torment</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_razah_armor_sunspear" data-hero="hero_razah" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_razah_armor_ancient" data-hero="hero_razah" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_razah_armor_primeval" data-hero="hero_razah" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -17032,13 +17032,13 @@
                         </td>
                         <td style="color:#ffa657;">Monk</td>
                         <td>Far Shiverpeaks</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_ogden_stonehealer_armor_brotherhood" data-hero="hero_ogden_stonehealer" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_ogden_stonehealer_armor_deldrimor" data-hero="hero_ogden_stonehealer" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_ogden_stonehealer_armor_mysterious" data-hero="hero_ogden_stonehealer" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17057,13 +17057,13 @@
                         </td>
                         <td style="color:#ffa657;">Elementalist</td>
                         <td>Far Shiverpeaks</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_vekk_armor_brotherhood" data-hero="hero_vekk" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_vekk_armor_deldrimor" data-hero="hero_vekk" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_vekk_armor_mysterious" data-hero="hero_vekk" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17082,13 +17082,13 @@
                         </td>
                         <td style="color:#ffa657;">Mesmer</td>
                         <td>Far Shiverpeaks</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_gwen_armor_brotherhood" data-hero="hero_gwen" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_gwen_armor_deldrimor" data-hero="hero_gwen" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_gwen_armor_mysterious" data-hero="hero_gwen" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17107,13 +17107,13 @@
                         </td>
                         <td style="color:#ffa657;">Ritualist</td>
                         <td>Far Shiverpeaks</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_xandra_armor_brotherhood" data-hero="hero_xandra" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_xandra_armor_deldrimor" data-hero="hero_xandra" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_xandra_armor_mysterious" data-hero="hero_xandra" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17132,13 +17132,13 @@
                         </td>
                         <td style="color:#ffa657;">Dervish</td>
                         <td>Far Shiverpeaks</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_kahmu_armor_brotherhood" data-hero="hero_kahmu" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_kahmu_armor_deldrimor" data-hero="hero_kahmu" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_kahmu_armor_mysterious" data-hero="hero_kahmu" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17157,13 +17157,13 @@
                         </td>
                         <td style="color:#ffa657;">Warrior</td>
                         <td>Far Shiverpeaks</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_jora_armor_brotherhood" data-hero="hero_jora" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_jora_armor_deldrimor" data-hero="hero_jora" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_jora_armor_mysterious" data-hero="hero_jora" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17182,13 +17182,13 @@
                         </td>
                         <td style="color:#ffa657;">Ranger</td>
                         <td>Charr Homelands</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_pyre_fierceshot_armor_brotherhood" data-hero="hero_pyre_fierceshot" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_pyre_fierceshot_armor_deldrimor" data-hero="hero_pyre_fierceshot" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_pyre_fierceshot_armor_mysterious" data-hero="hero_pyre_fierceshot" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17207,13 +17207,13 @@
                         </td>
                         <td style="color:#ffa657;">Assassin</td>
                         <td>Charr Homelands</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_anton_armor_brotherhood" data-hero="hero_anton" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_anton_armor_deldrimor" data-hero="hero_anton" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_anton_armor_mysterious" data-hero="hero_anton" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17232,13 +17232,13 @@
                         </td>
                         <td style="color:#ffa657;">Paragon</td>
                         <td>Tarnished Coast</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_hayda_armor_brotherhood" data-hero="hero_hayda" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_hayda_armor_deldrimor" data-hero="hero_hayda" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_hayda_armor_mysterious" data-hero="hero_hayda" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17257,13 +17257,13 @@
                         </td>
                         <td style="color:#ffa657;">Necromancer</td>
                         <td>Tarnished Coast</td>
-                        <td><div class="hero-armor-wrap"><label title="Brotherhood â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Brotherhood — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_livia_armor_brotherhood" data-hero="hero_livia" data-variant="brotherhood" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Brotherhood</span>
-                </label><label title="Deldrimor â€” Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Deldrimor — Eye of the North (Deldrimor Steel Ingot x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_livia_armor_deldrimor" data-hero="hero_livia" data-variant="deldrimor" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Deldrimor</span>
-                </label><label title="Mysterious â€” Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Mysterious — Eye of the North (Cloth of the Brotherhood x5)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_livia_armor_mysterious" data-hero="hero_livia" data-variant="mysterious" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Mysterious</span>
                 </label></div></td>
@@ -17282,7 +17282,7 @@
                         </td>
                         <td style="color:#ffa657;">Dervish</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/M.O.X._(quest)" target="_blank" style="color:#8b949e;">M.O.X. (quest)</a></td>
                     </tr>
                     <tr data-type="nightfall" data-area="heroes" data-region="special" data-id="hero_olias">
@@ -17298,13 +17298,13 @@
                         </td>
                         <td style="color:#ffa657;">Necromancer</td>
                         <td>Special</td>
-                        <td><div class="hero-armor-wrap"><label title="Sunspear â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                        <td><div class="hero-armor-wrap"><label title="Sunspear — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_olias_armor_sunspear" data-hero="hero_olias" data-variant="sunspear" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Sunspear</span>
-                </label><label title="Ancient â€” Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Ancient — Gate of Anguish (15 Passages + Gems)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_olias_armor_ancient" data-hero="hero_olias" data-variant="ancient" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Ancient</span>
-                </label><label title="Primeval â€” Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
+                </label><label title="Primeval — Gate of Pain (15 Boss Bounties)" style="display:inline-flex;align-items:center;gap:6px;margin-right:10px;color:#8b949e;">
                     <input type="checkbox" class="armor-checkbox" data-id="hero_olias_armor_primeval" data-hero="hero_olias" data-variant="primeval" style="width:18px;height:18px;accent-color:#58a6ff;">
                     <span>Primeval</span>
                 </label></div></td>
@@ -17323,7 +17323,7 @@
                         </td>
                         <td style="color:#ffa657;">Assassin</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Befriending_Zenmai" target="_blank" style="color:#8b949e;">Befriending Zenmai</a></td>
                     </tr>
                     <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_keiran_thackeray">
@@ -17339,7 +17339,7 @@
                         </td>
                         <td style="color:#ffa657;">Paragon</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Hearts_of_the_North" target="_blank" style="color:#8b949e;">Hearts of the North</a></td>
                     </tr>
                     <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_miku">
@@ -17355,7 +17355,7 @@
                         </td>
                         <td style="color:#ffa657;">Assassin</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Winds_of_Change" target="_blank" style="color:#8b949e;">Winds of Change</a></td>
                     </tr>
                     <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_zei_ri">
@@ -17371,7 +17371,7 @@
                         </td>
                         <td style="color:#ffa657;">Ritualist</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/Winds_of_Change" target="_blank" style="color:#8b949e;">Winds of Change</a></td>
                     </tr>
                     <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_devona">
@@ -17387,7 +17387,7 @@
                         </td>
                         <td style="color:#ffa657;">Warrior</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Scourge_Beneath_or_The_Hero_From_Ascalon" target="_blank" style="color:#8b949e;">The Scourge Beneath or The Hero From Ascalon</a></td>
                     </tr>
                     <tr data-type="beyond" data-area="heroes" data-region="special" data-id="hero_ghost_of_althea">
@@ -17403,7 +17403,7 @@
                         </td>
                         <td style="color:#ffa657;">Mesmer</td>
                         <td>Special</td>
-                        <td><span style="color:#8b949e;">â€”</span></td>
+                        <td><span style="color:#8b949e;">—</span></td>
                         <td><a href="https://wiki.guildwars.com/wiki/The_Dreamer_and_the_Zealot" target="_blank" style="color:#8b949e;">The Dreamer and the Zealot</a></td>
                     </tr>
                 </tbody>
@@ -17411,7 +17411,7 @@
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">ðŸ’¡ Hero Armor for HoM</h4>
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Hero Armor for HoM</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
                     <li><strong>Sunspear/Primeval</strong> - Gate of Pain (15 Boss Bounties)</li>
                     <li><strong>Ancient</strong> - Gate of Anguish (Passages + Gems)</li>
@@ -17876,7 +17876,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ—ºï¸ Story Missions (58 total)</span>
+                    <span class="progress-text">🗺️ Story Missions (58 total)</span>
                     <span class="progress-count"><span id="missions-completed">0</span> / <span id="missions-total">58</span></span>
                 </div>
                 <div class="progress-bar">
@@ -17892,7 +17892,7 @@
             </div>
             
             <div class="container">
-            <h3 style="color:#58a6ff;margin:20px 0 10px 0;">ðŸ—ºï¸ Prophecies (26 missions)</h3>
+            <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ Prophecies (26 missions)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -18114,7 +18114,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#58a6ff;margin:20px 0 10px 0;">ðŸ—ºï¸ Factions (12 missions)</h3>
+            <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ Factions (12 missions)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -18224,7 +18224,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#58a6ff;margin:20px 0 10px 0;">ðŸ—ºï¸ Nightfall (20 missions)</h3>
+            <h3 style="color:#58a6ff;margin:20px 0 10px 0;">🗺️ Nightfall (20 missions)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -18401,11 +18401,11 @@
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#58a6ff;margin:0 0 10px 0;">ðŸ’¡ Mission Objectives</h4>
+                <h4 style="color:#58a6ff;margin:0 0 10px 0;">💡 Mission Objectives</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
-                    <li><strong>âœ… Done</strong> - Completed mission in Normal Mode</li>
-                    <li><strong>ðŸŸ  Bonus</strong> - Completed bonus objective (Masters in Factions/Nightfall)</li>
-                    <li><strong>ðŸ”´ HM</strong> - Completed in Hard Mode (for Guardian title)</li>
+                    <li><strong>✅ Done</strong> - Completed mission in Normal Mode</li>
+                    <li><strong>🟠 Bonus</strong> - Completed bonus objective (Masters in Factions/Nightfall)</li>
+                    <li><strong>🔴 HM</strong> - Completed in Hard Mode (for Guardian title)</li>
                     <li><strong>Protector</strong> - All bonuses in Normal Mode</li>
                     <li><strong>Guardian</strong> - All missions in Hard Mode</li>
                 </ul>
@@ -18416,7 +18416,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ° Elite Missions & Dungeons (25 total)</span>
+                    <span class="progress-text">🏰 Elite Missions & Dungeons (25 total)</span>
                     <span class="progress-count"><span id="dungeons-completed">0</span> / <span id="dungeons-total">25</span></span>
                 </div>
                 <div class="progress-bar">
@@ -18427,7 +18427,7 @@
             <div class="filters" data-area="dungeons">
                 <button class="filter-btn active" data-filter="all">All</button>
                 <button class="filter-btn" data-filter="elite">⚔️ Elite Missions</button>
-                <button class="filter-btn" data-filter="dungeon">ðŸ”ï¸ EotN Dungeons</button>
+                <button class="filter-btn" data-filter="dungeon">🏔️ EotN Dungeons</button>
             </div>
             
             <div class="container">
@@ -18498,7 +18498,7 @@
             </table>
             
             <!-- EOTN DUNGEONS -->
-            <h3 style="color:#58a6ff;margin:25px 0 10px 0;">ðŸ”ï¸ Eye of the North Dungeons (18)</h3>
+            <h3 style="color:#58a6ff;margin:25px 0 10px 0;">🏔️ Eye of the North Dungeons (18)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -18641,7 +18641,7 @@
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#58a6ff;margin:0 0 10px 0;">ðŸ’¡ Dungeon Tips</h4>
+                <h4 style="color:#58a6ff;margin:0 0 10px 0;">💡 Dungeon Tips</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
                     <li><strong>Dungeon Guide Mode</strong> - First completion per character gives bonus rewards</li>
                     <li><strong>Master Dungeon Guide</strong> - EotN title for completing all dungeons</li>
@@ -19442,7 +19442,7 @@
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">ðŸ’¡ Vanquishing Tips</h4>
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Vanquishing Tips</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
                     <li><strong>Hard Mode only</strong> - Must be in Hard Mode to vanquish</li>
                     <li><strong>Kill counter</strong> - Shows remaining enemies in top-left</li>
@@ -21052,7 +21052,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ›¡ï¸ Elite Armor Sets (29 HoM eligible)</span>
+                    <span class="progress-text">🛡️ Elite Armor Sets (29 HoM eligible)</span>
                     <span class="progress-count"><span id="armor-completed">0</span> / <span id="armor-total">29</span></span>
                 </div>
                 <div class="progress-bar">
@@ -21094,7 +21094,7 @@
 </td>
                         <td style="color:#8b949e;">Fissure of Woe</td>
                         <td style="font-size:0.85em;color:#ffa657;">FoW Quests completed</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="warrior" data-id="armor_elite_charr_hide">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_charr_hide" data-area="armor"></td>
@@ -21109,7 +21109,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="warrior" data-id="armor_elite_gladiator">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_gladiator" data-area="armor"></td>
@@ -21124,7 +21124,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="warrior" data-id="armor_elite_templar">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_templar" data-area="armor"></td>
@@ -21139,7 +21139,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="ranger" data-id="armor_elite_drakescale">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_drakescale" data-area="armor"></td>
@@ -21154,7 +21154,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="ranger" data-id="armor_elite_druid">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_druid" data-area="armor"></td>
@@ -21169,7 +21169,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="monk" data-id="armor_elite_saintly">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_saintly" data-area="armor"></td>
@@ -21184,7 +21184,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="monk" data-id="armor_labyrinthine">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_labyrinthine" data-area="armor"></td>
@@ -21199,7 +21199,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="necromancer" data-id="armor_elite_necrotic">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_necrotic" data-area="armor"></td>
@@ -21214,7 +21214,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="necromancer" data-id="armor_elite_scar_pattern">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_scar_pattern" data-area="armor"></td>
@@ -21229,7 +21229,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="necromancer" data-id="armor_elite_profane">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_profane" data-area="armor"></td>
@@ -21244,7 +21244,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="mesmer" data-id="armor_elite_enchanter">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_enchanter" data-area="armor"></td>
@@ -21259,7 +21259,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="mesmer" data-id="armor_elite_rogue">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_rogue" data-area="armor"></td>
@@ -21274,7 +21274,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="elementalist" data-id="armor_elite_stormforged">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_stormforged" data-area="armor"></td>
@@ -21289,7 +21289,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="prophecies" data-area="armor" data-profession="elementalist" data-id="armor_elite_stoneforged">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_stoneforged" data-area="armor"></td>
@@ -21304,7 +21304,7 @@
 </td>
                         <td style="color:#8b949e;">Droknar's Forge</td>
                         <td style="font-size:0.85em;color:#ffa657;">15k gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="factions" data-area="armor" data-profession="all" data-id="armor_elite_kurzick">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_kurzick" data-area="armor"></td>
@@ -21319,7 +21319,7 @@
 </td>
                         <td style="color:#8b949e;">Vasburg Armory</td>
                         <td style="font-size:0.85em;color:#ffa657;">Kurzick faction</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="factions" data-area="armor" data-profession="all" data-id="armor_elite_luxon">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_luxon" data-area="armor"></td>
@@ -21334,7 +21334,7 @@
 </td>
                         <td style="color:#8b949e;">Leviathan Pits</td>
                         <td style="font-size:0.85em;color:#ffa657;">Luxon faction</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="factions" data-area="armor" data-profession="all" data-id="armor_elite_canthan">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_canthan" data-area="armor"></td>
@@ -21349,7 +21349,7 @@
 </td>
                         <td style="color:#8b949e;">Divine Path</td>
                         <td style="font-size:0.85em;color:#ffa657;">Beat Shiro</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="factions" data-area="armor" data-profession="all" data-id="armor_elite_exotic">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_exotic" data-area="armor"></td>
@@ -21364,7 +21364,7 @@
 </td>
                         <td style="color:#8b949e;">Divine Path</td>
                         <td style="font-size:0.85em;color:#ffa657;">Beat Shiro</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="factions" data-area="armor" data-profession="all" data-id="armor_elite_imperial">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_imperial" data-area="armor"></td>
@@ -21379,7 +21379,7 @@
 </td>
                         <td style="color:#8b949e;">Divine Path</td>
                         <td style="font-size:0.85em;color:#ffa657;">Beat Shiro</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="nightfall" data-area="armor" data-profession="all" data-id="armor_elite_sunspear">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_elite_sunspear" data-area="armor"></td>
@@ -21394,7 +21394,7 @@
 </td>
                         <td style="color:#8b949e;">Command Post</td>
                         <td style="font-size:0.85em;color:#ffa657;">Prisoners of War quest</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="nightfall" data-area="armor" data-profession="all" data-id="armor_vabbian">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_vabbian" data-area="armor"></td>
@@ -21409,7 +21409,7 @@
 </td>
                         <td style="color:#8b949e;">Kodash Bazaar</td>
                         <td style="font-size:0.85em;color:#ffa657;">Gems + Gold</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="nightfall" data-area="armor" data-profession="all" data-id="armor_ancient">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_ancient" data-area="armor"></td>
@@ -21424,7 +21424,7 @@
 </td>
                         <td style="color:#8b949e;">Bone Palace</td>
                         <td style="font-size:0.85em;color:#ffa657;">DoA materials</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="nightfall" data-area="armor" data-profession="all" data-id="armor_primeval">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_primeval" data-area="armor"></td>
@@ -21439,7 +21439,7 @@
 </td>
                         <td style="color:#8b949e;">Throne of Secrets</td>
                         <td style="font-size:0.85em;color:#ffa657;">Beat Abaddon</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_asuran_armor">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_asuran_armor" data-area="armor"></td>
@@ -21454,7 +21454,7 @@
 </td>
                         <td style="color:#8b949e;">Rata Sum</td>
                         <td style="font-size:0.85em;color:#ffa657;">Asuran Rank 5</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_monument_armor">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_monument_armor" data-area="armor"></td>
@@ -21469,7 +21469,7 @@
 </td>
                         <td style="color:#8b949e;">Eye of the North</td>
                         <td style="font-size:0.85em;color:#ffa657;">Vanguard Rank 5</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_norn_armor">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_norn_armor" data-area="armor"></td>
@@ -21484,7 +21484,7 @@
 </td>
                         <td style="color:#8b949e;">Gunnar's Hold</td>
                         <td style="font-size:0.85em;color:#ffa657;">Norn Rank 5</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_deldrimor_armor">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_deldrimor_armor" data-area="armor"></td>
@@ -21499,7 +21499,7 @@
 </td>
                         <td style="color:#8b949e;">Central Transfer Chamber</td>
                         <td style="font-size:0.85em;color:#ffa657;">Deldrimor Rank 5</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="warrior" data-id="armor_silver_eagle">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_silver_eagle" data-area="armor"></td>
@@ -21514,7 +21514,7 @@
 </td>
                         <td style="color:#8b949e;">Central Transfer Chamber</td>
                         <td style="font-size:0.85em;color:#ffa657;">Deldrimor Rank 5</td>
-                        <td style="text-align:center;">âœ…</td>
+                        <td style="text-align:center;">✅</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_chaos_gloves">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_chaos_gloves" data-area="armor"></td>
@@ -21529,7 +21529,7 @@
 </td>
                         <td style="color:#8b949e;">Central Transfer Chamber</td>
                         <td style="font-size:0.85em;color:#ffa657;">Deldrimor Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_dragon_gauntlets">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_dragon_gauntlets" data-area="armor"></td>
@@ -21544,7 +21544,7 @@
 </td>
                         <td style="color:#8b949e;">Central Transfer Chamber</td>
                         <td style="font-size:0.85em;color:#ffa657;">Deldrimor Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_stone_gauntlets">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_stone_gauntlets" data-area="armor"></td>
@@ -21559,7 +21559,7 @@
 </td>
                         <td style="color:#8b949e;">Central Transfer Chamber</td>
                         <td style="font-size:0.85em;color:#ffa657;">Deldrimor Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_bandana">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_bandana" data-area="armor"></td>
@@ -21574,7 +21574,7 @@
 </td>
                         <td style="color:#8b949e;">Central Transfer Chamber</td>
                         <td style="font-size:0.85em;color:#ffa657;">Deldrimor Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_spectacles">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_spectacles" data-area="armor"></td>
@@ -21589,7 +21589,7 @@
 </td>
                         <td style="color:#8b949e;">Rata Sum</td>
                         <td style="font-size:0.85em;color:#ffa657;">Asuran Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_slim_spectacles">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_slim_spectacles" data-area="armor"></td>
@@ -21604,7 +21604,7 @@
 </td>
                         <td style="color:#8b949e;">Rata Sum</td>
                         <td style="font-size:0.85em;color:#ffa657;">Asuran Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_tinted_spectacles">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_tinted_spectacles" data-area="armor"></td>
@@ -21619,7 +21619,7 @@
 </td>
                         <td style="color:#8b949e;">Rata Sum</td>
                         <td style="font-size:0.85em;color:#ffa657;">Asuran Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_norn_woad">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_norn_woad" data-area="armor"></td>
@@ -21634,7 +21634,7 @@
 </td>
                         <td style="color:#8b949e;">Gunnar's Hold</td>
                         <td style="font-size:0.85em;color:#ffa657;">Norn Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                     <tr data-type="eye of the north" data-area="armor" data-profession="all" data-id="armor_highlander_woad">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="armor_highlander_woad" data-area="armor"></td>
@@ -21649,14 +21649,14 @@
 </td>
                         <td style="color:#8b949e;">Gunnar's Hold</td>
                         <td style="font-size:0.85em;color:#ffa657;">Norn Rank 5</td>
-                        <td style="text-align:center;">âŒ</td>
+                        <td style="text-align:center;">❌</td>
                     </tr>
                 </tbody>
             </table>
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">ðŸ’¡ HoM Resilience Monument</h4>
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 HoM Resilience Monument</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
                     <li><strong>Elite Armor</strong> counts for the Resilience monument</li>
                     <li><strong>Obsidian Armor</strong> from Fissure of Woe is the most prestigious</li>
@@ -21680,14 +21680,14 @@
             
             <div class="filters" data-area="minis">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="white" style="color:#fff;">âšª Common</button>
-                <button class="filter-btn" data-filter="purple" style="color:#a855f7;">ðŸŸ£ Uncommon</button>
-                <button class="filter-btn" data-filter="gold" style="color:#ffd700;">ðŸŸ¡ Rare</button>
-                <button class="filter-btn" data-filter="green" style="color:#00ff00;">ðŸŸ¢ Unique</button>
+                <button class="filter-btn" data-filter="white" style="color:#fff;">⚪ Common</button>
+                <button class="filter-btn" data-filter="purple" style="color:#a855f7;">🟣 Uncommon</button>
+                <button class="filter-btn" data-filter="gold" style="color:#ffd700;">🟡 Rare</button>
+                <button class="filter-btn" data-filter="green" style="color:#00ff00;">🟢 Unique</button>
             </div>
             
             <div class="container">
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ 1st Birthday (14)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 1st Birthday (14)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -21854,7 +21854,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ 2nd Birthday (14)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 2nd Birthday (14)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -22021,7 +22021,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ 3rd Birthday (14)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 3rd Birthday (14)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -22188,7 +22188,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ 4th Birthday (14)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 4th Birthday (14)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -22355,7 +22355,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ 5th Birthday (14)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 5th Birthday (14)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -22522,7 +22522,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ In-Game Rewards (20)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 In-Game Rewards (20)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -22755,7 +22755,7 @@
                     </tr>
                 </tbody>
             </table>
-            <h3 style="color:#ffa657;margin:20px 0 10px 0;">ðŸŽ Festivals (15)</h3>
+            <h3 style="color:#ffa657;margin:20px 0 10px 0;">🎁 Festivals (15)</h3>
             <table class="has-checkbox-first">
                 <thead>
                     <tr>
@@ -22936,7 +22936,7 @@
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#ffa657;margin:0 0 10px 0;">ðŸ’¡ HoM Devotion Monument</h4>
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 HoM Devotion Monument</h4>
                 <ul style="margin:0;color:#8b949e;font-size:0.9em;">
                     <li><strong>20 unique minis</strong> for maximum HoM points</li>
                     <li><strong>Any rarity counts</strong> - White minis are cheapest</li>
@@ -22950,7 +22950,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ’Ž Unique Items (41 items)</span>
+                    <span class="progress-text">💎 Unique Items (41 items)</span>
                     <span class="progress-count"><span id="uniques-completed">0</span> / <span id="uniques-total">41</span></span>
                 </div>
                 <div class="progress-bar">
@@ -22960,8 +22960,8 @@
             
             <div class="filters" data-area="uniques">
                 <button class="filter-btn active" data-filter="all">All</button>
-                <button class="filter-btn" data-filter="pre-searing" style="background:#4a3728;border-color:#8B4513;">ðŸ° Pre-Searing</button>
-                <button class="filter-btn" data-filter="hom" style="background:#238636;border-color:#238636;">ðŸ›ï¸ HoM Sets</button>
+                <button class="filter-btn" data-filter="pre-searing" style="background:#4a3728;border-color:#8B4513;">🏰 Pre-Searing</button>
+                <button class="filter-btn" data-filter="hom" style="background:#238636;border-color:#238636;">🏛️ HoM Sets</button>
                 <button class="filter-btn" data-filter="prophecies">Prophecies</button>
                 <button class="filter-btn" data-filter="factions">Factions</button>
                 <button class="filter-btn" data-filter="core">Core (FoW/UW)</button>
@@ -22970,7 +22970,7 @@
             <div class="container">
             
             <!-- PRE-SEARING QUEST REWARDS -->
-            <h3 style="color:#ffa657;margin:15px 0 10px 0;">ðŸ° Pre-Searing Quest Rewards</h3>
+            <h3 style="color:#ffa657;margin:15px 0 10px 0;">🏰 Pre-Searing Quest Rewards</h3>
             <table>
                 <thead>
                     <tr>
@@ -23112,7 +23112,7 @@
             </table>
             
             <!-- HOM WEAPON SETS -->
-            <h3 style="color:#238636;margin:25px 0 10px 0;">ðŸ›ï¸ Hall of Monuments Weapon Sets</h3>
+            <h3 style="color:#238636;margin:25px 0 10px 0;">🏛️ Hall of Monuments Weapon Sets</h3>
             <table>
                 <thead>
                     <tr>
@@ -23145,7 +23145,7 @@
             </table>
             
             <!-- GREEN UNIQUES (BOSS DROPS) -->
-            <h3 style="color:#00ff00;margin:25px 0 10px 0;">ðŸ’š Green Uniques (Boss Drops)</h3>
+            <h3 style="color:#00ff00;margin:25px 0 10px 0;">💚 Green Uniques (Boss Drops)</h3>
             <table>
                 <thead>
                     <tr>
@@ -23323,7 +23323,7 @@
             </div>
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                <h4 style="color:#00ff00;margin:0 0 10px 0;">ðŸ’¡ About Green Uniques</h4>
+                <h4 style="color:#00ff00;margin:0 0 10px 0;">💡 About Green Uniques</h4>
                 <p style="margin:0;color:#8b949e;font-size:0.9em;">
                     Green items (unique items) drop from specific bosses. This is a small selection of popular greens - 
                     there are hundreds more! Check the <a href="https://wiki.guildwars.com/wiki/Unique_item" target="_blank" style="color:#58a6ff;">Wiki</a> for the full list.
@@ -23335,7 +23335,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ›ï¸ Hall of Monuments (50 points for GW2)</span>
+                    <span class="progress-text">🏛️ Hall of Monuments (50 points for GW2)</span>
                     <span class="progress-count"><span id="hom-completed">0</span> / <span id="hom-total">50</span></span>
                 </div>
                 <div class="progress-bar">
@@ -23344,13 +23344,13 @@
             </div>
             
             <div style="display:flex;gap:10px;align-items:center;margin:15px 0;padding:15px;background:#238636;border-radius:8px;">
-                <span style="font-size:1.5em;">ðŸ”—</span>
+                <span style="font-size:1.5em;">🔗</span>
                 <div style="flex:1;">
                     <strong>Official HoM Calculator</strong><br>
                     <span style="font-size:0.85em;opacity:0.9;">Check your HoM rewards for GW2</span>
                 </div>
                 <button onclick="openHoMCalculator()" style="padding:10px 20px;background:#fff;color:#238636;border:none;border-radius:6px;font-weight:bold;cursor:pointer;">
-                    ðŸŒ Open
+                    🌐 Open
                 </button>
             </div>
             
@@ -23449,7 +23449,7 @@
             </div>
             
             <div style="margin-top: 20px; padding: 15px; background: #21262d; border-radius: 8px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <h3 style="color: #ffd700; margin-bottom: 10px;">ðŸŽ GW2 Rewards by Points</h3>
+                <h3 style="color: #ffd700; margin-bottom: 10px;">🎁 GW2 Rewards by Points</h3>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.9em;">
                     <div>3 pts: Fiery Dragon Sword</div>
                     <div>10 pts: Gnarled Walking Stick</div>
@@ -23466,7 +23466,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ˜ï¸ Cities & Outposts (182 total)</span>
+                    <span class="progress-text">🏘️ Cities & Outposts (182 total)</span>
                     <span class="progress-count"><span id="outposts-completed">0</span> / <span id="outposts-total">182</span></span>
                 </div>
                 <div class="progress-bar">
@@ -24409,7 +24409,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ“š Non-Elite Skills (988 total)</span>
+                    <span class="progress-text">📚 Non-Elite Skills (988 total)</span>
                     <span class="progress-count"><span id="skills-completed">0</span> / <span id="skills-total">988</span></span>
                 </div>
                 <div class="progress-bar">
@@ -24419,7 +24419,7 @@
             
             <div style="display:grid;grid-template-columns:repeat(6,1fr);gap:8px;margin:15px 0;" id="skills-prof-grid">
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-common').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸŒŸ</div>
+                    <div style="font-size:1.3em;">🌟</div>
                     <div style="font-size:0.7em;color:#9CA3AF;font-weight:bold;">Common</div>
                     <div style="font-size:0.8em;" id="skills-common-count">0/43</div>
                 </div>
@@ -24439,44 +24439,44 @@
                     <div style="font-size:0.8em;" id="skills-monk-count">0/109</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-necromancer').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ’€</div>
+                    <div style="font-size:1.3em;">💀</div>
                     <div style="font-size:0.7em;color:#2E8B57;font-weight:bold;">Necromancer</div>
                     <div style="font-size:0.8em;" id="skills-necromancer-count">0/110</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-mesmer').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸŽ­</div>
+                    <div style="font-size:1.3em;">🎭</div>
                     <div style="font-size:0.7em;color:#DA70D6;font-weight:bold;">Mesmer</div>
                     <div style="font-size:0.8em;" id="skills-mesmer-count">0/106</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-elementalist').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ”¥</div>
+                    <div style="font-size:1.3em;">🔥</div>
                     <div style="font-size:0.7em;color:#FF4500;font-weight:bold;">Elementalist</div>
                     <div style="font-size:0.8em;" id="skills-elementalist-count">0/112</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-assassin').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ—¡ï¸</div>
+                    <div style="font-size:1.3em;">🗡️</div>
                     <div style="font-size:0.7em;color:#4B0082;font-weight:bold;">Assassin</div>
                     <div style="font-size:0.8em;" id="skills-assassin-count">0/88</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-ritualist').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ‘»</div>
+                    <div style="font-size:1.3em;">👻</div>
                     <div style="font-size:0.7em;color:#008B8B;font-weight:bold;">Ritualist</div>
                     <div style="font-size:0.8em;" id="skills-ritualist-count">0/88</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-paragon').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ›¡ï¸</div>
+                    <div style="font-size:1.3em;">🛡️</div>
                     <div style="font-size:0.7em;color:#FF8C00;font-weight:bold;">Paragon</div>
                     <div style="font-size:0.8em;" id="skills-paragon-count">0/58</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-dervish').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸŒ€</div>
+                    <div style="font-size:1.3em;">🌀</div>
                     <div style="font-size:0.7em;color:#8B4513;font-weight:bold;">Dervish</div>
                     <div style="font-size:0.8em;" id="skills-dervish-count">0/73</div>
                 </div>
             </div>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-common">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#9CA3AF;">
-                    ðŸŒŸ Common (43 skills)
+                    🌟 Common (43 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Common" data-area="skills" data-id="skill_a_touch_of_guile" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -26269,7 +26269,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-necromancer">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#2E8B57;">
-                    ðŸ’€ Necromancer (110 skills)
+                    💀 Necromancer (110 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Necromancer" data-area="skills" data-id="skill_angorodons_gaze" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -26826,7 +26826,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-mesmer">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#DA70D6;">
-                    ðŸŽ­ Mesmer (106 skills)
+                    🎭 Mesmer (106 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Mesmer" data-area="skills" data-id="skill_accumulated_pain" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -27363,7 +27363,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-elementalist">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#FF4500;">
-                    ðŸ”¥ Elementalist (112 skills)
+                    🔥 Elementalist (112 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Elementalist" data-area="skills" data-id="skill_aftershock" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -27930,7 +27930,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-assassin">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#4B0082;">
-                    ðŸ—¡ï¸ Assassin (88 skills)
+                    🗡️ Assassin (88 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Assassin" data-area="skills" data-id="skill_assassins_remedy" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -28377,7 +28377,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-ritualist">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#008B8B;">
-                    ðŸ‘» Ritualist (88 skills)
+                    👻 Ritualist (88 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Ritualist" data-area="skills" data-id="skill_agony" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -28824,7 +28824,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-paragon">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#FF8C00;">
-                    ðŸ›¡ï¸ Paragon (58 skills)
+                    🛡️ Paragon (58 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Paragon" data-area="skills" data-id="skill_aggressive_refrain" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -29121,7 +29121,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-dervish">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#8B4513;">
-                    ðŸŒ€ Dervish (73 skills)
+                    🌀 Dervish (73 skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">
                     <div data-type="Dervish" data-area="skills" data-id="skill_armor_of_sanctity" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -29497,7 +29497,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸ¦ Zaishen Menagerie (37 animals)</span>
+                    <span class="progress-text">🦁 Zaishen Menagerie (37 animals)</span>
                     <span class="progress-count"><span id="menagerie-completed">0</span> / <span id="menagerie-total">37</span></span>
                 </div>
                 <div class="progress-bar">
@@ -29739,7 +29739,7 @@
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">ðŸŽ¯ Legendary Skill Hunter (300 Elite Skills)</span>
+                    <span class="progress-text">🎯 Legendary Skill Hunter (300 Elite Skills)</span>
                     <span class="progress-count"><span id="elites-completed">0</span> / <span id="elites-total">300</span></span>
                 </div>
                 <div class="progress-bar">
@@ -29764,37 +29764,37 @@
                     <div style="font-size:0.8em;" id="elites-monk-count">0/36</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-necromancer').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ’€</div>
+                    <div style="font-size:1.3em;">💀</div>
                     <div style="font-size:0.7em;color:#2E8B57;font-weight:bold;">Necromancer</div>
                     <div style="font-size:0.8em;" id="elites-necromancer-count">0/36</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-mesmer').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸŽ­</div>
+                    <div style="font-size:1.3em;">🎭</div>
                     <div style="font-size:0.7em;color:#DA70D6;font-weight:bold;">Mesmer</div>
                     <div style="font-size:0.8em;" id="elites-mesmer-count">0/35</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-elementalist').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ”¥</div>
+                    <div style="font-size:1.3em;">🔥</div>
                     <div style="font-size:0.7em;color:#FF4500;font-weight:bold;">Elementalist</div>
                     <div style="font-size:0.8em;" id="elites-elementalist-count">0/36</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-assassin').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ—¡ï¸</div>
+                    <div style="font-size:1.3em;">🗡️</div>
                     <div style="font-size:0.7em;color:#4B0082;font-weight:bold;">Assassin</div>
                     <div style="font-size:0.8em;" id="elites-assassin-count">0/26</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-ritualist').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ‘»</div>
+                    <div style="font-size:1.3em;">👻</div>
                     <div style="font-size:0.7em;color:#008B8B;font-weight:bold;">Ritualist</div>
                     <div style="font-size:0.8em;" id="elites-ritualist-count">0/26</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-paragon').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸ›¡ï¸</div>
+                    <div style="font-size:1.3em;">🛡️</div>
                     <div style="font-size:0.7em;color:#FF8C00;font-weight:bold;">Paragon</div>
                     <div style="font-size:0.8em;" id="elites-paragon-count">0/16</div>
                 </div>
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-dervish').scrollIntoView({behavior:'smooth'});">
-                    <div style="font-size:1.3em;">ðŸŒ€</div>
+                    <div style="font-size:1.3em;">🌀</div>
                     <div style="font-size:0.7em;color:#8B4513;font-weight:bold;">Dervish</div>
                     <div style="font-size:0.8em;" id="elites-dervish-count">0/16</div>
                 </div>
@@ -30694,7 +30694,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-necromancer">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#2E8B57;">
-                    ðŸ’€ Necromancer (36 elite skills)
+                    💀 Necromancer (36 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_necromancer_blood_is_power" data-campaign="core" data-profession="necromancer" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -30989,7 +30989,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-mesmer">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#DA70D6;">
-                    ðŸŽ­ Mesmer (35 elite skills)
+                    🎭 Mesmer (35 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_mesmer_crippling_anguish" data-campaign="core" data-profession="mesmer" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -31276,7 +31276,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-elementalist">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#FF4500;">
-                    ðŸ”¥ Elementalist (36 elite skills)
+                    🔥 Elementalist (36 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_elementalist_elemental_attunement" data-campaign="core" data-profession="elementalist" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -31571,7 +31571,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-assassin">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#4B0082;">
-                    ðŸ—¡ï¸ Assassin (26 elite skills)
+                    🗡️ Assassin (26 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_assassin_shadow_theft" data-campaign="core" data-profession="assassin" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -31786,7 +31786,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-ritualist">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#008B8B;">
-                    ðŸ‘» Ritualist (26 elite skills)
+                    👻 Ritualist (26 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_ritualist_weapons_of_three_forges" data-campaign="core" data-profession="ritualist" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -32001,7 +32001,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-paragon">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#FF8C00;">
-                    ðŸ›¡ï¸ Paragon (16 elite skills)
+                    🛡️ Paragon (16 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_paragon_heroic_refrain" data-campaign="core" data-profession="paragon" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -32136,7 +32136,7 @@
             </details>
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-dervish">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:#8B4513;">
-                    ðŸŒ€ Dervish (16 elite skills)
+                    🌀 Dervish (16 elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">
                     <div data-area="elites" data-id="elite_dervish_vow_of_revolution" data-campaign="core" data-profession="dervish" style="display:flex;align-items:center;gap:8px;padding:5px;background:#21262d;border-radius:4px;">
@@ -32324,7 +32324,7 @@
             span.className = 'tb-conn';
             span.innerHTML = '<span id="tb-dot" class="tb-dot" title="Toolbox connection"></span>'+
                              ' <button class="char-btn" onclick="toolboxPing()" title="Connect to Toolbox">Toolbox</button>'+
-                             ' <button class="char-btn" onclick="toolboxPromptPort()" title="Set Toolbox port">âš™</button>';
+                             ' <button class="char-btn" onclick="toolboxPromptPort()" title="Set Toolbox port">⚙</button>';
             host.appendChild(span);
             try {
                 const conn = span;
@@ -32335,7 +32335,7 @@
                 bSync.className = 'char-btn'; bSync.textContent = 'Sync'; bSync.title = 'Sync progress';
                 bSync.onclick = toolboxSyncProgress; conn.appendChild(bSync);
                 const bCfg = document.createElement('button');
-                bCfg.className = 'char-btn'; bCfg.textContent = 'âš™'; bCfg.title = 'Set Toolbox port';
+                bCfg.className = 'char-btn'; bCfg.textContent = '⚙'; bCfg.title = 'Set Toolbox port';
                 bCfg.onclick = toolboxPromptPort; conn.appendChild(bCfg);
             } catch (e) {}
         }
@@ -33283,7 +33283,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 if (legCb && doneCount === 3 && !legCb.checked) {
                     legCb.checked = true;
                     if (legRow) legRow.classList.add('completed');
-                    console.log('ðŸ† Auto-completed:', legendary);
+                    console.log('🏆 Auto-completed:', legendary);
                 }
             }
             
@@ -33295,7 +33295,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     homGwamm.checked = true;
                     const row = homGwamm.closest('tr');
                     if (row) row.classList.add('completed');
-                    console.log('ðŸŒŸ GWAMM UNLOCKED! You have', maxedTitles, 'maxed titles!');
+                    console.log('🌟 GWAMM UNLOCKED! You have', maxedTitles, 'maxed titles!');
                 }
             }
             
@@ -33543,7 +33543,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     });
                     
                     updateProgress(areaId);
-                    alert('Import erfolgreich fÃ¼r ' + currentCharacter + '! ' + Object.keys(importedProgress).length + ' Eintraege geladen.');
+                    alert('Import erfolgreich für ' + currentCharacter + '! ' + Object.keys(importedProgress).length + ' Eintraege geladen.');
                 } catch (err) {
                     alert('Import Fehler: ' + err.message);
                 }
@@ -33554,7 +33554,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         
         // Reset
         function resetProgress(areaId) {
-            if (!confirm('Progress fÃ¼r ' + currentCharacter + ' in dieser Region loeschen?')) return;
+            if (!confirm('Progress für ' + currentCharacter + ' in dieser Region loeschen?')) return;
             const progress = JSON.parse(localStorage.getItem(getProgressKey()) || '{}');
             Object.keys(progress).forEach(k => {
                 if (k.startsWith(areaId + '_')) delete progress[k];
@@ -33600,10 +33600,10 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 try {
                     const data = JSON.parse(e.target.result);
                     applyToolboxData(data);
-                    status.textContent = 'âœ… Imported from file!';
+                    status.textContent = '✅ Imported from file!';
                     status.style.color = '#3fb950';
                 } catch (err) {
-                    status.textContent = 'âŒ Invalid JSON';
+                    status.textContent = '❌ Invalid JSON';
                     status.style.color = '#f85149';
                 }
             };
