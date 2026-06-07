@@ -646,7 +646,10 @@ html = '''<!DOCTYPE html>
         .mode-toggle img { width: 22px; height: 22px; }
         .mode-badge { width: 20px; height: 20px; vertical-align: middle; margin-left: 4px; }
         body.mode-reforged-off tr[data-reforged="1"] { display: none; }
-        body.mode-melandru-on #area-menagerie .content { opacity: 0.4; pointer-events: none; filter: grayscale(60%); }
+        body.mode-melandru-on .menagerie-grid { opacity: 0.4; pointer-events: none; filter: grayscale(60%); }
+        .menagerie-blocked { display: none; }
+        body.mode-melandru-on .menagerie-normal { display: none; }
+        body.mode-melandru-on .menagerie-blocked { display: inline; color: #f85149; font-weight: 600; }
         .melandru-block { display: none; margin: 10px 0; padding: 10px 14px; border-radius: 8px; background: rgba(248,81,73,0.12); border: 1px solid #f85149; color: #f0a39c; font-weight: 600; }
         body.mode-melandru-on .melandru-block { display: block; }
         .melandru-hint { display: none; }
@@ -2542,7 +2545,7 @@ def generate_menagerie_html():
             <div class="progress-container">
                 <div class="progress-header">
                     <span class="progress-text">🦁 Zaishen Menagerie ({total} animals)</span>
-                    <span class="progress-count"><span id="menagerie-completed">0</span> / <span id="menagerie-total">{total}</span></span>
+                    <span class="progress-count"><span class="menagerie-normal"><span id="menagerie-completed">0</span> / <span id="menagerie-total">{total}</span></span><span class="menagerie-blocked">n/a — Blocked under Melandru's Accord</span></span>
                 </div>
                 <div class="progress-bar">
                     <div class="progress-fill" id="menagerie-progress" style="width: 0%"></div>
@@ -2553,7 +2556,7 @@ def generate_menagerie_html():
                 Collect and donate animals to the <a href="https://wiki.guildwars.com/wiki/Zaishen_Menagerie" target="_blank" style="color:#58a6ff;">Zaishen Menagerie</a> to unlock them as pets for all characters!
             </p>
             
-            <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">'''
+            <div class="menagerie-grid" style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;">'''
     
     # Some animals have different image names on the wiki
     img_name_map = {
@@ -3751,8 +3754,22 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             updateAllProgress();
         }
 
+        // Menagerie checkboxes live in DIVs (not TRs); count them directly.
+        function updateMenagerieProgress() {
+            const total = document.querySelectorAll('.quest-checkbox[data-area="menagerie"]').length;
+            const completed = document.querySelectorAll('.quest-checkbox[data-area="menagerie"]:checked').length;
+            const blocked = document.body.classList.contains('mode-melandru-on');
+            const cEl = document.getElementById('menagerie-completed');
+            const tEl = document.getElementById('menagerie-total');
+            const bar = document.getElementById('menagerie-progress');
+            if (cEl) cEl.textContent = completed;
+            if (tEl) tEl.textContent = total;
+            if (bar) bar.style.width = (blocked ? 0 : (total > 0 ? completed / total * 100 : 0)) + '%';
+        }
+
         // Update progress for an area
         function updateProgress(areaId) {
+            if (areaId === 'menagerie') { updateMenagerieProgress(); return; }
             // Count only DOABLE quests/pieces
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
