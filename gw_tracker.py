@@ -1691,8 +1691,9 @@ def generate_dungeons_html():
             "Nightfall": "badge-endgame",
         }.get(campaign, "badge-side")
         
+        elite_reforged = ' data-reforged="1"' if name in ("Forsaken Tunnels", "Tunnels of the Forsaken") else ''
         h += f'''
-                    <tr data-type="elite" data-area="dungeons" data-id="{mission_id}">
+                    <tr data-type="elite" data-area="dungeons" data-id="{mission_id}"{elite_reforged}>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{mission_id}" data-area="dungeons"></td>
                         <td><a href="{wiki_url}" target="_blank" class="quest-link" style="color:#ff6b6b;">{icon} {name}</a></td>
                         <td><span class="badge {badge_class}">{campaign}</span></td>

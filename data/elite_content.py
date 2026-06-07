@@ -14,6 +14,8 @@ ELITE_MISSIONS = [
     
     # PROPHECIES
     ("Sorrow's Furnace", "Prophecies", "8", "Dwarven dungeon, Stone Summit", "Sorrow%27s_Furnace"),
+    ("Forsaken Tunnels", "Prophecies", "4", "Reforged dungeon beneath the Northlands (pre-Searing)", "Forsaken_Tunnels"),
+    ("Tunnels of the Forsaken", "Prophecies", "4", "Reforged dungeon, post-Searing twin (Ascalon)", "Tunnels_of_the_Forsaken"),
     
     # FACTIONS
     ("The Deep", "Factions", "12", "Luxon elite mission, Kanaxai", "The_Deep"),
