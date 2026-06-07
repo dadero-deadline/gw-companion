@@ -580,6 +580,7 @@
         <button class="main-tab" data-category="heroes" onclick="switchCategory('heroes')">🦸 Heroes</button>
         <button class="main-tab" data-category="dungeons" onclick="switchCategory('dungeons')">🏰 Dungeons</button>
         <button class="main-tab" data-category="vanquish" onclick="switchCategory('vanquish')">⚔️ Vanquish</button>
+        <button class="main-tab" data-category="cartographer" onclick="switchCategory('cartographer')">🗺️ Cartographer</button>
         <button class="main-tab" data-category="armor" onclick="switchCategory('armor')">🛡️ Armor</button>
         <button class="main-tab" data-category="minis" onclick="switchCategory('minis')">🐾 Minis</button>
         <button class="main-tab" data-category="menagerie" onclick="switchCategory('menagerie')">🦁 Menagerie</button>
@@ -33273,6 +33274,8 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 document.getElementById('area-dungeons').classList.add('active');
             } else if (category === 'vanquish') {
                 document.getElementById('area-vanquish').classList.add('active');
+            } else if (category === 'cartographer') {
+                document.getElementById('area-cartographer').classList.add('active');
             } else if (category === 'armor') {
                 document.getElementById('area-armor').classList.add('active');
                 try { updateArmorPreviews && updateArmorPreviews(); } catch(e) {}
