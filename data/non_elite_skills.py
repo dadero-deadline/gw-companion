@@ -33,7 +33,7 @@ NON_ELITE_SKILLS = [
     ("Mindbender", "Common", "Mindbender"),
     ("Pain Inverter", "Common", "Pain_Inverter"),
     ("Radiation Field", "Common", "Radiation_Field"),
-    ("Ressurection Signet", "Common", "Ressurection_Signet"),
+    ("Resurrection Signet", "Common", "Resurrection_Signet"),
     ("Signet of Infection", "Common", "Signet_of_Infection"),
     ("Smooth Criminal", "Common", "Smooth_Criminal"),
     ("Sneak Attack", "Common", "Sneak_Attack"),

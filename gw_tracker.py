@@ -16,7 +16,17 @@ from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, ZAISHEN_VANQUISHES,
 from outposts import OUTPOSTS
 from collectibles import MINIATURES, MENAGERIE
 from non_elite_skills import NON_ELITE_SKILLS
+from cartographer import CARTOGRAPHER, CARTOGRAPHER_TOTAL
 import urllib.request, re, urllib.parse
+
+# Reforged Mode content: quests added by the Guild Wars Reforged overhaul.
+# Drives the inline "Reforged Mode" badge in the quest name cell (Phase 1) and,
+# in Phase 2, data-reforged="1" on these rows for the optional toggle.
+REFORGED_QUEST_IDS = {
+    "pre_68", "pre_69", "pre_70", "pre_71", "pre_72",
+    "post_64", "post_65", "post_66", "post_67",
+    "kryta_33",
+}
 
 # Simple helper to fetch OpenGraph image from GW wiki hero page
 _OG_IMG_CACHE = {}
@@ -828,7 +838,10 @@ def generate_area_html(quests, area_id, area_name, is_first, is_bonus_pack=False
         hm_cell = f'<input type="checkbox" class="hm-checkbox" data-id="{q["id"]}-hm" data-area="{area_id}">' if is_mission else ''
         bonus_cell = f'<input type="checkbox" class="bonus-checkbox" data-id="{q["id"]}-bonus" data-area="{area_id}">' if is_mission else ''
         hm_bonus_cell = f'<input type="checkbox" class="hm-bonus-checkbox" data-id="{q["id"]}-hm-bonus" data-area="{area_id}">' if is_mission else ''
-        
+
+        # Reforged Mode badge in the quest name cell (matches the deployed site)
+        reforged_badge = '<br><span class="prereq">&#9874;&#65039; Reforged Mode</span>' if q['id'] in REFORGED_QUEST_IDS else ''
+
         h += f'''
                     <tr class="{row_cls}" data-id="{q['id']}" data-type="{q['type'].lower()}" data-prof="{prof}" data-area="{area_id}"{missable_attr}>
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{q['id']}" data-area="{area_id}"></td>
@@ -836,7 +849,7 @@ def generate_area_html(quests, area_id, area_name, is_first, is_bonus_pack=False
                         <td class="checkbox-cell">{bonus_cell}</td>
                         <td class="checkbox-cell">{hm_bonus_cell}</td>
                         <td class="order">{q['order']}</td>
-                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{q['name']}</a></td>
+                        <td><a href="{wiki_url}" target="_blank" class="quest-link">{q['name']}</a>{reforged_badge}</td>
                         <td>{q['giver']}</td>
                         <td class="location">{q['location']}</td>
                         <td><span class="badge {badge}">{q['type']}</span>{missable_badge}</td>
@@ -1147,114 +1160,192 @@ html += generate_heroes_html()
 
 # === DAILY QUESTS ===
 def generate_daily_html():
-    from datetime import datetime, timedelta
-    
-    # Calculate today's quests
-    today = datetime.now()
-    today = today.replace(hour=0, minute=0, second=0, microsecond=0)
-    
-    # Mission (69-day cycle)
-    mission_days = (today - ZAISHEN_MISSION_START).days
-    mission_idx = mission_days % len(ZAISHEN_MISSIONS)
-    today_mission = ZAISHEN_MISSIONS[mission_idx]
-    
-    # Bounty (66-day cycle)
-    bounty_days = (today - ZAISHEN_BOUNTY_START).days
-    bounty_idx = bounty_days % len(ZAISHEN_BOUNTIES)
-    today_bounty = ZAISHEN_BOUNTIES[bounty_idx]
-    
-    # Vanquish (136-day cycle, but we only have 10 in our list, so use that)
-    vanquish_days = (today - ZAISHEN_VANQUISH_START).days
-    vanquish_idx = vanquish_days % len(ZAISHEN_VANQUISHES)
-    today_vanquish = ZAISHEN_VANQUISHES[vanquish_idx]
-    
-    # Combat/PvP (7-day cycle)
-    combat_days = (today - ZAISHEN_COMBAT_START).days
-    combat_idx = combat_days % len(ZAISHEN_COMBAT)
-    today_combat = ZAISHEN_COMBAT[combat_idx]
-    
-    # Vanguard (9-day cycle) - Nov 28 2025 = Save the Ascalonian Noble (index 2)
-    # So start is Nov 26 2025 (2 days ago)
-    vanguard_start = datetime(2025, 11, 26)
-    vanguard_days = (today - vanguard_start).days
-    vanguard_idx = vanguard_days % len(VANGUARD_QUESTS)
-    today_vanguard = VANGUARD_QUESTS[vanguard_idx]
-    
+    from datetime import datetime
+    import json
+
+    # Server-side initial values (the daily tab's JS recomputes the authoritative,
+    # UTC-reset rotation client-side on open via the arrays emitted below).
+    today = datetime.now().replace(hour=0, minute=0, second=0, microsecond=0)
+    mission = ZAISHEN_MISSIONS[(today - ZAISHEN_MISSION_START).days % len(ZAISHEN_MISSIONS)]
+    bounty = ZAISHEN_BOUNTIES[(today - ZAISHEN_BOUNTY_START).days % len(ZAISHEN_BOUNTIES)]
+    vanquish = ZAISHEN_VANQUISHES[(today - ZAISHEN_VANQUISH_START).days % len(ZAISHEN_VANQUISHES)]
+    combat = ZAISHEN_COMBAT[(today - ZAISHEN_COMBAT_START).days % len(ZAISHEN_COMBAT)]
+    vanguard = VANGUARD_QUESTS[(today - datetime(2025, 11, 26)).days % len(VANGUARD_QUESTS)]
+
     h = f'''
     <div class="area" id="area-daily">
         <div class="content">
             <div style="text-align:center;margin-bottom:30px;">
-                <h2 style="color:#ffd700;margin:0;">ðŸ“… Today's Daily Quests</h2>
-                <p style="color:#8b949e;margin:5px 0;">{today.strftime("%A, %B %d, %Y")} â€¢ Resets at 16:01 UTC (8:01 AM Pacific Standard Time)</p>
+                <h2 style="color:#ffd700;margin:0;">📅 Today's Daily Quests</h2>
+                <p id="daily-date" style="color:#8b949e;margin:5px 0;">Loading daily date…</p>
             </div>
-            
+
             <div style="max-width:600px;margin:0 auto;">
                 <h3 style="color:#ffa657;margin:0 0 15px 0;">⚔️ Zaishen Dailies</h3>
-                
+
                 <div style="background:#21262d;border-radius:12px;overflow:hidden;">
                     <!-- Mission -->
                     <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
                         <input type="checkbox" id="daily-mission" class="quest-checkbox" style="width:22px;height:22px;" data-daily="mission">
                         <div style="flex:1;">
-                            <span style="color:#238636;font-weight:bold;">ðŸ—ºï¸ Mission:</span>
-                            <a href="https://wiki.guildwars.com/wiki/{today_mission[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_mission[0]}</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_mission[1]})</span>
+                            <span style="color:#238636;font-weight:bold;">🗺️ Mission:</span>
+                            <a id="daily-mission-link" href="https://wiki.guildwars.com/wiki/{mission[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{mission[0]}</a>
+                            <span id="daily-mission-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">({mission[1]})</span>
                         </div>
                     </div>
-                    
+
                     <!-- Bounty -->
                     <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
                         <input type="checkbox" id="daily-bounty" class="quest-checkbox" style="width:22px;height:22px;" data-daily="bounty">
                         <div style="flex:1;">
-                            <span style="color:#1f6feb;font-weight:bold;">ðŸŽ¯ Bounty:</span>
-                            <a href="https://wiki.guildwars.com/wiki/{today_bounty[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_bounty[0]}</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_bounty[1]})</span>
+                            <span style="color:#1f6feb;font-weight:bold;">🎯 Bounty:</span>
+                            <a id="daily-bounty-link" href="https://wiki.guildwars.com/wiki/{bounty[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{bounty[0]}</a>
+                            <span id="daily-bounty-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">({bounty[1]})</span>
                         </div>
                     </div>
-                    
+
                     <!-- Vanquish -->
                     <div style="display:flex;align-items:center;gap:15px;padding:15px;border-bottom:1px solid #30363d;">
                         <input type="checkbox" id="daily-vanquish" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanquish">
                         <div style="flex:1;">
                             <span style="color:#f85149;font-weight:bold;">⚔️ Vanquish:</span>
-                            <a href="https://wiki.guildwars.com/wiki/{today_vanquish[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_vanquish[0]}</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_vanquish[1]})</span>
+                            <a id="daily-vanquish-link" href="https://wiki.guildwars.com/wiki/{vanquish[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{vanquish[0]}</a>
+                            <span id="daily-vanquish-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">({vanquish[1]})</span>
                         </div>
                     </div>
-                    
+
                     <!-- Combat/PvP -->
                     <div style="display:flex;align-items:center;gap:15px;padding:15px;">
                         <input type="checkbox" id="daily-combat" class="quest-checkbox" style="width:22px;height:22px;" data-daily="combat">
                         <div style="flex:1;">
-                            <span style="color:#a855f7;font-weight:bold;">ðŸ† PvP:</span>
-                            <a href="https://wiki.guildwars.com/wiki/{today_combat[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_combat[0]}</a>
+                            <span style="color:#a855f7;font-weight:bold;">🏆 PvP:</span>
+                            <a id="daily-combat-link" href="https://wiki.guildwars.com/wiki/{combat[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{combat[0]}</a>
                         </div>
                     </div>
                 </div>
-                
-                <h3 style="color:#ffa657;margin:25px 0 15px 0;">ðŸ›¡ï¸ Pre-Searing Vanguard</h3>
+
+                <h3 style="color:#ffa657;margin:25px 0 15px 0;">🛡️ Pre-Searing Vanguard</h3>
                 <div style="background:#21262d;border-radius:12px;overflow:hidden;">
                     <div style="display:flex;align-items:center;gap:15px;padding:15px;">
                         <input type="checkbox" id="daily-vanguard" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanguard">
                         <div style="flex:1;">
-                            <span style="color:#ffa657;font-weight:bold;">ðŸ›¡ï¸ Vanguard:</span>
-                            <a href="https://wiki.guildwars.com/wiki/{today_vanguard[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{today_vanguard[0]}</a>
-                            <span style="color:#8b949e;font-size:0.85em;margin-left:8px;">({today_vanguard[2]})</span>
+                            <span style="color:#ffa657;font-weight:bold;">🛡️ Vanguard:</span>
+                            <a id="daily-vanguard-link" href="https://wiki.guildwars.com/wiki/{vanguard[3]}" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">{vanguard[0]}</a>
+                            <span id="daily-vanguard-region" style="color:#8b949e;font-size:0.85em;margin-left:8px;">({vanguard[2]})</span>
                         </div>
                     </div>
                 </div>
-                
+
                 <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
-                    <h4 style="color:#8b949e;margin:0 0 10px 0;">ðŸ’¡ Tips</h4>
+                    <h4 style="color:#8b949e;margin:0 0 10px 0;">💡 Tips</h4>
                     <ul style="margin:0;color:#8b949e;font-size:0.85em;">
-                        <li>Zaishen Coins â†’ Balthazar faction, lockpicks, tomes</li>
+                        <li>Zaishen Coins → Balthazar faction, lockpicks, tomes</li>
                         <li>Checkboxes reset daily</li>
                     </ul>
                 </div>
             </div>
         </div>
     </div>'''
-    return h
+
+    # Client-side rotation data (generated from data/daily_quests.py) + logic.
+    # updateTodaysZaishen() in the main script calls updateDailyRotation()/updateDailyDate()
+    # when the daily tab opens; these globals are initialized at page load.
+    def _arr(varname, rows):
+        items = ",\n            ".join(
+            "{ name: %s, campaign: %s, region: %s, wiki: %s }" % (
+                json.dumps(r[0]), json.dumps(r[1]), json.dumps(r[2]), json.dumps(r[3]))
+            for r in rows)
+        return "        const %s = [\n            %s\n        ];\n" % (varname, items)
+
+    data_js = (
+        "        const ZAISHEN_MISSION_START_UTC = Date.UTC(2025, 10, 26);\n"
+        "        const ZAISHEN_BOUNTY_START_UTC = Date.UTC(2025, 10, 20);\n"
+        "        const ZAISHEN_VANQUISH_START_UTC = Date.UTC(2025, 8, 9);\n"
+        "        const ZAISHEN_COMBAT_START_UTC = Date.UTC(2025, 10, 27);\n"
+        "        const VANGUARD_START_UTC = Date.UTC(2025, 10, 26);\n"
+        + _arr("ZAISHEN_MISSIONS_DATA", ZAISHEN_MISSIONS)
+        + _arr("ZAISHEN_BOUNTIES_DATA", ZAISHEN_BOUNTIES)
+        + _arr("ZAISHEN_VANQUISHES_DATA", ZAISHEN_VANQUISHES)
+        + _arr("ZAISHEN_COMBAT_DATA", ZAISHEN_COMBAT)
+        + _arr("VANGUARD_QUESTS_DATA", VANGUARD_QUESTS)
+    )
+
+    logic_js = '''
+        function getUtcDayOffset(startUtc) {
+            const RESET_HOUR_UTC = 16;
+            const RESET_MINUTE_UTC = 1;
+            const resetOffsetMs = ((RESET_HOUR_UTC * 60) + RESET_MINUTE_UTC) * 60 * 1000;
+            const now = new Date();
+            const shiftedNow = now.getTime() - resetOffsetMs;
+            return Math.floor((shiftedNow - startUtc) / 86400000);
+        }
+        function updateDailyDate() {
+            const el = document.getElementById('daily-date');
+            if (!el) return;
+            const now = new Date();
+            const weekday = now.toLocaleDateString('en-US', { weekday: 'long', timeZone: 'UTC' });
+            const month = now.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
+            const day = now.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
+            const year = now.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
+            el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at 16:01 UTC (8:01 AM Pacific Standard Time)`;
+        }
+        function updateDailyRotation() {
+            const missionLink = document.getElementById('daily-mission-link');
+            const missionCampaign = document.getElementById('daily-mission-campaign');
+            const bountyLink = document.getElementById('daily-bounty-link');
+            const bountyCampaign = document.getElementById('daily-bounty-campaign');
+            const vanquishLink = document.getElementById('daily-vanquish-link');
+            const vanquishCampaign = document.getElementById('daily-vanquish-campaign');
+            const combatLink = document.getElementById('daily-combat-link');
+            const vanguardLink = document.getElementById('daily-vanguard-link');
+            const vanguardRegion = document.getElementById('daily-vanguard-region');
+
+            if (missionLink && missionCampaign && ZAISHEN_MISSIONS_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_MISSION_START_UTC);
+                const idx = ((days % ZAISHEN_MISSIONS_DATA.length) + ZAISHEN_MISSIONS_DATA.length) % ZAISHEN_MISSIONS_DATA.length;
+                const m = ZAISHEN_MISSIONS_DATA[idx];
+                missionLink.href = 'https://wiki.guildwars.com/wiki/' + m.wiki;
+                missionLink.textContent = m.name;
+                missionCampaign.textContent = '(' + m.campaign + ')';
+            }
+
+            if (bountyLink && bountyCampaign && ZAISHEN_BOUNTIES_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_BOUNTY_START_UTC);
+                const idx = ((days % ZAISHEN_BOUNTIES_DATA.length) + ZAISHEN_BOUNTIES_DATA.length) % ZAISHEN_BOUNTIES_DATA.length;
+                const b = ZAISHEN_BOUNTIES_DATA[idx];
+                bountyLink.href = 'https://wiki.guildwars.com/wiki/' + b.wiki;
+                bountyLink.textContent = b.name;
+                bountyCampaign.textContent = '(' + b.campaign + ')';
+            }
+
+            if (vanquishLink && vanquishCampaign && ZAISHEN_VANQUISHES_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_VANQUISH_START_UTC);
+                const idx = ((days % ZAISHEN_VANQUISHES_DATA.length) + ZAISHEN_VANQUISHES_DATA.length) % ZAISHEN_VANQUISHES_DATA.length;
+                const v = ZAISHEN_VANQUISHES_DATA[idx];
+                vanquishLink.href = 'https://wiki.guildwars.com/wiki/' + v.wiki;
+                vanquishLink.textContent = v.name;
+                vanquishCampaign.textContent = '(' + v.campaign + ')';
+            }
+
+            if (combatLink && ZAISHEN_COMBAT_DATA.length) {
+                const days = getUtcDayOffset(ZAISHEN_COMBAT_START_UTC);
+                const idx = ((days % ZAISHEN_COMBAT_DATA.length) + ZAISHEN_COMBAT_DATA.length) % ZAISHEN_COMBAT_DATA.length;
+                const c = ZAISHEN_COMBAT_DATA[idx];
+                combatLink.href = 'https://wiki.guildwars.com/wiki/' + c.wiki;
+                combatLink.textContent = c.name;
+            }
+
+            if (vanguardLink && vanguardRegion && VANGUARD_QUESTS_DATA.length) {
+                const days = getUtcDayOffset(VANGUARD_START_UTC);
+                const idx = ((days % VANGUARD_QUESTS_DATA.length) + VANGUARD_QUESTS_DATA.length) % VANGUARD_QUESTS_DATA.length;
+                const q = VANGUARD_QUESTS_DATA[idx];
+                vanguardLink.href = 'https://wiki.guildwars.com/wiki/' + q.wiki;
+                vanguardLink.textContent = q.name;
+                vanguardRegion.textContent = '(' + q.region + ')';
+            }
+        }
+'''
+    return h + '\n    <script>\n' + data_js + logic_js + '    </script>\n'
 
 html += generate_daily_html()
 
@@ -1553,6 +1644,75 @@ def generate_vanquish_html():
     return h
 
 html += generate_vanquish_html()
+
+
+def generate_cartographer_html():
+    """Cartographer (mapping title) locations, grouped campaign -> region.
+    Data lives in data/cartographer.py (extracted from the deployed site).
+    The 12 duplicate locations are preserved on purpose (pre-existing quirk)."""
+    total = CARTOGRAPHER_TOTAL
+    h = f'''
+    <div class="area" id="area-cartographer">
+        <div class="content">
+            <div class="progress-container">
+                <div class="progress-header">
+                    <span class="progress-text">\U0001f5fa️ Cartographer Locations ({total} total)</span>
+                    <span class="progress-count"><span id="cartographer-completed">0</span> / <span id="cartographer-total">{total}</span></span>
+                </div>
+                <div class="progress-bar">
+                    <div class="progress-fill" id="cartographer-progress" style="width: 0%"></div>
+                </div>
+            </div>
+
+            <div class="filters" data-area="cartographer">
+                <button class="filter-btn active" data-filter="all">All</button>
+                <button class="filter-btn" data-filter="prophecies">Prophecies</button>
+                <button class="filter-btn" data-filter="factions">Factions</button>
+                <button class="filter-btn" data-filter="nightfall">Nightfall</button>
+            </div>
+
+            <div class="container">
+'''
+    for camp_key, camp_header, regions in CARTOGRAPHER:
+        h += f'            <h3 style="color:#ffa657;margin:20px 0 10px 0;">{camp_header}</h3>\n'
+        for region_header, rows in regions:
+            h += f'            <h4 style="color:#58a6ff;margin:15px 0 8px 0;">{region_header}</h4>\n'
+            h += '''            <table class="has-checkbox-first">
+                <thead>
+                    <tr>
+                        <th style="width:50px">✓</th>
+                        <th>Location</th>
+                        <th style="width:150px">Type</th>
+                    </tr>
+                </thead>
+                <tbody>
+'''
+            for cid, name, slug, typ in rows:
+                h += f'''                    <tr data-type="{camp_key}" data-area="cartographer" data-id="{cid}">
+                        <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{cid}" data-area="cartographer"></td>
+                        <td><a href="https://wiki.guildwars.com/wiki/{slug}" target="_blank" class="quest-link">{name}</a></td>
+                        <td style="color:#8b949e;">{typ}</td>
+                    </tr>
+'''
+            h += '''                </tbody>
+            </table>
+'''
+    h += '''            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
+                <h4 style="color:#ffa657;margin:0 0 10px 0;">\U0001f4a1 Cartographer Tips</h4>
+                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                    <li><strong>Wall Hugging</strong> - Walk along edges to uncover map</li>
+                    <li><strong>All locations</strong> - Towns, outposts, missions, and explorable areas all count</li>
+                    <li><strong>100% per continent</strong> - Tyria, Cantha, and Elona each need 100%</li>
+                    <li><strong>Dungeons excluded</strong> - Underground areas do not count</li>
+                    <li><strong>EotN separate</strong> - Eye of the North has its own "Master of the North" title</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    </div>'''
+    return h
+
+html += generate_cartographer_html()
 
 # === ARMOR SETS ===
 def generate_armor_html():
@@ -2066,9 +2226,15 @@ def generate_outposts_html():
         "Nightfall": "badge-side",
         "Eye of the North": "badge-special"
     }
-    
+
+    # Explicit id overrides where the deployed page's id differs from the default slug
+    # (the hand-added Reforged pre-Searing outpost). Keeps localStorage keys stable.
+    outpost_id_overrides = {
+        "Piken Square (pre-Searing)": "outpost_piken_square_pre_searing",
+    }
+
     for name, campaign, wiki_slug in OUTPOSTS:
-        outpost_id = f"outpost_{name.lower().replace(' ', '_').replace(chr(39), '')}"
+        outpost_id = outpost_id_overrides.get(name) or f"outpost_{name.lower().replace(' ', '_').replace(chr(39), '')}"
         badge_cls = campaign_badges.get(campaign, "badge-side")
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki_slug}"
         
@@ -3125,6 +3291,25 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         }
         
         // Update title progress bar
+        // Auto-calc Vanquisher title progress from the Vanquish tab (matches deployed site)
+        function updateVanquisherTitlesFromVanquish() {
+            const mapping = { prophecies: 'title_vanq_tyria', factions: 'title_vanq_cantha', nightfall: 'title_vanq_elona' };
+            Object.entries(mapping).forEach(([type, titleId]) => {
+                const total = document.querySelectorAll(`tr[data-area="vanquish"][data-type="${type}"] .quest-checkbox`).length;
+                const done = document.querySelectorAll(`tr[data-area="vanquish"][data-type="${type}"] .quest-checkbox:checked`).length;
+                const input = document.querySelector(`.title-progress-input[data-id="${titleId}"]`);
+                if (input) { input.value = Math.min(done, parseInt(input.dataset.max)||done); updateTitleProgressBar(input); }
+            });
+            const tv = document.querySelector('.quest-checkbox[data-id="title_vanq_tyria"]');
+            const cv = document.querySelector('.quest-checkbox[data-id="title_vanq_cantha"]');
+            const ev = document.querySelector('.quest-checkbox[data-id="title_vanq_elona"]');
+            const lv = document.querySelector('.quest-checkbox[data-id="title_leg_vanq"]');
+            if (tv && cv && ev && lv) {
+                const all = !!(tv.checked && cv.checked && ev.checked);
+                if (lv.checked !== all) { lv.checked = all; const row=lv.closest('tr'); if (row) row.classList.toggle('completed', all); }
+            }
+        }
+
         function updateTitleProgressBar(input) {
             const val = parseInt(input.value) || 0;
             const max = parseInt(input.dataset.max) || 1;
@@ -3675,6 +3860,8 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         
         // Load/save daily checkboxes
         function updateTodaysZaishen() {
+            updateDailyDate();
+            updateDailyRotation();
             loadDailyCheckboxes();
         }
         
