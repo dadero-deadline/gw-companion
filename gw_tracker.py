@@ -1976,13 +1976,14 @@ def generate_minis_html():
             # Build a base file path and fall back across extensions; also avoid sending referrers.
             # On the Guild Wars Wiki, Special:FilePath works reliably for images.
             icon_base = f"https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}"
+            icon_base_js = icon_base.replace("'", "%27")  # JS-string-safe for single-quoted onerror fallbacks
 
             h += f'''
                     <tr data-type="{rarity_lower}" data-area="minis" data-id="{mini_id}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{mini_id}" data-area="minis"></td>
                         <td>
                             <div style="display:flex;align-items:center;gap:6px;">
-                                <img src="{icon_base}.png" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:32px;height:32px;border-radius:4px;" onerror="this.onerror=null; this.src='{icon_base}.jpg'; this.onerror=function(){{this.src='{icon_base}.gif'; this.onerror=function(){{this.style.display='none'}}}}">
+                                <img src="{icon_base}.png" alt="" referrerpolicy="no-referrer" loading="lazy" style="width:32px;height:32px;border-radius:4px;" onerror="this.onerror=null; this.src='{icon_base_js}.jpg'; this.onerror=function(){{this.src='{icon_base_js}.gif'; this.onerror=function(){{this.style.display='none'}}}}">
                                 <a href="{wiki_url}" target="_blank" class="quest-link" style="color:{rarity_color};">{name}</a>
                             </div>
                         </td>
@@ -2499,7 +2500,8 @@ def generate_menagerie_html():
         # Get the image name (may differ from wiki_slug)
         img_name = img_name_map.get(wiki_slug, wiki_slug)
         img_url = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{img_name}.jpg"
-        img_url_png = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{img_name}.png"
+        # %27-encode apostrophes: img_url_png is emitted inside a single-quoted onerror JS string
+        img_url_png = f"https://wiki.guildwars.com/wiki/Special:Redirect/file/{img_name}.png".replace("'", "%27")
         
         h += f'''
                 <div data-area="menagerie" data-id="{animal_id}" style="display:flex;align-items:center;gap:15px;padding:12px;background:#161b22;border-radius:10px;border:1px solid #30363d;">
