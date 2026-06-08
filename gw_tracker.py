@@ -1259,7 +1259,7 @@ def generate_heroes_html():
     
     # Group by campaign
     for hero in HEROES:
-        name, profession, campaign, region, quest, wiki = hero
+        name, profession, campaign, region, quest, wiki, hero_img = hero
         hero_id = f"hero_{name.lower().replace(' ', '_').replace('.', '')}"
         hero_reforged = ' data-reforged="1"' if name in ("Devona", "Ghost of Althea") else ''
         icon = HERO_PROFESSIONS.get(profession, "")
@@ -1277,13 +1277,11 @@ def generate_heroes_html():
         
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
         quest_url = f"https://wiki.guildwars.com/wiki/{quest.replace(' ', '_')}"
-        # Prefer explicit override -> infobox portrait -> direct file path -> OG image
-        override_file = HERO_IMAGE_OVERRIDES.get(wiki)
-        hero_img = None
-        if override_file:
-            hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{override_file}"
+        # Explicit harvested portrait URL (from heroes.py — GWW infobox image).
+        # Fall back to override / constructed path only if an explicit URL is missing.
         if not hero_img:
-            hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{wiki}.jpg"
+            override_file = HERO_IMAGE_OVERRIDES.get(wiki)
+            hero_img = f"https://wiki.guildwars.com/wiki/Special:FilePath/{override_file or wiki + '.jpg'}"
         
         # Hero armor variants (non-exclusive toggles), based on campaign
         variants = []
