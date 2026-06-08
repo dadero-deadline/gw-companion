@@ -81,6 +81,39 @@ HERO_IMAGE_OVERRIDES = {
     'M.O.X.': 'M.O.X.jpg',
     'Zei_Ri': 'Initiate_Zei_Ri.jpg',
 }
+
+def prof_icon_img(prof, px=18):
+    """Official Guild Wars Wiki profession tango icon as an <img> (replaces emoji)."""
+    url = HERO_PROFESSIONS.get(prof)
+    return f'<img src="{url}" style="width:{px}px;height:{px}px;vertical-align:middle;" alt="">' if url else ''
+
+# De-emojify: profession/Reforged glyphs are <img> tags; every remaining emoji on the
+# page is decorative and is stripped here (deliberate design — the page uses no emoji).
+# Functional glyphs (check, dropdown arrow, arrows, profession-row markers) are kept.
+_DEEMOJI_KEEP = {0x2190, 0x2192, 0x2713, 0x25BC, 0x25B6, 0x25C0, 0x2605, 0x25C6}
+def _is_emoji_cp(cp):
+    if cp in _DEEMOJI_KEEP:
+        return False
+    if cp in (0xFE0F, 0xFE0E, 0x20E3):   # variation selectors / keycap combiner
+        return True
+    if 0x2190 <= cp <= 0x2BFF:           # arrows, misc symbols, dingbats
+        return True
+    if 0x1F000 <= cp <= 0x1FAFF:         # astral-plane emoji
+        return True
+    return False
+def deemojify(text):
+    out = []
+    i, n = 0, len(text)
+    while i < n:
+        if _is_emoji_cp(ord(text[i])):
+            i += 1
+            while i < n and ord(text[i]) in (0xFE0F, 0xFE0E, 0x20E3):
+                i += 1
+            if i < n and text[i] == ' ':   # swallow one trailing space ("📚 Skills" -> "Skills")
+                i += 1
+            continue
+        out.append(text[i]); i += 1
+    return ''.join(out)
 # Cache for armor images (female/male previews)
 _ARMOR_IMG_CACHE = {}
 def get_wiki_armor_images(slug):
@@ -282,9 +315,9 @@ html = '''<!DOCTYPE html>
         
         /* Quest profession highlighting - highlight matching, dim others */
         tr.my-profession { background: rgba(63, 185, 80, 0.2) !important; border-left: 3px solid #3fb950; }
-        tr.my-profession td:first-child::before { content: "⭐ "; }
+        tr.my-profession td:first-child::before { content: "★ "; }
         tr.my-secondary-profession { background: rgba(255, 166, 87, 0.15) !important; border-left: 3px solid #ffa657; }
-        tr.my-secondary-profession td:first-child::before { content: "🔶 "; }
+        tr.my-secondary-profession td:first-child::before { content: "◆ "; }
         tr.other-profession { opacity: 0.5; }
         
         /* Profession progress grid */
@@ -1027,7 +1060,7 @@ def generate_area_html(quests, area_id, area_name, is_first, is_bonus_pack=False
         hm_bonus_cell = f'<input type="checkbox" class="hm-bonus-checkbox" data-id="{q["id"]}-hm-bonus" data-area="{area_id}">' if is_mission else ''
 
         # Reforged Mode badge in the quest name cell (matches the deployed site)
-        reforged_badge = '<br><span class="prereq">&#9874;&#65039; Reforged Mode</span>' if q['id'] in REFORGED_QUEST_IDS else ''
+        reforged_badge = '<br><span class="prereq"><img src="https://wiki.guildwars.com/images/1/19/ReforgedMode-Small.png" alt="" style="height:14px;width:auto;vertical-align:-2px;margin-right:3px;"> Reforged Mode</span>' if q['id'] in REFORGED_QUEST_IDS else ''
         reforged_attr = ' data-reforged="1"' if q['id'] in REFORGED_QUEST_IDS else ''
 
         h += f'''
@@ -1320,7 +1353,7 @@ def generate_heroes_html():
                                 <a href="{wiki_url}" target="_blank" class="quest-link">{name}</a>
                             </div>
                         </td>
-                        <td style="color:#ffa657;">{profession}</td>
+                        <td style="color:#ffa657;">{prof_icon_img(profession)} {profession}</td>
                         <td>{region}</td>
                         <td>{armor_html}</td>
                         <td><a href="{quest_url}" target="_blank" style="color:#8b949e;">{quest}</a></td>
@@ -1949,7 +1982,7 @@ def generate_armor_html():
         _known_profs = ['warrior','ranger','monk','necromancer','mesmer','elementalist','assassin','ritualist','paragon','dervish']
         prof_lower = _prof_prefix if _prof_prefix in _known_profs else 'all'
         wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
-        hom_badge = "✅" if hom_eligible else "❌"
+        hom_badge = "✓" if hom_eligible else "—"
         
         h += f'''
                     <tr data-type="{campaign_lower}" data-area="armor" data-profession="{prof_lower}" data-id="{armor_id}">
@@ -2474,7 +2507,7 @@ def generate_skills_html():
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">📚 Non-Elite Skills ({total} total)</span><span class="melandru-hint">⚖️ Skill tomes blocked under Melandru's Accord</span>
+                    <span class="progress-text">📚 Non-Elite Skills ({total} total)</span><span class="melandru-hint">⚖️ Skill tomes blocked under Melandru's Accord — skills still available from trainers (base pool), quest rewards, and elite capture.</span>
                     <span class="progress-count"><span id="skills-completed">0</span> / <span id="skills-total">{total}</span></span>
                 </div>
                 <div class="progress-bar">
@@ -2492,7 +2525,7 @@ def generate_skills_html():
             data = prof_data.get(prof, {"color": "#9CA3AF", "icon": "❓"})
             h += f'''
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('skills-{prof.lower()}').scrollIntoView({{behavior:'smooth'}});">
-                    <div style="font-size:1.3em;">{data["icon"]}</div>
+                    <div style="font-size:1.3em;">{prof_icon_img(prof, 26)}</div>
                     <div style="font-size:0.7em;color:{data["color"]};font-weight:bold;">{prof}</div>
                     <div style="font-size:0.8em;" id="skills-{prof.lower()}-count">0/{count}</div>
                 </div>'''
@@ -2509,7 +2542,7 @@ def generate_skills_html():
             h += f'''
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="skills-{prof.lower()}">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:{data["color"]};">
-                    {data["icon"]} {prof} ({len(skills)} skills)
+                    {prof_icon_img(prof)} {prof} ({len(skills)} skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:6px;padding:10px;">'''
             
@@ -2614,7 +2647,7 @@ def generate_elite_skills_html():
         <div class="content">
             <div class="progress-container">
                 <div class="progress-header">
-                    <span class="progress-text">🎯 Legendary Skill Hunter ({total_skills} Elite Skills)</span><span class="melandru-hint">⚖️ Elite tomes blocked under Melandru's Accord</span>
+                    <span class="progress-text">🎯 Legendary Skill Hunter ({total_skills} Elite Skills)</span><span class="melandru-hint">⚖️ Elite tomes blocked under Melandru's Accord — elite skills still available from capture and quest rewards.</span>
                     <span class="progress-count"><span id="elites-completed">0</span> / <span id="elites-total">{total_skills}</span></span>
                 </div>
                 <div class="progress-bar">
@@ -2632,7 +2665,7 @@ def generate_elite_skills_html():
             data = prof_data.get(prof, {"color": "#9CA3AF", "icon": "❓"})
             h += f'''
                 <div style="background:#161b22;padding:8px;border-radius:6px;text-align:center;cursor:pointer;" onclick="document.getElementById('elites-{prof.lower()}').scrollIntoView({{behavior:'smooth'}});">
-                    <div style="font-size:1.3em;">{data["icon"]}</div>
+                    <div style="font-size:1.3em;">{prof_icon_img(prof, 26)}</div>
                     <div style="font-size:0.7em;color:{data["color"]};font-weight:bold;">{prof}</div>
                     <div style="font-size:0.8em;" id="elites-{prof.lower()}-count">0/{count}</div>
                 </div>'''
@@ -2660,7 +2693,7 @@ def generate_elite_skills_html():
             h += f'''
             <details open style="margin:10px 0;background:#161b22;border-radius:8px;border:1px solid #30363d;" id="elites-{prof_id}">
                 <summary style="padding:12px;cursor:pointer;font-weight:bold;color:{data["color"]};">
-                    {data["icon"]} {prof} ({len(skills)} elite skills)
+                    {prof_icon_img(prof)} {prof} ({len(skills)} elite skills)
                 </summary>
                 <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;padding:10px;">'''
             
@@ -2750,7 +2783,7 @@ html += '''
             span.className = 'tb-conn';
             span.innerHTML = '<span id="tb-dot" class="tb-dot" title="Toolbox connection"></span>'+
                              ' <button class="char-btn" onclick="toolboxPing()" title="Connect to Toolbox">Toolbox</button>'+
-                             ' <button class="char-btn" onclick="toolboxPromptPort()" title="Set Toolbox port">⚙</button>';
+                             ' <button class="char-btn" onclick="toolboxPromptPort()" title="Set Toolbox port">Cfg</button>';
             host.appendChild(span);
             try {
                 const conn = span;
@@ -2761,7 +2794,7 @@ html += '''
                 bSync.className = 'char-btn'; bSync.textContent = 'Sync'; bSync.title = 'Sync progress';
                 bSync.onclick = toolboxSyncProgress; conn.appendChild(bSync);
                 const bCfg = document.createElement('button');
-                bCfg.className = 'char-btn'; bCfg.textContent = '⚙'; bCfg.title = 'Set Toolbox port';
+                bCfg.className = 'char-btn'; bCfg.textContent = 'Cfg'; bCfg.title = 'Set Toolbox port';
                 bCfg.onclick = toolboxPromptPort; conn.appendChild(bCfg);
             } catch (e) {}
         }
@@ -3127,10 +3160,10 @@ html += '''
                 'necromancer': { label: 'Necromancer', icon: 'https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png' },
                 'mesmer': { label: 'Mesmer', icon: 'https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png' },
                 'elementalist': { label: 'Elementalist', icon: 'https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png' },
-                'assassin': { label: 'Assassin', icon: 'https://wiki.guildwars.com/images/e/ed/Assassin-tango-icon-20.png' },
-                'ritualist': { label: 'Ritualist', icon: 'https://wiki.guildwars.com/images/1/12/Ritualist-tango-icon-20.png' },
-                'paragon': { label: 'Paragon', icon: 'https://wiki.guildwars.com/images/3/30/Paragon-tango-icon-20.png' },
-                'dervish': { label: 'Dervish', icon: 'https://wiki.guildwars.com/images/5/58/Dervish-tango-icon-20.png' }
+                'assassin': { label: 'Assassin', icon: 'https://wiki.guildwars.com/images/5/5f/Assassin-tango-icon-20.png' },
+                'ritualist': { label: 'Ritualist', icon: 'https://wiki.guildwars.com/images/8/81/Ritualist-tango-icon-20.png' },
+                'paragon': { label: 'Paragon', icon: 'https://wiki.guildwars.com/images/5/55/Paragon-tango-icon-20.png' },
+                'dervish': { label: 'Dervish', icon: 'https://wiki.guildwars.com/images/3/3e/Dervish-tango-icon-20.png' }
             };
             
             const primarySpan = document.getElementById('primary-prof-selected');
@@ -4478,6 +4511,7 @@ updateArmorPreviews();
 </body>
 </html>'''
 
+html = deemojify(html)
 with open('gw_tracker.html', 'w', encoding='utf-8') as f:
     f.write(html)
 

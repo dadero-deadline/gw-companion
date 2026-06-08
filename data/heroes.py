@@ -67,16 +67,16 @@ HERO_ARMOR = {
     "Brotherhood": {"location": "Eye of the North", "cost": "Cloth of the Brotherhood x5"},
 }
 
-# Professions with icons
+# Professions -> official Guild Wars Wiki tango icon (20px) URLs (no emoji)
 HERO_PROFESSIONS = {
-    "Warrior": "⚔️",
-    "Ranger": "🏹",
-    "Monk": "✨",
-    "Necromancer": "💀",
-    "Mesmer": "🔮",
-    "Elementalist": "🔥",
-    "Assassin": "🗡️",
-    "Ritualist": "👻",
-    "Paragon": "🛡️",
-    "Dervish": "⚡",
+    "Warrior": "https://wiki.guildwars.com/images/3/3b/Warrior-tango-icon-20.png",
+    "Ranger": "https://wiki.guildwars.com/images/d/dc/Ranger-tango-icon-20.png",
+    "Monk": "https://wiki.guildwars.com/images/f/f8/Monk-tango-icon-20.png",
+    "Necromancer": "https://wiki.guildwars.com/images/7/7b/Necromancer-tango-icon-20.png",
+    "Mesmer": "https://wiki.guildwars.com/images/f/fb/Mesmer-tango-icon-20.png",
+    "Elementalist": "https://wiki.guildwars.com/images/a/ab/Elementalist-tango-icon-20.png",
+    "Assassin": "https://wiki.guildwars.com/images/5/5f/Assassin-tango-icon-20.png",
+    "Ritualist": "https://wiki.guildwars.com/images/8/81/Ritualist-tango-icon-20.png",
+    "Paragon": "https://wiki.guildwars.com/images/5/55/Paragon-tango-icon-20.png",
+    "Dervish": "https://wiki.guildwars.com/images/3/3e/Dervish-tango-icon-20.png",
 }
