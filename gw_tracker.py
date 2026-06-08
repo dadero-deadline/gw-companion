@@ -1249,9 +1249,9 @@ def generate_heroes_html():
                     <tr>
                         <th style="width:50px">Got</th>
                         <th>Hero</th>
-                        <th style="width:220px">Armor</th>
                         <th>Profession</th>
                         <th>Region</th>
+                        <th style="width:220px">Armor</th>
                         <th>Unlock Quest</th>
                     </tr>
                 </thead>
@@ -1335,7 +1335,7 @@ def generate_heroes_html():
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Hero Armor for HoM</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>Sunspear/Primeval</strong> - Gate of Pain (15 Boss Bounties)</li>
                     <li><strong>Ancient</strong> - Gate of Anguish (Passages + Gems)</li>
                     <li><strong>Brotherhood/Deldrimor/Mysterious</strong> - Eye of the North (Cloth/Steel)</li>
@@ -1427,7 +1427,7 @@ def generate_daily_html():
 
                 <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                     <h4 style="color:#8b949e;margin:0 0 10px 0;">💡 Tips</h4>
-                    <ul style="margin:0;color:#8b949e;font-size:0.85em;">
+                    <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.85em;">
                         <li>Zaishen Coins → Balthazar faction, lockpicks, tomes</li>
                         <li>Checkboxes reset daily</li>
                     </ul>
@@ -1626,7 +1626,7 @@ def generate_missions_html():
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#58a6ff;margin:0 0 10px 0;">💡 Mission Objectives</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>✅ Done</strong> - Completed mission in Normal Mode</li>
                     <li><strong>🟠 Bonus</strong> - Completed bonus objective (Masters in Factions/Nightfall)</li>
                     <li><strong>🔴 HM</strong> - Completed in Hard Mode (for Guardian title)</li>
@@ -1741,7 +1741,7 @@ def generate_dungeons_html():
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#58a6ff;margin:0 0 10px 0;">💡 Dungeon Tips</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>Dungeon Guide Mode</strong> - First completion per character gives bonus rewards</li>
                     <li><strong>Master Dungeon Guide</strong> - EotN title for completing all dungeons</li>
                     <li><strong>Slavers' Exile</strong> - Hardest dungeon, 5 separate boss areas</li>
@@ -1822,7 +1822,7 @@ def generate_vanquish_html():
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 Vanquishing Tips</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>Hard Mode only</strong> - Must be in Hard Mode to vanquish</li>
                     <li><strong>Kill counter</strong> - Shows remaining enemies in top-left</li>
                     <li><strong>Vanquisher title</strong> - Complete all areas in a campaign</li>
@@ -1889,7 +1889,7 @@ def generate_cartographer_html():
 '''
     h += '''            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#ffa657;margin:0 0 10px 0;">\U0001f4a1 Cartographer Tips</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>Wall Hugging</strong> - Walk along edges to uncover map</li>
                     <li><strong>All locations</strong> - Towns, outposts, missions, and explorable areas all count</li>
                     <li><strong>100% per continent</strong> - Tyria, Cantha, and Elona each need 100%</li>
@@ -1977,7 +1977,7 @@ def generate_armor_html():
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 HoM Resilience Monument</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>Elite Armor</strong> counts for the Resilience monument</li>
                     <li><strong>Obsidian Armor</strong> from Fissure of Woe is the most prestigious</li>
                     <li><strong>Vabbian Armor</strong> requires expensive gems from Vabbi</li>
@@ -2074,7 +2074,7 @@ def generate_minis_html():
             
             <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
                 <h4 style="color:#ffa657;margin:0 0 10px 0;">💡 HoM Devotion Monument</h4>
-                <ul style="margin:0;color:#8b949e;font-size:0.9em;">
+                <ul style="margin:0;padding-left:1.2em;color:#8b949e;font-size:0.9em;">
                     <li><strong>20 unique minis</strong> for maximum HoM points</li>
                     <li><strong>Any rarity counts</strong> - White minis are cheapest</li>
                     <li><strong>Birthday presents</strong> - Characters get one each year</li>
