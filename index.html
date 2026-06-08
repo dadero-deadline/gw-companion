@@ -33593,10 +33593,33 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             if (bar) bar.style.width = (grandTotal > 0 ? grandDone / grandTotal * 100 : 0) + '%';
         }
 
+        // Elite skills (Legendary Skill Hunter) — same DIV-not-TR structure as skills:
+        // per-profession <details id="elites-{prof}"> feeding the visible elites-{prof}-count grid.
+        // Totals DOM-derived; no mode gating (elites doable via capture/quest under every mode).
+        function updateEliteCounts() {
+            let grandTotal = 0, grandDone = 0;
+            document.querySelectorAll('[id^="elites-"][id$="-count"]').forEach(span => {
+                const prof = span.id.slice(7, -6); // strip "elites-" prefix and "-count" suffix
+                const box = document.getElementById('elites-' + prof);
+                if (!box) return;
+                const total = box.querySelectorAll('.quest-checkbox[data-area="elites"]').length;
+                const done = box.querySelectorAll('.quest-checkbox[data-area="elites"]:checked').length;
+                span.textContent = done + '/' + total;
+                grandTotal += total; grandDone += done;
+            });
+            const cEl = document.getElementById('elites-completed');
+            const tEl = document.getElementById('elites-total');
+            const bar = document.getElementById('elites-progress');
+            if (cEl) cEl.textContent = grandDone;
+            if (tEl) tEl.textContent = grandTotal;
+            if (bar) bar.style.width = (grandTotal > 0 ? grandDone / grandTotal * 100 : 0) + '%';
+        }
+
         // Update progress for an area
         function updateProgress(areaId) {
             if (areaId === 'menagerie') { updateMenagerieProgress(); return; }
             if (areaId === 'skills') { updateSkillCounts(); return; }
+            if (areaId === 'elites') { updateEliteCounts(); return; }
             // Count only DOABLE quests/pieces
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
