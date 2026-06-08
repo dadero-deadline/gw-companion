@@ -17623,8 +17623,8 @@
                         <input type="checkbox" id="daily-mission" class="quest-checkbox" style="width:22px;height:22px;" data-daily="mission">
                         <div style="flex:1;">
                             <span style="color:#238636;font-weight:bold;">Mission:</span>
-                            <a id="daily-mission-link" href="https://wiki.guildwars.com/wiki/Ruins_of_Morah_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Ruins of Morah</a>
-                            <span id="daily-mission-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Nightfall)</span>
+                            <a id="daily-mission-link" href="https://wiki.guildwars.com/wiki/Hell%27s_Precipice_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Hell's Precipice</a>
+                            <span id="daily-mission-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
                         </div>
                     </div>
 
@@ -17633,8 +17633,8 @@
                         <input type="checkbox" id="daily-bounty" class="quest-checkbox" style="width:22px;height:22px;" data-daily="bounty">
                         <div style="flex:1;">
                             <span style="color:#1f6feb;font-weight:bold;">Bounty:</span>
-                            <a id="daily-bounty-link" href="https://wiki.guildwars.com/wiki/Eldritch_Ettin_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Eldritch Ettin</a>
-                            <span id="daily-bounty-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Prophecies)</span>
+                            <a id="daily-bounty-link" href="https://wiki.guildwars.com/wiki/Vengeful_Aatxe_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Vengeful Aatxe</a>
+                            <span id="daily-bounty-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Core)</span>
                         </div>
                     </div>
 
@@ -17643,8 +17643,8 @@
                         <input type="checkbox" id="daily-vanquish" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanquish">
                         <div style="flex:1;">
                             <span style="color:#f85149;font-weight:bold;">Vanquish:</span>
-                            <a id="daily-vanquish-link" href="https://wiki.guildwars.com/wiki/Jaya_Bluffs_(Zaishen_vanquish)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Jaya Bluffs</a>
-                            <span id="daily-vanquish-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Factions)</span>
+                            <a id="daily-vanquish-link" href="https://wiki.guildwars.com/wiki/Holdings_of_Chokhin_(Zaishen_vanquish)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Holdings of Chokhin</a>
+                            <span id="daily-vanquish-campaign" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Nightfall)</span>
                         </div>
                     </div>
 
@@ -17653,7 +17653,7 @@
                         <input type="checkbox" id="daily-combat" class="quest-checkbox" style="width:22px;height:22px;" data-daily="combat">
                         <div style="flex:1;">
                             <span style="color:#a855f7;font-weight:bold;">PvP:</span>
-                            <a id="daily-combat-link" href="https://wiki.guildwars.com/wiki/Alliance_Battles_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Alliance Battles</a>
+                            <a id="daily-combat-link" href="https://wiki.guildwars.com/wiki/Fort_Aspenwood_(Zaishen_quest)" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Fort Aspenwood</a>
                         </div>
                     </div>
                 </div>
@@ -17664,7 +17664,7 @@
                         <input type="checkbox" id="daily-vanguard" class="quest-checkbox" style="width:22px;height:22px;" data-daily="vanguard">
                         <div style="flex:1;">
                             <span style="color:#ffa657;font-weight:bold;">Vanguard:</span>
-                            <a id="daily-vanguard-link" href="https://wiki.guildwars.com/wiki/Vanguard_Rescue:_Farmer_Hamnet" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Vanguard Rescue: Farmer Hamnet</a>
+                            <a id="daily-vanguard-link" href="https://wiki.guildwars.com/wiki/Vanguard_Annihilation:_Charr" target="_blank" style="color:#fff;text-decoration:none;margin-left:8px;">Vanguard Annihilation: Charr</a>
                             <span id="daily-vanguard-region" style="color:#8b949e;font-size:0.85em;margin-left:8px;">(Pre-Searing)</span>
                         </div>
                     </div>
@@ -33571,9 +33571,32 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             if (bar) bar.style.width = (blocked ? 0 : (total > 0 ? completed / total * 100 : 0)) + '%';
         }
 
+        // Skill checkboxes live in DIVs inside per-profession <details id="skills-{prof}">.
+        // Counters never updated (no mode gating — skills are doable under every mode).
+        // Per-profession totals are derived from the DOM so they stay correct if data changes.
+        function updateSkillCounts() {
+            let grandTotal = 0, grandDone = 0;
+            document.querySelectorAll('[id^="skills-"][id$="-count"]').forEach(span => {
+                const prof = span.id.slice(7, -6); // strip "skills-" prefix and "-count" suffix
+                const box = document.getElementById('skills-' + prof);
+                if (!box) return;
+                const total = box.querySelectorAll('.quest-checkbox[data-area="skills"]').length;
+                const done = box.querySelectorAll('.quest-checkbox[data-area="skills"]:checked').length;
+                span.textContent = done + '/' + total;
+                grandTotal += total; grandDone += done;
+            });
+            const cEl = document.getElementById('skills-completed');
+            const tEl = document.getElementById('skills-total');
+            const bar = document.getElementById('skills-progress');
+            if (cEl) cEl.textContent = grandDone;
+            if (tEl) tEl.textContent = grandTotal;
+            if (bar) bar.style.width = (grandTotal > 0 ? grandDone / grandTotal * 100 : 0) + '%';
+        }
+
         // Update progress for an area
         function updateProgress(areaId) {
             if (areaId === 'menagerie') { updateMenagerieProgress(); return; }
+            if (areaId === 'skills') { updateSkillCounts(); return; }
             // Count only DOABLE quests/pieces
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)

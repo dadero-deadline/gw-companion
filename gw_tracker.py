@@ -3827,9 +3827,32 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             if (bar) bar.style.width = (blocked ? 0 : (total > 0 ? completed / total * 100 : 0)) + '%';
         }
 
+        // Skill checkboxes live in DIVs inside per-profession <details id="skills-{prof}">.
+        // Counters never updated (no mode gating — skills are doable under every mode).
+        // Per-profession totals are derived from the DOM so they stay correct if data changes.
+        function updateSkillCounts() {
+            let grandTotal = 0, grandDone = 0;
+            document.querySelectorAll('[id^="skills-"][id$="-count"]').forEach(span => {
+                const prof = span.id.slice(7, -6); // strip "skills-" prefix and "-count" suffix
+                const box = document.getElementById('skills-' + prof);
+                if (!box) return;
+                const total = box.querySelectorAll('.quest-checkbox[data-area="skills"]').length;
+                const done = box.querySelectorAll('.quest-checkbox[data-area="skills"]:checked').length;
+                span.textContent = done + '/' + total;
+                grandTotal += total; grandDone += done;
+            });
+            const cEl = document.getElementById('skills-completed');
+            const tEl = document.getElementById('skills-total');
+            const bar = document.getElementById('skills-progress');
+            if (cEl) cEl.textContent = grandDone;
+            if (tEl) tEl.textContent = grandTotal;
+            if (bar) bar.style.width = (grandTotal > 0 ? grandDone / grandTotal * 100 : 0) + '%';
+        }
+
         // Update progress for an area
         function updateProgress(areaId) {
             if (areaId === 'menagerie') { updateMenagerieProgress(); return; }
+            if (areaId === 'skills') { updateSkillCounts(); return; }
             // Count only DOABLE quests/pieces
             // - Exclude campaign-locked quests (can't do them with this campaign)
             // - Exclude other-profession quests (can't do them with this build, except Pre-Searing)
