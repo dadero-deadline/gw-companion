@@ -207,9 +207,9 @@
             border-radius: 10px;
             padding: 15px 20px;
         }
-        .progress-header { display: flex; justify-content: space-between; margin-bottom: 8px; }
+        .progress-header { display: flex; justify-content: space-between; align-items: baseline; gap: 6px 10px; flex-wrap: wrap; margin-bottom: 8px; }
         .progress-text { color: #8b949e; }
-        .progress-count { color: #ffd700; font-weight: bold; font-size: 1.2em; }
+        .progress-count { color: #ffd700; font-weight: bold; font-size: 1.2em; white-space: nowrap; flex: 0 0 auto; margin-left: auto; }
         .progress-bar { height: 12px; background: #30363d; border-radius: 6px; overflow: hidden; }
         .progress-fill {
             height: 100%;
@@ -485,7 +485,7 @@
         .melandru-block { display: none; margin: 10px 0; padding: 10px 14px; border-radius: 8px; background: rgba(248,81,73,0.12); border: 1px solid #f85149; color: #f0a39c; font-weight: 600; }
         body.mode-melandru-on .melandru-block { display: block; }
         .melandru-hint { display: none; }
-        body.mode-melandru-on .melandru-hint { display: inline; color: #f85149; font-size: 0.85em; margin-left: 6px; }
+        body.mode-melandru-on .melandru-hint { display: block; flex: 1 1 100%; order: 10; color: #f85149; font-size: 0.85em; margin-left: 0; }
         /* Skills profession grid: 6 columns on desktop, wrap on small screens to avoid horizontal page overflow */
         @media (max-width: 480px) {
             #skills-prof-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; }
@@ -599,8 +599,8 @@
             <input type="hidden" id="secondary-prof" value="">
             <button class="char-btn" onclick="resetCharacter()" title="Reset all progress for this character">Reset</button>
             <button class="char-btn add" onclick="addCharacter()" aria-label="Add character" title="Add character">+ New</button>
-            <button class="char-btn" onclick="renameCharacter()" aria-label="Rename character" title="Rename character"></button>
-            <button class="char-btn delete" onclick="deleteCharacter()" aria-label="Delete character" title="Delete character"></button>
+            <button class="char-btn" onclick="renameCharacter()" aria-label="Rename character" title="Rename character"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"/></svg></button>
+            <button class="char-btn delete" onclick="deleteCharacter()" aria-label="Delete character" title="Delete character"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" style="vertical-align:-2px;"><path d="M3 6h18M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2m3 0v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6"/></svg></button>
         </div>
     </div>
     
