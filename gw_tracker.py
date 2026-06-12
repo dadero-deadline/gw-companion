@@ -224,7 +224,7 @@ html = '''<!DOCTYPE html>
     <link rel="canonical" href="https://gwcompanion.com/">
     <link rel="preconnect" href="https://wiki.guildwars.com">
     <link rel="dns-prefetch" href="//wiki.guildwars.com">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231b1611'/%3E%3Cpath d='M24 6 L38 11 L38 24 Q38 36 24 42 Q10 36 10 24 L10 11 Z' fill='none' stroke='%23c9a227' stroke-width='2'/%3E%3Ctext x='24' y='28' text-anchor='middle' font-size='14' fill='%23e3bf57' font-family='Georgia,serif'%3EGW%3C/text%3E%3Cline x1='16' y1='33' x2='32' y2='33' stroke='%23c9a227' stroke-width='1'/%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%23161b22'/%3E%3Cpath d='M24 6 L38 11 L38 24 Q38 36 24 42 Q10 36 10 24 L10 11 Z' fill='none' stroke='%23c9a227' stroke-width='2'/%3E%3Ctext x='24' y='28' text-anchor='middle' font-size='14' fill='%23e3bf57' font-family='Georgia,serif'%3EGW%3C/text%3E%3Cline x1='16' y1='33' x2='32' y2='33' stroke='%23c9a227' stroke-width='1'/%3E%3C/svg%3E">
     <link rel="preload" href="assets/gwc_logo.png" as="image">
     <title>GW Companion — Unofficial Guild Wars Fan Tracker</title>
     <style>
@@ -706,7 +706,7 @@ html = '''<!DOCTYPE html>
     <div class="header">
         <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">
             <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true" style="flex:0 0 auto;"><path d="M24 4 L40 10 L40 24 Q40 38 24 44 Q8 38 8 24 L8 10 Z" fill="none" stroke="#c9a227" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="15" fill="#e3bf57">GW</text><line x1="15" y1="33" x2="33" y2="33" stroke="#c9a227" stroke-width="1"/></svg>
-            <span style="display:inline-flex;flex-direction:column;line-height:1.15;vertical-align:middle;"><span style="letter-spacing:2.5px;">GW COMPANION</span><span style="font-size:0.45em;letter-spacing:1.5px;color:#a4906a;font-family:'EB Garamond', Georgia, serif;">UNOFFICIAL FAN TRACKER</span></span>
+            <span style="display:inline-flex;flex-direction:column;line-height:1.15;vertical-align:middle;"><span style="letter-spacing:2.5px;">GW COMPANION</span><span style="font-size:0.45em;letter-spacing:1.5px;color:#8b949e;font-family:'EB Garamond', Georgia, serif;">UNOFFICIAL FAN TRACKER</span></span>
         </h1>
         <div class="char-selector">
             <span class="char-label">Character:</span>
@@ -4624,34 +4624,12 @@ updateArmorPreviews();
                 Feedback &amp; Suggestions
             </a>
         </div>
-        <div style="margin-top:8px;font-size:0.78em;color:#7d6c4e;line-height:1.5;">GW Companion is an unofficial fan site. Guild Wars and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. Not affiliated with or endorsed by ArenaNet or NCSOFT.</div>
+        <div style="margin-top:8px;font-size:0.78em;color:#8b949e;opacity:0.75;line-height:1.5;">GW Companion is an unofficial fan site. Guild Wars and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. Not affiliated with or endorsed by ArenaNet or NCSOFT.</div>
     </footer>
 </body>
 </html>'''
 
 html = html.replace('__DUP_ID_MIGRATION__', json.dumps(DUP_ID_RENAMES, sort_keys=True))
-# Prophecies-Fantasy theme (Variante A, 2026-06-12): map the GitHub dark palette
-# to stone/parchment/gold. Game-semantic colors (rarity, profession highlights,
-# Discord brand) are intentionally NOT mapped. Substitution is idempotent: no
-# target hex appears on the left side.
-GW_THEME = {
-    '#0d1117': '#15110c',
-    '#161b22': '#1b1611',
-    '#21262d': '#261f15',
-    '#30363d': '#4a3a22',
-    '#8b949e': '#a4906a',
-    '#c9d1d9': '#e6d8b8',
-    '#58a6ff': '#d9b146',
-    '#1f6feb': '#c9a227',
-    '#ffa657': '#c98a4b',
-    '#ffd700': '#e3bf57',
-    '#238636': '#5c7a33',
-    '#3fb950': '#8aa854',
-    '#f85149': '#b5483a',
-}
-for _old, _new in GW_THEME.items():
-    html = html.replace(_old, _new)
-
 html = deemojify(html)
 with open('gw_tracker.html', 'w', encoding='utf-8') as f:
     f.write(html)
