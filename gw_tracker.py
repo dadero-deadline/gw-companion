@@ -210,23 +210,23 @@ html = '''<!DOCTYPE html>
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations. Works offline using local storage.">
+    <meta name="description" content="Unofficial fan-made progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations. Works offline using local storage.">
     <meta name="theme-color" content="#0d1117">
-    <meta property="og:title" content="Guild Wars Companion">
-    <meta property="og:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
+    <meta property="og:title" content="GW Companion — Unofficial Guild Wars Fan Tracker">
+    <meta property="og:description" content="Unofficial fan-made progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gwcompanion.com/">
-    <meta property="og:image" content="https://gwcompanion.com/assets/Guild_Wars_logo.png">
+    <meta property="og:image" content="https://gwcompanion.com/assets/gwc_logo.png">
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Guild Wars Companion">
-    <meta name="twitter:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
-    <meta name="twitter:image" content="https://gwcompanion.com/assets/Guild_Wars_logo.png">
+    <meta name="twitter:title" content="GW Companion — Unofficial Guild Wars Fan Tracker">
+    <meta name="twitter:description" content="Unofficial fan-made progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
+    <meta name="twitter:image" content="https://gwcompanion.com/assets/gwc_logo.png">
     <link rel="canonical" href="https://gwcompanion.com/">
     <link rel="preconnect" href="https://wiki.guildwars.com">
     <link rel="dns-prefetch" href="//wiki.guildwars.com">
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231b1611'/%3E%3Cpath d='M24 6 L38 11 L38 24 Q38 36 24 42 Q10 36 10 24 L10 11 Z' fill='none' stroke='%23c9a227' stroke-width='2'/%3E%3Ctext x='24' y='28' text-anchor='middle' font-size='14' fill='%23e3bf57' font-family='Georgia,serif'%3EGW%3C/text%3E%3Cline x1='16' y1='33' x2='32' y2='33' stroke='%23c9a227' stroke-width='1'/%3E%3C/svg%3E">
-    <link rel="preload" href="assets/Guild_Wars_logo.png" as="image">
-    <title>Guild Wars Companion</title>
+    <link rel="preload" href="assets/gwc_logo.png" as="image">
+    <title>GW Companion — Unofficial Guild Wars Fan Tracker</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
         h1, h2, h3, h4, .progress-text { font-family: 'Cinzel', Georgia, serif; letter-spacing: 0.5px; }
@@ -4622,6 +4622,7 @@ updateArmorPreviews();
                 Feedback &amp; Suggestions
             </a>
         </div>
+        <div style="margin-top:8px;font-size:0.78em;color:#7d6c4e;line-height:1.5;">GW Companion is an unofficial fan site. Guild Wars and all associated logos and designs are trademarks or registered trademarks of NCSOFT Corporation. Not affiliated with or endorsed by ArenaNet or NCSOFT.</div>
     </footer>
 </body>
 </html>'''
