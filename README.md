@@ -9,8 +9,8 @@ Comprehensive progress tracker for Guild Wars 1. Track every aspect of your jour
 - **📜 Quests** - 1000+ quests across all campaigns and regions
 - **🎯 Missions** - Normal/Bonus/Hard Mode tracking with master requirements
 - **⚔️ Elite Skills** - 300 elite skills with profession filters and capture locations
-- **🗺️ Cartographer** - 276 locations (towns, outposts, missions, explorable areas)
-- **⚔️ Vanquisher** - 144 explorable areas to vanquish
+- **🗺️ Cartographer** - 275 locations (towns, outposts, missions, explorable areas)
+- **⚔️ Vanquisher** - 138 explorable areas to vanquish
 - **🦸 Heroes** - 31 heroes with unlock requirements
 - **🏰 Dungeons** - Elite missions + Eye of the North dungeons
 - **🛡️ Armor** - Elite armor sets with profession filters

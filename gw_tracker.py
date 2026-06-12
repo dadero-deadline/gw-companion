@@ -1157,7 +1157,7 @@ TITLES = [
     ("guard_elona", "Guardian of Elona", "Guardian_of_Elona", 1, 20, "pve", "Nightfall", "All HM + bonus"),
     ("cart_elona", "Elonian Cartographer", "Elonian_Cartographer", 1, 100, "pve", "Nightfall", "100% map"),
     ("skill_elona", "Elonian Skill Hunter", "Skill_Hunter", 1, 140, "pve", "Nightfall", "All elites captured"),
-    ("vanq_elona", "Elonian Vanquisher", "Vanquisher", 1, 51, "pve", "Nightfall", "All areas vanquished"),
+    ("vanq_elona", "Elonian Vanquisher", "Vanquisher", 1, 34, "pve", "Nightfall", "All areas vanquished"),
     ("sunspear", "Sunspear General", "Sunspear_rank", 10, 50000, "pve", "Nightfall", "Sunspear points"),
     ("lightbringer", "Lightbringer", "Lightbringer_rank", 8, 50000, "pve", "Nightfall", "LB points"),
     # EotN

@@ -77,7 +77,7 @@ PROPHECIES_VANQUISHES = [
     ("Perdition Rock", "Ring of Fire", "Prophecies", "Perdition_Rock"),
 ]
 
-# ==================== FACTIONS (32 areas) ====================
+# ==================== FACTIONS (33 areas) ====================
 FACTIONS_VANQUISHES = [
     # Shing Jea Island
     ("Haiju Lagoon", "Shing Jea Island", "Factions", "Haiju_Lagoon"),
@@ -96,7 +96,8 @@ FACTIONS_VANQUISHES = [
     ("Raisu Palace", "Kaineng City", "Factions", "Raisu_Palace_(explorable_area)"),
     ("Shadow's Passage", "Kaineng City", "Factions", "Shadow%27s_Passage"),
     ("Shenzun Tunnels", "Kaineng City", "Factions", "Shenzun_Tunnels"),
-    ("The Undercity", "Kaineng City", "Factions", "The_Undercity"),
+    ("Sunjiang District", "Kaineng City", "Factions", "Sunjiang_District_(explorable_area)"),
+    ("Tahnnakai Temple", "Kaineng City", "Factions", "Tahnnakai_Temple_(explorable_area)"),
     ("Wajjun Bazaar", "Kaineng City", "Factions", "Wajjun_Bazaar"),
     ("Xaquang Skyway", "Kaineng City", "Factions", "Xaquang_Skyway"),
     
@@ -120,7 +121,7 @@ FACTIONS_VANQUISHES = [
     ("Unwaking Waters", "The Jade Sea", "Factions", "Unwaking_Waters_(explorable_area)"),
 ]
 
-# ==================== NIGHTFALL (49 areas) ====================
+# ==================== NIGHTFALL (34 areas) ====================
 NIGHTFALL_VANQUISHES = [
     # Istan
     ("Cliffs of Dohjok", "Istan", "Nightfall", "Cliffs_of_Dohjok"),
@@ -163,15 +164,6 @@ NIGHTFALL_VANQUISHES = [
     ("The Ruptured Heart", "The Desolation", "Nightfall", "The_Ruptured_Heart"),
     ("The Shattered Ravines", "The Desolation", "Nightfall", "The_Shattered_Ravines"),
     ("The Sulfurous Wastes", "The Desolation", "Nightfall", "The_Sulfurous_Wastes"),
-    
-    # Realm of Torment
-    ("Domain of Fear", "Realm of Torment", "Nightfall", "Domain_of_Fear"),
-    ("Domain of Pain", "Realm of Torment", "Nightfall", "Domain_of_Pain"),
-    ("Domain of Secrets", "Realm of Torment", "Nightfall", "Domain_of_Secrets"),
-    ("Nightfallen Coast", "Realm of Torment", "Nightfall", "Nightfallen_Coast"),
-    ("Nightfallen Garden", "Realm of Torment", "Nightfall", "Nightfallen_Garden"),
-    ("Nightfallen Jahai", "Realm of Torment", "Nightfall", "Nightfallen_Jahai"),
-    ("The Shattered Ravines", "Realm of Torment", "Nightfall", "The_Shattered_Ravines"),
 ]
 
 # ==================== EYE OF THE NORTH (18 areas) ====================

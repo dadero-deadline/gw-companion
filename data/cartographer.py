@@ -5,7 +5,7 @@
 # on the live site). Order and duplicates are preserved so the build reproduces the
 # deployed page exactly. Do NOT de-duplicate or reorder.
 
-CARTOGRAPHER_TOTAL = 276
+CARTOGRAPHER_TOTAL = 275
 
 # (campaign_key, campaign_header_html, [ (region_header_html, [ (id,name,slug,type) ]) ])
 CARTOGRAPHER = [
@@ -81,7 +81,6 @@ CARTOGRAPHER = [
       ('cart_the_wilds', 'The Wilds', 'The_Wilds', '🎯 Mission Outposts'),
       ('cart_dry_top', 'Dry Top', 'Dry_Top', '🗺️ Explorable'),
       ('cart_ettins_back', "Ettin's Back", 'Ettin%27s_Back', '🗺️ Explorable'),
-      ('cart_majestys_rest', "Majesty's Rest", 'Majesty%27s_Rest', '🗺️ Explorable'),
       ('cart_mamnoon_lagoon', 'Mamnoon Lagoon', 'Mamnoon_Lagoon', '🗺️ Explorable'),
       ('cart_reed_bog', 'Reed Bog', 'Reed_Bog', '🗺️ Explorable'),
       ('cart_sage_lands', 'Sage Lands', 'Sage_Lands', '🗺️ Explorable'),
