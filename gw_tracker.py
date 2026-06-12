@@ -215,16 +215,16 @@ html = '''<!DOCTYPE html>
     <meta property="og:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://gwcompanion.com/">
-    <meta property="og:image" content="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png">
+    <meta property="og:image" content="https://gwcompanion.com/assets/Guild_Wars_logo.png">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Guild Wars Companion">
     <meta name="twitter:description" content="Comprehensive progress tracker for Guild Wars 1: quests, missions, elite skills, titles, HoM, and daily rotations.">
-    <meta name="twitter:image" content="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png">
+    <meta name="twitter:image" content="https://gwcompanion.com/assets/Guild_Wars_logo.png">
     <link rel="canonical" href="https://gwcompanion.com/">
     <link rel="preconnect" href="https://wiki.guildwars.com">
     <link rel="dns-prefetch" href="//wiki.guildwars.com">
     <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23161b22%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-size%3D%2228%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffd700%22%20font-family%3D%22Segoe%20UI%2CArial%2Csans-serif%22%3EGW%3C/text%3E%3C/svg%3E">
-    <link rel="preload" href="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" as="image">
+    <link rel="preload" href="assets/Guild_Wars_logo.png" as="image">
     <title>Guild Wars Companion</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
@@ -699,7 +699,7 @@ html = '''<!DOCTYPE html>
     <a class="skip-link" href="#app-main">Skip to main content</a>
     <div class="header">
         <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">
-            <img src="https://wiki.guildwars.com/images/b/bc/Guild_Wars_logo.png" alt="GW" loading="eager" decoding="async" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
+            <img src="assets/Guild_Wars_logo.png" alt="GW" loading="eager" decoding="async" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
             Guild Wars Companion
         </h1>
         <div class="char-selector">
