@@ -1511,7 +1511,10 @@ def generate_daily_html():
             const month = now.toLocaleDateString('en-US', { month: 'long', timeZone: 'UTC' });
             const day = now.toLocaleDateString('en-US', { day: 'numeric', timeZone: 'UTC' });
             const year = now.toLocaleDateString('en-US', { year: 'numeric', timeZone: 'UTC' });
-            el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at 16:01 UTC (8:01 AM Pacific Standard Time)`;
+            // Reset is fixed at 16:01 UTC; the Pacific wall-clock time shifts with DST (8:01 PST / 9:01 PDT)
+            const resetUtc = new Date(Date.UTC(now.getUTCFullYear(), now.getUTCMonth(), now.getUTCDate(), 16, 1));
+            const pacific = resetUtc.toLocaleTimeString('en-US', { timeZone: 'America/Los_Angeles', hour: 'numeric', minute: '2-digit', timeZoneName: 'short' });
+            el.textContent = `${weekday}, ${month} ${day}, ${year} • Resets at 16:01 UTC (${pacific})`;
         }
         function updateDailyRotation() {
             const missionLink = document.getElementById('daily-mission-link');
