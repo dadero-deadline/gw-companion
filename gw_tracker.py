@@ -3152,12 +3152,10 @@ html += '''
             const data = JSON.parse(localStorage.getItem(getProfessionKey()) || '{}');
             const primary = data.primary || '';
             const secondary = data.secondary || '';
-            console.log('[Load Professions] Loaded from storage:', { primary, secondary });
-            
+
             // Set hidden input values
             document.getElementById('primary-prof').value = primary;
             document.getElementById('secondary-prof').value = secondary;
-            console.log('[Load Professions] Set dropdown values to:', primary || '(empty)', secondary || '(empty)');
             
             // Update displayed values in custom dropdowns
             const profMap = {
@@ -4321,9 +4319,9 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     });
                     
                     updateProgress(areaId);
-                    alert('Import erfolgreich für ' + currentCharacter + '! ' + Object.keys(importedProgress).length + ' Eintraege geladen.');
+                    alert('Import successful for ' + currentCharacter + '! ' + Object.keys(importedProgress).length + ' entries loaded.');
                 } catch (err) {
-                    alert('Import Fehler: ' + err.message);
+                    alert('Import error: ' + err.message);
                 }
             };
             reader.readAsText(file);
@@ -4556,13 +4554,15 @@ updateArmorPreviews();
         // (single profession-change listener registered above; init call runs at script end)
     
                 function copyDiscordName() {
+            // navigator.clipboard only exists in secure contexts (https / localhost)
+            if (!navigator.clipboard || !navigator.clipboard.writeText) return;
             navigator.clipboard.writeText('daestro420').then(() => {
                 const el = document.getElementById('discord-copy-label');
                 if (!el) return;
                 const orig = el.textContent;
                 el.textContent = '✓ Copied!';
                 setTimeout(() => { el.textContent = orig; }, 1500);
-            });
+            }).catch(() => {});
         }
         console.log('GW Companion initialized!');
     </script>
