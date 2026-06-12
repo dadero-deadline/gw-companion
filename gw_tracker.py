@@ -3985,6 +3985,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
             updateProgress('daily');
             updateProgress('uniques');
             updateProgress('outposts');
+            updateProgress('cartographer');
             updateProgress('skills');
             updateProgress('menagerie');
             updateElitesCampaignProgress();
