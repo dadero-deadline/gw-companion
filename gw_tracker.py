@@ -692,6 +692,8 @@ html = '''<!DOCTYPE html>
         /* Skills profession grid: 6 columns on desktop, wrap on small screens to avoid horizontal page overflow */
         @media (max-width: 480px) {
             #skills-prof-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; }
+            #elites-prof-grid { grid-template-columns: repeat(auto-fill, minmax(80px, 1fr)) !important; }
+            .menagerie-grid { grid-template-columns: 1fr !important; }
         }
     </style>
 </head>
