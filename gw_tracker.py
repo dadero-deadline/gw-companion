@@ -4228,13 +4228,11 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                 // For elites, filter by campaign
                 if (areaId === 'elites') {
                     let showCampaign = (typeFilter === 'all' || rowCampaign === typeFilter);
-                    const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
-                    row.classList.toggle('hidden', !showCampaign || restricted);
+                    row.classList.toggle('hidden', !showCampaign);
                 } else if (areaId === 'skills' || areaId === 'outposts') {
                     // Simple profession/campaign filter for skills and outposts
                     let show = (typeFilter === 'all' || rowType === typeFilter);
-                    const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
-                    row.classList.toggle('hidden', !show || restricted);
+                    row.classList.toggle('hidden', !show);
                 } else {
                     let showType = (typeFilter === 'all' || rowType === typeFilter);
                     // Heroes: allow filtering by region 'special' even if campaign differs (e.g., Beyond heroes in Special region)
@@ -4247,8 +4245,11 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                         showProf = activeProfs.includes(rowProf);
                     }
                     
-                    const restricted = (areaId === 'armor') ? row.classList.contains('hidden-restrict') : false;
-                    row.classList.toggle('hidden', !(showType && showProf) || restricted);
+                    // 'hidden' is owned by the filter buttons; profession availability lives in
+                    // 'hidden-restrict' (updateArmorVisibility). Both hide via CSS and both are
+                    // excluded by the counters, so they must stay independent: baking the restrict
+                    // state into 'hidden' goes stale when the profession changes without a filter click.
+                    row.classList.toggle('hidden', !(showType && showProf));
                 }
             });
             
