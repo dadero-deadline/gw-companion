@@ -224,13 +224,14 @@ html = '''<!DOCTYPE html>
     <link rel="canonical" href="https://gwcompanion.com/">
     <link rel="preconnect" href="https://wiki.guildwars.com">
     <link rel="dns-prefetch" href="//wiki.guildwars.com">
-    <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2212%22%20fill%3D%22%23161b22%22/%3E%3Ctext%20x%3D%2250%25%22%20y%3D%2254%25%22%20font-size%3D%2228%22%20text-anchor%3D%22middle%22%20fill%3D%22%23ffd700%22%20font-family%3D%22Segoe%20UI%2CArial%2Csans-serif%22%3EGW%3C/text%3E%3C/svg%3E">
+    <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 48 48'%3E%3Crect width='48' height='48' rx='8' fill='%231b1611'/%3E%3Cpath d='M24 6 L38 11 L38 24 Q38 36 24 42 Q10 36 10 24 L10 11 Z' fill='none' stroke='%23c9a227' stroke-width='2'/%3E%3Ctext x='24' y='28' text-anchor='middle' font-size='14' fill='%23e3bf57' font-family='Georgia,serif'%3EGW%3C/text%3E%3Cline x1='16' y1='33' x2='32' y2='33' stroke='%23c9a227' stroke-width='1'/%3E%3C/svg%3E">
     <link rel="preload" href="assets/Guild_Wars_logo.png" as="image">
     <title>Guild Wars Companion</title>
     <style>
         * { box-sizing: border-box; margin: 0; padding: 0; }
+        h1, h2, h3, h4, .progress-text { font-family: 'Cinzel', Georgia, serif; letter-spacing: 0.5px; }
         body { 
-            font-family: 'Segoe UI', system-ui, sans-serif; 
+            font-family: 'EB Garamond', Georgia, 'Times New Roman', serif; 
             background: linear-gradient(135deg, #0d1117 0%, #161b22 100%);
             min-height: 100vh;
             color: #c9d1d9;
@@ -702,8 +703,8 @@ html = '''<!DOCTYPE html>
     <a class="skip-link" href="#app-main">Skip to main content</a>
     <div class="header">
         <h1 id="main-header" style="cursor:pointer;" onclick="location.reload()" title="Reload page" role="button" tabindex="0" aria-label="Reload page">
-            <img src="assets/Guild_Wars_logo.png" alt="GW" loading="eager" decoding="async" onerror="this.style.display='none'" onload="this.classList.add('loaded')">
-            Guild Wars Companion
+            <svg width="38" height="38" viewBox="0 0 48 48" aria-hidden="true" style="flex:0 0 auto;"><path d="M24 4 L40 10 L40 24 Q40 38 24 44 Q8 38 8 24 L8 10 Z" fill="none" stroke="#c9a227" stroke-width="2"/><text x="24" y="27" text-anchor="middle" font-family="Cinzel, Georgia, serif" font-size="15" fill="#e3bf57">GW</text><line x1="15" y1="33" x2="33" y2="33" stroke="#c9a227" stroke-width="1"/></svg>
+            <span style="display:inline-flex;flex-direction:column;line-height:1.15;vertical-align:middle;"><span style="letter-spacing:2.5px;">GW COMPANION</span><span style="font-size:0.45em;letter-spacing:1.5px;color:#a4906a;font-family:'EB Garamond', Georgia, serif;">UNOFFICIAL FAN TRACKER</span></span>
         </h1>
         <div class="char-selector">
             <span class="char-label">Character:</span>
@@ -4626,6 +4627,28 @@ updateArmorPreviews();
 </html>'''
 
 html = html.replace('__DUP_ID_MIGRATION__', json.dumps(DUP_ID_RENAMES, sort_keys=True))
+# Prophecies-Fantasy theme (Variante A, 2026-06-12): map the GitHub dark palette
+# to stone/parchment/gold. Game-semantic colors (rarity, profession highlights,
+# Discord brand) are intentionally NOT mapped. Substitution is idempotent: no
+# target hex appears on the left side.
+GW_THEME = {
+    '#0d1117': '#15110c',
+    '#161b22': '#1b1611',
+    '#21262d': '#261f15',
+    '#30363d': '#4a3a22',
+    '#8b949e': '#a4906a',
+    '#c9d1d9': '#e6d8b8',
+    '#58a6ff': '#d9b146',
+    '#1f6feb': '#c9a227',
+    '#ffa657': '#c98a4b',
+    '#ffd700': '#e3bf57',
+    '#238636': '#5c7a33',
+    '#3fb950': '#8aa854',
+    '#f85149': '#b5483a',
+}
+for _old, _new in GW_THEME.items():
+    html = html.replace(_old, _new)
+
 html = deemojify(html)
 with open('gw_tracker.html', 'w', encoding='utf-8') as f:
     f.write(html)
