@@ -2312,7 +2312,7 @@ html += '''
             </div>
             
             <div style="display:flex;gap:10px;align-items:center;margin:15px 0;padding:15px;background:#238636;border-radius:8px;">
-                <span style="font-size:1.5em;">🔗</span>
+                <span style="display:inline-flex;align-items:center;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg></span>
                 <div style="flex:1;">
                     <strong>Official HoM Calculator</strong><br>
                     <span style="font-size:0.85em;opacity:0.9;">Check your HoM rewards for GW2</span>
@@ -2644,7 +2644,7 @@ def generate_menagerie_html():
                 <div data-area="menagerie" data-id="{animal_id}" style="display:flex;align-items:center;gap:15px;padding:12px;background:#161b22;border-radius:10px;border:1px solid #30363d;">
                     <input type="checkbox" class="quest-checkbox" data-id="{animal_id}" data-area="menagerie" style="width:22px;height:22px;cursor:pointer;">
                     <img src="{img_url}" alt="{name}" style="width:80px;height:80px;object-fit:contain;border-radius:8px;" onerror="this.onerror=null;this.src='{img_url_png}';this.onerror=function(){{this.style.display='none';this.nextElementSibling.style.display='flex';}}">
-                    <span style="display:none;width:96px;height:96px;background:#21262d;border-radius:8px;align-items:center;justify-content:center;font-size:40px;">🐾</span>
+                    <span style="display:none;width:96px;height:96px;background:#21262d;border-radius:8px;align-items:center;justify-content:center;color:#8b949e;"><svg width="40" height="40" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><circle cx="6" cy="9" r="2.2"/><circle cx="10" cy="5.5" r="2.2"/><circle cx="14.5" cy="5.5" r="2.2"/><circle cx="18.5" cy="9" r="2.2"/><path d="M12.2 10c-3 0-5.5 2.6-5.5 5.2 0 1.7 1.3 2.8 3 2.8 1 0 1.7-.4 2.5-.4s1.5.4 2.5.4c1.7 0 3-1.1 3-2.8 0-2.6-2.5-5.2-5.5-5.2z"/></svg></span>
                     <a href="{wiki_url}" target="_blank" class="quest-link" style="flex:1;font-size:1.1em;">{name}</a>
                 </div>'''
     
