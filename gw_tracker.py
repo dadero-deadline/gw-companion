@@ -2,6 +2,7 @@ from http.server import HTTPServer, SimpleHTTPRequestHandler
 import openpyxl
 import sys
 import os
+import json
 sys.path.insert(0, 'data')
 
 from elite_skills import ELITE_SKILLS
@@ -1792,7 +1793,24 @@ def generate_dungeons_html():
 html += generate_dungeons_html()
 
 # === VANQUISH ===
+# Same-name locations that appear twice (mission outpost vs explorable area, town vs
+# explorable) historically shared ONE checkbox id = one localStorage key. The emitters
+# rename the second occurrence to '<id>_2'; the {new: old} map is injected into the page
+# as DUP_ID_MIGRATION so saved progress is copied to the split id once on load.
+DUP_ID_RENAMES = {}
+
+def _dedup_data_id(data_id, seen):
+    rid = data_id
+    if data_id in seen:
+        rid = data_id + '_2'
+        assert rid not in seen, f"triple data-id {data_id}"
+        DUP_ID_RENAMES[rid] = data_id
+    seen.add(rid)
+    seen.add(data_id)
+    return rid
+
 def generate_vanquish_html():
+    seen_ids = set()
     h = '''
     <div class="area" id="area-vanquish">
         <div class="content">
@@ -1840,7 +1858,7 @@ def generate_vanquish_html():
         
         for area in areas:
             name, region, campaign, wiki = area
-            area_id = f"vanq_{name.lower().replace(' ', '_').replace(chr(39), '').replace(',', '')}"
+            area_id = _dedup_data_id(f"vanq_{name.lower().replace(' ', '_').replace(chr(39), '').replace(',', '')}", seen_ids)
             region_icon = VANQUISH_REGIONS.get(region, "🗺️")
             wiki_url = f"https://wiki.guildwars.com/wiki/{wiki}"
             
@@ -1877,8 +1895,10 @@ html += generate_vanquish_html()
 def generate_cartographer_html():
     """Cartographer (mapping title) locations, grouped campaign -> region.
     Data lives in data/cartographer.py (extracted from the deployed site).
-    The 12 duplicate locations are preserved on purpose (pre-existing quirk)."""
+    Same-name pairs (mission/explorable, town/explorable) are distinct rows;
+    their previously-shared ids are deduplicated via _dedup_data_id."""
     total = CARTOGRAPHER_TOTAL
+    seen_ids = set()
     h = f'''
     <div class="area" id="area-cartographer">
         <div class="content">
@@ -1916,6 +1936,7 @@ def generate_cartographer_html():
                 <tbody>
 '''
             for cid, name, slug, typ in rows:
+                cid = _dedup_data_id(cid, seen_ids)
                 h += f'''                    <tr data-type="{camp_key}" data-area="cartographer" data-id="{cid}">
                         <td class="checkbox-cell"><input type="checkbox" class="quest-checkbox" data-id="{cid}" data-area="cartographer"></td>
                         <td><a href="https://wiki.guildwars.com/wiki/{slug}" target="_blank" class="quest-link">{name}</a></td>
@@ -3652,9 +3673,26 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
         }
         
         // ==================== PROGRESS MANAGEMENT ====================
+        // Duplicate checkbox ids were split (second same-name row -> '<id>_2'). Both rows
+        // historically shared the old key, so the new id inherits its value once; the old
+        // key is never deleted (it still drives the first row).
+        const DUP_ID_MIGRATION = __DUP_ID_MIGRATION__;
+        function migrateDupIds(progress) {
+            let changed = false;
+            Object.keys(DUP_ID_MIGRATION).forEach(newKey => {
+                const oldKey = DUP_ID_MIGRATION[newKey];
+                if (progress[oldKey] !== undefined && progress[newKey] === undefined) {
+                    progress[newKey] = progress[oldKey];
+                    changed = true;
+                }
+            });
+            return changed;
+        }
+
         function loadProgress() {
             clearUI();
             const saved = JSON.parse(localStorage.getItem(getProgressKey()) || '{}');
+            if (migrateDupIds(saved)) localStorage.setItem(getProgressKey(), JSON.stringify(saved));
             document.querySelectorAll('.quest-checkbox').forEach(cb => {
                 if (saved[cb.dataset.id]) {
                     cb.checked = true;
@@ -4310,6 +4348,7 @@ document.querySelectorAll('tr[data-area="elites"][data-profession]').forEach(row
                     
                     const currentProgress = JSON.parse(localStorage.getItem(getProgressKey()) || '{}');
                     Object.assign(currentProgress, importedProgress);
+                    migrateDupIds(currentProgress); // imports may carry pre-split ids
                     localStorage.setItem(getProgressKey(), JSON.stringify(currentProgress));
                     
                     document.querySelectorAll(`tr[data-area="${areaId}"] .quest-checkbox`).forEach(cb => {
@@ -4585,6 +4624,7 @@ updateArmorPreviews();
 </body>
 </html>'''
 
+html = html.replace('__DUP_ID_MIGRATION__', json.dumps(DUP_ID_RENAMES, sort_keys=True))
 html = deemojify(html)
 with open('gw_tracker.html', 'w', encoding='utf-8') as f:
     f.write(html)
