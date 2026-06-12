@@ -13,21 +13,35 @@ CORE_ARMOR = [
 
 # ==================== PROPHECIES ====================
 PROPHECIES_ARMOR = [
-    # Droknar's Forge - All professions
-    ("Elite Charr Hide", "Droknar's Forge", "Prophecies", "15k gold", True, "Warrior_Elite_Charr_Hide_armor"),
-    ("Elite Gladiator", "Droknar's Forge", "Prophecies", "15k gold", True, "Warrior_Elite_Gladiator_armor"),
-    ("Elite Templar", "Droknar's Forge", "Prophecies", "15k gold", True, "Warrior_Elite_Templar_armor"),
-    ("Elite Drakescale", "Droknar's Forge", "Prophecies", "15k gold", True, "Ranger_Elite_Drakescale_armor"),
-    ("Elite Druid", "Droknar's Forge", "Prophecies", "15k gold", True, "Ranger_Elite_Druid_armor"),
-    ("Elite Saintly", "Droknar's Forge", "Prophecies", "15k gold", True, "Monk_Elite_Saintly_armor"),
-    ("Labyrinthine", "Droknar's Forge", "Prophecies", "15k gold", True, "Monk_Labyrinthine_armor"),
-    ("Elite Necrotic", "Droknar's Forge", "Prophecies", "15k gold", True, "Necromancer_Elite_Necrotic_armor"),
-    ("Elite Scar Pattern", "Droknar's Forge", "Prophecies", "15k gold", True, "Necromancer_Elite_Scar_Pattern_armor"),
-    ("Elite Profane", "Droknar's Forge", "Prophecies", "15k gold", True, "Necromancer_Elite_Profane_armor"),
-    ("Elite Enchanter", "Droknar's Forge", "Prophecies", "15k gold", True, "Mesmer_Elite_Enchanter_armor"),
-    ("Elite Rogue", "Droknar's Forge", "Prophecies", "15k gold", True, "Mesmer_Elite_Rogue_armor"),
-    ("Elite Stormforged", "Droknar's Forge", "Prophecies", "15k gold", True, "Elementalist_Elite_Stormforged_armor"),
-    ("Elite Stoneforged", "Droknar's Forge", "Prophecies", "15k gold", True, "Elementalist_Elite_Stoneforged_armor"),
+    # Granite Citadel (Hagen) - profession-specific sets (verified GWW Prestige_armor)
+    ("Elite Platemail", "Granite Citadel", "Prophecies", "15k gold", True, "Warrior_Elite_Platemail_armor"),
+    ("Elite Dragon", "Granite Citadel", "Prophecies", "15k gold", True, "Warrior_Elite_Dragon_armor"),
+    ("Elite Fur-Lined", "Granite Citadel", "Prophecies", "15k gold", True, "Ranger_Elite_Fur-Lined_armor"),
+    ("Elite Studded Leather", "Granite Citadel", "Prophecies", "15k gold", True, "Ranger_Elite_Studded_Leather_armor"),
+    ("Elite Judge", "Granite Citadel", "Prophecies", "15k gold", True, "Monk_Elite_Judge_armor"),
+    ("Elite Woven", "Granite Citadel", "Prophecies", "15k gold", True, "Monk_Elite_Woven_armor"),
+    ("Flowing", "Granite Citadel", "Prophecies", "15k gold", True, "Monk_Flowing_armor"),
+    ("Elite Cabal", "Granite Citadel", "Prophecies", "15k gold", True, "Necromancer_Elite_Cabal_armor"),
+    ("Elite Cultist", "Granite Citadel", "Prophecies", "15k gold", True, "Necromancer_Elite_Cultist_armor"),
+    ("Elite Noble", "Granite Citadel", "Prophecies", "15k gold", True, "Mesmer_Elite_Noble_armor"),
+    ("Elite Elegant", "Granite Citadel", "Prophecies", "15k gold", True, "Mesmer_Elite_Elegant_armor"),
+    ("Elite Flameforged", "Granite Citadel", "Prophecies", "15k gold", True, "Elementalist_Elite_Flameforged_armor"),
+    ("Elite Iceforged", "Granite Citadel", "Prophecies", "15k gold", True, "Elementalist_Elite_Iceforged_armor"),
+    # Marhan's Grotto (Karl) - profession-specific sets
+    ("Elite Charr Hide", "Marhan's Grotto", "Prophecies", "15k gold", True, "Warrior_Elite_Charr_Hide_armor"),
+    ("Elite Gladiator", "Marhan's Grotto", "Prophecies", "15k gold", True, "Warrior_Elite_Gladiator_armor"),
+    ("Elite Templar", "Marhan's Grotto", "Prophecies", "15k gold", True, "Warrior_Elite_Templar_armor"),
+    ("Elite Drakescale", "Marhan's Grotto", "Prophecies", "15k gold", True, "Ranger_Elite_Drakescale_armor"),
+    ("Elite Druid", "Marhan's Grotto", "Prophecies", "15k gold", True, "Ranger_Elite_Druid_armor"),
+    ("Elite Saintly", "Marhan's Grotto", "Prophecies", "15k gold", True, "Monk_Elite_Saintly_armor"),
+    ("Labyrinthine", "Marhan's Grotto", "Prophecies", "15k gold", True, "Monk_Labyrinthine_armor"),
+    ("Elite Necrotic", "Marhan's Grotto", "Prophecies", "15k gold", True, "Necromancer_Elite_Necrotic_armor"),
+    ("Elite Scar Pattern", "Marhan's Grotto", "Prophecies", "15k gold", True, "Necromancer_Elite_Scar_Pattern_armor"),
+    ("Elite Profane", "Marhan's Grotto", "Prophecies", "15k gold", True, "Necromancer_Elite_Profane_armor"),
+    ("Elite Enchanter", "Marhan's Grotto", "Prophecies", "15k gold", True, "Mesmer_Elite_Enchanter_armor"),
+    ("Elite Rogue", "Marhan's Grotto", "Prophecies", "15k gold", True, "Mesmer_Elite_Rogue_armor"),
+    ("Elite Stormforged", "Marhan's Grotto", "Prophecies", "15k gold", True, "Elementalist_Elite_Stormforged_armor"),
+    ("Elite Stoneforged", "Marhan's Grotto", "Prophecies", "15k gold", True, "Elementalist_Elite_Stoneforged_armor"),
 ]
 
 # ==================== FACTIONS ====================
