@@ -16,6 +16,7 @@ from minipets import ALL_MINIS, RARITY_COLORS, YEAR1_MINIS, YEAR2_MINIS, YEAR3_M
 from daily_quests import ZAISHEN_MISSIONS, ZAISHEN_BOUNTIES, ZAISHEN_VANQUISHES, ZAISHEN_COMBAT, VANGUARD_QUESTS, ZAISHEN_MISSION_START, ZAISHEN_BOUNTY_START, ZAISHEN_VANQUISH_START, ZAISHEN_COMBAT_START
 from outposts import OUTPOSTS
 from collectibles import MINIATURES, MENAGERIE
+from hall_of_monuments import GW2_REWARDS, GW2_TITLES, GW2_PETS
 from non_elite_skills import NON_ELITE_SKILLS
 from cartographer import CARTOGRAPHER, CARTOGRAPHER_TOTAL
 import urllib.request, re, urllib.parse
@@ -2298,6 +2299,65 @@ def generate_uniques_html():
 html += generate_uniques_html()
 
 # === HALL OF MONUMENTS ===
+def generate_gw2_rewards_html():
+    """HoM -> GW2 rewards by points. Reference table only (no progress checkboxes,
+    no data-ids). Data verified against the official GW2 wiki. Points 1-30 each grant
+    one skin/mini; titles every 5 (5-50); Ranger pets every 5 (15-30); >30 = titles only."""
+    titles_by_pts = {p: t for p, t in GW2_TITLES}
+    pets_by_pts = {p: t for p, t in GW2_PETS}
+    type_color = {"Armor": "#58a6ff", "Weapon": "#f0883e", "Mini": "#a371f7"}
+    def gw2_link(name):
+        slug = name.replace(' ', '_').replace(chr(39), '%27')
+        return f"https://wiki.guildwars2.com/wiki/{slug}"
+    dash = '<span style="color:#484f58;">—</span>'
+    h = '''
+            <div style="margin-top:20px;padding:15px;background:#21262d;border-radius:8px;">
+                <h3 style="color:#ffd700;margin:0 0 6px 0;">GW2 Rewards by Points</h3>
+                <p style="color:#8b949e;font-size:0.85em;margin:0 0 12px 0;">Each Hall of Monuments point (1-30) unlocks one Guild Wars 2 skin or miniature. Titles unlock every 5 points (5-50) and Ranger pets every 5 points (15-30); past 30 points only titles remain.</p>
+                <div class="container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th style="width:60px;text-align:center;">Points</th>
+                            <th>Reward</th>
+                            <th style="width:90px;">Type</th>
+                            <th>Title</th>
+                            <th>Ranger Pet</th>
+                        </tr>
+                    </thead>
+                    <tbody>'''
+    for pts, reward, typ in GW2_REWARDS:
+        color = type_color.get(typ, "#8b949e")
+        title = titles_by_pts.get(pts)
+        pet = pets_by_pts.get(pts)
+        title_cell = f'<span style="color:#ffd700;">{title}</span>' if title else dash
+        pet_cell = f'<span style="color:#3fb950;">{pet}</span>' if pet else dash
+        h += f'''
+                        <tr>
+                            <td style="text-align:center;font-weight:bold;color:#c9d1d9;">{pts}</td>
+                            <td><a href="{gw2_link(reward)}" target="_blank" class="quest-link">{reward}</a></td>
+                            <td><span style="color:{color};font-size:0.85em;font-weight:bold;">{typ}</span></td>
+                            <td>{title_cell}</td>
+                            <td>{pet_cell}</td>
+                        </tr>'''
+    h += '''
+                    </tbody>
+                </table>
+                </div>'''
+    beyond = [(p, t) for p, t in GW2_TITLES if p > 30]
+    if beyond:
+        h += '''
+                <h4 style="color:#ffd700;margin:16px 0 6px 0;">Beyond 30 points (titles only)</h4>
+                <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(220px,1fr));gap:6px;font-size:0.9em;color:#c9d1d9;">'''
+        for p, t in beyond:
+            h += f'''
+                    <div><strong style="color:#ffd700;">{p} pts</strong> &mdash; {t}</div>'''
+        h += '''
+                </div>'''
+    h += '''
+            </div>'''
+    return h
+
 html += '''
     <div class="area" id="area-hom">
         <div class="content">
@@ -2416,17 +2476,9 @@ html += '''
             </table>
             </div>
             
-            <div style="margin-top: 20px; padding: 15px; background: #21262d; border-radius: 8px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                <h3 style="color: #ffd700; margin-bottom: 10px;">🎁 GW2 Rewards by Points</h3>
-                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.9em;">
-                    <div>3 pts: Fiery Dragon Sword</div>
-                    <div>10 pts: Gnarled Walking Stick</div>
-                    <div>15 pts: Orange Tabby Cat</div>
-                    <div>30 pts: Rainbow Jellyfish</div>
-                    <div>40 pts: Rhythm of Green Woods</div>
-                    <div>50 pts: Lava Spider</div>
-                </div>
-            </div>
+'''
+html += generate_gw2_rewards_html()
+html += '''
         </div>
     </div>
 '''

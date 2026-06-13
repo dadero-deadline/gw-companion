@@ -132,38 +132,49 @@ ACCOUNT_TITLES = [
 # =============================================================================
 # GW2 REWARDS BY POINTS
 # =============================================================================
-GW2_REWARDS = [
-    (1, "Heritage Armor"),
-    (3, "Fiery Dragon Sword"),
-    (5, "Ithas Longbow"),
-    (8, "Legacy Pillars of Honor (Mini)"),
-    (10, "Gnarled Walking Stick"),
-    (15, "Orange Tabby Cat (Mini)"),
-    (18, "Stygian Reaver Greatsword"),
-    (20, "Tapestry Shawl"),
-    (25, "Droknar's Chaingun (Focus)"),
-    (30, "Rainbow Jellyfish (Mini)"),
-    (35, "Tormented Shield"),
-    (40, "Rhythm of the Green Woods"),
-    (45, "Destroyer Knuckles"),
-    (50, "Lava Spider (Mini)"),
+# Verified against the official Guild Wars 2 wiki (Hall of Monuments rewards).
+# Points 1-30 each grant one skin/mini; titles every 5 points (5-50);
+# Ranger pets every 5 points (15-30); above 30 points there are only titles.
+GW2_REWARDS = [  # (points, reward, type)
+    (1, "Heritage Boots", "Armor"), (2, "Heritage Pants", "Armor"), (3, "Heritage Greatcoat", "Armor"),
+    (4, "Heritage Gloves", "Armor"), (5, "Heritage Mantle", "Armor"), (6, "Heritage Masque", "Armor"),
+    (7, "Gnarled Walking Staff", "Weapon"), (8, "Living Short Bow", "Weapon"), (9, "Mini Orange Tabby Cat", "Mini"),
+    (10, "Fiery Dragon Sword", "Weapon"), (11, "Diamond Aegis Shield", "Weapon"), (12, "Baroque Mask", "Armor"),
+    (13, "Centurions Claw", "Weapon"), (14, "Wheelock Rifle", "Weapon"), (15, "Mini Orrian Baby Chicken", "Mini"),
+    (16, "Wayward Wand Scepter", "Weapon"), (17, "Seathunder Pistol", "Weapon"), (18, "Heavenly Bracers", "Armor"),
+    (19, "Deldrimor Mace", "Weapon"), (20, "Chimeric Prism Focus", "Weapon"), (21, "Mini Rockfur Racoon", "Mini"),
+    (22, "Ithas Longbow", "Weapon"), (23, "Fellblade", "Weapon"), (24, "Icelord's Diadem", "Armor"),
+    (25, "Icebreaker", "Weapon"), (26, "Flaming Beacon", "Weapon"), (27, "Mini Servitor Golem", "Mini"),
+    (28, "Stygian Axe", "Weapon"), (29, "Mountaincall Warhorn", "Weapon"), (30, "Fire God's Vambraces", "Armor"),
+]
+
+GW2_TITLES = [  # (points, title)
+    (5, "Traveler"), (10, "Guild Warrior"), (15, "Rift Warden"), (20, "Chosen"), (25, "Ascendant"),
+    (30, "Closer to the Stars"), (35, "Ghostly Hero"), (40, "Flameseeker"), (45, "Legend of the Mists"),
+    (50, "Champion of the Gods"),
+]
+
+GW2_PETS = [  # (points, ranger pet)
+    (15, "Juvenile Black Moa"), (20, "Juvenile Rainbow Jellyfish"),
+    (25, "Juvenile White Raven"), (30, "Juvenile Black Widow Spider"),
 ]
 
 # =============================================================================
-# SUMMARY
+# SUMMARY  (only when run directly; importing this module must stay side-effect free)
 # =============================================================================
-print("=" * 60)
-print("  HALL OF MONUMENTS CALCULATOR")
-print("=" * 60)
-print(f"\n  Maximum Points: 50")
-print(f"\n  Monument Breakdown:")
-print(f"    Devotion (Minipets):   8 points max")
-print(f"    Fellowship (Heroes):   8 points max")
-print(f"    Honor (Titles):        8 points max")
-print(f"    Resilience (Armors):   8 points max")
-print(f"    Valor (Weapons):       8 points max")
-print(f"    Bonuses:              10 points max")
-print(f"\n  Total Heroes Available: {len(HEROES)}")
-print(f"  Total Armors Available: {len(ARMORS)}")
-print(f"  GW2 Rewards: {len(GW2_REWARDS)} items")
-print("=" * 60)
+if __name__ == "__main__":
+    print("=" * 60)
+    print("  HALL OF MONUMENTS CALCULATOR")
+    print("=" * 60)
+    print(f"\n  Maximum Points: 50")
+    print(f"\n  Monument Breakdown:")
+    print(f"    Devotion (Minipets):   8 points max")
+    print(f"    Fellowship (Heroes):   8 points max")
+    print(f"    Honor (Titles):        8 points max")
+    print(f"    Resilience (Armors):   8 points max")
+    print(f"    Valor (Weapons):       8 points max")
+    print(f"    Bonuses:              10 points max")
+    print(f"\n  Total Heroes Available: {len(HEROES)}")
+    print(f"  Total Armors Available: {len(ARMORS)}")
+    print(f"  GW2 Rewards: {len(GW2_REWARDS)} items, {len(GW2_TITLES)} titles, {len(GW2_PETS)} pets")
+    print("=" * 60)
