@@ -1,5 +1,5 @@
 <svg xmlns="http://www.w3.org/2000/svg" width="172" height="36" viewBox="0 0 172 36" role="img" aria-label="Buy me a coffee :)">
   <title>Buy me a coffee :)</title>
-  <rect x="1" y="1" width="170" height="34" rx="5" fill="#1c1608" stroke="#9e7c0c" stroke-width="2"/>
-  <text x="86" y="23" text-anchor="middle" fill="#ffd700" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15" font-weight="600">Buy me a coffee :)</text>
+  <rect x="0.5" y="0.5" width="171" height="35" rx="6" fill="#21262d" stroke="#c9a227" stroke-width="1"/>
+  <text x="86" y="23" text-anchor="middle" fill="#e3bf57" font-family="Segoe UI, Helvetica, Arial, sans-serif" font-size="15">Buy me a coffee :)</text>
 </svg>
