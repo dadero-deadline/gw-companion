@@ -76,6 +76,12 @@ PRs welcome! Areas that need help:
 - Additional quest data validation
 - UI/UX improvements
 
+## ☕ Support
+
+GW Companion is free and stays free. If it helps you on your way to GWAMM, you can buy me a coffee.
+
+<a href="https://buymeacoffee.com/dadero"><img src="assets/buy-me-a-coffee.svg" alt="Buy me a coffee :)" height="36"></a>
+
 ## 📄 License
 
 MIT - Feel free to use and modify!
